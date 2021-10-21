@@ -1,2 +1,2 @@
 
-[download](https://github.com/K1638186/Bloxorz/releases/download/tag/Bloxorz.zip)
+[Download](https://github.com/CubeTures/CubeTures.github.io/releases/download/Tag/Bloxorz.zip)
