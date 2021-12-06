@@ -1,5 +1,3 @@
-Download the game by clicking [[Here]](https://github.com/CubeTures/CubeTures.github.io/releases/download/Tag/Bloxorz.zip) or by going to the [[Download Site]](https://github.com/CubeTures/CubeTures.github.io/releases/tag/Tag) and downloading the .zip file.
+Download our recreation of Bloxorz [[Here]](https://github.com/CubeTures/CubeTures.github.io/releases/download/Tag/Bloxorz.zip).
 
-Extract the files and run the Main application to play the game!
-
-If your computer's antivirus flags it, be sure to press [more info] then [run anyway].
+Download the pdf rules of our recreation of Forbidden Island [[Here]]().
