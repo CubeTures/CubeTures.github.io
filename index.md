@@ -1,4 +1,4 @@
-Download the Band of the Year Form Filler [[Here]](https://github.com/CubeTures/FormFiller/files/9865135/FormFillerV2.zip).
+Download the Band of the Year Form Filler [[Here]](https://github.com/CubeTures/FormFiller/files/9865135/FormFillerV2.zip) (it doesn't work all too well).
 
 Download our recreation of Bloxorz [[Here]](https://github.com/CubeTures/CubeTures.github.io/releases/download/Tag/Bloxorz.zip).
 
