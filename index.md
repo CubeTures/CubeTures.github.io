@@ -1,6 +1,0 @@
-Download the Band of the Year Form Filler [[Here]](https://github.com/CubeTures/FormFiller/files/9865135/FormFillerV2.zip) (it doesn't work all too well).
-(Download Site [[Here]](https://github.com/CubeTures/FormFiller/releases/tag/tag2))
-
-Download our recreation of Bloxorz [[Here]](https://github.com/CubeTures/CubeTures.github.io/releases/download/Tag/Bloxorz.zip).
-
-Download the pdf rules of our recreation of Forbidden Island [[Here]](https://github.com/CubeTures/CubeTures.github.io/files/7665275/ForbiddenIslandInstructions.pdf).
