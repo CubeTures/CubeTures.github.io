@@ -12,3 +12,7 @@ schoolwork
 personal projects
 -- finished & published games (link to my itch.io)
 -- unfinished games (preview?)
+
+contact 
+-- email
+-- captcha
