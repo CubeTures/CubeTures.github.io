@@ -26,8 +26,10 @@ let appHeader = `
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item disabled" href="#">High School</a></li>
+            <li><a class="dropdown-item` + (page == "principles" ? " active" : "") + `" href="/Pages/Class/principles.html">Principles</a></li>
             <li><a class="dropdown-item` + (page == "data_structures" ? " active" : "") + `" href="/Pages/Class/data_structures.html">Data Structures</a></li>
             <li><a class="dropdown-item` + (page == "independent_studies" ? " active" : "") + `" href="/Pages/Class/independent_studies.html">Independent Studies</a></li>
+            <li><a class="dropdown-item` + (page == "unity" ? " active" : "") + `" href="/Pages/Class/unity.html">Unity</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">College</a></li>
           </ul>
