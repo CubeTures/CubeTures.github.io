@@ -1,0 +1,3 @@
+[submodule "Speed-CardAPI"]
+	path = Speed-CardAPI
+	url = https://github.com/CubeTures/Speed-CardAPI
