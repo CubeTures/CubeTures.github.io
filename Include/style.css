@@ -11,3 +11,7 @@
     left: -4rem;
     transform: rotate(30deg);
 }
+
+.card {
+    width: 15%;
+}

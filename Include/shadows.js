@@ -1,10 +1,16 @@
 let shadowDensity = 5;
 let alpha = "rgba(0, 0, 0, 0)";
 
+let num = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K'];
+let suit = ['D', 'C', 'S', 'H'];
+
 document.addEventListener('DOMContentLoaded', () => {
     shadowTop();
     shadowBot();
     spaced();
+
+    // console.log(num[Math.floor(Math.random() * num.length)] + 
+    // suit[Math.floor(Math.random() * suit.length)]);
 });
 
 function spaced() {
