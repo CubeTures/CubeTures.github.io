@@ -1,16 +1,11 @@
 let shadowDensity = 5;
 let alpha = "rgba(0, 0, 0, 0)";
 
-let num = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K'];
-let suit = ['D', 'C', 'S', 'H'];
-
 document.addEventListener('DOMContentLoaded', () => {
     shadowTop();
     shadowBot();
     spaced();
-
-    // console.log(num[Math.floor(Math.random() * num.length)] + 
-    // suit[Math.floor(Math.random() * suit.length)]);
+    absoluteCenter();
 });
 
 function spaced() {
@@ -28,6 +23,26 @@ function spaced() {
 
         div.style = "white-space: break-spaces";
     }
+}
+
+function absoluteCenter() {
+    let divs = document.getElementsByClassName('absolute-center');
+    for(let x = 0; x < divs.length; x++) {
+        let div = divs.item(x);
+
+        let parent = div.parentNode;
+        let wrapper = document.createElement('div');
+        wrapper.classList += 'row ';
+        parent.replaceChild(wrapper, div);
+
+        let smaller = document.createElement('div');
+        smaller.classList += 'col ';
+        smaller.classList += 'text-center '
+        wrapper.appendChild(smaller);
+
+        smaller.appendChild(div);
+    }
+    
 }
 
 function shadowTop() {
