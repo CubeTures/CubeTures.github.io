@@ -7,11 +7,6 @@
 .spacing {  visibility: hidden; }
 .spacing:after { content: 'Filler'; }
 
-.left-parallax {
-    left: -4rem;
-    transform: rotate(30deg);
-}
-
-.card {
+.image-card {
     width: 15%;
 }
