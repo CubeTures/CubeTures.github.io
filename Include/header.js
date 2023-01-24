@@ -6,7 +6,7 @@ let isPersonal = page == "collaborative" || page == "unpublished" || page == "pu
 ` + (page == "education" ? " active" : "") + `;
 
 let appHeader = `
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="navbar" style="transition: top .5s;">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,4 +52,29 @@ let appHeader = `
   </div>
 </nav>
 `;
+
 document.getElementById("app-header").innerHTML = appHeader;
+
+//appear on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  let prevScroll = window.pageYOffset;
+  let lowestScroll = window.pageYOffset;
+
+  document.addEventListener('scroll', () => {
+    let currentScroll = window.pageYOffset;
+
+    if(prevScroll < currentScroll) {
+      document.getElementById("navbar").style.top = "-100px";
+      lowestScroll = currentScroll;
+    }
+    else if(lowestScroll - 100 > currentScroll || currentScroll <= 20) {
+      document.getElementById("navbar").style.top = "0";
+    }
+    else {
+      document.getElementById("navbar").style.top = "-100px";
+    }
+
+    prevScroll = currentScroll;
+    if(lowestScroll < currentScroll) { lowestScroll = currentScroll; }
+  });
+});
