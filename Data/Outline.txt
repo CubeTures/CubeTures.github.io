@@ -9,7 +9,7 @@ schoolwork
 -- csp projects (bloxorz, burger flipper, pool)
 -- cs3 projects (dislcaim they are not good :stareyes:)
 -- cs4 projects (work on data structures, card api)
--- unity class (maze, asteroids,)
+-- unity class (maze, asteroids)
 
 personal projects
 -- finished & published games (link to my itch.io)

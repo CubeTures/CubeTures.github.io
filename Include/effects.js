@@ -89,7 +89,7 @@ function screenRight() {
     for(let x = 0; x < elements.length; x++) {
         let elem = elements.item(x);
 
-        elem.style = "right: -75%;"
+        elem.style = "right: -10%;"
     }
 }
 
