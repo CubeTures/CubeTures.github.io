@@ -121,6 +121,7 @@ function expandableContainer(isSmall) {
             let elem = elements.item(x);
 
             if(elem.classList.contains('container')) { elem.classList.remove('container'); }
+            if(elem.classList.contains('rounded-4')) { elem.classList.remove('rounded-4'); }
             elem.classList.add('container-fluid');
         }
     }
@@ -129,6 +130,7 @@ function expandableContainer(isSmall) {
             let elem = elements.item(x);
             
             if(elem.classList.contains('container-fluid')) { elem.classList.remove('container-fluid'); }
+            elem.classList.add('rounded-4');
             elem.classList.add('container');
         }
     }
