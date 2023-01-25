@@ -4,13 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     spaced();
     absoluteCenter();
+    clampHeight();
 
-    rotateLeft();
-    rotateRight();
-    screenLeft();
-    screenRight();
-
-    window.addEventListener('scroll', moveParallax);
     window.addEventListener('resize', resize);
 });
 
@@ -49,47 +44,18 @@ function absoluteCenter() {
     }
 }
 
-function moveParallax() {
-    let y = window.scrollY;
-        let elements = document.getElementsByClassName('parallax-y');
+function clampHeight() {
+    let elements = document.getElementsByClassName('clamp-height');
+    for(let x = 0; x < elements.length; x++) {
+        let elem = elements.item(x);
 
-        for(let i = 0; i < elements.length; i++) {
-            elem = elements.item(i);
-            elem.style.top = y * .1 + 'px';
+        let calculatedHeight = Math.round(elem.width * elem.naturalHeight / elem.naturalWidth);
+        if(calculatedHeight > window.visualViewport.height / 2) {
+            if(elem.classList.contains('w-50')) { elem.classList.remove('w-50'); }
+            if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
+            if(elem.classList.contains('expandable')) { elem.classList.remove('expandable'); }
+            elem.style = "height: 50vh; width: auto";
         }
-}
-
-function rotateLeft() {
-    let elements = document.getElementsByClassName('rotate-left');
-    for(let x = 0; x < elements.length; x++) {
-        let elem = elements.item(x);
-
-        elem.style = "rotate: -75deg"
-    }
-}
-function rotateRight() {
-    let elements = document.getElementsByClassName('rotate-right');
-    for(let x = 0; x < elements.length; x++) {
-        let elem = elements.item(x);
-
-        elem.style = "rotate: 25deg"
-    }
-}
-
-function screenLeft() {
-    let elements = document.getElementsByClassName('screen-left');
-    for(let x = 0; x < elements.length; x++) {
-        let elem = elements.item(x);
-
-        elem.style = "left: -20%;"
-    }
-}
-function screenRight() {
-    let elements = document.getElementsByClassName('screen-right');
-    for(let x = 0; x < elements.length; x++) {
-        let elem = elements.item(x);
-
-        elem.style = "right: -10%;"
     }
 }
 
