@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     spaced();
     absoluteCenter();
+    //to do: if width is larger than 50 / 75 % then remove vh, re-add expandable
     setClamps();
 
     window.addEventListener('resize', resize);
@@ -44,16 +45,6 @@ function absoluteCenter() {
     }
 }
 
-
-function tempClamps() {
-    Promise.all(Array.from(document.images)
-    .filter(img => !img.complete)
-    .map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
-    .then(() => {
-        console.log('images finished loading');
-        clampHeight();
-    });
-}
 function setClamps() {
     console.log("Called");
     Promise.all(Array.from(document.images).map(img => {
@@ -78,20 +69,11 @@ function setClamps() {
 }
 function clampHeight(elem) {
     let calculatedHeight = Math.round(elem.width * elem.naturalHeight / elem.naturalWidth);
-
-    console.log(elem);
-    console.log("W: " + elem.width + " NH: " + elem.naturalHeight + " NW: " + elem.naturalWidth);
-    console.log(calculatedHeight + " < " + window.visualViewport.height / 2 + " ?");
     if(calculatedHeight > window.visualViewport.height / 2) {
         if(elem.classList.contains('w-50')) { elem.classList.remove('w-50'); }
         if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
         if(elem.classList.contains('expandable')) { elem.classList.remove('expandable'); }
         elem.style = "height: 50vh; width: auto";
-
-        console.log("True");
-    }
-    else {
-        console.log("False");
     }
 }
 
