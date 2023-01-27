@@ -55,10 +55,16 @@ function tempClamps() {
     });
 }
 function setClamps() {
+    console.log("Called");
     Promise.all(Array.from(document.images).map(img => {
-        if (img.complete)
+        console.log("First: " + img);
+        if (img.complete) {
+            clampHeight(img);
             return Promise.resolve(img.naturalHeight !== 0);
+        }
+            
         return new Promise(resolve => {
+            console.log("Second: " + img);
             img.addEventListener('load', () => resolve(true));
             img.addEventListener('load', () => { clampHeight(img); });
             img.addEventListener('error', () => resolve(false));
@@ -81,6 +87,11 @@ function clampHeight(elem) {
         if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
         if(elem.classList.contains('expandable')) { elem.classList.remove('expandable'); }
         elem.style = "height: 50vh; width: auto";
+
+        console.log("True");
+    }
+    else {
+        console.log("False");
     }
 }
 
