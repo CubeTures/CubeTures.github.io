@@ -49,7 +49,12 @@ function clampHeight() {
     for(let x = 0; x < elements.length; x++) {
         let elem = elements.item(x);
 
+        console.log(elem);
+        console.log("W: " + elem.width + " NH: " + elem.naturalHeight + " NW: " + elem.naturalWidth)
+
         let calculatedHeight = Math.round(elem.width * elem.naturalHeight / elem.naturalWidth);
+
+        console.log(calculatedHeight + " vs " + window.visualViewport.height / 2);
         if(calculatedHeight > window.visualViewport.height / 2) {
             if(elem.classList.contains('w-50')) { elem.classList.remove('w-50'); }
             if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
