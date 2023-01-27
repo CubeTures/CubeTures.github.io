@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     spaced();
     absoluteCenter();
-    clampHeight();
+    setClamps();
 
     window.addEventListener('resize', resize);
 });
@@ -44,26 +44,31 @@ function absoluteCenter() {
     }
 }
 
+
+function setClamps() {
+    Promise.all(Array.from(document.images)
+    .filter(img => !img.complete)
+    .map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
+    .then(() => {
+        console.log('images finished loading');
+        clampHeight();
+    });
+}
 function clampHeight() {
     let elements = document.getElementsByClassName('clamp-height');
     for(let x = 0; x < elements.length; x++) {
         let elem = elements.item(x);
+        
+        let calculatedHeight = Math.round(elem.width * elem.naturalHeight / elem.naturalWidth);
 
         console.log(elem);
-        elem.onload = function() {
-            let calculatedHeight = Math.round(elem.width * elem.naturalHeight / elem.naturalWidth);
-
-            console.log(elem);
-            console.log("W: " + elem.width + " NH: " + elem.naturalHeight + " NW: " + elem.naturalWidth);
-            console.log(calculatedHeight + " < " + window.visualViewport.height / 2 + " ?");
-            if(calculatedHeight > window.visualViewport.height / 2) {
-                if(elem.classList.contains('w-50')) { elem.classList.remove('w-50'); }
-                if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
-                if(elem.classList.contains('expandable')) { elem.classList.remove('expandable'); }
-                elem.style = "height: 50vh; width: auto";
-
-                console.log("True");
-            }
+        console.log("W: " + elem.width + " NH: " + elem.naturalHeight + " NW: " + elem.naturalWidth);
+        console.log(calculatedHeight + " < " + window.visualViewport.height / 2 + " ?");
+        if(calculatedHeight > window.visualViewport.height / 2) {
+            if(elem.classList.contains('w-50')) { elem.classList.remove('w-50'); }
+            if(elem.classList.contains('w-75')) { elem.classList.remove('w-75'); }
+            if(elem.classList.contains('expandable')) { elem.classList.remove('expandable'); }
+            elem.style = "height: 50vh; width: auto";
         }
     }
 }
