@@ -13,7 +13,7 @@ schoolwork
 -- cs4 projects 
     links: connect4, sql, barthy, portfolio, word guesser, maze generator, card api, retro game,
 -- unity class
-    links: maze, asteroids
+    links: maze, rush hour, asteroids
 
 personal projects
 -- published games 
