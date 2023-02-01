@@ -6,15 +6,29 @@ education
 -- workload
 
 schoolwork
--- csp projects (bloxorz, burger flipper, pool)
--- cs3 projects (dislcaim they are not good :stareyes:)
--- cs4 projects (work on data structures, card api)
--- unity class (maze, asteroids)
+-- csp projects 
+    links: bloxorz, kidou?, billiards, burger flipper
+-- cs3 projects 
+    links: bingo, forbidden island, catan
+-- cs4 projects 
+    links: connect4, sql, barthy, portfolio, word guesser, maze generator, card api, retro game,
+-- unity class
+    links: maze, asteroids
 
 personal projects
--- finished & published games (link to my itch.io)
--- unfinished games (preview?)
+-- published games 
+    links: shadows, brain&
+-- unpublished games
+    depicted: 
+-- collaborative Games (disclaim: bloxorz, forbidden island, catan, barthy, retro game are made with group)
+    links: core control
 
 contact 
 -- email
 -- captcha
+
+
+Order of operations
+-- Basic structure and content
+-- Included projects
+-- Fancy items (like parallax and side items)
