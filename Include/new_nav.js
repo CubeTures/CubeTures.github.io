@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //Menu Hover
-    for(let child in document.body.children) {
-        console.log(child);
-        child.addEventListener('mouseenter', (e) => { onHover(e); });
-        child.addEventListener('mouseleave', (e) => { onHover(e); });
-    }
+    //Menu on Hover
+    document.body.addEventListener('mouseenter', (e) => { onHover(e); });
+    document.body.addEventListener('mouseleave', (e) => { onHover(e); });
 
-    //Light / Dark
+    //Light / Dark Theme
     document.getElementById('switch').addEventListener('click', () => {
         let body = document.body;
         let toggle = document.getElementById('switch');
+        let light = document.getElementById('logo-light');
+        let dark = document.getElementById('logo-dark');
 
         if(body.classList.contains('dark')) {
             body.classList.remove('dark');
@@ -23,5 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function onHover(e) {
-    console.log("yes");
+    $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
+        var _d = e.target.closest('.nav-item');
+        _d.classList.add('show');
+        setTimeout(() => {
+            if(_d.matches(':hover')) {
+                _d.classList.add('show');
+            }
+            else {
+                _d.classList.remove('show');
+            }
+        }, 1);
+    });
 }
