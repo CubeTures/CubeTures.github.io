@@ -97,7 +97,7 @@ body{
     height: 28px;
     width: auto;
     display: block;
-filter: brightness(10%);
+    filter: brightness(10%);
     -webkit-transition : all 0.3s ease-out;
     transition : all 0.3s ease-out;
 }
@@ -147,10 +147,8 @@ filter: brightness(10%);
     font-weight: 500;
     transition: all 200ms linear;
 }
-.nav-item:hover .nav-link{
-    color: #8167a9 !important;
-}
 .nav-item.active .nav-link{
+    /* background-color: rgba(128, 102, 169, .3); */
     color: #777 !important;
 }
 .nav-link {
@@ -183,10 +181,6 @@ filter: brightness(10%);
 
 /* #Primary style ================================================== */
 
-.nav-item.active {
-    outline: 3px #8167a9 !important;
-}
-
 .bg-light {
     background-color: #fff !important;
     transition: all 200ms linear;
@@ -207,7 +201,7 @@ filter: brightness(10%);
     top: 50%;
     left: 0;
     width: 100%;
-margin-top: 40px;
+    margin-top: 40px;
     transform: translateY(-50%);
     z-index: 20;
 }
@@ -215,7 +209,6 @@ h1{
     font-size: 48px;
     line-height: 1.2;
     font-weight: 700;
-    color: #212112;
     text-align: center;
 }
 p{
@@ -234,7 +227,7 @@ h1 span{
     transform: translate(0);
 }
 .nav-item .dropdown-menu {
-    transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, -10px, 0);
     visibility: hidden;
     opacity: 0;
     max-height: 0;
@@ -242,6 +235,7 @@ h1 span{
     padding: 0;
     margin: 0;
     transition: all 200ms linear;
+    
 }
 .nav-item.show .dropdown-menu {
     opacity: 1;
@@ -283,16 +277,6 @@ body.dark{
 }
 body.dark .navbar-brand img{
 filter: brightness(100%);
-}
-body.dark h1{
-    color: #fff;
-}
-body.dark h1 span{
-    transition-delay: 0ms !important;
-}
-body.dark p{
-    color: #fff;
-    transition-delay: 0ms !important;
 }
 body.dark .bg-light {
     background-color: #14151a !important;
@@ -345,11 +329,10 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         top: 15px;
         left: 0;
         width: 11px;
-        height: 1px;
+        height: .5px;
         content: "";
         border: none;
         background-color: #000;
-        vertical-align: 0;
     }
     .dropdown-toggle::after {
         position: absolute;
@@ -361,7 +344,6 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         content: "";
         border: none;
         background-color: #000;
-        vertical-align: 0;
         transition: all 200ms linear;
     }
     .dropdown-toggle[aria-expanded="true"]::after{

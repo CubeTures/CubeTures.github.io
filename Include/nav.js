@@ -1,4 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+    load();
+}
+else {
+    document.addEventListener('DOMContentLoaded', () => { load(); });
+}
+
+
+function load() {
+    //Set Active
+    let path = window.location.pathname;
+    let page = path.split("/").pop();
+    page = page.substring(0, page.indexOf("."));
+    let isClasswork = page == "principles" || page == "data_structures" || page == "independent_studies" || page == "unity";
+    let isPersonal = page == "collaborative" || page == "unpublished" || page == "published";
+
+
     //Menu on Hover
     $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
         //768
@@ -27,4 +43,4 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.add('dark');
         }
     });
-});
+}

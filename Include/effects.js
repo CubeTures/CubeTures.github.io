@@ -46,16 +46,13 @@ function absoluteCenter() {
 }
 
 function setClamps() {
-    console.log("Called");
     Promise.all(Array.from(document.images).map(img => {
-        console.log("First: " + img);
         if (img.complete) {
             clampHeight(img);
             return Promise.resolve(img.naturalHeight !== 0);
         }
             
         return new Promise(resolve => {
-            console.log("Second: " + img);
             img.addEventListener('load', () => resolve(true));
             img.addEventListener('load', () => { clampHeight(img); });
             img.addEventListener('error', () => resolve(false));
