@@ -8,14 +8,12 @@ async function addCss(fileName) {
 
     head.appendChild(link);
 }
-async function addScript(fileName, toBody = false) {
+async function addScript(fileName) {
     var head = document.head;
-    var body = document.body;
     var link = document.createElement("script");
 
     link.src = fileName;
-    if(toBody) { body.appendChild(link); }
-    else { head.appendChild(link); }
+    head.appendChild(link);
 }
   
 addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js');
