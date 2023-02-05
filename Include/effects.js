@@ -1,6 +1,13 @@
 let expanded = null;
 let screenSize = 1920 / 2;
-document.addEventListener('DOMContentLoaded', () => {
+
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+    load();
+}
+else {
+    document.addEventListener('DOMContentLoaded', () => { load(); });
+}
+function load() {
     resize();
     spaced();
     absoluteCenter();
@@ -8,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setClamps();
 
     window.addEventListener('resize', resize);
-});
+};
 
 function spaced() {
     let divs = document.getElementsByClassName('spaced');

@@ -1,11 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+    load();
+}
+else {
+    document.addEventListener('DOMContentLoaded', () => { load(); });
+}
+
+function load() {
 
     rotateLeft();
     rotateRight();
     screenLeft();
     screenRight();
     
-});
+}
 
 function rotateLeft() {
     let elements = document.getElementsByClassName('rotate-left');
