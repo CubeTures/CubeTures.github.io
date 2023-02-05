@@ -32,3 +32,8 @@ Order of operations
 -- Basic structure and content
 -- Included projects
 -- Fancy items (like parallax and side items)
+
+to fix: 
+init dark mode
+keeping selected theme between pages
+on scroll for nav bar
