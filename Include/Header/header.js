@@ -1,4 +1,4 @@
-$('#app-header').load('/Include/header.html#insert');
+$('#app-header').load('/Include/Header/nav.html#insert');
 
 //appear on scroll
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentScroll = window.pageYOffset;
 
         if(prevScroll < currentScroll) {
-        document.getElementById("navbar").style.top = "-100px";
-        lowestScroll = currentScroll;
+            document.querySelector(".navbar").style.top = "-100px";
+            lowestScroll = currentScroll;
         }
         else if(lowestScroll - 100 > currentScroll || currentScroll <= 20) {
-        document.getElementById("navbar").style.top = "0";
+            document.querySelector(".navbar").style.top = "0";
         }
         else {
-        document.getElementById("navbar").style.top = "-100px";
+            document.querySelector(".navbar").style.top = "-100px";
         }
 
         prevScroll = currentScroll;

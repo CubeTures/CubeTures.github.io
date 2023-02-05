@@ -9,8 +9,8 @@
     </head>
 
     <div id="insert">
-        <script src="/Include/nav.js"></script>
-        <link rel="stylesheet" href="/Include/nav.css">
+        <script src="/Include/Header/nav.js"></script>
+        <link rel="stylesheet" href="/Include/Header/nav.css">
 
         <div class="navigation-wrap bg-light start-header scroll-on">
             <div class="container">
@@ -18,10 +18,9 @@
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
                         
-                            <div class="logo">
-                                <img src="/Images/Dark.svg" alt="" class="overlay-logo-dark">
-                                <img src="/Images/Light.svg" alt="" class="overlay-logo">
-                                <img src="/Images/Logo.svg" alt="" class="new-logo">
+                            <div class="switch">
+                                <img src="/Images/Transparent Light.svg" alt="" class="logo">
+                                <a class="nav-link">Owen Shadburne</a>
                             </div>
                             
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,13 +29,13 @@
                             
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                        <a class="nav-link" href="/Pages/index.html">Home</a>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4" id="index">
+                                        <a class="nav-link" href="/index.html">Home</a>
                                     </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4" id="education">
                                         <a class="nav-link" href="/Pages/education.html">Education</a>
                                     </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4" id="classwork">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Classwork</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="/Pages/Class/principles.html">Principles</a>
@@ -45,7 +44,7 @@
                                             <a class="dropdown-item" href="/Pages/Class/unity.html">Unity</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4" id="personal">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personal Projects</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="/Pages/Personal/published.html">Published</a>
@@ -53,7 +52,7 @@
                                             <a class="dropdown-item" href="/Pages/Personal/collaborative.html">Collaborative</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4" id="contact">
                                         <a class="nav-link" href="/Pages/contact.html">Contact</a>
                                     </li>
                                 </ul>

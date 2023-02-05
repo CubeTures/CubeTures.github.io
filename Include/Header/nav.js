@@ -14,6 +14,10 @@ function load() {
     let isClasswork = page == "principles" || page == "data_structures" || page == "independent_studies" || page == "unity";
     let isPersonal = page == "collaborative" || page == "unpublished" || page == "published";
 
+    if(isClasswork) { page = "classwork"; }
+    else if(isPersonal) { page = "personal"; }
+    document.querySelector('#' + page).classList.add('active');
+
 
     //Menu on Hover
     $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
@@ -33,7 +37,7 @@ function load() {
     });
 
     //Light / Dark Theme
-    document.querySelector('.logo').addEventListener('click', () => {
+    document.querySelector('.switch').addEventListener('click', () => {
         let body = document.body;
 
         if(body.classList.contains('dark')) {
