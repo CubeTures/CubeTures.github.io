@@ -2,43 +2,14 @@ let expanded = null;
 let screenSize = 1920 / 2;
 
 console.log("effects");
+console.log("state: " + document.readyState);
 if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
     load();
-    let divs = document.getElementsByClassName('spaced');
-    console.log('divs got by spaced: ' + divs);
-    for(let x = 0; x < divs.length; x++) {
-        let div = divs.item(x);
-        let len = parseInt(div.innerHTML);
-        console.log('div ' + x + " " + div);
-
-        let inner = "";
-        for(let i = 0; i < len; i++) {
-            inner += '\n';
-        }
-        div.innerHTML = inner;
-
-        div.style = "white-space: break-spaces";
-    }
 }
 else {
-    window.onload = () => { 
+    document.addEventListener('DOMContentLoaded', () => { 
         load(); 
-        let divs = document.getElementsByClassName('spaced');
-        console.log('divs got by spaced: ' + divs);
-        for(let x = 0; x < divs.length; x++) {
-            let div = divs.item(x);
-            let len = parseInt(div.innerHTML);
-            console.log('div ' + x + " " + div);
-    
-            let inner = "";
-            for(let i = 0; i < len; i++) {
-                inner += '\n';
-            }
-            div.innerHTML = inner;
-    
-            div.style = "white-space: break-spaces";
-        }
-    }
+    });
 }
 function load() {
     console.log('effects.js started');
