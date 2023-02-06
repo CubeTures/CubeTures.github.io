@@ -65,10 +65,12 @@ function setClamps() {
             img.addEventListener('error', () => resolve(false));
         });
     })).then(results => {
-        if (results.every(res => res))
-            console.log('all images loaded successfully');
-        else
-            console.log('some images failed to load, all finished loading');
+        if (results.every(res => res)) { 
+            //console.log('all images loaded successfully'); 
+        }
+        else { 
+            //console.log('some images failed to load, all finished loading'); 
+        }
     });
 }
 function clampHeight(elem) {

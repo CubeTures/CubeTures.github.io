@@ -1,6 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
     readTextFile();
-});
+}
+else {
+    document.addEventListener('DOMContentLoaded', () => { readTextFile(); });
+}
 
 async function readTextFile()
 {
@@ -8,7 +11,7 @@ async function readTextFile()
 
     let temp = document.getElementsByTagName('script');
     for(let i = 0; i < temp.length; i++) {
-        if(temp[i].src.includes('text_insert.js')) {
+        if(temp[i].src.includes('basics.js')) {
             fileName = temp[i].getAttribute('file');
         }
     }

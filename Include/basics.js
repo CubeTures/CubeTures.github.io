@@ -17,14 +17,18 @@ async function addScript(fileName) {
 }
   
 addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js');
-addScript('/Include/effects.js');
-addScript('/Include/decoration.js');
+addCss('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
 addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js');
-defer();
 
 addCss('/Include/style.css');
 addCss('/Include//Header/nav.css');
-addCss('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
+
+addScript('/Include/effects.js');
+addScript('/Include/decoration.js');
+addScript('/Include/text_insert.js');
+defer();
+
+
 
 async function defer(method) {
     if (window.jQuery) {
