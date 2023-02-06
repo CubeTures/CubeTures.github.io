@@ -38,3 +38,5 @@ init dark mode (maybe not)
 keeping selected theme between pages
 on scroll for nav bar
 90% text width on mobile
+Problem with file loading still occurs!
++ icon issue on Firefox mobile
