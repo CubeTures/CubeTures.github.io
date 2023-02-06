@@ -1,11 +1,11 @@
 let expanded = null;
 let screenSize = 1920 / 2;
 
-if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+if (document.readyState === "complete" || document.readyState === "loaded") {
     load();
 }
 else {
-    document.addEventListener('DOMContentLoaded', () => { load(); });
+    window.onload = () => { load(); }
 }
 function load() {
     resize();
