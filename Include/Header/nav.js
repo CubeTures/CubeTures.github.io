@@ -16,6 +16,7 @@ function load() {
 
     if(isClasswork) { page = "classwork"; }
     else if(isPersonal) { page = "personal"; }
+    console.log("[" + page + "] " + document.getElementById(page));
     document.getElementById(page).classList.add('active');
 
 
