@@ -3,7 +3,7 @@ let screenSize = 1920 / 2;
 
 console.log("effects");
 console.log("state: " + document.readyState);
-if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive" || document.readyState === "loading") {
     load();
 }
 else {
