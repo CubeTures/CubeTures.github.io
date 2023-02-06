@@ -4,22 +4,6 @@ let screenSize = 1920 / 2;
 console.log("effects");
 if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
     load();
-}
-else {
-    window.onload = () => { load(); }
-}
-function load() {
-    console.log('effects.js started');
-    resize();
-    spaced();
-    absoluteCenter();
-    //to do: if width is larger than 50 / 75 % then remove vh, re-add expandable
-    setClamps();
-
-    window.addEventListener('resize', resize);
-};
-
-function spaced() {
     let divs = document.getElementsByClassName('spaced');
     console.log('divs got by spaced: ' + divs);
     for(let x = 0; x < divs.length; x++) {
@@ -35,6 +19,40 @@ function spaced() {
 
         div.style = "white-space: break-spaces";
     }
+}
+else {
+    window.onload = () => { 
+        load(); 
+        let divs = document.getElementsByClassName('spaced');
+        console.log('divs got by spaced: ' + divs);
+        for(let x = 0; x < divs.length; x++) {
+            let div = divs.item(x);
+            let len = parseInt(div.innerHTML);
+            console.log('div ' + x + " " + div);
+    
+            let inner = "";
+            for(let i = 0; i < len; i++) {
+                inner += '\n';
+            }
+            div.innerHTML = inner;
+    
+            div.style = "white-space: break-spaces";
+        }
+    }
+}
+function load() {
+    console.log('effects.js started');
+    resize();
+    spaced();
+    absoluteCenter();
+    //to do: if width is larger than 50 / 75 % then remove vh, re-add expandable
+    setClamps();
+
+    window.addEventListener('resize', resize);
+};
+
+function spaced() {
+ 
 }
 
 function absoluteCenter() {
