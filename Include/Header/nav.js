@@ -16,7 +16,7 @@ function load() {
 
     if(isClasswork) { page = "classwork"; }
     else if(isPersonal) { page = "personal"; }
-    document.getElementById('#' + page).classList.add('active');
+    document.getElementById(page).classList.add('active');
 
 
     //Menu on Hover
