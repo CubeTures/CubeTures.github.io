@@ -2,7 +2,7 @@ if (document.readyState === "complete" || document.readyState === "loaded" || do
     load();
 }
 else {
-    document.addEventListener('DOMContentLoaded', () => { load(); });
+    window.onload = () => { load(); }
 }
 
 function load() {

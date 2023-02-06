@@ -1,7 +1,14 @@
 $('#app-header').load('/Include/Header/nav.html#insert');
 
 //appear on scroll
-document.addEventListener('DOMContentLoaded', () => {
+
+if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+    load();
+}
+else {
+    window.onload = () => { load(); }
+}
+function load() {
     let prevScroll = window.pageYOffset;
     let lowestScroll = window.pageYOffset;
 
@@ -22,4 +29,4 @@ document.addEventListener('DOMContentLoaded', () => {
         prevScroll = currentScroll;
         if(lowestScroll < currentScroll) { lowestScroll = currentScroll; }
     });
-});
+}

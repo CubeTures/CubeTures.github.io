@@ -2,7 +2,7 @@ if (document.readyState === "complete" || document.readyState === "loaded" || do
     readTextFile();
 }
 else {
-    document.addEventListener('DOMContentLoaded', () => { readTextFile(); });
+    window.onload = () => { readTextFile(); }
 }
 
 async function readTextFile()

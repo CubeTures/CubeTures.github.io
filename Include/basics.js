@@ -1,6 +1,6 @@
-async function addCss(fileName) {
-    var head = document.head;
-    var link = document.createElement("link");
+function addCss(fileName) {
+    let head = document.head;
+    let link = document.createElement("link");
 
     link.type = "text/css";
     link.rel = "stylesheet";
@@ -8,9 +8,9 @@ async function addCss(fileName) {
 
     head.appendChild(link);
 }
-async function addScript(fileName) {
-    var head = document.head;
-    var link = document.createElement("script");
+function addScript(fileName) {
+    let head = document.head;
+    let link = document.createElement("script");
 
     link.src = fileName;
     head.appendChild(link);
