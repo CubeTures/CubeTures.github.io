@@ -14,9 +14,10 @@ function load() {
     let isClasswork = page == "principles" || page == "data_structures" || page == "independent_studies" || page == "unity";
     let isPersonal = page == "collaborative" || page == "unpublished" || page == "published";
 
-    if(isClasswork) { page = "classwork"; }
+    if(page == "") { page = "index"; }
+    else if(isClasswork) { page = "classwork"; }
     else if(isPersonal) { page = "personal"; }
-    console.log("[" + page + "] " + document.getElementById(page));
+    console.log("[" + page + "] " + document.getElementById(page) + " " + document.getElementById(page).classList);
     document.getElementById(page).classList.add('active');
 
 
