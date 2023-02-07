@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Owen Shadburne</title>
 
+    <script>
+      window.addEventListener('load', (event) => {
+        log.textContent += 'load\n';
+      });
+
+      document.addEventListener('readystatechange', (event) => {
+        log.textContent += `readystate: ${document.readyState}\n`;
+      });
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+        log.textContent += 'DOMContentLoaded\n';
+      });
+    </script>
+
     <script src="/Include/basics.js" file="/Data/Home.json"></script>
     <link href="/Images/Transparent Dark.svg?" rel="icon" type="image/svg">
   </head>
