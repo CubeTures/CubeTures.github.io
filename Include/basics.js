@@ -1,3 +1,12 @@
+function callOnLoad(funct) {
+    if (document.readyState !== "loading") {
+        funct();
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', () => { funct(); });
+    }
+}
+
 function addCss(fileName) {
     let head = document.head;
     let link = document.createElement("link");
@@ -15,7 +24,7 @@ function addScript(fileName) {
     link.src = fileName;
     head.appendChild(link);
 }
-  
+
 addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js');
 addCss('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
 addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js');

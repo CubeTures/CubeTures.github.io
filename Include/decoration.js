@@ -1,10 +1,4 @@
-if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
-    load();
-}
-else {
-    window.onload = () => { load(); }
-}
-
+callOnLoad(load);
 function load() {
 
     rotateLeft();

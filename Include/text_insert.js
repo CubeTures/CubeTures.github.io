@@ -1,10 +1,4 @@
-if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
-    readTextFile();
-}
-else {
-    window.onload = () => { readTextFile(); }
-}
-
+callOnLoad(readTextFile);
 async function readTextFile()
 {
     let fileName = "";
