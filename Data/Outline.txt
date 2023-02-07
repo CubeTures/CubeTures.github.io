@@ -36,7 +36,7 @@ Order of operations
 to fix: 
 init dark mode (maybe not)
 keeping selected theme between pages
-on scroll for nav bar
+on scroll for nav bar 
+problem where nav bar inits too late so you have to scroll up to see nav bar
 90% text width on mobile
-Problem with file loading still occurs!
 [+] before thing issue on Firefox mobile
