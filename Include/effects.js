@@ -2,15 +2,17 @@ let expanded = null;
 let screenSize = 1920 / 2;
 
 console.log("state at time of effects load: " + document.readyState);
-if (document.readyState === "complete" || document.readyState === "loaded" || document.readyState === "interactive") {
+if (document.readyState !== "loading") {
     console.log('outright loading');
     load();
 }
 else {
     console.log('adding to dom content loaded');
     document.addEventListener('DOMContentLoaded', () => { 
+        console.log('v1 firing');
         load(); 
     });
+    document.addEventListener('DOMContentLoaded', load);
 }
 function load() {
     console.log('effects.js started');
