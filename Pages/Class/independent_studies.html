@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
       window.addEventListener('load', (event) => {
-        log.textContent += 'load\n';
+        console.log('load');
       });
 
       document.addEventListener('readystatechange', (event) => {
-        log.textContent += `readystate: ${document.readyState}\n`;
+        console.log(`readystate: ${document.readyState}`);
       });
 
       document.addEventListener('DOMContentLoaded', (event) => {
-        log.textContent += 'DOMContentLoaded\n';
+        console.log('DOMContentLoaded');
       });
     </script>
 
