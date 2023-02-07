@@ -25,6 +25,7 @@ function load() {
 function spaced() {
     let divs = document.getElementsByClassName('spaced');
         console.log('divs got by spaced: ' + divs);
+        console.log(divs.length);
         for(let x = 0; x < divs.length; x++) {
             let div = divs.item(x);
             let len = parseInt(div.innerHTML);
