@@ -36,7 +36,7 @@ function addIcon(fileName) {
     head.appendChild(link);
 }
 
-callOnLoad(addDark);
+callOnLoad(setTheme);
 addIcon('/Images/Backed.svg?');
 addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js');
 addCss('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
@@ -58,33 +58,33 @@ async function defer(method) {
     }
 }
 
-function addDark() {
+function setTheme() {
     //local, if no then preference, save
     console.log("[" + localStorage.getItem("theme") + "]");
 
     let theme = localStorage.getItem("theme");
     if(theme) {
         if(theme == 'dark') {
-            console.log('loading dark theme from local');
+            //console.log('loading dark theme from local');
             dark();
         }
         else {
-            console.log('loading light theme from local');
+            //console.log('loading light theme from local');
             light();
         }
     }
     else if (window.matchMedia) {
         if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            console.log('no local, loading dark them from preferences');
+            //console.log('no local, loading dark them from preferences');
             dark();
         } 
         else {
-            console.log('no local, loading light them from preferences');
+            //console.log('no local, loading light them from preferences');
             light();
         }
     } 
     else {
-        console.log('no local, no preferences, loading dark by default');
+        //console.log('no local, no preferences, loading dark by default');
         dark();
     }
 }
