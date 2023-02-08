@@ -36,9 +36,11 @@ function load() {
 
         if(body.classList.contains('dark')) {
             body.classList.remove('dark');
+            light();
         }
         else {
             body.classList.add('dark');
+            dark();
         }
     });
 }

@@ -34,7 +34,6 @@ Order of operations
 -- Fancy items (like parallax and side items)
 
 to fix: 
-init dark mode (maybe not)
 keeping selected theme between pages
 on scroll for nav bar 
 problem where nav bar inits too late so you have to scroll up to see nav bar
