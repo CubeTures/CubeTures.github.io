@@ -19,7 +19,7 @@ personal projects
 -- published games 
     links: shadows, brain&
 -- unpublished games
-    depicted: 
+    depicted: Chair Simulator, Endless Runner, Boat Game, Triple Mode, Titania
 -- collaborative Games (disclaim: bloxorz, forbidden island, catan, barthy, retro game are made with group)
     links: core control
 
