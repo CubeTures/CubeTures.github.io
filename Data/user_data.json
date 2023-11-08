@@ -1,0 +1,30 @@
+{
+    "users": {
+        "userID": {
+            "username": "test_user_1",
+            "friends": [
+                    "test_user_2"
+                ],
+            "session": {
+                "center": [30.619107746247806, -96.33609672016316],
+                "radius": 25,
+                "people": ["test_user_1", "test_user_2"],
+                "locations": {
+                    "<address_1>": "Y",
+                    "<address_2>": "M",
+                    "<address_3>": "N",
+                    "<address_4>": "U"
+                }
+            },
+            "requests": [
+                {
+                    "center": [32.98437699018884, -96.7482544272266],
+                    "radius": 10,
+                    "people": ["test_user_2", "test_user_1"]
+                }
+            ]
+        }
+    }
+}
+  
+  
