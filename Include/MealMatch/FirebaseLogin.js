@@ -1,17 +1,23 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import {  } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 const auth = getAuth()
+
+function loginComplete(user) {
+    console.log(user.uid);
+}
+
+function debugLogin() {
+
+}
 
 function login() {
     const provider = new GoogleAuthProvider();
     
     signInWithPopup(auth, provider)
         .then((result) => {
-            // User signed in successfully
-            const user = result.user;
-            console.log(`Logged in as ${user.displayName}`);
+            loginComplete(result.user);
         })
         .catch((error) => {
-            // Handle login errors
             console.error("Login error:", error);
         });
 }
