@@ -25,8 +25,9 @@ function getNewUserData(displayName) {
     return {
         "username": displayName,
         "friends": [],
+        "friend_requests": [],
         "session": {},
-        "requests": []
+        "session_requests": []
     }
 }
 function setNewUserData(reference, displayName) {
