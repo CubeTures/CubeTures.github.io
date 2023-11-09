@@ -1,5 +1,5 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { setupDatabase } from "./FirebaseDatabase";
+import { setupDatabase } from "./FirebaseDatabase.js";
 
 class FakeUser {
     constructor(uid, displayName) {
@@ -27,7 +27,7 @@ function login() {
 
 function onContentLoad() {
     let loginButton = document.getElementById("login");
-    loginButton.addEventListener("click", login);
+    loginButton.addEventListener("click", debugLogin);
 }
 
 document.addEventListener("DOMContentLoaded", onContentLoad);
