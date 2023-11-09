@@ -27,7 +27,7 @@ function login() {
 
 function onContentLoad() {
     let loginButton = document.getElementById("login");
-    loginButton.addEventListener("click", debugLogin);
+    loginButton.addEventListener("click", login);
 }
 
 document.addEventListener("DOMContentLoaded", onContentLoad);
