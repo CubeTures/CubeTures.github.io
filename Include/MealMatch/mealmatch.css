@@ -14,7 +14,7 @@
 }
 
 body {
-  padding-bottom: 4rem;
+  padding-bottom: 5rem;
 }
 
 .top-div {
@@ -30,4 +30,23 @@ body {
 .image-button {
   background-color: transparent;
   border-color: transparent;
+}
+
+.bg-pri {
+  background-color: #fc4a74
+}
+
+.padded {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  padding: 1rem;
+}
+
+.bottom-border {
+  border-bottom: 3px solid #0e0104;
+  margin-bottom: 0px;
+}
+.top-border {
+  border-top: 3px solid #0e0104;
+  margin-top: 0px;
 }
