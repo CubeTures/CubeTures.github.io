@@ -1,15 +1,33 @@
 :root[data-theme="light"] {
-    --text: #25040c;
-    --background: #fef1f4;
-    --primary: #b5032c;
-    --secondary: #f9becb;
-    --accent: #d51542;
-  }
-  :root[data-theme="dark"] {
-    --text: #fbdae2;
-    --background: #0e0104;
-    --primary: #fc4a74;
-    --secondary: #410613;
-    --accent: #ea2a56;
-  }
-  
+  --text: #25040c;
+  --background: #fef1f4;
+  --primary: #b5032c;
+  --secondary: #f9becb;
+  --accent: #d51542;
+}
+:root[data-theme="dark"] {
+  --text: #fbdae2;
+  --background: #0e0104;
+  --primary: #fc4a74;
+  --secondary: #410613;
+  --accent: #ea2a56;
+}
+
+body {
+  padding-bottom: 4rem;
+}
+
+.top-div {
+  text-align: center;
+  background-color: #fc4a74;
+}
+
+.toolbar-image {
+  height: 3rem;
+  width: auto;
+}
+
+.image-button {
+  background-color: transparent;
+  border-color: transparent;
+}

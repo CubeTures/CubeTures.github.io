@@ -36,7 +36,7 @@ function setNewUserData(reference, displayName) {
     userData = newUserData;
 }
 function setupDatabase(user) {
-    console.log(`Logging in as ${user.displayName}`)
+console.log(`Logging in as ${user.displayName}`)
     const reference = getReference(user.uid);
     updateUserData(reference, () => {
         if(userData == null) {

@@ -15,12 +15,7 @@
                 ]
             },
             "readonly": {
-                "username": "test_user_1"
-            },
-            "private": {
-                "friends": [
-                        "userID2"
-                    ],
+                "username": "test_user_1",
                 "session": {
                     "center": [30.619107746247806, -96.33609672016316],
                     "radius": 25,
@@ -32,7 +27,11 @@
                         "<address_4>": "U"
                     }
                 }
-                
+            },
+            "private": {
+                "friends": [
+                    "userID2"
+                ]
             }
         }
     }
