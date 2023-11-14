@@ -1,5 +1,13 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { setupDatabase } from "./FirebaseDatabase.js";
+import { onLogin } from "./homepage.js";
+
+function loginUser() {
+    console.log(`Login with cookie [${document.cookie}]`);
+    onLogin();
+}
+function setCookie(user) {
+    document.cookie = `uid=${user.uid} displayName=${user.displayName}`;
+}
 
 class FakeUser {
     constructor(uid, displayName) {
@@ -8,8 +16,10 @@ class FakeUser {
     }
 }
 function debugLogin() {
+    console.log("Logging in...");
     let fakeUser = new FakeUser("fakeID", "fakeDisplayName");
-    setupDatabase(fakeUser);
+    setCookie(fakeUser);
+    loginUser();
 }
 
 function login() {
@@ -18,7 +28,8 @@ function login() {
     
     signInWithPopup(auth, provider)
         .then((result) => {
-            setupDatabase(result.user);
+            setCookie(result.user);
+            loginUser();
         })
         .catch((error) => {
             console.error("Login error:", error);
@@ -26,6 +37,9 @@ function login() {
 }
 
 function onContentLoad() {
+    // check cookies for user id
+    // if user is found push directly to onlogin
+
     let loginButton = document.getElementById("login");
     loginButton.addEventListener("click", debugLogin);
 }

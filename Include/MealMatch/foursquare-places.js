@@ -1,4 +1,4 @@
-import { parseLocation, parseRadius, parseNumResults } from "./NewMatch.js";
+import { parseLocation, parseRadius, parseNumResults } from "./new-match.js";
 
 function displayDataList(response) {
     const element = document.getElementById("data");

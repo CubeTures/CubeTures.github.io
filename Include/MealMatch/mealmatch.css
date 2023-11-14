@@ -43,10 +43,14 @@ body {
 }
 
 .bottom-border {
-  border-bottom: 3px solid #0e0104;
+  border-bottom: 3px solid #282828;
   margin-bottom: 0px;
 }
 .top-border {
-  border-top: 3px solid #0e0104;
+  border-top: 3px solid #282828;
   margin-top: 0px;
+}
+
+.hidden {
+  display: none;
 }
