@@ -9,14 +9,14 @@
     <body class="dark-color text-light">
         <!-- Toolbar -->
         <nav class="navbar top-div fixed-bottom top-border hidden" id="toolbar">
-            <div class="container-fluid justify-content-evenly">
+            <div type="button" class="container-fluid justify-content-evenly">
                 <a class="btn image-button" href="/Pages/MealMatch/friends.html">
                     <img class="toolbar-image" src="/Images/MealMatch/Friends.svg">
                 </a>
-                <a class="btn image-button" href="/Pages/MealMatch/newmatch.html">
+                <a type="button" class="btn image-button" href="/Pages/MealMatch/newmatch.html">
                     <img class="toolbar-image" src="/Images/MealMatch/Add_square.svg">
                 </a>
-                <a class="btn image-button" href="/mealmatch.html">
+                <a type="button" class="btn image-button" href="/mealmatch.html">
                     <img class="toolbar-image" src="/Images/MealMatch/Home.svg">
                 </a>
             </div>
@@ -26,7 +26,7 @@
         <div class="top-div sticky-top bottom-border">
             <br/>
             <br/>
-            <h1 style="font-size: 48px">MealMatch</h1>
+            <h1 class="xxl-font">MealMatch</h1>
             <br/>
             <br/>
         </div>
@@ -57,18 +57,19 @@
         
         <!-- Buttons -->
         <div class="text-center justify-content-evenly">
-            <button type="button" class="btn btn-light hidden" id="refresh">Refresh</button>
-            <button type="button" class="btn btn-light hidden" id="logout">Log Out</button>
-            <button type="button" class="btn btn-light" id="login">Login</button>
+            <button type="button" class="btn btn-outline-light hidden" id="refresh">Refresh</button>
+            <button type="button" class="btn btn-outline-light hidden" id="logout">Log Out</button>
+            <button type="button" class="btn btn-outline-light" id="login">Login</button>
         </div>
         
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link href="">
         
         <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
         <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
         <script type="module" src="/Include/MealMatch/firebase-login.js"></script>
-        <script type="module" page="home" src="/Include/MealMatch/firebase-database.js"></script>
+        <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
     </body>
 </html>

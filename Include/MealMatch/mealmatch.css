@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Baloo";
+  src: url("../../Data/BalooBhaina2-VariableFont_wght.ttf");
+}
+
 :root[data-theme="light"] {
   --text: #25040c;
   --background: #fef1f4;
@@ -13,25 +18,6 @@
   --accent: #ea2a56;
 }
 
-body {
-  padding-bottom: 5rem;
-}
-
-.top-div {
-  text-align: center;
-  background-color: #fc4a74;
-}
-
-.toolbar-image {
-  height: 3rem;
-  width: auto;
-}
-
-.image-button {
-  background-color: transparent;
-  border-color: transparent;
-}
-
 .primary-color {
   background-color: #fc4a74
 }
@@ -39,12 +25,20 @@ body {
   background-color: #282828;
 }
 
+body {
+  font-family: "Baloo";
+  padding-bottom: 5rem;
+}
 .padded {
   margin-left: 1rem !important;
   margin-right: 1rem !important;
   padding: 1rem;
 }
 
+.top-div {
+  text-align: center;
+  background-color: #fc4a74;
+}
 .bottom-border {
   border-bottom: 3px solid #282828;
   margin-bottom: 0px;
@@ -54,8 +48,37 @@ body {
   margin-top: 0px;
 }
 
+.image-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+.toolbar-image {
+  height: 3rem;
+  width: auto;
+}
+.pill-image {
+  height: 2rem;
+  width: auto;
+}
+
 .hidden {
   display: none;
 }
-
 .session-element {}
+
+.xxl-font {
+  font-size: 64px;
+  margin-top: 28px;
+  margin-bottom: 0px;
+}
+.xl-font {
+  font-size: 48px;
+  margin-top: 16px;
+  margin-bottom: 0px;
+}
+.l-font {
+  font-size: 36px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
