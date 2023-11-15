@@ -41,7 +41,7 @@ function onContentLoad() {
     if(uid) { loginUser(); }
 
     let loginButton = document.getElementById("login");
-    loginButton.addEventListener("click", debugLogin);
+    loginButton.addEventListener("click", login);
 }
 
 document.addEventListener("DOMContentLoaded", onContentLoad);

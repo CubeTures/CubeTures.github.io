@@ -18,7 +18,7 @@ function getCookie(cookieName) {
     for(let cookie of cookieList) {
         let spl = cookie.split("=");
         if(spl[0] == cookieName) {
-            return spl[1];
+            return spl[1].substring(0, spl[1].length - 1);
         }
     }
 

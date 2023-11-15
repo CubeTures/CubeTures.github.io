@@ -42,8 +42,8 @@
             <br/>
         </div>
 
-        
-        <div> <!-- Send Friend Request -->
+        <!-- Send Friend Request -->
+        <div> 
             <div class="primary-color rounded padded">
                 <div class="justify-content-between" style="display:flex">
                     <p class="l-font">Send Request</p>
@@ -63,12 +63,24 @@
         <div>
             <div class="primary-color rounded padded">
                 <div class="justify-content-between d-flex">
-                    <p class="l-font">Friend Requests</p>
-                    <img class="pill-image" src="/Images/MealMatch/Expand_up.svg">
+                    <p class="l-font">Requests</p>
+                    <img class="footer-image" src="/Images/MealMatch/Expand_up.svg" id="request-expand">
                 </div>
             </div>
-            <br/>
+            <div class="primary-color-opacity rounded padded-extension">
+                <div id="friend-request-entry">
+                    <br/>
+                    <div class="primary-color rounded padded-2 d-flex justify-content-between">
+                        <p class="m-font">DisplayName</p>
+                        <div>
+                            <button class="btn btn-outline-light">X</button>
+                            <button class="btn btn-outline-light">Y</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <br/>
 
         <!-- Toast -->
         <div class="toast-container position-fixed top-0 end-0 p-3">
