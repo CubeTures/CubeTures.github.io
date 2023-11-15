@@ -22,17 +22,20 @@
             },
             "readonly": {
                 "username": "test_user_1",
-                "userID1": {
-                    "center": [30.619107746247806, -96.33609672016316],
-                    "radius": 25,
-                    "people": ["userID1", "userID2"],
-                    "locations": {
-                        "<address_1>": "Y",
-                        "<address_2>": "M",
-                        "<address_3>": "N",
-                        "<address_4>": "U"
+                "session": {
+                    "userID1": {
+                        "center": [30.619107746247806, -96.33609672016316],
+                        "radius": 25,
+                        "people": ["userID1", "userID2"],
+                        "locations": {
+                            "<address_1>": "Y",
+                            "<address_2>": "M",
+                            "<address_3>": "N",
+                            "<address_4>": "U"
+                        }
                     }
                 }
+                
             },
             "private": {
                 "friends": [

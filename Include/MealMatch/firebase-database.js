@@ -1,18 +1,17 @@
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
-const listenOptions = { onlyOnce: true };
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 
 function getReference(uid, dataType) {
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
     return ref(db, path);
 }
-function getUserData(dataType, callback) {
+async function getUserData(dataType) {
     let uid = getCookie("uid");
     let reference = getReference(uid, dataType);
-    onValue(reference, (snapshot) => {
-        callback(snapshot.val());
-    }, listenOptions);
+    const snapshot = await get(reference);
+    return snapshot.val();
 }
+
 
 function getCookie(cookieName) {
     let cookieList = document.cookie.split(" ");
@@ -27,4 +26,25 @@ function getCookie(cookieName) {
     return null;
 }
 
-export { getUserData, getCookie }
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function hasCookie(name) {
+    return document.cookie.split(';').some(c => {
+        return c.trim().startsWith(name + '=');
+    });
+}
+function removeCookie(cookieName) {
+    if(hasCookie(cookieName)) {
+        document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+    }
+}
+
+export { getUserData, getCookie, setCookie, removeCookie }

@@ -32,8 +32,11 @@ body {
   border-color: transparent;
 }
 
-.bg-pri {
+.primary-color {
   background-color: #fc4a74
+}
+.dark-color {
+  background-color: #282828;
 }
 
 .padded {
@@ -54,3 +57,5 @@ body {
 .hidden {
   display: none;
 }
+
+.session-element {}
