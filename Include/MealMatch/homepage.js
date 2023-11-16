@@ -2,6 +2,85 @@ import { getUserData, getCookie, removeCookie } from "./firebase-database.js";
 let toolbar, login, logout, refresh;
 let sessionContainer, sessionTemplate, spinner;
 
+function onDocumentLoad() {
+    setVariables();
+    setOnClicks();
+}
+function setVariables() {
+    toolbar = document.getElementById("toolbar");
+    login = document.getElementById("login");
+    logout = document.getElementById("logout");
+    refresh = document.getElementById("refresh");
+    sessionContainer = document.getElementById("session-container");
+    sessionTemplate = document.getElementById("session-template");
+    spinner = document.getElementById("spinner");
+}
+function setOnClicks() {
+    document.getElementById("refresh")
+        .addEventListener("click", onRefresh);
+    document.getElementById("logout")
+        .addEventListener("click", onLogout);
+}
+
+function onLogin() {
+    toggleAssetVisibilty(true);
+    populateHomepage();
+}
+function onLogout() {
+    toggleAssetVisibilty(false);
+    depopulateHomepage();
+    removeCookie("uid");
+    removeCookie("displayName");
+}
+function onRefresh() {
+    depopulateHomepage();
+    populateHomepage();
+}
+
+async function populateHomepage() {
+    toggleSpinner(true);
+    let uid = getCookie("uid");
+
+    const _readonly = await getUserData("readonly");
+    if(_readonly) {
+        addToHomepage(_readonly["session"]);
+    }
+
+    const _writeonly = await getUserData("writeonly");
+    if(_writeonly) {
+        const sessionList = _writeonly["session_requests"];
+        for(const session in sessionList) {
+            addToHomepage(session);
+        }
+    }
+
+    // popup if there is nothing added instructing users to create new session
+    toggleSpinner(false);
+}
+function addToHomepage(sessions) {
+    for(const session in sessions) {
+        const clone = sessionTemplate.content.cloneNode(true);
+
+        const sessionElement = clone.querySelector("#session-element");
+        sessionElement.classList.add("session-element");
+
+        const creator = clone.querySelector("#creator");
+        creator.textContent = session;
+
+        //edit more fields
+        //add click capability
+
+        sessionContainer.append(clone);
+    }
+}
+
+function depopulateHomepage() {
+    const elements = document.getElementsByClassName("session-element");
+    for(let i = 0; i < elements.length; i++) {
+        elements[i].remove();
+    }
+}
+
 function toggleAssetVisibilty(isVisible) {  
     if(isVisible) {
         toolbar.classList.remove("hidden");
@@ -24,85 +103,6 @@ function toggleSpinner(isVisible) {
         spinner.classList.add("hidden");
     }
 }   
-
-function addToHomepage(sessions) {
-    for(const session in sessions) {
-        const clone = sessionTemplate.content.cloneNode(true);
-
-        const sessionElement = clone.querySelector("#session-element");
-        sessionElement.classList.add("session-element");
-
-        const creator = clone.querySelector("#creator");
-        creator.textContent = session;
-
-        //edit more fields
-        //add click capability
-
-        sessionContainer.append(clone);
-    }
-}
-async function populateHomepage() {
-    toggleSpinner(true);
-    let uid = getCookie("uid");
-
-    const _readonly = await getUserData("readonly");
-    if(_readonly) {
-        addToHomepage(_readonly["session"]);
-    }
-
-    const _writeonly = await getUserData("writeonly");
-    if(_writeonly) {
-        const sessionList = _writeonly["session_requests"];
-        for(const session in sessionList) {
-            addToHomepage(session);
-        }
-    }
-
-    // popup if there is nothing added instructing users to create new session
-    toggleSpinner(false);
-}
-
-function depopulateHomepage() {
-    const elements = document.getElementsByClassName("session-element");
-    for(let i = 0; i < elements.length; i++) {
-        elements[i].remove();
-    }
-}
-
-function onLogin() {
-    toggleAssetVisibilty(true);
-    populateHomepage();
-}
-function onLogout() {
-    toggleAssetVisibilty(false);
-    depopulateHomepage();
-    removeCookie("uid");
-    removeCookie("displayName");
-}
-function onRefresh() {
-    depopulateHomepage();
-    populateHomepage();
-}
-
-function setOnClicks() {
-    document.getElementById("refresh")
-        .addEventListener("click", onRefresh);
-    document.getElementById("logout")
-        .addEventListener("click", onLogout);
-}
-function setVariables() {
-    toolbar = document.getElementById("toolbar");
-    login = document.getElementById("login");
-    logout = document.getElementById("logout");
-    refresh = document.getElementById("refresh");
-    sessionContainer = document.getElementById("session-container");
-    sessionTemplate = document.getElementById("session-template");
-    spinner = document.getElementById("spinner");
-}
-function onDocumentLoad() {
-    setOnClicks();
-    setVariables();
-}
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
 export { onLogin }

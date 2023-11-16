@@ -3,44 +3,29 @@
         "userID1": {
             "writeonly": {
                 "friend_requests": [
-                    "userID2",
-                    "userID3"
+                    "userID3",
+                    "userID4"
                 ],
-                "session_requests": {
-                    "userID2": {
-                        "center": [32.98437699018884, -96.7482544272266],
-                        "radius": 25,
-                        "people": ["userID1", "userID2"],
-                        "locations": {
-                            "<address_1>": "Y",
-                            "<address_2>": "M",
-                            "<address_3>": "N",
-                            "<address_4>": "U"
-                        }
-                    }
-                }
-            },
-            "readonly": {
-                "username": "test_user_1",
-                "session": {
-                    "userID1": {
-                        "center": [30.619107746247806, -96.33609672016316],
-                        "radius": 25,
-                        "people": ["userID1", "userID2"],
-                        "locations": {
-                            "<address_1>": "Y",
-                            "<address_2>": "M",
-                            "<address_3>": "N",
-                            "<address_4>": "U"
-                        }
-                    }
-                }
-                
-            },
-            "private": {
                 "friends": [
                     "userID2"
+                ],
+                "session_requests": [
+                    "userID2"
                 ]
+            },
+            "readonly": {
+                "displayName": "test_user_1",
+                "session": {
+                    "center": [30.619107746247806, -96.33609672016316],
+                    "radius": 25,
+                    "people": ["userID1", "userID2"],
+                    "locations": {
+                        "<address_1>": "Y",
+                        "<address_2>": "M",
+                        "<address_3>": "N",
+                        "<address_4>": "U"
+                    }
+                }
             }
         }
     }

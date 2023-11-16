@@ -1,18 +1,29 @@
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 
+async function getUserData(dataType, otherUID=null) {
+    let uid = "";
+    if(otherUID) {
+        uid = otherUID;
+    }
+    else {
+        uid = getCookie("uid");
+    }
+
+    let reference = getReference(uid, dataType);
+    const snapshot = await get(reference);
+    return snapshot.val();
+}
 function getReference(uid, dataType) {
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
     return ref(db, path);
 }
-async function getUserData(dataType) {
-    let uid = getCookie("uid");
-    let reference = getReference(uid, dataType);
-    const snapshot = await get(reference);
-    return snapshot.val();
+
+function hasCookie(cookieName) {
+    return document.cookie.split(';').some(c => {
+        return c.trim().startsWith(cookieName + '=');
+    });
 }
-
-
 function getCookie(cookieName) {
     let cookieList = document.cookie.split(" ");
     for(let cookie of cookieList) {
@@ -25,21 +36,14 @@ function getCookie(cookieName) {
     console.log(`${cookieName} not found in cookies`);
     return null;
 }
-
-function setCookie(name, value, days) {
+function setCookie(cookieName, value, days) {
     var expires = "";
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
-
-function hasCookie(name) {
-    return document.cookie.split(';').some(c => {
-        return c.trim().startsWith(name + '=');
-    });
+    document.cookie = cookieName + "=" + (value || "")  + expires + "; path=/";
 }
 function removeCookie(cookieName) {
     if(hasCookie(cookieName)) {
@@ -47,4 +51,4 @@ function removeCookie(cookieName) {
     }
 }
 
-export { getUserData, getCookie, setCookie, removeCookie }
+export { getUserData, hasCookie, getCookie, setCookie, removeCookie }

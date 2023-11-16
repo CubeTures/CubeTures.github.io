@@ -1,26 +1,12 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getCookie, setCookie } from "./firebase-database.js";
+import { hasCookie, setCookie } from "./firebase-database.js";
 import { onLogin } from "./homepage.js";
 
-function loginUser() {
-    console.log(`Login with cookie [${document.cookie}]`);
-    onLogin();
-}
-function newLogin(user) {
-    setCookie("uid", user.uid, 3);
-    setCookie("displayName", user.displayName, 3);
-    loginUser();
-}
-
-class FakeUser {
-    constructor(uid, displayName) {
-        this.uid = uid;
-        this.displayName = displayName;
-    }
-}
-function debugLogin() {
-    let fakeUser = new FakeUser("fakeID", "fakeDisplayName");
-    newLogin(fakeUser);
+function onContentLoad() {
+    let loginButton = document.getElementById("login");
+    loginButton.addEventListener("click", login);
+    
+    if(hasCookie("uid")) { loginUser(); }
 }
 
 function login() {
@@ -36,12 +22,26 @@ function login() {
         });
 }
 
-function onContentLoad() {
-    let uid = getCookie("uid");
-    if(uid) { loginUser(); }
+function debugLogin() {
+    let fakeUser = new FakeUser("fakeID", "fakeDisplayName");
+    newLogin(fakeUser);
+}
+class FakeUser {
+    constructor(uid, displayName) {
+        this.uid = uid;
+        this.displayName = displayName;
+    }
+}
 
-    let loginButton = document.getElementById("login");
-    loginButton.addEventListener("click", login);
+function newLogin(user) {
+    setCookie("uid", user.uid, 3);
+    setCookie("displayName", user.displayName, 3);
+    //set database with displayName
+    loginUser();
+}
+function loginUser() {
+    console.log(`Login with cookie [${document.cookie}]`);
+    onLogin();
 }
 
 document.addEventListener("DOMContentLoaded", onContentLoad);
