@@ -1,11 +1,10 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { hasCookie, setCookie } from "./firebase-database.js";
+import { hasCookie, setCookie, updateUserData } from "./firebase-database.js";
 import { onLogin } from "./homepage.js";
 
 function onContentLoad() {
     let loginButton = document.getElementById("login");
     loginButton.addEventListener("click", login);
-    
     if(hasCookie("uid")) { loginUser(); }
 }
 
@@ -35,9 +34,13 @@ class FakeUser {
 
 function newLogin(user) {
     setCookie("uid", user.uid, 3);
-    setCookie("displayName", user.displayName, 3);
-    //set database with displayName
+    setDisplayName(user);
     loginUser();
+}
+function setDisplayName(user) {
+    let data = {};
+    data["display_name"] = user.displayName;
+    updateUserData("readonly", data);
 }
 function loginUser() {
     console.log(`Login with cookie [${document.cookie}]`);

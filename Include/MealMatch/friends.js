@@ -1,10 +1,11 @@
-import { getUserData, getCookie } from "./firebase-database.js";
+import { getUserData, updateUserData, getCookie } from "./firebase-database.js";
 let friendcode, sendRequestInput;
 let toastBootstrap;
 
 function onDocumentLoad() {
     setFriendCode();
     setSendFriendRequest();
+    setFriendRequests();
     setToast();
 }
 
@@ -30,27 +31,55 @@ async function sendFriendRequest() {
     const code = sendRequestInput.value;
     if(code) {
         let isValidUser = await validUser(code);
-        if(isValidUser && notThisUser(code)) {
+        let thisUser = isThisUser(code);
+        let alreadFriend = await alreadyFriend(code)
+        if(isValidUser && !thisUser && !alreadFriend) {
             sendRequest(code);
             sendRequestInput.value = "";
             showToast("Friend Request Sent!");
             return;
         }
+        else if(!isValidUser) {
+            showToast("Invalid Friend Code.");
+        }
+        else if(thisUser) {
+            showToast("Cannot use own Friend Code.");
+        }
+        else if(alreadFriend) {
+            showToast("User is already your Friend.");
+        }
     }
-    
-    showToast("Invalid Friend Code.");
+    else {
+        showToast("No Friend Code was input.");
+    }
 }
 function sendRequest(code) {
-    //set with database to other user's writeonly
+    let data = {};
+    data[getCookie("uid")] = true
+    updateUserData("writeonly/friend_requests", data, code);
 }
 async function validUser(code) {
     const userData = await getUserData("readonly", code);
     if(userData) { return true; }
     return false;
 }
-function notThisUser(code) {
+function isThisUser(code) {
     const uid = getCookie("uid");
-    return uid != code;
+    return uid == code;
+}
+async function alreadyFriend(code) {
+    const friends = await getUserData("writeonly/friends");
+    if(friends && code in friends) {
+        return true;
+    }
+    return false;
+}
+
+function setFriendRequests() {
+    //set toggle caret functionality
+    //set the number of requests
+    //populate list
+    //set accept and decline functionality for each request
 }
 
 function setToast() {

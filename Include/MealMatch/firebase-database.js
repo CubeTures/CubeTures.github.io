@@ -1,22 +1,36 @@
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 
-async function getUserData(dataType, otherUID=null) {
-    let uid = "";
+function getUID(otherUID) {
     if(otherUID) {
-        uid = otherUID;
+        return otherUID;
     }
-    else {
-        uid = getCookie("uid");
-    }
-
-    let reference = getReference(uid, dataType);
-    const snapshot = await get(reference);
-    return snapshot.val();
+    return getCookie("uid");
 }
 function getReference(uid, dataType) {
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
     return ref(db, path);
+}
+async function getUserData(dataType, otherUID=null) {
+    let uid = getUID(otherUID);
+    let reference = getReference(uid, dataType);
+    const snapshot = await get(reference);
+    return snapshot.val();
+}
+async function updateUserData(dataType, data, otherUID=null) {
+    let uid = getUID(otherUID);
+    let reference = getReference(uid, dataType);
+    update(reference, data);
+}
+function removeUserData(dataType, otherUID=null) {
+    let uid = getUID(otherUID);
+    let reference = getReference(uid, dataType);
+    remove(reference);
+}
+
+async function getFriendName(code) {
+    const userData = await getUserData("writeonly/friends");
+    return userData[code];
 }
 
 function hasCookie(cookieName) {
@@ -29,7 +43,7 @@ function getCookie(cookieName) {
     for(let cookie of cookieList) {
         let spl = cookie.split("=");
         if(spl[0] == cookieName) {
-            return spl[1].substring(0, spl[1].length - 1);
+            return spl[1];
         }
     }
 
@@ -51,4 +65,52 @@ function removeCookie(cookieName) {
     }
 }
 
-export { getUserData, hasCookie, getCookie, setCookie, removeCookie }
+function testUserData() {
+    //addPersonalMatch();
+    //addMatchRequest();    
+    //addPersonalMatchRequest();    
+    removeUserData("readonly/match");
+    removeUserData("writeonly/match_requests");
+    removeUserData("readonly/match", "fakeID");
+}
+function addPersonalMatch() {
+    updateUserData("readonly/match", {
+        "ll": [0, 0],
+        "radius": 0,
+        "people": {
+            "uid1": "displayName1", 
+            "uid2": "displayName2"
+        },
+        "locations": {
+            "loc_a": "Y",
+            "loc_b": "M",
+            "loc_c": "N",
+            "loc_d": "U"
+        }
+    });
+}
+function addMatchRequest() {
+    updateUserData("writeonly/match_requests", {
+        "fakeID": true
+    });
+}
+function addPersonalMatchRequest() {
+    updateUserData("readonly/match", {
+        "ll": [0, 0],
+        "radius": 0,
+        "people": {
+            "uid1": "displayName1", 
+            "uid2": "displayName2"
+        },
+        "locations": {
+            "loc_a": "Y",
+            "loc_b": "M",
+            "loc_c": "N",
+            "loc_d": "U"
+        }
+    }, "fakeID");
+}
+testUserData();
+
+export { getUserData, updateUserData, getFriendName,
+    hasCookie, getCookie, setCookie, removeCookie }

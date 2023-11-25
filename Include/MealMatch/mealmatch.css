@@ -83,7 +83,10 @@ body {
 .hidden {
   display: none;
 }
-.session-element {}
+.match-element {}
+.disclaimer-text {
+  margin-bottom: 0px;
+}
 
 .xxl-font {
   font-size: 64px;

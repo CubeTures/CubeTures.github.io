@@ -1,6 +1,6 @@
-import { getUserData, getCookie, removeCookie } from "./firebase-database.js";
-let toolbar, login, logout, refresh;
-let sessionContainer, sessionTemplate, spinner;
+import { getUserData, getFriendName, removeCookie } from "./firebase-database.js";
+let toolbar, login, logout, refresh, disclaimer;
+let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 
 function onDocumentLoad() {
     setVariables();
@@ -11,8 +11,10 @@ function setVariables() {
     login = document.getElementById("login");
     logout = document.getElementById("logout");
     refresh = document.getElementById("refresh");
-    sessionContainer = document.getElementById("session-container");
-    sessionTemplate = document.getElementById("session-template");
+    disclaimer = document.getElementById("login_disclaimer");
+    matchContainer = document.getElementById("match-container");
+    matchTemplate = document.getElementById("match-template");
+    noMatchDisclaimer = document.getElementById("no-matches-disclaimer");
     spinner = document.getElementById("spinner");
 }
 function setOnClicks() {
@@ -39,60 +41,82 @@ function onRefresh() {
 
 async function populateHomepage() {
     toggleSpinner(true);
-    let uid = getCookie("uid");
+    setVisible(noMatchDisclaimer, false);
 
-    const _readonly = await getUserData("readonly");
-    if(_readonly) {
-        addToHomepage(_readonly["session"]);
-    }
+    let hasMatch = false;
+    hasMatch = (await populatePersonal()) ? true : hasMatch;
+    hasMatch = (await populateRequests()) ? true : hasMatch;
+    console.log(`Has Match? ${hasMatch}`);
 
-    const _writeonly = await getUserData("writeonly");
-    if(_writeonly) {
-        const sessionList = _writeonly["session_requests"];
-        for(const session in sessionList) {
-            addToHomepage(session);
-        }
-    }
-
-    // popup if there is nothing added instructing users to create new session
+    setVisible(noMatchDisclaimer, !hasMatch);
     toggleSpinner(false);
 }
-function addToHomepage(sessions) {
-    for(const session in sessions) {
-        const clone = sessionTemplate.content.cloneNode(true);
-
-        const sessionElement = clone.querySelector("#session-element");
-        sessionElement.classList.add("session-element");
-
-        const creator = clone.querySelector("#creator");
-        creator.textContent = session;
-
-        //edit more fields
-        //add click capability
-
-        sessionContainer.append(clone);
+async function populatePersonal() {
+    const _readonly = await getUserData("readonly");
+    const match = _readonly["match"];
+    if(match) {
+        addToHomepage(match, _readonly["display_name"]);
+        return true;
     }
+
+    return false;
+}
+async function populateRequests() {
+    const requests = await getUserData("writeonly/match_requests");
+    if(requests) {
+        for(const request in requests) {
+            const match = await getUserData("readonly/match", request);
+            const friendName = await getFriendName(request);
+            addToHomepage(match, friendName);
+        }
+        return true;
+    }
+    return false;
+}
+function addToHomepage(match, creator) {
+    const clone = matchTemplate.content.cloneNode(true);
+
+    const matchElement = clone.querySelector("#match-element");
+    matchElement.classList.add("match-element");
+
+    const creatorText = clone.querySelector("#creator");
+    creatorText.textContent = creator;
+
+    //edit more fields
+    //add click capability
+
+    matchContainer.append(clone);
 }
 
 function depopulateHomepage() {
-    const elements = document.getElementsByClassName("session-element");
-    for(let i = 0; i < elements.length; i++) {
+    const elements = document.getElementsByClassName("match-element");
+    for(let i = elements.length - 1; i >= 0; i--) {
         elements[i].remove();
     }
 }
 
 function toggleAssetVisibilty(isVisible) {  
     if(isVisible) {
-        toolbar.classList.remove("hidden");
-        refresh.classList.remove("hidden");
-        logout.classList.remove("hidden");
-        login.classList.add("hidden");
+        setVisible(toolbar, true);
+        setVisible(refresh, true);
+        setVisible(logout, true);
+        setVisible(login, false);
+        setVisible(disclaimer, false);
     }
     else {
-        toolbar.classList.add("hidden");
-        refresh.classList.add("hidden");
-        logout.classList.add("hidden");
-        login.classList.remove("hidden");
+        setVisible(toolbar, false);
+        setVisible(refresh, false);
+        setVisible(logout, false);
+        setVisible(login, true);
+        setVisible(disclaimer, true);
+    }
+}
+function setVisible(asset, isVisible) {
+    if(isVisible) {
+        asset.classList.remove("hidden");
+    }
+    else {
+        asset.classList.add("hidden");
     }
 }
 function toggleSpinner(isVisible) {

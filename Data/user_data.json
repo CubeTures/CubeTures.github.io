@@ -2,23 +2,25 @@
     "users": {
         "userID1": {
             "writeonly": {
-                "friend_requests": [
-                    "userID3",
-                    "userID4"
-                ],
-                "friends": [
-                    "userID2"
-                ],
-                "session_requests": [
-                    "userID2"
-                ]
+                "friend_requests": {
+                    "userID3": true,
+                    "userID4": true
+                },
+                "friends": {
+                    "userID2": "cube",
+                    "userID5": "lowa"
+                },
+                "match_requests": {
+                    "userID2": true
+                }
             },
             "readonly": {
                 "displayName": "test_user_1",
-                "session": {
-                    "center": [30.619107746247806, -96.33609672016316],
+                "match": {
+                    "ll": [30.619107746247806, -96.33609672016316],
                     "radius": 25,
-                    "people": ["userID1", "userID2"],
+                    "uids": ["userID1", "userID2"],
+                    "display_names": ["cube", "lowa"],
                     "locations": {
                         "<address_1>": "Y",
                         "<address_2>": "M",
