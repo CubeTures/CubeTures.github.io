@@ -1,4 +1,5 @@
 import { getUserData, updateUserData, removeUserData, getCookie } from "./firebase-database.js";
+let thisUserDisplayName;
 let friendcode, sendRequestInput;
 let requestCaret, requestAmount, requestDropdown, requestTemplate;
 let expandedCaret = "/Images/MealMatch/Expand_down.svg";
@@ -6,10 +7,15 @@ let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
 
 function onDocumentLoad() {
+    setDisplayName();
     setFriendCode();
     setSendFriendRequest();
     setFriendRequests();
     setToast();
+}
+
+async function setDisplayName() {
+    thisUserDisplayName = await getUserData("readonly/display_name");
 }
 
 function setFriendCode() {
@@ -56,9 +62,9 @@ async function sendFriendRequest() {
         showToast("No Friend Code was input.");
     }
 }
-function sendRequest(code) {
+async function sendRequest(code) {
     let data = {};
-    data[getCookie("uid")] = true
+    data[getCookie("uid")] = thisUserDisplayName;
     updateUserData("writeonly/friend_requests", data, code);
 }
 async function validUser(code) {
@@ -160,10 +166,9 @@ async function answerRequest(wrapper, code, displayName, isYes) {
         const thisFriendList = {};
         thisFriendList[code] = displayName;
         updateUserData("writeonly/friends", thisFriendList);
-
-        const thisDisplayName = await getUserData("readonly/display_name");
+        
         const otherFriendList = {};
-        otherFriendList[getCookie("uid")] = thisDisplayName;
+        otherFriendList[getCookie("uid")] = thisUserDisplayName;
         updateUserData("writeonly/friends", otherFriendList, code);
     }
 }
