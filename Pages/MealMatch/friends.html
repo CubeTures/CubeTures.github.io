@@ -69,18 +69,21 @@
                     <img class="footer-image" src="/Images/MealMatch/Expand_up.svg" id="request-caret">
                 </div>
             </div>
+
             <!-- Dropdown -->
-            <div class="primary-color-opacity rounded padded-extension hidden">
-                <div id="friend-request-entry">
-                    <br/>
-                    <div class="primary-color rounded padded-2 d-flex justify-content-between">
-                        <p class="m-font">DisplayName</p>
-                        <div>
-                            <button class="btn btn-outline-light">X</button>
-                            <button class="btn btn-outline-light">Y</button>
+            <div class="primary-color-opacity rounded padded-extension hidden" id="request-dropdown">
+                <template id="request-template">
+                    <div id="request-wrapper">
+                        <br/>
+                        <div class="primary-color rounded padded-2 d-flex justify-content-between">
+                            <p class="m-font" id="display-name">DisplayName</p>
+                            <div>
+                                <button class="btn btn-outline-light" id="decline">X</button>
+                                <button class="btn btn-outline-light" id="accept">Y</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
         <br/>

@@ -1,5 +1,8 @@
 import { getUserData, updateUserData, getCookie } from "./firebase-database.js";
 let friendcode, sendRequestInput;
+let requestCaret, requestAmount, requestDropdown, requestTemplate;
+let expandedCaret = "/Images/MealMatch/Expand_down.svg";
+let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
 
 function onDocumentLoad() {
@@ -75,11 +78,105 @@ async function alreadyFriend(code) {
     return false;
 }
 
-function setFriendRequests() {
-    //set toggle caret functionality
-    //set the number of requests
-    //populate list
-    //set accept and decline functionality for each request
+async function setFriendRequests() {
+    requestCaret = document.getElementById("request-caret");
+    requestAmount = document.getElementById("request-amount");
+    requestDropdown = document.getElementById("request-dropdown");
+    requestTemplate = document.getElementById("request-template");
+    
+    let requestCount = await populateFriendRequests();
+    if(requestCount > 0) {
+        requestCaret.addEventListener("click", toggleRequests);
+    }
+}
+function toggleRequests() {
+    let isExpanded = requestCaret.hasAttribute("expanded");
+    if(isExpanded) {
+        setRequestDropdown(false);
+    }
+    else {
+        setRequestDropdown(true);
+    }
+}
+function setRequestDropdown(isVisibile) {
+    setVisible(requestDropdown, isVisibile);
+
+    if(isVisibile) {
+        requestCaret.src = expandedCaret;
+        requestCaret.setAttribute("expanded", "");
+    }
+    else {
+        requestCaret.src = collapsedCaret;
+        requestCaret.removeAttribute("expanded");
+    }
+}
+async function populateFriendRequests() {
+    const _writeonly = await getUserData("writeonly");
+    console.log(JSON.stringify(_writeonly, null, 2));
+    const requests = await getUserData("writeonly/friend_requests");
+
+    let requestCount = 0;
+    for(const [code, displayName] of Object.entries(requests)) {
+        addRequest(code, displayName);
+        requestCount++;
+    }
+
+    requestAmount.textContent =`[${requestCount}]`;
+    return requestCount;
+}
+function addRequest(code, displayName) {
+    const clone = requestTemplate.content.cloneNode(true);
+    
+    const displayNameText = clone.querySelector("#display-name");
+    displayNameText.textContent = displayName;
+
+    const decline = clone.querySelector("#decline");
+    decline.addEventListener("click", (event) => { 
+        const wrapper = event.target.closest("#request-wrapper");
+        answerRequest(wrapper, code, displayName, false);
+    });
+
+    const accept = clone.querySelector("#accept");
+    accept.addEventListener("click", (event) => { 
+        const wrapper = event.target.closest("#request-wrapper");
+        answerRequest(wrapper, code, displayName, true);
+    });
+
+    requestDropdown.append(clone);
+}
+
+function answerRequest(wrapper, code, displayName, isYes) {
+    console.log(`Responded to code ${code} with ${isYes ? "Yes" : "No"}.`);
+    wrapper.remove();
+    
+    let requestCount = decrementRequestAmount();
+    if(requestCount <= 0) {
+        setRequestDropdown(false);
+        requestDropdown.removeEventListener("click");
+    }
+
+    if(isYes) {
+        const thisFriendList = {};
+        thisFriendList[code] = displayName;
+        updateUserData("friends", thisFriendList);
+
+        const otherFriendList = {};
+        //set code and displayname
+        updateUserData("friends", otherFriendList, code);
+    }
+}
+function decrementRequestAmount() {
+    const textContent = requestAmount.textContent;
+    const stringAmount = textContent.substring(1, textContent.length - 1);
+    let intAmount = parseInt(stringAmount) - 1;
+
+    let toSet = "";
+    if(intAmount > 0) {
+        toSet = `[${intAmount}]`;
+    }
+    requestAmount = toSet;
+
+    return intAmount;
 }
 
 function setToast() {
@@ -90,6 +187,15 @@ function showToast(message) {
     const toastText = document.getElementById("toast-text");
     toastText.textContent = message;
     toastBootstrap.show();
+}
+
+function setVisible(asset, isVisible) {
+    if(isVisible) {
+        asset.classList.remove("hidden");
+    }
+    else {
+        asset.classList.add("hidden");
+    }
 }
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);

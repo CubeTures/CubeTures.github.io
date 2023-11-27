@@ -3,8 +3,8 @@
         "userID1": {
             "writeonly": {
                 "friend_requests": {
-                    "userID3": true,
-                    "userID4": true
+                    "userID3": "not_cube",
+                    "userID4": "not_lowa"
                 },
                 "friends": {
                     "userID2": "cube",

@@ -10,7 +10,7 @@ function setVariables() {
     toolbar = document.getElementById("toolbar");
     login = document.getElementById("login");
     logout = document.getElementById("logout");
-    refresh = document.getElementById("refresh");
+    //refresh = document.getElementById("refresh");
     disclaimer = document.getElementById("login_disclaimer");
     matchContainer = document.getElementById("match-container");
     matchTemplate = document.getElementById("match-template");
@@ -18,8 +18,8 @@ function setVariables() {
     spinner = document.getElementById("spinner");
 }
 function setOnClicks() {
-    document.getElementById("refresh")
-        .addEventListener("click", onRefresh);
+    //document.getElementById("refresh")
+        //.addEventListener("click", onRefresh);
     document.getElementById("logout")
         .addEventListener("click", onLogout);
 }
@@ -64,9 +64,9 @@ async function populatePersonal() {
 async function populateRequests() {
     const requests = await getUserData("writeonly/match_requests");
     if(requests) {
-        for(const request in requests) {
-            const match = await getUserData("readonly/match", request);
-            const friendName = await getFriendName(request);
+        for(const uid in requests) {
+            const match = await getUserData("readonly/match", uid);
+            const friendName = await getFriendName(uid);
             addToHomepage(match, friendName);
         }
         return true;
@@ -98,14 +98,14 @@ function depopulateHomepage() {
 function toggleAssetVisibilty(isVisible) {  
     if(isVisible) {
         setVisible(toolbar, true);
-        setVisible(refresh, true);
+        //setVisible(refresh, true);
         setVisible(logout, true);
         setVisible(login, false);
         setVisible(disclaimer, false);
     }
     else {
         setVisible(toolbar, false);
-        setVisible(refresh, false);
+        //setVisible(refresh, false);
         setVisible(logout, false);
         setVisible(login, true);
         setVisible(disclaimer, true);
