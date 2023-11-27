@@ -19,7 +19,7 @@
 }
 
 .primary-color {
-  background-color: #fc4a74;
+  background-color: #FB4670;
 }
 .primary-color-opacity {
   background-color: rgba(252, 74, 116, .3);
@@ -109,24 +109,15 @@ body {
   margin-bottom: 0px;
 }
 
-.rotate-caret {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-animation:spin .5s linear;
-  -moz-animation:spin .5s linear;
-  animation:spin .5s linear;
+.no-overflow {
+  min-width: 0;
 }
-@-moz-keyframes spin { 
-  100% { -moz-transform: rotate(180deg); } 
+.no-overflow-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 0;
 }
-@-webkit-keyframes spin { 
-  100% { -webkit-transform: rotate(180deg); } 
-}
-@keyframes spin { 
-  100% { 
-      -webkit-transform: rotate(180deg); 
-      transform:rotate(180deg); 
-  } 
+.no-overflow-boxes {
+  flex-shrink: 0;
 }
 

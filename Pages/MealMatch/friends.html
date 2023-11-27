@@ -3,6 +3,7 @@
     <head>
        <title>MealMatch</title>
        <meta name="viewport" content="width=device-width, initial-scale=1">
+       <link rel="icon" type="image/x-icon" href="/Images/MealMatch/Logo (Simple).svg">
     </head>
 
     <body class="dark-color text-light">
@@ -75,11 +76,45 @@
                 <template id="request-template">
                     <div id="request-wrapper">
                         <br/>
-                        <div class="primary-color rounded padded-2 d-flex justify-content-between">
-                            <p class="m-font" id="display-name">DisplayName</p>
+                        <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
+                            <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
+                            <div class="justify-content-evenly no-overflow-boxes">
+                                <button class="btn btn-outline-light" id="decline">
+                                    <img src="/Images/MealMatch/Close_round.svg">
+                                </button>
+                                <button class="btn btn-outline-light" id="accept">
+                                    <img src="/Images/MealMatch/Done_round.svg">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <br/>
+
+        <!-- Friends -->
+        <div>
+            <div class="primary-color rounded padded">
+                <div class="justify-content-between d-flex">
+                    <p class="l-font">Friends 
+                        <span id="friend-amount"></span>
+                    </p>
+                    <img class="footer-image" src="/Images/MealMatch/Expand_up.svg" id="friend-caret">
+                </div>
+            </div>
+
+            <!-- Dropdown -->
+            <div class="primary-color-opacity rounded padded-extension hidden" id="friend-dropdown">
+                <template id="friend-template">
+                    <div id="friend-wrapper">
+                        <br/>
+                        <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
+                            <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
                             <div>
-                                <button class="btn btn-outline-light" id="decline">X</button>
-                                <button class="btn btn-outline-light" id="accept">Y</button>
+                                <button class="btn btn-outline-light" id="remove">
+                                    <img src="/Images/MealMatch/Close_round.svg">
+                                </button>
                             </div>
                         </div>
                     </div>

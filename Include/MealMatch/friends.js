@@ -2,6 +2,7 @@ import { getUserData, updateUserData, removeUserData, getCookie } from "./fireba
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
 let requestCaret, requestAmount, requestDropdown, requestTemplate;
+let friendCaret, friendAmount, friendDropdown, friendTemplate;
 let expandedCaret = "/Images/MealMatch/Expand_down.svg";
 let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
@@ -11,6 +12,7 @@ function onDocumentLoad() {
     setFriendCode();
     setSendFriendRequest();
     setFriendRequests();
+    setFriends();
     setToast();
 }
 
@@ -127,7 +129,7 @@ async function populateFriendRequests() {
         }
     }
 
-    requestAmount.textContent = `[${requestCount}]`;
+    requestAmount.textContent = `(${requestCount})`;
     return requestCount;
 }
 function addRequest(code, displayName) {
@@ -150,7 +152,6 @@ function addRequest(code, displayName) {
 
     requestDropdown.append(clone);
 }
-
 async function answerRequest(wrapper, code, displayName, isYes) {
     wrapper.remove();
     
@@ -176,8 +177,77 @@ function decrementRequestAmount() {
     const textContent = requestAmount.textContent;
     const stringAmount = textContent.substring(1, textContent.length - 1);
     let intAmount = parseInt(stringAmount) - 1;
-    requestAmount.textContent = `[${intAmount}]`;
+    requestAmount.textContent = `(${intAmount})`;
     return intAmount;
+}
+
+async function setFriends() {
+    friendCaret = document.getElementById("friend-caret");
+    friendAmount = document.getElementById("friend-amount");
+    friendDropdown = document.getElementById("friend-dropdown");
+    friendTemplate = document.getElementById("friend-template");
+    
+    let friendCount = await populateFriends();
+    if(friendCount > 0) {
+        friendCaret.addEventListener("click", toggleFriends);
+    }
+}
+function toggleFriends() {
+    let isExpanded = friendCaret.hasAttribute("expanded");
+    if(isExpanded) {
+        setFriendDropdown(false);
+    }
+    else {
+        setFriendDropdown(true);
+    }
+}
+function setFriendDropdown(isVisibile) {
+    setVisible(friendDropdown, isVisibile);
+
+    if(isVisibile) {
+        friendCaret.src = expandedCaret;
+        friendCaret.setAttribute("expanded", "");
+    }
+    else {
+        friendCaret.src = collapsedCaret;
+        friendCaret.removeAttribute("expanded");
+    }
+}
+async function populateFriends() {
+    const friends = await getUserData("writeonly/friends");
+    console.log(JSON.stringify(friends, null, 2));
+
+    let friendCount = 0;
+    if(friends) {
+        for(const [code, displayName] of Object.entries(friends)) {
+            addFriend(code, displayName);
+            friendCount++;
+        }
+    }
+    
+    friendAmount.textContent = `(${friendCount})`;
+    return friendCount;
+}
+function addFriend(code, displayName) {
+    const clone = friendTemplate.content.cloneNode(true);
+    
+    const displayNameText = clone.querySelector("#display-name");
+    displayNameText.textContent = displayName;
+
+    const remove = clone.querySelector("#remove");
+    remove.addEventListener("click", (event) => { 
+        const wrapper = event.target.closest("#friend-wrapper");
+        removeFriend(wrapper, code);
+    });
+
+    friendDropdown.append(clone);
+}
+function removeFriend(wrapper, code) {
+    console.log("TODO: remove friend");
+    //remove friend from both lists
+}
+function decrementFriendAmount() {
+    //self explanitory
 }
 
 function setToast() {
