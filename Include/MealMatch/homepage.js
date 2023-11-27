@@ -33,6 +33,7 @@ function onLogout() {
     depopulateHomepage();
     removeCookie("uid");
     removeCookie("displayName");
+    //firebase.auth().signOut();
 }
 function onRefresh() {
     depopulateHomepage();
@@ -109,6 +110,7 @@ function toggleAssetVisibilty(isVisible) {
         setVisible(logout, false);
         setVisible(login, true);
         setVisible(disclaimer, true);
+        setVisible(noMatchDisclaimer, false);
     }
 }
 function setVisible(asset, isVisible) {

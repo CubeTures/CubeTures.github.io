@@ -9,7 +9,7 @@ function onContentLoad() {
 }
 
 function login() {
-    const auth = getAuth()
+    const auth = getAuth();
     const provider = new GoogleAuthProvider();
     
     signInWithPopup(auth, provider)

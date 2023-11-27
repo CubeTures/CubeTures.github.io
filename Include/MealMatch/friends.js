@@ -1,4 +1,4 @@
-import { getUserData, updateUserData, getCookie } from "./firebase-database.js";
+import { getUserData, updateUserData, removeUserData, getCookie } from "./firebase-database.js";
 let friendcode, sendRequestInput;
 let requestCaret, requestAmount, requestDropdown, requestTemplate;
 let expandedCaret = "/Images/MealMatch/Expand_down.svg";
@@ -111,17 +111,17 @@ function setRequestDropdown(isVisibile) {
     }
 }
 async function populateFriendRequests() {
-    const _writeonly = await getUserData("writeonly");
-    console.log(JSON.stringify(_writeonly, null, 2));
     const requests = await getUserData("writeonly/friend_requests");
 
     let requestCount = 0;
-    for(const [code, displayName] of Object.entries(requests)) {
-        addRequest(code, displayName);
-        requestCount++;
+    if(requests) {
+        for(const [code, displayName] of Object.entries(requests)) {
+            addRequest(code, displayName);
+            requestCount++;
+        }
     }
 
-    requestAmount.textContent =`[${requestCount}]`;
+    requestAmount.textContent = `[${requestCount}]`;
     return requestCount;
 }
 function addRequest(code, displayName) {
@@ -145,37 +145,33 @@ function addRequest(code, displayName) {
     requestDropdown.append(clone);
 }
 
-function answerRequest(wrapper, code, displayName, isYes) {
-    console.log(`Responded to code ${code} with ${isYes ? "Yes" : "No"}.`);
+async function answerRequest(wrapper, code, displayName, isYes) {
     wrapper.remove();
     
     let requestCount = decrementRequestAmount();
     if(requestCount <= 0) {
         setRequestDropdown(false);
-        requestDropdown.removeEventListener("click");
+        requestCaret.removeEventListener("click", toggleRequests);
     }
+
+    removeUserData(`writeonly/friend_requests/${code}`);
 
     if(isYes) {
         const thisFriendList = {};
         thisFriendList[code] = displayName;
-        updateUserData("friends", thisFriendList);
+        updateUserData("writeonly/friends", thisFriendList);
 
+        const thisDisplayName = await getUserData("readonly/display_name");
         const otherFriendList = {};
-        //set code and displayname
-        updateUserData("friends", otherFriendList, code);
+        otherFriendList[getCookie("uid")] = thisDisplayName;
+        updateUserData("writeonly/friends", otherFriendList, code);
     }
 }
 function decrementRequestAmount() {
     const textContent = requestAmount.textContent;
     const stringAmount = textContent.substring(1, textContent.length - 1);
     let intAmount = parseInt(stringAmount) - 1;
-
-    let toSet = "";
-    if(intAmount > 0) {
-        toSet = `[${intAmount}]`;
-    }
-    requestAmount = toSet;
-
+    requestAmount.textContent = `[${intAmount}]`;
     return intAmount;
 }
 

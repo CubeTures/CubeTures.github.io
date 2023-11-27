@@ -1,4 +1,12 @@
 import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+let auth;
+
+function checkAuth() {
+    if(!auth) {
+        auth = getAuth();
+    }    
+}
 
 function getUID(otherUID) {
     if(otherUID) {
@@ -7,6 +15,7 @@ function getUID(otherUID) {
     return getCookie("uid");
 }
 function getReference(uid, dataType) {
+    checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
     return ref(db, path);
@@ -69,9 +78,9 @@ function testUserData() {
     //addPersonalMatch();
     //addMatchRequest();    
     //addPersonalMatchRequest();    
-    removeUserData("readonly/match");
-    removeUserData("writeonly/match_requests");
-    removeUserData("readonly/match", "fakeID");
+    //removeUserData("readonly/match");
+    //removeUserData("writeonly/match_requests");
+    //removeUserData("readonly/match", "fakeID");
 }
 function addPersonalMatch() {
     updateUserData("readonly/match", {
@@ -112,5 +121,5 @@ function addPersonalMatchRequest() {
 }
 testUserData();
 
-export { getUserData, updateUserData, getFriendName,
+export { getUserData, updateUserData, removeUserData, getFriendName,
     hasCookie, getCookie, setCookie, removeCookie }
