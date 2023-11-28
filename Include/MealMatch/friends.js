@@ -1,8 +1,8 @@
 import { getUserData, updateUserData, removeUserData, getCookie } from "./firebase-database.js";
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
-let requestCaret, requestAmount, requestDropdown, requestTemplate;
-let friendCaret, friendAmount, friendDropdown, friendTemplate;
+let requestDiv, requestCaret, requestAmount, requestDropdown, requestTemplate;
+let friendDiv, friendCaret, friendAmount, friendDropdown, friendTemplate;
 let expandedCaret = "/Images/MealMatch/Expand_down.svg";
 let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
@@ -87,6 +87,7 @@ async function alreadyFriend(code) {
 }
 
 async function setFriendRequests() {
+    requestDiv = document.getElementById("request-div");
     requestCaret = document.getElementById("request-caret");
     requestAmount = document.getElementById("request-amount");
     requestDropdown = document.getElementById("request-dropdown");
@@ -94,7 +95,7 @@ async function setFriendRequests() {
     
     let requestCount = await populateFriendRequests();
     if(requestCount > 0) {
-        requestCaret.addEventListener("click", toggleRequests);
+        requestDiv.addEventListener("click", toggleRequests);
     }
 }
 function toggleRequests() {
@@ -158,7 +159,7 @@ async function answerRequest(wrapper, code, displayName, isYes) {
     let requestCount = decrementRequestAmount();
     if(requestCount <= 0) {
         setRequestDropdown(false);
-        requestCaret.removeEventListener("click", toggleRequests);
+        requestDiv.removeEventListener("click", toggleRequests);
     }
 
     removeUserData(`writeonly/friend_requests/${code}`);
@@ -182,6 +183,7 @@ function decrementRequestAmount() {
 }
 
 async function setFriends() {
+    friendDiv = document.getElementById("friend-div");
     friendCaret = document.getElementById("friend-caret");
     friendAmount = document.getElementById("friend-amount");
     friendDropdown = document.getElementById("friend-dropdown");
@@ -189,7 +191,7 @@ async function setFriends() {
     
     let friendCount = await populateFriends();
     if(friendCount > 0) {
-        friendCaret.addEventListener("click", toggleFriends);
+        friendDiv.addEventListener("click", toggleFriends);
     }
 }
 function toggleFriends() {
@@ -243,11 +245,25 @@ function addFriend(code, displayName) {
     friendDropdown.append(clone);
 }
 function removeFriend(wrapper, code) {
-    console.log("TODO: remove friend");
-    //remove friend from both lists
+    wrapper.remove();
+
+    let friendCount = decrementFriendAmount();
+    console.log(friendCount);
+    if(friendCount <= 0) {
+        setFriendDropdown(false);
+        friendDiv.removeEventListener("click", toggleFriends);
+    }
+
+    const uid = getCookie("uid");
+    removeUserData(`writeonly/friends/${code}`);
+    removeUserData(`writeonly/friends/${uid}`, code);
 }
 function decrementFriendAmount() {
-    //self explanitory
+    const textContent = friendAmount.textContent;
+    const stringAmount = textContent.substring(1, textContent.length - 1);
+    let intAmount = parseInt(stringAmount) - 1;
+    friendAmount.textContent = `(${intAmount})`;
+    return intAmount;
 }
 
 function setToast() {
