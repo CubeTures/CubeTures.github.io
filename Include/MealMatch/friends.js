@@ -172,6 +172,11 @@ async function answerRequest(wrapper, code, displayName, isYes) {
         const otherFriendList = {};
         otherFriendList[getCookie("uid")] = thisUserDisplayName;
         updateUserData("writeonly/friends", otherFriendList, code);
+
+        showToast("Friend Request Accepted.");
+    }
+    else {
+        showToast("Friend Request Declined.");
     }
 }
 function decrementRequestAmount() {
@@ -257,6 +262,7 @@ function removeFriend(wrapper, code) {
     const uid = getCookie("uid");
     removeUserData(`writeonly/friends/${code}`);
     removeUserData(`writeonly/friends/${uid}`, code);
+    showToast("Friend Removed.");
 }
 function decrementFriendAmount() {
     const textContent = friendAmount.textContent;
