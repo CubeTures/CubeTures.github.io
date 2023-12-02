@@ -1,25 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body>
-        <span>
-            <p>Coordinates:</p>
-            <input type="text" id="latitude">
-            <input type="text" id="longitude">
-            <button id="mylocation">Use My Location</button>
+    <head>
+        <title>MealMatch</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/Images/MealMatch/Logo (Simple).svg">
+     </head>
 
-            <p>Radius (Miles):</p>
-            <input type="number" min="5" value="25" max="60" id="radius">
+    <body class="dark-color text-light">
+        <!-- Toolbar -->
+        <nav class="navbar top-div fixed-bottom top-border" id="toolbar">
+            <div class="container-fluid justify-content-evenly">
+                <a type="button" class="btn image-button" href="/Pages/MealMatch/friends.html">
+                    <img class="toolbar-image" src="/Images/MealMatch/Friends.svg">
+                </a>
+                <a type="button" class="btn image-button" href="/Pages/MealMatch/newmatch.html">
+                    <img class="toolbar-image" src="/Images/MealMatch/Add_square.svg">
+                </a>
+                <a type="button" class="btn image-button" href="/index.html">
+                    <img class="toolbar-image" src="/Images/MealMatch/Home.svg">
+                </a>
+            </div>
+        </nav>
 
-            <p>Number of Results:</p>
-            <input type="number" min="5" value="10" max="50" id="numresults">
-        </span>
+        <!-- Header -->
+        <div class="top-div sticky-top bottom-border">
+            <br/>
+            <h1 class="xl-font">New Match</h1>
+            <br/>
+        </div>
 
-        <br/>
-        <br/>
-        <button id="search">Search</button>
-        <br/>
-        <br/>
+        <br/> <!-- Location -->
+        <div>
+            <div class="primary-color rounded padded">
+                <div class="justify-content-between d-flex">
+                    <p class="l-font">Location</p>
+                    <button type="button" class="image-button" id="copy">
+                        <img class="pill-image" src="/Images/MealMatch/Pin_alt.svg">
+                    </button>
+                </div>
+                <div class="input-group mb-3" data-bs-theme="dark">
+                    <div class="form-floating">
+                        <input type="text" class="form-control colored-input" id="address-input" placeholder="">
+                        <label for="address-input">Address</label>
+                    </div>
+                </div>
+                <div class="input-group mb-3" data-bs-theme="dark">
+                    <div class="form-floating">
+                        <input type="number" class="form-control colored-input" id="latitude-input" placeholder="">
+                        <label for="latitude-input">Latitude</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control colored-input" id="longitude-input" placeholder="">
+                        <label for="longitude-input">Longitude</label>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
 
-        <p id="data">Data</p>  
+        <!-- Radius -->
+        <div>
+            <div class="primary-color rounded padded">
+                <p class="l-font">Radius</p>
+                <div class="input-group mb-3" data-bs-theme="dark">
+                    <div class="form-floating">
+                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="">
+                        <label for="radius-input">Radius</label>
+                    </div>
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Miles</button>
+                    <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
+                        <li><a class="dropdown-item" id="miles-btn">Miles</a></li>
+                        <li><a class="dropdown-item" id="meters-btn">Meters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+        <div>
+            <div class="primary-color rounded padded" style="padding-bottom: 1.5rem;">
+                <p class="l-font">People</p>
+                <div class="btn-group-vertical" role="group">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <label class="btn btn-outline-light" for="btncheck1">Person 1</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                    <label class="btn btn-outline-light" for="btncheck2">Person 2</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                    <label class="btn btn-outline-light" for="btncheck3">Person 3</label>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+        <div>
+            <div class="text-center">
+                <button class="btn btn-outline-light white-border">Match</button>
+            </div>
+            <br>
+        </div>
+
+        <p>&emsp;TODO:</p>
+        <p>&emsp;&emsp;Filters</p>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+        <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
+        <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
+        <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
+        <!--script type="module" src="/Include/MealMatch/new-match.js"></script>
+        <script type="module" src="/Include/MealMatch/tomtom-api.js"></script>
+        <script type="module" src="/Include/MealMatch/google-api.js"></script-->
     </body>
 </html>

@@ -51,7 +51,7 @@
                 </div>
                 <div class="input-group mb-3" data-bs-theme="dark">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="friend-request-input" placeholder="Code">
+                        <input type="text" class="form-control colored-input" id="friend-request-input" placeholder="Code">
                         <label for="friend-request-input">Friend Code</label>
                     </div>
                     <button class="btn btn-outline-light" type="button" id="send-request">Send</button>
@@ -62,7 +62,7 @@
 
         <!-- Friend Requests -->
         <div>
-            <div class="primary-color rounded padded" id="request-div">
+            <div class="primary-color rounded padded top-layer" id="request-div">
                 <div class="justify-content-between d-flex">
                     <p class="l-font">Requests 
                         <span id="request-amount"></span>
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Dropdown -->
-            <div class="primary-color-opacity rounded padded-extension hidden" id="request-dropdown">
+            <div class="primary-color-opacity rounded padded-extension hidden bottom-layer" id="request-dropdown">
                 <template id="request-template">
                     <div id="request-wrapper">
                         <br/>
@@ -95,7 +95,7 @@
 
         <!-- Friends -->
         <div>
-            <div class="primary-color rounded padded" id="friend-div">
+            <div class="primary-color rounded padded top-layer" id="friend-div">
                 <div class="justify-content-between d-flex">
                     <p class="l-font">Friends 
                         <span id="friend-amount"></span>
@@ -105,7 +105,7 @@
             </div>
 
             <!-- Dropdown -->
-            <div class="primary-color-opacity rounded padded-extension hidden" id="friend-dropdown">
+            <div class="primary-color-opacity rounded padded-extension hidden bordered bottom-layer"id="friend-dropdown">
                 <template id="friend-template">
                     <div id="friend-wrapper">
                         <br/>

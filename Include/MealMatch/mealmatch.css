@@ -3,6 +3,10 @@
   src: url("../../Data/BalooBhaina2-VariableFont_wght.ttf");
 }
 
+:root {
+  --borderColor: #f9becb;
+  --primary-transparent: rgba(252, 74, 116, .25);
+}
 :root[data-theme="light"] {
   --text: #25040c;
   --background: #fef1f4;
@@ -22,10 +26,16 @@
   background-color: #FB4670;
 }
 .primary-color-opacity {
-  background-color: rgba(252, 74, 116, .3);
+  background-color: var(--primary-transparent);
 }
 .dark-color {
   background-color: #282828;
+}
+.colored-input {
+  border: 1px solid var(--borderColor);
+}
+.colored-input:focus {
+  box-shadow: none;
 }
 
 body {
@@ -36,9 +46,13 @@ body {
   margin-left: 1rem !important;
   margin-right: 1rem !important;
   padding: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border: 1px solid var(--borderColor);
 }
 .padded-2 {
   padding: 1rem;
+  border: 1px solid var(--borderColor);
 }
 .padded-extension {
   margin-left: 1rem !important;
@@ -46,18 +60,41 @@ body {
   padding: 1rem;
   margin-top: -1rem;
 }
+.bordered {
+  border: 1px solid var(--borderColor) !important;
+}
+.no-border {
+  border: 0px !important;
+}
+.no-top-border {
+  border-top: 0px !important;
+}
+.btn {
+  border-color: var(--borderColor);
+}
+.white-border {
+  border-color: #FAF9F6;
+}
 
 .top-div {
   text-align: center;
   background-color: #fc4a74;
 }
 .bottom-border {
-  border-bottom: 3px solid #282828;
+  border-bottom: 1px solid var(--borderColor);
   margin-bottom: 0px;
 }
 .top-border {
-  border-top: 3px solid #282828;
+  border-top: 1px solid var(--borderColor);
   margin-top: 0px;
+}
+.top-layer {
+  z-index: 2;
+  position: relative;
+}
+.bottom-layer {
+  z-index: 1;
+  position: relative;
 }
 
 .image-button {

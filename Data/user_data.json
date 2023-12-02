@@ -15,17 +15,19 @@
                 }
             },
             "readonly": {
-                "displayName": "test_user_1",
+                "displayName": "test_user_1"
+            },
+            "public": {
                 "match": {
+                    "center": "reverse_geocoded_address",
                     "ll": [30.619107746247806, -96.33609672016316],
                     "radius": 25,
-                    "uids": ["userID1", "userID2"],
-                    "display_names": ["cube", "lowa"],
+                    "people": {"userID1": "cube", "userID2": "lowa"},
                     "locations": {
-                        "<address_1>": "Y",
-                        "<address_2>": "M",
-                        "<address_3>": "N",
-                        "<address_4>": "U"
+                        "<address_1>": {"userID1": "Y", "userID2": "N"},
+                        "<address_2>": {"userID1": "M", "userID2": "N"},
+                        "<address_3>": {"userID1": "Y", "userID2": "Y"},
+                        "<address_4>": {"userID1": "N", "userID2": "U"}
                     }
                 }
             }
