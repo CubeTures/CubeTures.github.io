@@ -1,16 +1,21 @@
 let latitudeInput, longitudeInput;
 let radiusInput;
 let numResultsInput;
+let peopleContainer, peopleTemplate;
 
 function onDocumentLoad() {
     setVariables();
     setOnClicks();
+    setPeople();
 }
 function setVariables() {
     latitudeInput = document.getElementById("latitude");
     longitudeInput = document.getElementById("longitude");
     radiusInput = document.getElementById("radius");
     numResultsInput = document.getElementById("numresults");
+
+    peopleContainer = document.getElementById("people-container");
+    peopleTemplate = document.getElementById("people-template");
 }
 function setOnClicks() {
     document.getElementById("mylocation")
@@ -32,30 +37,12 @@ function getCurrentLocation(callback) {
     }
 }
 
-function parseInputData() {
-    checkForData();
-    let inputData = {}
-    inputData["ll"] = parseLocation();
-    inputData["radius"] = parseRadius();
-    inputData["limit"] = parseNumResults();
-
-    return inputData;
-}
-function parseLocation() {
-    return `${latitudeInput.value},${longitudeInput.value}`
-}
-function milesToMeters(miles) {
-    return parseInt(miles) * 1609;
-}
-function parseRadius() {
-    return String(milesToMeters(radiusInput.value));
-}
-function parseNumResults() {
-    return numResultsInput.value;
-}
-
 function checkForData() {
     //check to see if all the data is filled, otherwise give errors using bootstrap
+}
+
+function setPeople() {
+    //hide the disclaimer if there are people
 }
 
 
