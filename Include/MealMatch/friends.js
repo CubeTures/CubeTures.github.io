@@ -28,8 +28,8 @@ function setFriendCode() {
         .addEventListener("click", copyToClipboard);
 }
 function copyToClipboard() {
-    const code = friendcode.textContent;
-    navigator.clipboard.writeText(code);
+    const uid = friendcode.textContent;
+    navigator.clipboard.writeText(uid);
     showToast("Copied to Clipboard!");
 }
 
@@ -39,13 +39,13 @@ function setSendFriendRequest() {
         .addEventListener("click", sendFriendRequest);
 }
 async function sendFriendRequest() {
-    const code = sendRequestInput.value;
-    if(code) {
-        let isValidUser = await validUser(code);
-        let thisUser = isThisUser(code);
-        let alreadFriend = await alreadyFriend(code)
+    const uid = sendRequestInput.value;
+    if(uid) {
+        let isValidUser = await validUser(uid);
+        let thisUser = isThisUser(uid);
+        let alreadFriend = await alreadyFriend(uid)
         if(isValidUser && !thisUser && !alreadFriend) {
-            sendRequest(code);
+            sendRequest(uid);
             sendRequestInput.value = "";
             showToast("Friend Request Sent!");
             return;
@@ -64,23 +64,23 @@ async function sendFriendRequest() {
         showToast("No Friend Code was input.");
     }
 }
-async function sendRequest(code) {
+async function sendRequest(uid) {
     let data = {};
     data[getCookie("uid")] = thisUserDisplayName;
-    updateUserData("writeonly/friend_requests", data, code);
+    updateUserData("writeonly/friend_requests", data, uid);
 }
-async function validUser(code) {
-    const userData = await getUserData("readonly", code);
+async function validUser(uid) {
+    const userData = await getUserData("readonly", uid);
     if(userData) { return true; }
     return false;
 }
-function isThisUser(code) {
-    const uid = getCookie("uid");
-    return uid == code;
+function isThisUser(uid) {
+    const thisUID = getCookie("uid");
+    return thisUID == uid;
 }
-async function alreadyFriend(code) {
+async function alreadyFriend(uid) {
     const friends = await getUserData("writeonly/friends");
-    if(friends && code in friends) {
+    if(friends && uid in friends) {
         return true;
     }
     return false;
@@ -124,8 +124,8 @@ async function populateFriendRequests() {
 
     let requestCount = 0;
     if(requests) {
-        for(const [code, displayName] of Object.entries(requests)) {
-            addRequest(code, displayName);
+        for(const [uid, displayName] of Object.entries(requests)) {
+            addRequest(uid, displayName);
             requestCount++;
         }
     }
@@ -133,7 +133,7 @@ async function populateFriendRequests() {
     requestAmount.textContent = `(${requestCount})`;
     return requestCount;
 }
-function addRequest(code, displayName) {
+function addRequest(uid, displayName) {
     const clone = requestTemplate.content.cloneNode(true);
     
     const displayNameText = clone.querySelector("#display-name");
@@ -142,18 +142,18 @@ function addRequest(code, displayName) {
     const decline = clone.querySelector("#decline");
     decline.addEventListener("click", (event) => { 
         const wrapper = event.target.closest("#request-wrapper");
-        answerRequest(wrapper, code, displayName, false);
+        answerRequest(wrapper, uid, displayName, false);
     });
 
     const accept = clone.querySelector("#accept");
     accept.addEventListener("click", (event) => { 
         const wrapper = event.target.closest("#request-wrapper");
-        answerRequest(wrapper, code, displayName, true);
+        answerRequest(wrapper, uid, displayName, true);
     });
 
     requestDropdown.append(clone);
 }
-async function answerRequest(wrapper, code, displayName, isYes) {
+async function answerRequest(wrapper, uid, displayName, isYes) {
     wrapper.remove();
     
     let requestCount = decrementRequestAmount();
@@ -162,16 +162,16 @@ async function answerRequest(wrapper, code, displayName, isYes) {
         requestDiv.removeEventListener("click", toggleRequests);
     }
 
-    removeUserData(`writeonly/friend_requests/${code}`);
+    removeUserData(`writeonly/friend_requests/${uid}`);
 
     if(isYes) {
         const thisFriendList = {};
-        thisFriendList[code] = displayName;
+        thisFriendList[uid] = displayName;
         updateUserData("writeonly/friends", thisFriendList);
         
         const otherFriendList = {};
         otherFriendList[getCookie("uid")] = thisUserDisplayName;
-        updateUserData("writeonly/friends", otherFriendList, code);
+        updateUserData("writeonly/friends", otherFriendList, uid);
 
         showToast("Friend Request Accepted.");
     }
@@ -222,12 +222,11 @@ function setFriendDropdown(isVisibile) {
 }
 async function populateFriends() {
     const friends = await getUserData("writeonly/friends");
-    console.log(JSON.stringify(friends, null, 2));
 
     let friendCount = 0;
     if(friends) {
-        for(const [code, displayName] of Object.entries(friends)) {
-            addFriend(code, displayName);
+        for(const [uid, displayName] of Object.entries(friends)) {
+            addFriend(uid, displayName);
             friendCount++;
         }
     }
@@ -235,7 +234,7 @@ async function populateFriends() {
     friendAmount.textContent = `(${friendCount})`;
     return friendCount;
 }
-function addFriend(code, displayName) {
+function addFriend(uid, displayName) {
     const clone = friendTemplate.content.cloneNode(true);
     
     const displayNameText = clone.querySelector("#display-name");
@@ -244,12 +243,12 @@ function addFriend(code, displayName) {
     const remove = clone.querySelector("#remove");
     remove.addEventListener("click", (event) => { 
         const wrapper = event.target.closest("#friend-wrapper");
-        removeFriend(wrapper, code);
+        removeFriend(wrapper, uid);
     });
 
     friendDropdown.append(clone);
 }
-function removeFriend(wrapper, code) {
+function removeFriend(wrapper, uid) {
     wrapper.remove();
 
     let friendCount = decrementFriendAmount();
@@ -259,9 +258,9 @@ function removeFriend(wrapper, code) {
         friendDiv.removeEventListener("click", toggleFriends);
     }
 
-    const uid = getCookie("uid");
-    removeUserData(`writeonly/friends/${code}`);
-    removeUserData(`writeonly/friends/${uid}`, code);
+    const thisUID = getCookie("uid");
+    removeUserData(`writeonly/friends/${uid}`);
+    removeUserData(`writeonly/friends/${thisUID}`, uid);
     showToast("Friend Removed.");
 }
 function decrementFriendAmount() {

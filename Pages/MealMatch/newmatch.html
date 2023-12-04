@@ -74,7 +74,7 @@
                 </div>
                 <div class="input-group mb-3" data-bs-theme="dark">
                     <div class="form-floating">
-                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="">
+                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="" value="25">
                         <label for="radius-input">Radius</label>
                     </div>
                     <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Miles</button>
@@ -99,12 +99,12 @@
                 <!-- Flexbox -->
                 <div class="d-flex flex-wrap" id="people-container">
                     <template id="people-template">
-                        <input type="checkbox" class="btn-check" id="checkbox">
+                        <input type="checkbox" class="btn-check" id="input">
                         <label class="btn btn-outline-light flex-wrap-checkbox" for="checkbox" id="label"> 
                             Person 1
                         </label>
                     </template>
-                    <p class="s-font">You have no friends.</p>
+                    <p class="s-font" id="people-disclaimer">You have no friends.</p>
                 </div>
             </div>
             <br/>
@@ -112,13 +112,36 @@
 
         <div>
             <div class="text-center">
-                <button class="btn btn-outline-light white-border">Match</button>
+                <button class="btn btn-outline-light white-border" id="test-location">Location</button>
+                <button class="btn btn-outline-light white-border" id="test-radius">Radius</button>
+                <button class="btn btn-outline-light white-border" id="test-people">People</button>
+            </div>
+            <br/>
+            <div class="text-center">
+                <button class="btn btn-outline-light white-border" id="match">Match</button>
             </div>
             <br>
         </div>
 
-        <p>&emsp;TODO:</p>
-        <p>&emsp;&emsp;Filters</p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+            </div>
+            </div>
+        </div>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -126,8 +149,8 @@
         <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
         <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
         <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
-        <!--script type="module" src="/Include/MealMatch/new-match.js"></script>
-        <script type="module" src="/Include/MealMatch/tomtom-api.js"></script>
+        <script type="module" src="/Include/MealMatch/new-match.js"></script>
+        <!--script type="module" src="/Include/MealMatch/tomtom-api.js"></script>
         <script type="module" src="/Include/MealMatch/google-api.js"></script-->
     </body>
 </html>

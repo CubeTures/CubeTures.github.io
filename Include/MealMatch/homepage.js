@@ -92,7 +92,7 @@ function addToHomepage(match, creator) {
 function depopulateHomepage() {
     const elements = document.getElementsByClassName("match-element");
     for(let i = elements.length - 1; i >= 0; i--) {
-        elements[i].remove();
+        elements.item(i).remove();
     }
 }
 
