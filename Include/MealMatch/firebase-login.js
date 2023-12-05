@@ -38,6 +38,7 @@ function newLogin(user) {
     loginUser();
 }
 function setDisplayName(user) {
+    console.log("set un");
     let data = {};
     data["display_name"] = user.displayName;
     updateUserData("readonly", data);

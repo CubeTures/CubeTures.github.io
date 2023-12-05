@@ -5,6 +5,7 @@ let auth;
 function checkAuth() {
     if(!auth) {
         auth = getAuth();
+        
     }    
 }
 
@@ -52,7 +53,10 @@ function getCookie(cookieName) {
     for(let cookie of cookieList) {
         let spl = cookie.split("=");
         if(spl[0] == cookieName) {
-            return spl[1].substring(0, spl[1].indexOf(";"));
+            if(spl.indexOf(";") >= 0) {
+                return spl[1].substring(0, spl[1].indexOf(";"));
+            }
+            return spl[1];
         }
     }
 
