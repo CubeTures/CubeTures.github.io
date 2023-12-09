@@ -24,7 +24,7 @@ function setFriendCode() {
     friendcode = document.getElementById("friendcode");
     friendcode.textContent = getCookie("uid");
 
-    document.getElementById("copy")
+    document.getElementById("friend-code-container")
         .addEventListener("click", copyToClipboard);
 }
 function copyToClipboard() {

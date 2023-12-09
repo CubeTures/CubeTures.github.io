@@ -38,14 +38,14 @@
                         <button type="button" class="image-button" id="current-location">
                             <img class="pill-image" src="/Images/MealMatch/Pin_alt.svg">
                         </button>
-                        <button type="button" class="image-button" id="location-info">
+                        <button type="button" class="image-button" id="location-info" data-bs-toggle="modal" data-bs-target="#locationModal">
                             <img class="pill-image" src="/Images/MealMatch/Info.svg">
                         </button>
                     </div>
                 </div>
                 <div class="input-group mb-3" data-bs-theme="dark">
                     <div class="form-floating">
-                        <input type="text" class="form-control colored-input" id="address-input" placeholder="">
+                        <input type="text" class="form-control" id="address-input" placeholder="">
                         <label for="address-input">Address</label>
                     </div>
                 </div>
@@ -68,19 +68,19 @@
             <div class="primary-color rounded padded">
                 <div class="d-flex justify-content-between">
                     <p class="l-font">Radius</p>
-                    <button type="button" class="image-button" id="radius-info">
+                    <button type="button" class="image-button" id="radius-info" data-bs-toggle="modal" data-bs-target="#radiusModal">
                         <img class="pill-image" src="/Images/MealMatch/Info.svg">
                     </button>
                 </div>
                 <div class="input-group mb-3" data-bs-theme="dark">
                     <div class="form-floating">
-                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="" value="25">
+                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="" value="10" units="miles">
                         <label for="radius-input">Radius</label>
                     </div>
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Miles</button>
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="radius-label">Miles</button>
                     <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                        <li><a class="dropdown-item" id="miles-btn">Miles</a></li>
-                        <li><a class="dropdown-item" id="meters-btn">Meters</a></li>
+                        <li id="miles-button"><a class="dropdown-item" >Miles</a></li>
+                        <li id="meters-button"><a class="dropdown-item">Meters</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="primary-color rounded padded padded-bottom" id="people">
                 <div class="d-flex justify-content-between">
                     <p class="l-font">People</p>
-                    <button type="button" class="image-button" id="people-info">
+                    <button type="button" class="image-button" id="people-info" data-bs-toggle="modal" data-bs-target="#peopleModal">
                         <img class="pill-image" src="/Images/MealMatch/Info.svg">
                     </button>
                 </div>
@@ -122,22 +122,47 @@
             </div>
             <br>
         </div>
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button>
         
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-theme="dark">
+        <!-- Location Modal -->
+        <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true" data-bs-theme="dark">
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="locaitonModalLabel">Location</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    Information on how to input
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Radius Modal -->
+        <div class="modal fade" id="radiusModal" tabindex="-1" aria-labelledby="radiusModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="radiusModalLabel">Radius</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Information on how to input
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- People Modal -->
+        <div class="modal fade" id="peopleModal" tabindex="-1" aria-labelledby="peopleModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="peopleModalLabel">People</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Information on how to input
                 </div>
             </div>
             </div>

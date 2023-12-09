@@ -1,6 +1,7 @@
 import { getUserData } from "./firebase-database.js"
 let addressInput, latitudeInput, longitudeInput;
-let radiusInput;
+let radiusInput, radiusLabel;
+const milesToMeters = 1609;
 let peopleContainer, peopleTemplate, peopleDisclaimer;
 
 function onDocumentLoad() {
@@ -10,6 +11,26 @@ function onDocumentLoad() {
     setMatch();
 }
 
+/*
+    How do location ???
+
+    Start typing in one box 
+        lock out other
+    If box is lat/lon 
+        mark as invalid until it has 6 decimal points
+
+    Click to use current location
+        Don't lock either box
+        remove verify button
+
+    Click verify location
+        Verify location (either geocode or reverse geocode)
+        If valid, mark boxes with green check
+
+    If the box is edited after verification 
+        undo verification
+        
+*/  
 function setLocation() {
     addressInput = document.getElementById("address-input");
     latitudeInput = document.getElementById("latitude-input");
@@ -34,17 +55,44 @@ function getCurrentLocation(callback) {
 
 function setRadius() {
     radiusInput = document.getElementById("radius-input");
-    //set radius min and max
-    //set miles-btn and meters-btn
-    //set info button
+    radiusLabel = document.getElementById("radius-label");
+
+    setOnClick("miles-button", () => { changeRadiusUnits("miles"); });
+    setOnClick("meters-button", () => { changeRadiusUnits("meters"); });
+}
+function changeRadiusUnits(units) {
+    const previousUnits = radiusInput.getAttribute("units");
+    radiusInput.setAttribute("units", units);
+
+    if(previousUnits == "miles" && units == "meters") {
+        adjustRadiusValue(milesToMeters);
+    }
+    else if(previousUnits == "meters" && units == "miles") {
+        adjustRadiusValue(1 / milesToMeters);
+    }
+
+    const capitalized = units.substring(0, 1).toUpperCase() + units.substring(1);
+    radiusLabel.textContent = capitalized;
+    console.log(capitalized);
+}
+function adjustRadiusValue(multiplier) {
+    try {
+        const asString = radiusInput.value;
+        let radius = Math.floor(parseFloat(asString));
+        radius *= multiplier;
+        radiusInput.value = Math.floor(radius);
+    }
+    catch {
+        //do nothing
+    }
 }
 
 function setPeople() {
     peopleContainer = document.getElementById("people-container");
     peopleTemplate = document.getElementById("people-template");
     peopleDisclaimer = document.getElementById("people-disclaimer");
+
     populatePeople();
-    //set info button
 }
 async function populatePeople() {
     const friends = await getUserData("writeonly/friends");
@@ -122,18 +170,48 @@ function tryGetInputs() {
     };
 }
 function tryGetLocation() {
-    //get address and see if it is a valid location
-    //or
-    //get latitude and longitute and check if valid locaiton
+    const address = addressInput.value;
+    const latitude = latitudeInput.value;
+    const longitude = longitudeInput.value;
 
-    //prompt an error if either are incorrect
+    if(address) {
+        //geocode
+        //error if invalud
+    }
+    if(latitude && longitude) {
+        //reverse geocode
+        //error if invalid
+    }
+    else {
+        //error for no input
+    }
+
+
     return null;
 }
 function tryGetRadius() {
-    //round to int
-    //just forcibly clamp the bounds if they are somehow invalid
-    //if the input is just null, do minimum
-    return null;
+    const asString = radiusInput.value;
+    const units = radiusInput.getAttribute("units");
+
+    let radius = 0;
+    let minimum = units == "miles" ? 5 : 5000;
+    let maximum = units == "miles" ? 30 : 50000;
+    if(asString) {
+        radius = Math.floor(parseFloat(asString));
+    }
+
+    if(radius < minimum) {
+        radius = minimum;
+    }
+    else if(radius > maximum) {
+        radius = maximum;
+    }
+
+    if(units == "miles") {
+        radius *= milesToMeters;
+    }
+
+    return radius;
 }
 function tryGetPeople() {
     let people = {};
