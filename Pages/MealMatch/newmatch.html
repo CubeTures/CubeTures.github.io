@@ -48,16 +48,8 @@
                         <input type="text" class="form-control" id="address-input" placeholder="">
                         <label for="address-input">Address</label>
                     </div>
-                </div>
-                <div class="input-group mb-3" data-bs-theme="dark">
-                    <div class="form-floating">
-                        <input type="number" class="form-control colored-input" id="latitude-input" placeholder="">
-                        <label for="latitude-input">Latitude</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="number" class="form-control colored-input" id="longitude-input" placeholder="">
-                        <label for="longitude-input">Longitude</label>
-                    </div>
+                    <input type="hidden" id="latitude-input">
+                    <input type="hidden" id="longitude-input">
                 </div>
             </div>
             <br/>
@@ -104,7 +96,19 @@
                             Person 1
                         </label>
                     </template>
+
+                    <!-- Disclaimer -->
                     <p class="s-font" id="people-disclaimer">You have no friends.</p>
+                </div>
+
+                <!-- Spinner -->
+                <div class="hidden" id="people-spinner" style="margin-top: -2rem;">
+                    <br/>
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br/>
@@ -175,7 +179,7 @@
         <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
         <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
         <script type="module" src="/Include/MealMatch/new-match.js"></script>
-        <!--script type="module" src="/Include/MealMatch/tomtom-api.js"></script>
-        <script type="module" src="/Include/MealMatch/google-api.js"></script-->
+        <!--script type="module" src="/Include/MealMatch/tomtom-api.js"></script-->
+        <script type="module" src="/Include/MealMatch/google-api.js"></script>
     </body>
 </html>

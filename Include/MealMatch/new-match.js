@@ -2,7 +2,7 @@ import { getUserData } from "./firebase-database.js"
 let addressInput, latitudeInput, longitudeInput;
 let radiusInput, radiusLabel;
 const milesToMeters = 1609;
-let peopleContainer, peopleTemplate, peopleDisclaimer;
+let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
 
 function onDocumentLoad() {
     setLocation();
@@ -14,22 +14,17 @@ function onDocumentLoad() {
 /*
     How do location ???
 
-    Start typing in one box 
-        lock out other
-    If box is lat/lon 
-        mark as invalid until it has 6 decimal points
-
     Click to use current location
-        Don't lock either box
-        remove verify button
+        disable verify button
 
     Click verify location
-        Verify location (either geocode or reverse geocode)
-        If valid, mark boxes with green check
+        Verify location (check if can geocode)
+        If valid, mark box with green check
+        Disable verify button
 
     If the box is edited after verification 
         undo verification
-        
+        enable verify button
 */  
 function setLocation() {
     addressInput = document.getElementById("address-input");
@@ -91,6 +86,7 @@ function setPeople() {
     peopleContainer = document.getElementById("people-container");
     peopleTemplate = document.getElementById("people-template");
     peopleDisclaimer = document.getElementById("people-disclaimer");
+    peopleSpinner = document.getElementById("people-spinner");
 
     populatePeople();
 }
@@ -99,9 +95,13 @@ async function populatePeople() {
 
     if(friends) {
         peopleDisclaimer.classList.add("hidden");
+        peopleSpinner.classList.remove("hidden");
+
         for(const [uid, displayName] of Object.entries(friends)) {
             addPerson(uid, displayName);
         }
+
+        peopleSpinner.classList.add("hidden");
     }
 }
 function addPerson(uid, displayName) {
