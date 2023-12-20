@@ -62,7 +62,7 @@
 
         <!-- Friend Requests -->
         <div>
-            <div class="primary-color rounded padded top-layer" id="request-div">
+            <div class="primary-color rounded padded top-layer" id="request-div" data-bs-toggle="collapse" data-bs-target="#request-dropdown">
                 <div class="justify-content-between d-flex">
                     <p class="l-font">Requests
                         <span id="request-amount">(0)</span>
@@ -72,10 +72,10 @@
             </div>
 
             <!-- Dropdown -->
-            <div class="primary-color-opacity rounded padded-extension hidden bottom-layer" id="request-dropdown">
+            <div class="collapse primary-color-opacity rounded padded-extension bordered bottom-layer" id="request-dropdown">
+                <br/>
                 <template id="request-template">
                     <div id="request-wrapper">
-                        <br/>
                         <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
                             <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
                             <div class="justify-content-evenly no-overflow-boxes">
@@ -87,6 +87,7 @@
                                 </button>
                             </div>
                         </div>
+                        <br/>
                     </div>
                 </template>
             </div>
@@ -95,7 +96,7 @@
 
         <!-- Friends -->
         <div>
-            <div class="primary-color rounded padded top-layer" id="friend-div">
+            <div class="primary-color rounded padded top-layer" id="friend-div" data-bs-toggle="collapse" data-bs-target="#friend-dropdown">
                 <div class="justify-content-between d-flex">
                     <p class="l-font">Friends 
                         <span id="friend-amount">(0)</span>
@@ -105,10 +106,10 @@
             </div>
 
             <!-- Dropdown -->
-            <div class="primary-color-opacity rounded padded-extension hidden bordered bottom-layer"id="friend-dropdown">
+            <div class="collapse primary-color-opacity rounded padded-extension bordered bottom-layer" id="friend-dropdown">
+                <br/>
                 <template id="friend-template">
                     <div id="friend-wrapper">
-                        <br/>
                         <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
                             <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
                             <div>
@@ -117,6 +118,7 @@
                                 </button>
                             </div>
                         </div>
+                        <br/>
                     </div>
                 </template>
             </div>

@@ -2,4 +2,3 @@
 Make Filters option for searching
 So many issues with being logged in
 Redirect user to homepage to log in if session expired
-Collapse for the friend dropdowns

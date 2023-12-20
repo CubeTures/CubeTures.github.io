@@ -108,13 +108,15 @@ function toggleRequests() {
     }
 }
 function setRequestDropdown(isVisibile) {
-    setVisible(requestDropdown, isVisibile);
+    //setVisible(requestDropdown, isVisibile);
 
     if(isVisibile) {
+        requestDiv.classList.add("flat-bottom");
         requestCaret.src = expandedCaret;
         requestCaret.setAttribute("expanded", "");
     }
     else {
+        requestDiv.classList.remove("flat-bottom");
         requestCaret.src = collapsedCaret;
         requestCaret.removeAttribute("expanded");
     }
@@ -160,6 +162,7 @@ async function answerRequest(wrapper, uid, displayName, isYes) {
     if(requestCount <= 0) {
         setRequestDropdown(false);
         requestDiv.removeEventListener("click", toggleRequests);
+        requestDropdown.remove();
     }
 
     removeUserData(`writeonly/friend_requests/${uid}`);
@@ -209,13 +212,15 @@ function toggleFriends() {
     }
 }
 function setFriendDropdown(isVisibile) {
-    setVisible(friendDropdown, isVisibile);
+    //setVisible(friendDropdown, isVisibile);
 
     if(isVisibile) {
+        friendDiv.classList.add("flat-bottom");
         friendCaret.src = expandedCaret;
         friendCaret.setAttribute("expanded", "");
     }
     else {
+        friendDiv.classList.remove("flat-bottom");
         friendCaret.src = collapsedCaret;
         friendCaret.removeAttribute("expanded");
     }
@@ -256,6 +261,7 @@ function removeFriend(wrapper, uid) {
     if(friendCount <= 0) {
         setFriendDropdown(false);
         friendDiv.removeEventListener("click", toggleFriends);
+        friendDropdown.remove();
     }
 
     const thisUID = getCookie("uid");

@@ -27,7 +27,6 @@ async function getCurrentLocation() {
         alert("locaiton service error");
     }
 
-    //error in getting location
     return null;
 }
 function getGeolocation() {
@@ -62,7 +61,7 @@ function getAddressData(data) {
     return addressData;
 }
 
-// [street_number*l] [route*s], [locality*l], [administrative_area_level_1*s] [postal_code*l], USA
+// [street_number] [route], [locality], [administrative_area_level_1] [postal_code], USA
 
 
 //geocode
