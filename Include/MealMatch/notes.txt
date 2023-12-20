@@ -1,4 +1,0 @@
-startup: 
-- home page
-- only allow login, remove toolbar
-- once login, populate page and add toolbar

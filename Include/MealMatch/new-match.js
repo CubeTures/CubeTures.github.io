@@ -1,4 +1,5 @@
 import { getUserData } from "./firebase-database.js"
+import { getCurrentLocation } from "./google-geocode.js";
 let addressInput, latitudeInput, longitudeInput;
 let radiusInput, radiusLabel;
 const milesToMeters = 1609;
@@ -33,18 +34,16 @@ function setLocation() {
 
     setOnClick("current-location", setCurrentLocation);
 }
-function setCurrentLocation() {
-    getCurrentLocation((position) => {
-        latitudeInput.value = position.coords.latitude;
-        longitudeInput.value = position.coords.longitude;
-    });
-}
-function getCurrentLocation(callback) {
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(callback);
+async function setCurrentLocation() {
+    const locationData = await getCurrentLocation();
+    if(locationData) {
+        const latlng = locationData["latlng"].split(",");
+        addressInput.value = locationData["address"];
+        latitudeInput.value = latlng[0];
+        longitudeInput.value = latlng[1];
     }
     else {
-        console.log("Geolocation error");
+        //error getting location
     }
 }
 
@@ -154,8 +153,8 @@ function tryMatch() {
 function tryGetInputs() {
     //get all the data
     //prompt the user if the input is invalid
-    const ll = tryGetLocation();
-    if(!ll) { return null; }
+    const latlng = tryGetLocation();
+    if(!latlng) { return null; }
 
     const radius = tryGetRadius();
     if(!radius) { return null; }
@@ -164,7 +163,7 @@ function tryGetInputs() {
     if(!people) { return null; }
 
     return {
-        "ll": ll,
+        "latlng": latlng,
         "radius": radius,
         "people": people
     };
@@ -176,7 +175,7 @@ function tryGetLocation() {
 
     if(address) {
         //geocode
-        //error if invalud
+        //error if invalid
     }
     if(latitude && longitude) {
         //reverse geocode

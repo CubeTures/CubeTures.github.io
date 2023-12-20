@@ -20,7 +20,7 @@
             "public": {
                 "match": {
                     "center": "reverse_geocoded_address",
-                    "ll": [30.619107746247806, -96.33609672016316],
+                    "latlng": [30.619107746247806, -96.33609672016316],
                     "radius": 25,
                     "timestamp": "some_time",
                     "people": {"userID1": "cube", "userID2": "lowa"},

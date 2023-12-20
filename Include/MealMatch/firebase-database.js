@@ -88,7 +88,7 @@ function testUserData() {
 }
 function addPersonalMatch() {
     updateUserData("readonly/match", {
-        "ll": [0, 0],
+        "latlng": [0, 0],
         "radius": 0,
         "people": {
             "uid1": "displayName1", 
@@ -109,7 +109,7 @@ function addMatchRequest() {
 }
 function addPersonalMatchRequest() {
     updateUserData("readonly/match", {
-        "ll": [0, 0],
+        "latlng": [0, 0],
         "radius": 0,
         "people": {
             "uid1": "displayName1", 
