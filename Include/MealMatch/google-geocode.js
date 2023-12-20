@@ -19,6 +19,12 @@ async function getCurrentLocation() {
                 "latlng": latlng
             }
         }
+        else {
+            alert("Reverse geocode error");
+        }
+    }
+    else {
+        alert("locaiton service error");
     }
 
     //error in getting location
@@ -31,14 +37,32 @@ function getGeolocation() {
 }
 
 async function reverseGeocode(latlng) {
-    const parameters = { "latlng": latlng, "key": API_KEY };
+    const parameters = { 
+        "latlng": latlng, 
+        "location_type": "ROOFTOP",
+        "key": API_KEY 
+    };
     const data = await httpRequest(REVERSE_GEOCODE_URL, parameters);
-    if(data["results"]) {
-        return data["results"][0]["formatted_address"];
+    console.log(data);
+    if(data && data["status"] == "OK") {
+        return getAddressData(data["results"][0]);
     }
 
     return null;
 }
+function getAddressData(data) {
+    let addressData = {};
+
+    for(const [index, component] of Object.entries(data["address_components"])) {
+        const dataType = component["types"][0];
+        const name = component["short_name"];
+        addressData[dataType] = name;
+    }
+
+    return addressData;
+}
+
+// [street_number*l] [route*s], [locality*l], [administrative_area_level_1*s] [postal_code*l], USA
 
 
 //geocode

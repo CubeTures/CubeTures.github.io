@@ -1,6 +1,6 @@
 import { getUserData } from "./firebase-database.js"
 import { getCurrentLocation } from "./google-geocode.js";
-let addressInput, latitudeInput, longitudeInput;
+let addressInput, cityInput, stateInput, zipInput, latlngInput;
 let radiusInput, radiusLabel;
 const milesToMeters = 1609;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
@@ -29,18 +29,22 @@ function onDocumentLoad() {
 */  
 function setLocation() {
     addressInput = document.getElementById("address-input");
-    latitudeInput = document.getElementById("latitude-input");
-    longitudeInput = document.getElementById("longitude-input");
+    cityInput = document.getElementById("city-input");
+    stateInput = document.getElementById("state-input");
+    zipInput = document.getElementById("zip-input");
+    latlngInput = document.getElementById("latlng-input");
 
     setOnClick("current-location", setCurrentLocation);
 }
 async function setCurrentLocation() {
     const locationData = await getCurrentLocation();
     if(locationData) {
-        const latlng = locationData["latlng"].split(",");
-        addressInput.value = locationData["address"];
-        latitudeInput.value = latlng[0];
-        longitudeInput.value = latlng[1];
+        const address = locationData["address"];
+        addressInput.value = `${address["street_number"]} ${address["route"]}`;
+        cityInput.value = address["locality"];
+        stateInput.value = address["administrative_area_level_1"];
+        zipInput.value = address["postal_code"];
+        latlngInput.value = locationData["latlng"];
     }
     else {
         //error getting location
