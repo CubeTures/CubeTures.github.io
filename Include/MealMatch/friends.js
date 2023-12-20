@@ -95,6 +95,7 @@ async function setFriendRequests() {
     
     let requestCount = await populateFriendRequests();
     if(requestCount > 0) {
+        requestDiv.setAttribute("data-bs-target", "#request-dropdown");
         requestDiv.addEventListener("click", toggleRequests);
     }
 }
@@ -162,6 +163,7 @@ async function answerRequest(wrapper, uid, displayName, isYes) {
     if(requestCount <= 0) {
         setRequestDropdown(false);
         requestDiv.removeEventListener("click", toggleRequests);
+        requestDiv.setAttribute("data-bs-target", "");
         requestDropdown.remove();
     }
 
@@ -199,6 +201,7 @@ async function setFriends() {
     
     let friendCount = await populateFriends();
     if(friendCount > 0) {
+        friendDiv.setAttribute("data-bs-target", "#friend-dropdown");
         friendDiv.addEventListener("click", toggleFriends);
     }
 }
@@ -261,6 +264,7 @@ function removeFriend(wrapper, uid) {
     if(friendCount <= 0) {
         setFriendDropdown(false);
         friendDiv.removeEventListener("click", toggleFriends);
+        friendDiv.setAttribute("data-bs-target", "");
         friendDropdown.remove();
     }
 

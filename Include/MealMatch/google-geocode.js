@@ -7,10 +7,12 @@ const header = {
 }
 
 async function getCurrentLocation() {
+    //add timeout for edge cases
     const position = await getGeolocation();
     if(position) {
         const latlng = `${position.coords.latitude},${position.coords.longitude}`; 
         const address = await reverseGeocode(latlng);
+        alert("promise resolved");
 
         if(address) {
             return {
@@ -29,7 +31,9 @@ async function getCurrentLocation() {
     return null;
 }
 function getGeolocation() {
+    alert("got to the method");
     return new Promise(resolve => {
+        alert("got to the anon function");
         navigator.geolocation.getCurrentPosition(position => resolve(position));
     });
 }
