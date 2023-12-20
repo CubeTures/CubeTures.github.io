@@ -1,6 +1,6 @@
 import { getUserData } from "./firebase-database.js"
-import { getCurrentLocation } from "./google-geocode.js";
-let addressInput, cityInput, stateInput, zipInput, latlngInput;
+import { getCurrentLocation, validateAddress } from "./google-geocode.js";
+let addressInput, cityInput, stateInput, zipInput, latlngInput, locationSpinner;
 let radiusInput, radiusLabel;
 const milesToMeters = 1609;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
@@ -33,11 +33,15 @@ function setLocation() {
     stateInput = document.getElementById("state-input");
     zipInput = document.getElementById("zip-input");
     latlngInput = document.getElementById("latlng-input");
+    locationSpinner = document.getElementById("location-spinner");
 
     setOnClick("current-location", setCurrentLocation);
 }
 async function setCurrentLocation() {
+    locationSpinner.classList.remove("hidden");
     const locationData = await getCurrentLocation();
+    locationSpinner.classList.add("hidden");
+
     if(locationData) {
         const address = locationData["address"];
         addressInput.value = `${address["street_number"]} ${address["route"]}`;
@@ -154,10 +158,10 @@ function tryMatch() {
     }
 }
 
-function tryGetInputs() {
+async function tryGetInputs() {
     //get all the data
     //prompt the user if the input is invalid
-    const latlng = tryGetLocation();
+    const latlng = await tryGetLocation();
     if(!latlng) { return null; }
 
     const radius = tryGetRadius();
@@ -172,16 +176,19 @@ function tryGetInputs() {
         "people": people
     };
 }
-function tryGetLocation() {
+async function tryGetLocation() {
     const address = addressInput.value;
-    const latitude = latitudeInput.value;
-    const longitude = longitudeInput.value;
+    const city = cityInput.value;
+    const state = stateInput.value;
+    const zip = zipInput.value;
+    const latlng = latlngInput.value;
 
-    if(address) {
+    const data = await validateAddress(address, city, state, zip);
+    if(data) {
         //geocode
         //error if invalid
     }
-    if(latitude && longitude) {
+    if(latlng) {
         //reverse geocode
         //error if invalid
     }

@@ -3,8 +3,7 @@ import { API_KEY } from "./initialize-firebase.js";
 const REVERSE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 const ADDRESS_VALIDATION_URL = "https://addressvalidation.googleapis.com/v1:validateAddress"
 const header = {
-    "Content-Type": "application/json",
-    "X-Goog-Api-Key": API_KEY
+    "Content-Type": "application/json"
 }
 
 async function getCurrentLocation() {
@@ -61,13 +60,31 @@ function getAddressData(data) {
     return addressData;
 }
 
+async function validateAddress(address, city, state, zip) {
+    const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
+    //const body = getBody(address, city, state, zip);
+    const body = getBody("24502 Evangeline Springs Ln", "Katy", "TX", "");
+
+    const data = await postRequest(url, header, body);
+    console.log(data);
+
+    //if not data["result"]["verdict"]["addressComplete"] then tell to redo
+    //data["result"]["geocode"]["location"]["latitude"]
+}
+function getBody(address, city, state, zip) {
+    return {
+        "address": {
+            "regionCode": "US",
+            "locality": city,
+            "administrativeArea": state,
+            "postalCode": zip,
+            "addressLines": [address]
+        },
+        "enableUspsCass": true
+    };
+}
+
 // [street_number] [route], [locality], [administrative_area_level_1] [postal_code], USA
-
-
-//geocode
-//get location
-
 //return all results as {address, latlng}
 
-
-export { getCurrentLocation };
+export { getCurrentLocation, validateAddress };
