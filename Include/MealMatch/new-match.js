@@ -1,8 +1,6 @@
 import { getUserData } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
 let addressInput, cityInput, stateInput, zipInput, latlngInput, locationSpinner;
-let radiusInput, radiusLabel;
-const milesToMeters = 1609;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
 
 function onDocumentLoad() {
@@ -52,40 +50,6 @@ async function setCurrentLocation() {
     }
     else {
         //error getting location
-    }
-}
-
-function setRadius() {
-    radiusInput = document.getElementById("radius-input");
-    radiusLabel = document.getElementById("radius-label");
-
-    setOnClick("miles-button", () => { changeRadiusUnits("miles"); });
-    setOnClick("meters-button", () => { changeRadiusUnits("meters"); });
-}
-function changeRadiusUnits(units) {
-    const previousUnits = radiusInput.getAttribute("units");
-    radiusInput.setAttribute("units", units);
-
-    if(previousUnits == "miles" && units == "meters") {
-        adjustRadiusValue(milesToMeters);
-    }
-    else if(previousUnits == "meters" && units == "miles") {
-        adjustRadiusValue(1 / milesToMeters);
-    }
-
-    const capitalized = units.substring(0, 1).toUpperCase() + units.substring(1);
-    radiusLabel.textContent = capitalized;
-    console.log(capitalized);
-}
-function adjustRadiusValue(multiplier) {
-    try {
-        const asString = radiusInput.value;
-        let radius = Math.floor(parseFloat(asString));
-        radius *= multiplier;
-        radiusInput.value = Math.floor(radius);
-    }
-    catch {
-        //do nothing
     }
 }
 
@@ -164,15 +128,11 @@ async function tryGetInputs() {
     const latlng = await tryGetLocation();
     if(!latlng) { return null; }
 
-    const radius = tryGetRadius();
-    if(!radius) { return null; }
-
     const people = tryGetPeople();
     if(!people) { return null; }
 
     return {
         "latlng": latlng,
-        "radius": radius,
         "people": people
     };
 }
@@ -198,30 +158,6 @@ async function tryGetLocation() {
 
 
     return null;
-}
-function tryGetRadius() {
-    const asString = radiusInput.value;
-    const units = radiusInput.getAttribute("units");
-
-    let radius = 0;
-    let minimum = units == "miles" ? 5 : 5000;
-    let maximum = units == "miles" ? 30 : 50000;
-    if(asString) {
-        radius = Math.floor(parseFloat(asString));
-    }
-
-    if(radius < minimum) {
-        radius = minimum;
-    }
-    else if(radius > maximum) {
-        radius = maximum;
-    }
-
-    if(units == "miles") {
-        radius *= milesToMeters;
-    }
-
-    return radius;
 }
 function tryGetPeople() {
     let people = {};

@@ -4,7 +4,12 @@ const REVERSE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 const ADDRESS_VALIDATION_URL = "https://addressvalidation.googleapis.com/v1:validateAddress"
 const header = {
     "Content-Type": "application/json"
-}
+};
+const geolocaitonOptions = {
+    "maximumAge": 10000,
+    "timeout": 10000,
+    "enableHighAccuracy": true
+};
 
 async function getCurrentLocation() {
     //add timeout for edge cases
@@ -31,11 +36,15 @@ async function getCurrentLocation() {
     return null;
 }
 function getGeolocation() {
-    alert("got to the method");
     return new Promise(resolve => {
-        alert("got to the anon function");
-        navigator.geolocation.getCurrentPosition(position => resolve(position));
+        //alert("got to the anon function"); //got here
+        navigator.geolocation.getCurrentPosition(position => resolve(position), getGeolocationError, geolocaitonOptions);
     });
+}
+async function getGeolocationError() {
+    alert(`ERROR(${err.code}): ${err.message}`);
+    //time for 5 seconds
+    //cancel callback
 }
 
 async function reverseGeocode(latlng) {

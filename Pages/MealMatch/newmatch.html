@@ -136,30 +136,6 @@
             <br/>
         </div>
 
-        <!-- Radius -->
-        <div>
-            <div class="primary-color rounded padded">
-                <div class="d-flex justify-content-between">
-                    <p class="l-font">Radius</p>
-                    <button type="button" class="image-button" id="radius-info" data-bs-toggle="modal" data-bs-target="#radiusModal">
-                        <img class="pill-image" src="/Images/MealMatch/Info.svg">
-                    </button>
-                </div>
-                <div class="input-group mb-3" data-bs-theme="dark">
-                    <div class="form-floating">
-                        <input type="number" class="form-control colored-input" id="radius-input" placeholder="" value="10" units="miles">
-                        <label for="radius-input">Radius</label>
-                    </div>
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="radius-label">Miles</button>
-                    <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                        <li id="miles-button"><a class="dropdown-item" >Miles</a></li>
-                        <li id="meters-button"><a class="dropdown-item">Meters</a></li>
-                    </ul>
-                </div>
-            </div>
-            <br/>
-        </div>
-
         <!-- People -->
         <div>
             <div class="primary-color rounded padded padded-bottom" id="people">
@@ -198,7 +174,6 @@
         <div>
             <div class="text-center">
                 <button class="btn btn-outline-light white-border" id="test-location">Location</button>
-                <button class="btn btn-outline-light white-border" id="test-radius">Radius</button>
                 <button class="btn btn-outline-light white-border" id="test-people">People</button>
             </div>
             <br/>
@@ -220,26 +195,6 @@
                     <ul>
                         <li>Input the address of the center of the area you would like to search.</li>
                         <li>Click the <img src="/Images/MealMatch/Pin_alt.svg"> icon to use your current location.</li>
-                    </ul>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Radius Modal -->
-        <div class="modal fade" id="radiusModal" tabindex="-1" aria-labelledby="radiusModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="radiusModalLabel">Radius</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul>
-                        <li>Input the radius of your search.</li>
-                        <li>You can search in either miles or meters.</li>
-                        <li>The minimum search radius is 5 miles or 5000 meters.</li>
-                        <li>The maximum search radius is 30 miles or 50000 meters.</li>
                     </ul>
                 </div>
             </div>
@@ -271,7 +226,6 @@
         <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
         <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
         <script type="module" src="/Include/MealMatch/new-match.js"></script>
-        <!--script type="module" src="/Include/MealMatch/tomtom-api.js"></script-->
         <script type="module" src="/Include/api-commands.js"></script>
         <script type="module" src="/Include/MealMatch/google-geocode.js"></script>
         <script type="module" src="/Include/MealMatch/google-nearby.js"></script>
