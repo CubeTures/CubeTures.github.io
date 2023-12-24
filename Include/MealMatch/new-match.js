@@ -36,19 +36,26 @@ function setLocation() {
 }
 async function setCurrentLocation() {
     locationSpinner.classList.remove("hidden");
-    const locationData = await getCurrentLocation();
+    const locationData = await getCurrentLocation(getCurrentLocationError);
     locationSpinner.classList.add("hidden");
 
-    if(locationData["error"]) {
-        //error message
-    }
-    else if(locationData) {
+    if(locationData) {
         const address = locationData["address"];
         addressInput.value = `${address["street_number"]} ${address["route"]}`;
         cityInput.value = address["locality"];
         stateInput.value = address["administrative_area_level_1"];
         zipInput.value = address["postal_code"];
         latlngInput.value = locationData["latlng"];
+    }
+}
+function getCurrentLocationError(error) {
+    locationSpinner.classList.add("hidden");
+
+    if(error.code == 1) {
+        alert("Permission Error");
+    }
+    else {
+        alert("Miscellaneous Error");
     }
 }
 

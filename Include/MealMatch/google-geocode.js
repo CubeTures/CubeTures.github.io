@@ -5,15 +5,15 @@ const ADDRESS_VALIDATION_URL = "https://addressvalidation.googleapis.com/v1:vali
 const header = {
     "Content-Type": "application/json"
 };
-const geolocaitonOptions = {
+const geolocationOptions = {
     maximumAge: 10000,
     timeout: 5000,
     enableHighAccuracy: true
 };
 
-async function getCurrentLocation() {
-    const position = await getGeolocation();
-    return null;
+async function getCurrentLocation(errorCallback) {
+    const position = await getGeolocation(errorCallback);
+
     if(position) {
         const latlng = `${position.coords.latitude},${position.coords.longitude}`; 
         const address = await reverseGeocode(latlng);
@@ -28,20 +28,13 @@ async function getCurrentLocation() {
             alert("Reverse geocode error");
         }
     }
-    else {
-        alert("locaiton service error");
-    }
 
     return null;
 }
-function getGeolocation() {
+function getGeolocation(errorCallback) {
     return new Promise(resolve => {
-        navigator.geolocation.getCurrentPosition(position => resolve(position), getGeolocationError, geolocaitonOptions);
+        navigator.geolocation.getCurrentPosition(position => resolve(position), errorCallback, geolocationOptions);
     });
-}
-async function getGeolocationError(err) {
-    alert(typeof err);
-    return err;
 }
 
 async function reverseGeocode(latlng) {
