@@ -39,16 +39,16 @@ async function setCurrentLocation() {
     const locationData = await getCurrentLocation();
     locationSpinner.classList.add("hidden");
 
-    if(locationData) {
+    if(locationData["error"]) {
+        //error message
+    }
+    else if(locationData) {
         const address = locationData["address"];
         addressInput.value = `${address["street_number"]} ${address["route"]}`;
         cityInput.value = address["locality"];
         stateInput.value = address["administrative_area_level_1"];
         zipInput.value = address["postal_code"];
         latlngInput.value = locationData["latlng"];
-    }
-    else {
-        //error getting location
     }
 }
 
