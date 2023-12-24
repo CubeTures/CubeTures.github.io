@@ -5,7 +5,6 @@ let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
 
 function onDocumentLoad() {
     setLocation();
-    setRadius();
     setPeople();
     setMatch();
 }
@@ -94,10 +93,6 @@ function setMatch() {
     setOnClick("test-location", () => { 
         const data = JSON.stringify(tryGetLocation(), null, 2);
         console.log(`Location:\n${data}`);
-    });
-    setOnClick("test-radius", () => {
-        const data = JSON.stringify(tryGetRadius(), null, 2);
-        console.log(`Radius:\n${data}`);
     });
     setOnClick("test-people", () => { 
         const data = JSON.stringify(tryGetPeople(), null, 2);

@@ -6,9 +6,9 @@ const header = {
     "Content-Type": "application/json"
 };
 const geolocaitonOptions = {
-    "maximumAge": 10000,
-    "timeout": 10000,
-    "enableHighAccuracy": true
+    maximumAge: 10000,
+    timeout: 5000,
+    enableHighAccuracy: true
 };
 
 async function getCurrentLocation() {
@@ -41,7 +41,7 @@ function getGeolocation() {
         navigator.geolocation.getCurrentPosition(position => resolve(position), getGeolocationError, geolocaitonOptions);
     });
 }
-async function getGeolocationError() {
+async function getGeolocationError(err) {
     alert(`ERROR(${err.code}): ${err.message}`);
     //time for 5 seconds
     //cancel callback
