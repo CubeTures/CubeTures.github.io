@@ -1,6 +1,7 @@
 import { getUserData } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
-let addressInput, cityInput, stateInput, zipInput, latlngInput, locationSpinner;
+let addressInput, cityInput, stateInput, zipInput, latlngInput;
+let locationSpinner, locationErrorModal, locationErrorText;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
 
 function onDocumentLoad() {
@@ -31,6 +32,8 @@ function setLocation() {
     zipInput = document.getElementById("zip-input");
     latlngInput = document.getElementById("latlng-input");
     locationSpinner = document.getElementById("location-spinner");
+    locationErrorModal = new bootstrap.Modal(document.getElementById("locationErrorModal"), {});
+    locationErrorText = document.getElementById("location-error-text");
 
     setOnClick("current-location", setCurrentLocation);
 }
@@ -47,16 +50,26 @@ async function setCurrentLocation() {
         zipInput.value = address["postal_code"];
         latlngInput.value = locationData["latlng"];
     }
+    else {
+        getCurrentLocationError();
+    }
 }
-function getCurrentLocationError(error) {
-    locationSpinner.classList.add("hidden");
-
-    if(error.code == 1) {
-        alert("Permission Error");
+function getCurrentLocationError(errorCode=0) {
+    if(errorCode == 1) {
+        locationErrorText.innerHMTL = "MealMatch could not access your location. " +
+            "Please change your location permissions or type the address manually.";
+    }
+    else if(errorCode == 3) {
+        locationErrorText.innerHTML = "The address you entered could not be identified. " +
+            "Please fix any mistakes in the address and try again " +
+            "or click <img src='/Images/MealMatch/Pin_alt.svg'> to automatically get your location.";
     }
     else {
-        alert("Miscellaneous Error");
+        locationErrorText.innerHTML = "There was an error in getting your location. " +
+            "Please type the address manually.";
     }
+
+    locationErrorModal.show();
 }
 
 function setPeople() {
@@ -159,7 +172,7 @@ async function tryGetLocation() {
     }
 
 
-    return null;
+    return data;
 }
 function tryGetPeople() {
     let people = {};

@@ -46,8 +46,8 @@
                 <div class="vertical-input-group">
                     <div class="input-group mb-3" data-bs-theme="dark">
                         <div class="form-floating">
-                            <input type="text" class="form-control colored-input is-invalid" id="address-input" placeholder="">
-                            <label for="address-input">Address</label>
+                            <input type="text" class="form-control colored-input" id="address-input" placeholder="">
+                            <label for="address-input">Street Address</label>
                         </div>
                     </div>
                     <div class="input-group mb-3" data-bs-theme="dark">
@@ -185,37 +185,53 @@
         
         <!-- Location Modal -->
         <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="locaitonModalLabel">Location</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul>
-                        <li>Input the address of the center of the area you would like to search.</li>
-                        <li>Click the <img src="/Images/MealMatch/Pin_alt.svg"> icon to use your current location.</li>
-                    </ul>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="locaitonModalLabel">How to Input Location</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li>Input the address of the center of the area you would like to search.</li>
+                            <li>Click the <img src="/Images/MealMatch/Pin_alt.svg"> icon to use your current location.</li>
+                            <li>Your current location may be read innacurately depending on your device.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Location Error Modal -->
+        <div class="modal fade" id="locationErrorModal" tabindex="-1" aria-labelledby="locationErrorModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="locaitonErrorModalLabel">Location Error</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="location-error-text">
+                        There was an error in getting your location. Please type the address manually.
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- People Modal -->
         <div class="modal fade" id="peopleModal" tabindex="-1" aria-labelledby="peopleModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="peopleModalLabel">People</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="peopleModalLabel">How to Select People</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li>Click the people who you wish to be included in your match.</li>
+                            <li>You must include at least one person to create a match.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <ul>
-                        <li>Click the people who you wish to be included in your match.</li>
-                        <li>You must include at least one person to create a match.</li>
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
 

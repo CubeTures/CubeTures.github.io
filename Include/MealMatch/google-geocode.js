@@ -24,16 +24,13 @@ async function getCurrentLocation(errorCallback) {
                 "latlng": latlng
             }
         }
-        else {
-            alert("Reverse geocode error");
-        }
     }
 
     return null;
 }
 function getGeolocation(errorCallback) {
     return new Promise(resolve => {
-        navigator.geolocation.getCurrentPosition(position => resolve(position), errorCallback, geolocationOptions);
+        navigator.geolocation.getCurrentPosition(position => resolve(position), error => errorCallback(error.code), geolocationOptions);
     });
 }
 
@@ -63,7 +60,7 @@ function getAddressData(data) {
     return addressData;
 }
 
-async function validateAddress(address, city, state, zip) {
+async function validateAddress(address, city, state, zip, errorCallback) {
     const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
     //const body = getBody(address, city, state, zip);
     const body = getBody("24502 Evangeline Springs Ln", "Katy", "TX", "");
