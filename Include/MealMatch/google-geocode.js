@@ -60,10 +60,10 @@ function getAddressData(data) {
     return addressData;
 }
 
-async function validateAddress(address, city, state, zip) {
+async function validateAddress(address, city, state, zip, inferredCallback) {
     const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
-    const body = getBody(address, city, state, zip);
-    //const body = getBody("24502 Evangeline Springs Ln", "Katy", "TX", "");
+    //const body = getBody(address, city, state, zip);
+    const body = getBody("6215", "Katy", "TX", "774");
 
     const data = await postRequest(url, header, body);
     console.log(data);
@@ -71,14 +71,14 @@ async function validateAddress(address, city, state, zip) {
     if(isAddressComplete(data)) {
         const lat = data["result"]["geocode"]["location"]["latitude"];
         const lng = data["result"]["geocode"]["location"]["longitude"];
-        const isInferred = isInferred(data, address, city, state, zip);
+        const inferred = isInferred(data, address, city, state, zip, inferredCallback);
         return {
             "address": address,
             "city": city,
             "state": state,
             "zip": zip,
             "latlng": `${lat},${lng}`,
-            "inferred": isInferred
+            "inferred": inferred
         };
     }
 
@@ -100,9 +100,17 @@ function isAddressComplete(data) {
     return data && data["result"] && data["result"]["verdict"] &&
             data["result"]["verdict"]["addressComplete"];
 }
-function isInferred(data, address, city, state, zip) {
+function isInferred(data, address, city, state, zip, inferredCallback) {
+    //data["result"]["address"]["addressComponents"]["componentName"]["text"]
+    //  data["result"]["address"]["addressComponents"]["inferred"]
+    //  data["result"]["verdict"]["hasUnconfirmedComponents"]
+
+    //  [street_number] [route] [locality] [administrative_area_level_1] [postal_code]
+    //  data["result"]["address"]["formatted_address"]
+
     //if the data states inferred, then check if the long or short version match the enterred components
     //popup to the user if the components differ a bit
+
     return false;
 }
 

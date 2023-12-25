@@ -55,11 +55,12 @@ async function setCurrentLocation() {
     }
 }
 function locationError(errorCode=0) {
+    //make modal static
     if(errorCode == 1) {
         locationErrorText.innerHMTL = "MealMatch could not access your location. " +
             "Please change your location permissions or type the address manually.";
     }
-    else if(errorCode == 3) {
+    else if(errorCode == 4) {
         locationErrorText.innerHTML = "The address you entered could not be identified. " +
             "Please fix any mistakes in the address and try again " +
             "or click <img src='/Images/MealMatch/Pin_alt.svg'> to automatically get your location.";
@@ -142,9 +143,9 @@ async function tryGetInputs() {
     const locationData = await tryGetLocation();
     if(!locationData) { 
         locErr = true;
-        locationError(3); 
-    } 
-    if(locationData["inferred"]) {
+        locationError(4); 
+    }
+    else if(locationData["inferred"]) {
         //ask the user if the address generated is correct
         //two options:
         //  Yes
@@ -168,7 +169,7 @@ async function tryGetLocation() {
     //check if boxes were edited since pressing getCurrentLocation, 
     //  if not, then use values from latlngInput
 
-    const data = await validateAddress(address, city, state, zip);
+    const data = await validateAddress(address, city, state, zip); //add last paramter for inferredCallback
     return data;
 }
 function tryGetPeople() {
