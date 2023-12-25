@@ -60,16 +60,29 @@ function getAddressData(data) {
     return addressData;
 }
 
-async function validateAddress(address, city, state, zip, errorCallback) {
+async function validateAddress(address, city, state, zip) {
     const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
-    //const body = getBody(address, city, state, zip);
-    const body = getBody("24502 Evangeline Springs Ln", "Katy", "TX", "");
+    const body = getBody(address, city, state, zip);
+    //const body = getBody("24502 Evangeline Springs Ln", "Katy", "TX", "");
 
     const data = await postRequest(url, header, body);
     console.log(data);
 
-    //if not data["result"]["verdict"]["addressComplete"] then tell to redo
-    //data["result"]["geocode"]["location"]["latitude"]
+    if(isAddressComplete(data)) {
+        const lat = data["result"]["geocode"]["location"]["latitude"];
+        const lng = data["result"]["geocode"]["location"]["longitude"];
+        const isInferred = isInferred(data, address, city, state, zip);
+        return {
+            "address": address,
+            "city": city,
+            "state": state,
+            "zip": zip,
+            "latlng": `${lat},${lng}`,
+            "inferred": isInferred
+        };
+    }
+
+    return null;
 }
 function getBody(address, city, state, zip) {
     return {
@@ -82,6 +95,15 @@ function getBody(address, city, state, zip) {
         },
         "enableUspsCass": true
     };
+}
+function isAddressComplete(data) {
+    return data && data["result"] && data["result"]["verdict"] &&
+            data["result"]["verdict"]["addressComplete"];
+}
+function isInferred(data, address, city, state, zip) {
+    //if the data states inferred, then check if the long or short version match the enterred components
+    //popup to the user if the components differ a bit
+    return false;
 }
 
 // [street_number] [route], [locality], [administrative_area_level_1] [postal_code], USA

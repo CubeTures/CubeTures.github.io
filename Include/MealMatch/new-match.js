@@ -39,7 +39,7 @@ function setLocation() {
 }
 async function setCurrentLocation() {
     locationSpinner.classList.remove("hidden");
-    const locationData = await getCurrentLocation(getCurrentLocationError);
+    const locationData = await getCurrentLocation(locationError);
     locationSpinner.classList.add("hidden");
 
     if(locationData) {
@@ -51,10 +51,10 @@ async function setCurrentLocation() {
         latlngInput.value = locationData["latlng"];
     }
     else {
-        getCurrentLocationError();
+        locationError();
     }
 }
-function getCurrentLocationError(errorCode=0) {
+function locationError(errorCode=0) {
     if(errorCode == 1) {
         locationErrorText.innerHMTL = "MealMatch could not access your location. " +
             "Please change your location permissions or type the address manually.";
@@ -108,22 +108,20 @@ function addPerson(uid, displayName) {
 
     peopleContainer.append(clone);
 }
+function peopleError(locationError=false) {
+    //if location error,
+    //  then attach activation for the people modal to the closing of the location modal
+    //  remove the activation after it is clicked
+}
 
 function setMatch() {
-    setOnClick("test-location", () => { 
-        const data = JSON.stringify(tryGetLocation(), null, 2);
-        console.log(`Location:\n${data}`);
-    });
-    setOnClick("test-people", () => { 
-        const data = JSON.stringify(tryGetPeople(), null, 2);
-        console.log(`People:\n${data}`);
-    });
-
     setOnClick("match", tryMatch);
 }
-function tryMatch() {
-    const inputData = tryGetInputs();
+async function tryMatch() {
+    const inputData = await tryGetInputs();
     if(inputData) {
+        console.log("No errors, creating search.");
+
         /*  
             get all of the data into an object
             send object to different class
@@ -140,14 +138,24 @@ function tryMatch() {
 async function tryGetInputs() {
     //get all the data
     //prompt the user if the input is invalid
-    const latlng = await tryGetLocation();
-    if(!latlng) { return null; }
+    let locErr = false;
+    const locationData = await tryGetLocation();
+    if(!locationData) { 
+        locErr = true;
+        locationError(3); 
+    } 
+    if(locationData["inferred"]) {
+        //ask the user if the address generated is correct
+        //two options:
+        //  Yes
+        //  No, Cancel Match
+    }
 
     const people = tryGetPeople();
-    if(!people) { return null; }
+    if(!people) { peopleError(locErr); } 
 
     return {
-        "latlng": latlng,
+        "locationData": locationData,
         "people": people
     };
 }
@@ -157,21 +165,10 @@ async function tryGetLocation() {
     const state = stateInput.value;
     const zip = zipInput.value;
     const latlng = latlngInput.value;
+    //check if boxes were edited since pressing getCurrentLocation, 
+    //  if not, then use values from latlngInput
 
     const data = await validateAddress(address, city, state, zip);
-    if(data) {
-        //geocode
-        //error if invalid
-    }
-    if(latlng) {
-        //reverse geocode
-        //error if invalid
-    }
-    else {
-        //error for no input
-    }
-
-
     return data;
 }
 function tryGetPeople() {
@@ -188,10 +185,9 @@ function tryGetPeople() {
     }
 
     if(isEmpty) {
-        //prompt error and tell user how to fix
-        console.log("ERROR: No people selected.");
         return null;
     }
+
     return people;
 }
 
