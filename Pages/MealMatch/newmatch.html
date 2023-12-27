@@ -121,6 +121,10 @@
                 </div>
                 
                 <div>
+                    <input type="hidden" id="address-hidden">
+                    <input type="hidden" id="city-hidden">
+                    <input type="hidden" id="state-hidden">
+                    <input type="hidden" id="zip-hidden">
                     <input type="hidden" id="latlng-input">
                 </div>
 
@@ -179,7 +183,7 @@
         
         <!-- Location Modal -->
         <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="locaitonModalLabel">How to Input Location</h1>
@@ -198,7 +202,7 @@
 
         <!-- Location Error Modal -->
         <div class="modal fade" id="locationErrorModal" tabindex="-1" aria-labelledby="locationErrorModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="locaitonErrorModalLabel">Location Error</h1>
@@ -211,9 +215,30 @@
             </div>
         </div>
 
+        <!-- Location Validation Modal -->
+        <div class="modal fade" id="locationValidationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="locationValidationModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="locaitonValidationModalLabel">Location Validation</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="location-error-text">
+                        The address you provided could not be found. Is this the correct address?
+                        <br/>
+                        <b id="formatted-address"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light white-border" data-bs-dismiss="modal">No, Cancel Match</button>
+                        <button type="button" class="btn btn-light white-border" data-bs-dismiss="modal" id="location-validation-button">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- People Modal -->
         <div class="modal fade" id="peopleModal" tabindex="-1" aria-labelledby="peopleModalLabel" aria-hidden="true" data-bs-theme="dark">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="peopleModalLabel">How to Select People</h1>
@@ -223,6 +248,32 @@
                         <ul>
                             <li>Click the people who you wish to be included in your match.</li>
                             <li>You must include at least one person to create a match.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- People Error Modal -->
+        <div class="modal fade" id="peopleErrorModal" tabindex="-1" aria-labelledby="peopleErrorModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="peopleErrorModalLabel">Error with Selected People</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li>Please select at least one person to create a match.</li>
+                            <li>If you have no people are showing up, you need to register a friend. 
+                                To do so, follow these steps:
+                                <ol>
+                                    <li>Go to the friend tab.</li>
+                                    <li>Copy your friend code and send it to someone.</li>
+                                    <li>Have them send you a friend request.</li>
+                                    <li>Accept their friend request under the "requests" tab.</li>
+                                </ol>
+                            </li>
                         </ul>
                     </div>
                 </div>

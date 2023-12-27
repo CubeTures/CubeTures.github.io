@@ -1,8 +1,10 @@
 import { getUserData } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
+let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
-let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner;
+let locationValidationModal, formattedAddressText, correctedAddress;
+let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -10,30 +12,25 @@ function onDocumentLoad() {
     setMatch();
 }
 
-/*
-    How do location ???
-
-    Click to use current location
-        disable verify button
-
-    Click verify location
-        Verify location (check if can geocode)
-        If valid, mark box with green check
-        Disable verify button
-
-    If the box is edited after verification 
-        undo verification
-        enable verify button
-*/  
 function setLocation() {
     addressInput = document.getElementById("address-input");
     cityInput = document.getElementById("city-input");
     stateInput = document.getElementById("state-input");
     zipInput = document.getElementById("zip-input");
     latlngInput = document.getElementById("latlng-input");
+
+    addressHidden = document.getElementById("address-hidden");
+    cityHidden = document.getElementById("city-hidden");
+    stateHidden = document.getElementById("state-hidden");
+    zipHidden = document.getElementById("zip-hidden");
+
     locationSpinner = document.getElementById("location-spinner");
-    locationErrorModal = new bootstrap.Modal(document.getElementById("locationErrorModal"), {});
+    locationErrorModal = getModal("locationErrorModal");
     locationErrorText = document.getElementById("location-error-text");
+
+    locationValidationModal = getModal("locationValidationModal");
+    formattedAddressText = document.getElementById("formatted-address");
+    setOnClick("location-validation-button", correctInferredError);
 
     setOnClick("current-location", setCurrentLocation);
 }
@@ -44,18 +41,16 @@ async function setCurrentLocation() {
 
     if(locationData) {
         const address = locationData["address"];
-        addressInput.value = `${address["street_number"]} ${address["route"]}`;
-        cityInput.value = address["locality"];
-        stateInput.value = address["administrative_area_level_1"];
-        zipInput.value = address["postal_code"];
-        latlngInput.value = locationData["latlng"];
+        setInputs(`${address["street_number"]} ${address["route"]}`, address["locality"],
+            address["administrative_area_level_1"], address["postal_code"], locationData["latlng"]);
     }
     else {
         locationError();
     }
 }
 function locationError(errorCode=0) {
-    //make modal static
+    console.warn("Location Error");
+    
     if(errorCode == 1) {
         locationErrorText.innerHMTL = "MealMatch could not access your location. " +
             "Please change your location permissions or type the address manually.";
@@ -72,12 +67,27 @@ function locationError(errorCode=0) {
 
     locationErrorModal.show();
 }
+function inferredError(locationData) {
+    console.warn(`Inferred\n${JSON.stringify(locationData, null, 2)}`);
+    correctedAddress = locationData["components"];
+    correctedAddress["latlng"] = locationData["latlng"];
+    const { address, city, state, zip } = correctedAddress;
+    const formattedAddress = `${address}, ${city}, ${state} ${zip}`;
+    formattedAddressText.textContent = formattedAddress;
+    locationValidationModal.show();
+}
+function correctInferredError() {
+    setInputs(correctedAddress["address"], correctedAddress["city"], correctedAddress["state"],
+        correctedAddress["zip"], correctedAddress["latlng"]);
+    tryMatch();
+}
 
 function setPeople() {
     peopleContainer = document.getElementById("people-container");
     peopleTemplate = document.getElementById("people-template");
     peopleDisclaimer = document.getElementById("people-disclaimer");
     peopleSpinner = document.getElementById("people-spinner");
+    peopleErrorModal = new bootstrap.Modal(document.getElementById("peopleErrorModal"), {});
 
     populatePeople();
 }
@@ -109,10 +119,9 @@ function addPerson(uid, displayName) {
 
     peopleContainer.append(clone);
 }
-function peopleError(locationError=false) {
-    //if location error,
-    //  then attach activation for the people modal to the closing of the location modal
-    //  remove the activation after it is clicked
+function peopleError() {
+    console.warn("People Error");
+    peopleErrorModal.show();
 }
 
 function setMatch() {
@@ -122,6 +131,12 @@ async function tryMatch() {
     const inputData = await tryGetInputs();
     if(inputData) {
         console.log("No errors, creating search.");
+
+        const loc = inputData["locationData"];
+        const formattedAddress = `${loc["address"]}, ${loc["city"]}, ${loc["state"]} ${loc["zip"]}`;
+        const latlng = loc["latlng"].split(",").join(", ");
+        //console.log(inputData);
+        alert(`${formattedAddress} @ ${latlng}`);
 
         /*  
             get all of the data into an object
@@ -137,23 +152,21 @@ async function tryMatch() {
 }
 
 async function tryGetInputs() {
-    //get all the data
-    //prompt the user if the input is invalid
-    let locErr = false;
     const locationData = await tryGetLocation();
-    if(!locationData) { 
-        locErr = true;
+    if(locationData == null) { 
         locationError(4); 
+        return;
     }
     else if(locationData["inferred"]) {
-        //ask the user if the address generated is correct
-        //two options:
-        //  Yes
-        //  No, Cancel Match
+        inferredError(locationData);
+        return;
     }
 
     const people = tryGetPeople();
-    if(!people) { peopleError(locErr); } 
+    if(people == null) { 
+        peopleError(); 
+        return;
+    } 
 
     return {
         "locationData": locationData,
@@ -166,10 +179,23 @@ async function tryGetLocation() {
     const state = stateInput.value;
     const zip = zipInput.value;
     const latlng = latlngInput.value;
-    //check if boxes were edited since pressing getCurrentLocation, 
-    //  if not, then use values from latlngInput
 
-    const data = await validateAddress(address, city, state, zip); //add last paramter for inferredCallback
+    let data = {}
+    if(inputsEdited()) {
+        data = await validateAddress(address, city, state, zip);
+    }
+    else {
+        console.warn("Inputs were not edited. Using verified information.");
+
+        data = {
+            "address": address,
+            "city": city,
+            "state": state,
+            "zip": zip,
+            "latlng": latlng
+        }
+    }
+    
     return data;
 }
 function tryGetPeople() {
@@ -192,10 +218,31 @@ function tryGetPeople() {
     return people;
 }
 
+function setInputs(address, city, state, zip, latlng) {
+    addressInput.value = address;
+    cityInput.value = city;
+    stateInput.value = state;
+    zipInput.value = zip;
+    latlngInput.value = latlng;
+
+    addressHidden.value = address;
+    cityHidden.value = city;
+    stateHidden.value = state;
+    zipHidden.value = zip;
+}
+function inputsEdited() {
+    return !(addressInput.value === addressHidden.value &&
+            cityInput.value === cityHidden.value &&
+            stateInput.value === stateHidden.value &&
+            zipInput.value === zipHidden.value);
+}
+
 function setOnClick(elementID, callback) {
     document.getElementById(elementID)
         .addEventListener("click", callback);
 }
-
+function getModal(elementID) {
+    return new bootstrap.Modal(document.getElementById(elementID), {});
+}
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);

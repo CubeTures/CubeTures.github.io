@@ -1,7 +1,10 @@
 import { httpRequest, postRequest } from "../api-commands.js";
 import { API_KEY } from "./initialize-firebase.js";
+
+const importantComponents = ["street_number", "route", "locality", "administrative_area_level_1", "postal_code"];
 const REVERSE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 const ADDRESS_VALIDATION_URL = "https://addressvalidation.googleapis.com/v1:validateAddress"
+
 const header = {
     "Content-Type": "application/json"
 };
@@ -12,18 +15,23 @@ const geolocationOptions = {
 };
 
 async function getCurrentLocation(errorCallback) {
-    const position = await getGeolocation(errorCallback);
+    try {
+        const position = await getGeolocation(errorCallback);
 
-    if(position) {
-        const latlng = `${position.coords.latitude},${position.coords.longitude}`; 
-        const address = await reverseGeocode(latlng);
+        if(position) {
+            const latlng = `${position.coords.latitude},${position.coords.longitude}`; 
+            const address = await reverseGeocode(latlng);
 
-        if(address) {
-            return {
-                "address": address,
-                "latlng": latlng
+            if(address) {
+                return {
+                    "address": address,
+                    "latlng": latlng
+                }
             }
         }
+    }
+    catch(error) {
+        console.error(`Error in Getting Current Location:\n${error}`);
     }
 
     return null;
@@ -42,6 +50,7 @@ async function reverseGeocode(latlng) {
     };
     const data = await httpRequest(REVERSE_GEOCODE_URL, parameters);
     console.log(data);
+
     if(data && data["status"] == "OK") {
         return getAddressData(data["results"][0]);
     }
@@ -60,26 +69,34 @@ function getAddressData(data) {
     return addressData;
 }
 
-async function validateAddress(address, city, state, zip, inferredCallback) {
-    const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
-    //const body = getBody(address, city, state, zip);
-    const body = getBody("6215", "Katy", "TX", "774");
+async function validateAddress(address, city, state, zip) {
+    try {
+        const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
+        const body = getBody(address, city, state, zip);
 
-    const data = await postRequest(url, header, body);
-    console.log(data);
+        const data = await postRequest(url, header, body);
+        console.log(data);
 
-    if(isAddressComplete(data)) {
-        const lat = data["result"]["geocode"]["location"]["latitude"];
-        const lng = data["result"]["geocode"]["location"]["longitude"];
-        const inferred = isInferred(data, address, city, state, zip, inferredCallback);
-        return {
-            "address": address,
-            "city": city,
-            "state": state,
-            "zip": zip,
-            "latlng": `${lat},${lng}`,
-            "inferred": inferred
-        };
+        const addressComplete = getNested(data, "result", "verdict", "addressComplete");
+        const unconfirmed = getNested(data, "result", "verdict", "hasUnconfirmedComponents");
+        if(addressComplete && !unconfirmed) {
+            const lat = getNested(data, "result", "geocode", "location", "latitude");
+            const lng = getNested(data, "result", "geocode", "location", "longitude");
+            const [ inferred, components ] = isInferred(data);
+
+            return {
+                "address": address,
+                "city": city,
+                "state": state,
+                "zip": zip,
+                "latlng": `${lat},${lng}`,
+                "inferred": inferred,
+                "components": components
+            };
+        }
+    }
+    catch(error) {
+        console.error(`Error in Address Validation:\n${error}`);
     }
 
     return null;
@@ -96,25 +113,66 @@ function getBody(address, city, state, zip) {
         "enableUspsCass": true
     };
 }
-function isAddressComplete(data) {
-    return data && data["result"] && data["result"]["verdict"] &&
-            data["result"]["verdict"]["addressComplete"];
+
+function isInferred(data) {
+    const components = getAddressComponents(data);
+    const renamedComponents = getRenamedComponents(components);
+
+    const issue = hasComponentIssue(data);
+    const replaced = getNested(data, "result", "verdict", "hasReplacedComponents");
+    const verdict = replaced || issue;
+    return [ verdict , renamedComponents ];
 }
-function isInferred(data, address, city, state, zip, inferredCallback) {
-    //data["result"]["address"]["addressComponents"]["componentName"]["text"]
-    //  data["result"]["address"]["addressComponents"]["inferred"]
-    //  data["result"]["verdict"]["hasUnconfirmedComponents"]
+function getAddressComponents(data) {
+    let components = {};
+    const componentData = getNested(data, "result", "address", "addressComponents");
+    if(componentData) {
+        for(const [index, component] of Object.entries(componentData)) {
+            const name = getNested(component, "componentType");
+            const value = getNested(component, "componentName", "text");
+            components[name] = value;
+        }
+    }
 
-    //  [street_number] [route] [locality] [administrative_area_level_1] [postal_code]
-    //  data["result"]["address"]["formatted_address"]
+    return components;
+}
+function getRenamedComponents(components) {
+    let renamed = {};
+    renamed["address"] = `${components?.street_number} ${components?.route}`;
+    renamed["city"] = components?.locality;
+    renamed["state"] = components?.administrative_area_level_1;
+    renamed["zip"] = components?.postal_code;
+    return renamed;
+}   
+function hasComponentIssue(data) {
+    const components = getNested(data, "result", "address", "addressComponents");
+    if(components) {
+        for(const [index, component] of Object.entries(components)) {
+            if(hasIssue(component)) {
+                return true;
+            }
+        }
 
-    //if the data states inferred, then check if the long or short version match the enterred components
-    //popup to the user if the components differ a bit
+        return false;
+    }
+
+    return true;
+}
+function hasIssue(component) {
+    const name = getNested(component, "componentType");
+    if(importantComponents.includes(name)) {
+        const inferred = component["inferred"];
+        const spellCorrected = component["spellCorrected"];
+        return inferred || spellCorrected;
+    }
 
     return false;
 }
 
-// [street_number] [route], [locality], [administrative_area_level_1] [postal_code], USA
-//return all results as {address, latlng}
+function getNested(obj, level,  ...rest) {
+    if (obj === undefined) return null;
+    if (rest.length == 0 && obj.hasOwnProperty(level)) return obj[level];
+    return getNested(obj[level], ...rest);
+}
 
 export { getCurrentLocation, validateAddress };
