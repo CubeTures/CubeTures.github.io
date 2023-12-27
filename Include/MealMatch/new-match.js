@@ -69,8 +69,7 @@ function locationError(errorCode=0) {
 }
 function inferredError(locationData) {
     console.warn(`Inferred\n${JSON.stringify(locationData, null, 2)}`);
-    correctedAddress = locationData["components"];
-    correctedAddress["latlng"] = locationData["latlng"];
+    correctedAddress = locationData;
     const { address, city, state, zip } = correctedAddress;
     const formattedAddress = `${address}, ${city}, ${state} ${zip}`;
     formattedAddressText.textContent = formattedAddress;
@@ -180,23 +179,22 @@ async function tryGetLocation() {
     const zip = zipInput.value;
     const latlng = latlngInput.value;
 
-    let data = {}
-    if(inputsEdited()) {
-        data = await validateAddress(address, city, state, zip);
-    }
-    else {
-        console.warn("Inputs were not edited. Using verified information.");
-
-        data = {
-            "address": address,
-            "city": city,
-            "state": state,
-            "zip": zip,
-            "latlng": latlng
-        }
-    }
-    
+    let data = await getLocationData(address, city, state, zip, latlng);
     return data;
+}
+async function getLocationData(address, city, state, zip, latlng) {
+    if(inputsEdited()) {
+        return await validateAddress(address, city, state, zip);
+    }
+
+    console.warn("Inputs were not edited. Using verified information.");
+    return {
+        "address": address,
+        "city": city,
+        "state": state,
+        "zip": zip,
+        "latlng": latlng
+    }
 }
 function tryGetPeople() {
     let people = {};

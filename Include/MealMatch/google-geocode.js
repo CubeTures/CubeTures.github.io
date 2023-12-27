@@ -85,13 +85,12 @@ async function validateAddress(address, city, state, zip) {
             const [ inferred, components ] = isInferred(data);
 
             return {
-                "address": address,
-                "city": city,
-                "state": state,
-                "zip": zip,
+                "address": components["address"],
+                "city": components["city"],
+                "state": components["state"],
+                "zip": components["zip"],
                 "latlng": `${lat},${lng}`,
-                "inferred": inferred,
-                "components": components
+                "inferred": inferred
             };
         }
     }
@@ -118,8 +117,8 @@ function isInferred(data) {
     const components = getAddressComponents(data);
     const renamedComponents = getRenamedComponents(components);
 
-    const issue = hasComponentIssue(data);
     const replaced = getNested(data, "result", "verdict", "hasReplacedComponents");
+    const issue = hasComponentIssue(data);
     const verdict = replaced || issue;
     return [ verdict , renamedComponents ];
 }
