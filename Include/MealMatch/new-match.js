@@ -37,9 +37,9 @@ function setLocation() {
     setOnClick("current-location", setCurrentLocation);
 }
 async function setCurrentLocation() {
-    locationSpinner.classList.remove("hidden");
+    locationSpinner.classList.remove("visually-hidden");
     const locationData = await getCurrentLocation(locationError);
-    locationSpinner.classList.add("hidden");
+    locationSpinner.classList.add("visually-hidden");
 
     if(locationData) {
         const address = locationData["address"];
@@ -96,14 +96,14 @@ async function populatePeople() {
     const friends = await getUserData("writeonly/friends");
 
     if(friends) {
-        peopleDisclaimer.classList.add("hidden");
-        peopleSpinner.classList.remove("hidden");
+        peopleDisclaimer.classList.add("visually-hidden");
+        peopleSpinner.classList.remove("visually-hidden");
 
         for(const [uid, displayName] of Object.entries(friends)) {
             addPerson(uid, displayName);
         }
 
-        peopleSpinner.classList.add("hidden");
+        peopleSpinner.classList.add("visually-hidden");
     }
 }
 function addPerson(uid, displayName) {

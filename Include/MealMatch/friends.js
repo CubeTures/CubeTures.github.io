@@ -2,7 +2,9 @@ import { getUserData, updateUserData, removeUserData, getCookie } from "./fireba
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
 let requestDiv, requestCaret, requestAmount, requestDropdown, requestTemplate;
+let requestBreak, requestDisclaimer;
 let friendDiv, friendCaret, friendAmount, friendDropdown, friendTemplate;
+let friendBreak, friendDisclaimer;
 let expandedCaret = "/Images/MealMatch/Expand_down.svg";
 let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
@@ -92,11 +94,14 @@ async function setFriendRequests() {
     requestAmount = document.getElementById("request-amount");
     requestDropdown = document.getElementById("request-dropdown");
     requestTemplate = document.getElementById("request-template");
+
+    requestBreak = document.getElementById("request-break");
+    requestDisclaimer = document.getElementById("request-disclaimer");
     
+    requestDiv.addEventListener("click", toggleRequests);
     let requestCount = await populateFriendRequests();
     if(requestCount > 0) {
-        requestDiv.setAttribute("data-bs-target", "#request-dropdown");
-        requestDiv.addEventListener("click", toggleRequests);
+        toggleDisclaimer(requestDisclaimer, requestBreak, false);
     }
 }
 function toggleRequests() {
@@ -113,11 +118,13 @@ function setRequestDropdown(isVisibile) {
 
     if(isVisibile) {
         requestDiv.classList.add("flat-bottom");
+        requestDropdown.classList.add("flat-top");
         requestCaret.src = expandedCaret;
         requestCaret.setAttribute("expanded", "");
     }
     else {
         requestDiv.classList.remove("flat-bottom");
+        requestDropdown.classList.remove("flat-top");
         requestCaret.src = collapsedCaret;
         requestCaret.removeAttribute("expanded");
     }
@@ -161,10 +168,7 @@ async function answerRequest(wrapper, uid, displayName, isYes) {
     
     let requestCount = decrementRequestAmount();
     if(requestCount <= 0) {
-        setRequestDropdown(false);
-        requestDiv.removeEventListener("click", toggleRequests);
-        requestDiv.setAttribute("data-bs-target", "");
-        requestDropdown.remove();
+        toggleDisclaimer(requestDisclaimer, requestBreak, true);
     }
 
     removeUserData(`writeonly/friend_requests/${uid}`);
@@ -198,11 +202,14 @@ async function setFriends() {
     friendAmount = document.getElementById("friend-amount");
     friendDropdown = document.getElementById("friend-dropdown");
     friendTemplate = document.getElementById("friend-template");
+
+    friendBreak = document.getElementById("friend-break");
+    friendDisclaimer = document.getElementById("friend-disclaimer");
     
+    friendDiv.addEventListener("click", toggleFriends);
     let friendCount = await populateFriends();
     if(friendCount > 0) {
-        friendDiv.setAttribute("data-bs-target", "#friend-dropdown");
-        friendDiv.addEventListener("click", toggleFriends);
+        toggleDisclaimer(friendDisclaimer, friendBreak, false);
     }
 }
 function toggleFriends() {
@@ -219,11 +226,13 @@ function setFriendDropdown(isVisibile) {
 
     if(isVisibile) {
         friendDiv.classList.add("flat-bottom");
+        friendDropdown.classList.add("flat-top");
         friendCaret.src = expandedCaret;
         friendCaret.setAttribute("expanded", "");
     }
     else {
         friendDiv.classList.remove("flat-bottom");
+        friendDropdown.classList.remove("flat-top");
         friendCaret.src = collapsedCaret;
         friendCaret.removeAttribute("expanded");
     }
@@ -262,10 +271,7 @@ function removeFriend(wrapper, uid) {
     let friendCount = decrementFriendAmount();
     console.log(friendCount);
     if(friendCount <= 0) {
-        setFriendDropdown(false);
-        friendDiv.removeEventListener("click", toggleFriends);
-        friendDiv.setAttribute("data-bs-target", "");
-        friendDropdown.remove();
+        toggleDisclaimer(friendDisclaimer, friendBreak, true);
     }
 
     const thisUID = getCookie("uid");
@@ -293,10 +299,20 @@ function showToast(message) {
 
 function setVisible(asset, isVisible) {
     if(isVisible) {
-        asset.classList.remove("hidden");
+        asset.classList.remove("visually-hidden");
     }
     else {
-        asset.classList.add("hidden");
+        asset.classList.add("visually-hidden");
+    }
+}
+function toggleDisclaimer(disclaimer, breakpoint, isVisible) {
+    if(isVisible) {
+        disclaimer.classList.remove("visually-hidden");
+        breakpoint.classList.add("visually-hidden");
+    }
+    else {
+        disclaimer.classList.add("visually-hidden");
+        breakpoint.classList.remove("visually-hidden");
     }
 }
 

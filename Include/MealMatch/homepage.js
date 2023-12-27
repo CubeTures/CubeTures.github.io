@@ -115,18 +115,18 @@ function toggleAssetVisibilty(isVisible) {
 }
 function setVisible(asset, isVisible) {
     if(isVisible) {
-        asset.classList.remove("hidden");
+        asset.classList.remove("visually-hidden");
     }
     else {
-        asset.classList.add("hidden");
+        asset.classList.add("visually-hidden");
     }
 }
 function toggleSpinner(isVisible) {
     if(isVisible) {
-        spinner.classList.remove("hidden");
+        spinner.classList.remove("visually-hidden");
     }
     else {
-        spinner.classList.add("hidden");
+        spinner.classList.add("visually-hidden");
     }
 }   
 
