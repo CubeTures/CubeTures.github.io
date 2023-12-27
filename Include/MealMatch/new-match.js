@@ -1,5 +1,7 @@
 import { getUserData } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
+import { createNewMatch } from "./google-nearby.js";
+
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
 let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
@@ -130,24 +132,12 @@ async function tryMatch() {
     const inputData = await tryGetInputs();
     if(inputData) {
         console.log("No errors, creating search.");
-
-        const loc = inputData["locationData"];
-        const formattedAddress = `${loc["address"]}, ${loc["city"]}, ${loc["state"]} ${loc["zip"]}`;
-        const latlng = loc["latlng"].split(",").join(", ");
-        //console.log(inputData);
-        alert(`${formattedAddress} @ ${latlng}`);
-
-        /*  
-            get all of the data into an object
-            send object to different class
-            class calls api and gets data
-            if api call returned results
-                class stores data in database
-                also updates users in the list with match request
-            else
-                prompt the user to change their location or radius of search  
-        */ 
+        createNewMatch(inputData, matchError);
     }
+}
+function matchError() {
+    console.warn("Match Error");
+    //there was some error with creating the match.
 }
 
 async function tryGetInputs() {
@@ -187,7 +177,7 @@ async function getLocationData(address, city, state, zip, latlng) {
         return await validateAddress(address, city, state, zip);
     }
 
-    console.warn("Inputs were not edited. Using verified information.");
+    console.log("Inputs were not edited. Using verified information.");
     return {
         "address": address,
         "city": city,

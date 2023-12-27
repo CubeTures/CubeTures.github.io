@@ -7,25 +7,48 @@ const header = {
     'X-Goog-Api-Key': API_KEY,
     'X-Goog-FieldMask': "places.id,places.displayName,places.photos,places.rating,places.priceLevel"
 };
-const body = {
-    includedTypes: ["restaurant"],
-    maxResultCount: 10,
-    locationRestriction: {
-        circle: {
-            center: {
-                latitude: 37.7937,
-                longitude: -122.3965
-            },
-            radius: 500.0
+
+async function createNewMatch(inputData, matchErrorCallback) { //locaitonData, people
+    /*  
+        get all of the data into an object
+        send object to different class
+        class calls api and gets data
+        if api call returned results
+            class stores data in database
+            also updates users in the list with match request
+        else
+            prompt the user to change their location or radius of search  
+    */ 
+
+    //find way to get to the promised 60 results max
+
+    //const data = await postRequest(NEARBY_SEARCH_URL, header, getBody(loc["latlng"]));
+    //console.log(data);
+
+    const loc = inputData["locationData"];
+    const formattedAddress = `${loc["address"]}, ${loc["city"]}, ${loc["state"]} ${loc["zip"]}`;
+    const latlng = loc["latlng"].split(",").join(", ");
+    alert(`${formattedAddress} @ ${latlng}`);
+}
+function getBody(latlng) {
+    const [ lat, lng ] = latlng.split(",");
+    return {
+        includedTypes: ["restaurant"],
+        maxResultCount: 20,
+        locationRestriction: {
+            circle: {
+                center: {
+                    latitude: lat,
+                    longitude: lng
+                },
+                radius: 50000.0
+            }
         }
     }
-};
-
-async function createRequest() {
-    const data = await postRequest(NEARBY_SEARCH_URL, header, body);
-    console.log(data);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     //createRequest();
 });
+
+export { createNewMatch };
