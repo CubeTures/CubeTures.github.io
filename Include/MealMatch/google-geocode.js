@@ -49,7 +49,6 @@ async function reverseGeocode(latlng) {
         "key": API_KEY 
     };
     const data = await httpRequest(REVERSE_GEOCODE_URL, parameters);
-    console.log(data);
 
     if(data && data["status"] == "OK") {
         return getAddressData(data["results"][0]);
@@ -75,7 +74,6 @@ async function validateAddress(address, city, state, zip) {
         const body = getBody(address, city, state, zip);
 
         const data = await postRequest(url, header, body);
-        console.log(data);
 
         const addressComplete = getNested(data, "result", "verdict", "addressComplete");
         const unconfirmed = getNested(data, "result", "verdict", "hasUnconfirmedComponents");

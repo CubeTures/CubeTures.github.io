@@ -1,83 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-       <title>MealMatch</title>
+       <title>Owen Shadburne</title>
        <meta name="viewport" content="width=device-width, initial-scale=1">
-       <link rel="icon" type="image/x-icon" href="/Images/MealMatch/Logo (Simple).svg">
-       <!-- Font: Baloo Bhaina 2 -->
+       <link rel="icon" type="image/x-icon" href="/Images/Logo/Backed.svg">
     </head>
-
-    <body class="dark-color text-light">
-        <!-- Toolbar -->
-        <nav class="navbar top-div fixed-bottom top-border visually-hidden" id="toolbar">
-            <div type="button" class="container-fluid justify-content-evenly">
-                <a type="button" class="btn image-button disabled no-border" href="/index.html">
-                    <img class="toolbar-image" src="/Images/MealMatch/Home.svg">
-                </a>
-                <a type="button" class="btn image-button" href="/Pages/MealMatch/newmatch.html">
-                    <img class="toolbar-image" src="/Images/MealMatch/Add_square.svg">
-                </a>
-                <a type="button" class="btn image-button" href="/Pages/MealMatch/friends.html">
-                    <img class="toolbar-image" src="/Images/MealMatch/Friends.svg">
-                </a>
-            </div>
-        </nav>
-
-        <!-- Header -->
-        <div class="top-div sticky-top bottom-border">
+    <body class="bg-dark text-light">
+        <div class="rounded-4 text-center title">
             <br/>
-            <br/>
-            <h1 class="xxl-font">MealMatch</h1>
-            <br/>
+            <h1 class="no-margin">Owen Shadburne</h1>
             <br/>
         </div>
+        <p class="text-center padded">
+            Welcome to <u>cubetures.github.io</u>!
+        </p>
 
-        <!-- Spinner -->
-        <div class="visually-hidden" id="spinner">
-            <br/>
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
+        <!-- Projects -->
+        <div class="d-flex flex-wrap padded">
+            <a class="btn justify-content-center mealmatch-btn text-light project-btn" href="/Pages/MealMatch/home.html">
+                <h5 class="h5-margin">MealMatch</h5>
+            </a>
+            <a class="btn btn-outline-light justify-content-center project-btn" href="https://github.com/OwenShadburne/">
+                <h5 class="h5-margin">My Github</h5>
+            </a>
+            <a class="btn btn-outline-secondary justify-content-center project-btn" href="https://github.com/CubeTures/CubeTures.github.io">
+                <h5 class="h5-margin">This Repository</h5>
+            </a>
         </div>
-
-        <!-- Matches -->
-        <div class="match-container" id="match-container">
-            <template id="match-template">
-                <div id="match-element">
-                    <br/>
-                    <div class="primary-color rounded padded">
-                        <h1 id="creator">Creator</h1>
-                        <h5 class="text-opacity-75">Date</h5>
-                        <p> Involved people </p>
-                    </div>
-                </div>
-            </template>
-        </div>
-        
-        <!-- Disclaimers -->
-        <div class="text-center padded no-border">
-            <p class="disclaimer-text visually-hidden" id="no-matches-disclaimer">You currently have no active matches.</p>
-            <p class="disclaimer-text" id="login_disclaimer">Logging in will allow others to see your google account username.</p>
-        </div>
-
-        <!-- Buttons -->
-        <div class="text-center justify-content-evenly">
-            <!--button type="button" class="btn btn-outline-light visually-hidden" id="refresh">Refresh</button-->
-            <button type="button" class="btn btn-outline-light white-border visually-hidden" id="logout">Log Out</button>
-            <button type="button" class="btn btn-outline-light white-border" id="login">Login</button>
-        </div>
-
-        
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <link href="">
-        
-        <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
-        <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
-        <script type="module" src="/Include/MealMatch/firebase-login.js"></script>
-        <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
+
+        <link href="/Include/Main Page/styles.css" rel="stylesheet">
     </body>
 </html>

@@ -132,6 +132,9 @@ body {
   width: auto;
   margin-bottom: .5rem;
 }
+.even-button-padding {
+  padding: 6px;
+}
 
 .match-element {}
 .people-elemnt {}
