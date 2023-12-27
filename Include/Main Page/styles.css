@@ -1,20 +1,29 @@
 .title {
     margin: 1rem;
-    border: 3px solid white;
+    border: 3px solid #f8f9fa;
+    transition-duration: .15s;
+    transition-timing-function: ease-in-out;
+}
+.title:hover {
+    color: #212529 !important;
+    background-color: #f8f9fa !important;
 }
 .white-border {
-    border: 1px solid white;
+    border: 1px solid #f8f9fa;
 }
+
 .project-btn {
     margin: 4px;
 }
-.mealmatch-btn {
-    border: 1px solid white !important;
-    background-color: #FB4670;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-bottom: 6px;
-    padding-top: 6px;
+.mealmatch-btn:hover {
+    border: 1px solid #f9becb !important;
+    background-color: #FB4670 !important;
+    color: #f8f9fa !important;
+}
+.github-btn:hover {
+    border: 1px solid #9461fb !important;
+    color: #9461fb !important;
+    background-color: #212529 !important;
 }
 
 .no-margin {

@@ -9,7 +9,7 @@
 
     <body class="dark-color text-light">
         <!-- Toolbar -->
-        <nav class="navbar top-div fixed-bottom top-border visually-hidden" id="toolbar">
+        <nav class="navbar top-div fixed-bottom top-border" id="toolbar">
             <div type="button" class="container-fluid justify-content-evenly">
                 <a type="button" class="btn image-button disabled no-border" href="/Pages/MealMatch/home.html">
                     <img class="toolbar-image" src="/Images/MealMatch/Home.svg">
@@ -26,47 +26,8 @@
         <!-- Header -->
         <div class="top-div sticky-top bottom-border">
             <br/>
+            <h1 class="xl-font">Match</h1>
             <br/>
-            <h1 class="xxl-font">MealMatch</h1>
-            <br/>
-            <br/>
-        </div>
-
-        <!-- Spinner -->
-        <div class="visually-hidden" id="spinner">
-            <br/>
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Matches -->
-        <div class="match-container" id="match-container">
-            <template id="match-template">
-                <div id="match-element">
-                    <br/>
-                    <div class="primary-color rounded padded">
-                        <h1 id="creator">Creator</h1>
-                        <h5 class="text-opacity-75">Date</h5>
-                        <p> Involved people </p>
-                    </div>
-                </div>
-            </template>
-        </div>
-        
-        <!-- Disclaimers -->
-        <div class="text-center padded no-border">
-            <p class="disclaimer-text visually-hidden" id="no-matches-disclaimer">You currently have no active matches.</p>
-            <p class="disclaimer-text" id="login_disclaimer">Logging in will allow others to see your google account username.</p>
-        </div>
-
-        <!-- Buttons -->
-        <div class="text-center justify-content-evenly">
-            <!--button type="button" class="btn btn-outline-light visually-hidden" id="refresh">Refresh</button-->
-            <button type="button" class="btn btn-outline-light white-border visually-hidden" id="logout">Log Out</button>
-            <button type="button" class="btn btn-outline-light white-border" id="login">Login</button>
         </div>
 
         
@@ -76,7 +37,6 @@
         
         <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
         <script type="module" src="/Include/MealMatch/initialize-firebase.js"></script>
-        <script type="module" src="/Include/MealMatch/firebase-login.js"></script>
         <script type="module" src="/Include/MealMatch/firebase-database.js"></script>
     </body>
 </html>
