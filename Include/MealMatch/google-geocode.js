@@ -1,18 +1,8 @@
 import { httpRequest, postRequest } from "../api-commands.js";
-import { API_KEY } from "./initialize-firebase.js";
+import { REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
+    ADDRESS_VALIDATION_URL, validationHeader, getValidationBody } from "./google-api.js";
 
 const importantComponents = ["street_number", "route", "locality", "administrative_area_level_1", "postal_code"];
-const REVERSE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
-const ADDRESS_VALIDATION_URL = "https://addressvalidation.googleapis.com/v1:validateAddress"
-
-const header = {
-    "Content-Type": "application/json"
-};
-const geolocationOptions = {
-    maximumAge: 10000,
-    timeout: 5000,
-    enableHighAccuracy: true
-};
 
 async function getCurrentLocation(errorCallback) {
     try {
@@ -43,12 +33,7 @@ function getGeolocation(errorCallback) {
 }
 
 async function reverseGeocode(latlng) {
-    const parameters = { 
-        "latlng": latlng, 
-        "location_type": "ROOFTOP",
-        "key": API_KEY 
-    };
-    const data = await httpRequest(REVERSE_GEOCODE_URL, parameters);
+    const data = await httpRequest(REVERSE_GEOCODE_URL, getGeocodeParameters(latlng));
 
     if(data && data["status"] == "OK") {
         return getAddressData(data["results"][0]);
@@ -70,10 +55,8 @@ function getAddressData(data) {
 
 async function validateAddress(address, city, state, zip) {
     try {
-        const url = `${ADDRESS_VALIDATION_URL}?key=${API_KEY}`;
-        const body = getBody(address, city, state, zip);
-
-        const data = await postRequest(url, header, body);
+        const body = getValidationBody(address, city, state, zip);
+        const data = await postRequest(ADDRESS_VALIDATION_URL, validationHeader, body);
 
         const addressComplete = getNested(data, "result", "verdict", "addressComplete");
         const unconfirmed = getNested(data, "result", "verdict", "hasUnconfirmedComponents");
@@ -97,18 +80,6 @@ async function validateAddress(address, city, state, zip) {
     }
 
     return null;
-}
-function getBody(address, city, state, zip) {
-    return {
-        "address": {
-            "regionCode": "US",
-            "locality": city,
-            "administrativeArea": state,
-            "postalCode": zip,
-            "addressLines": [address]
-        },
-        "enableUspsCass": true
-    };
 }
 
 function isInferred(data) {

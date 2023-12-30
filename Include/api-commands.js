@@ -16,7 +16,7 @@ function getParameterString(parameters) {
 async function postRequest(url, header, body) {
     const response = await fetch(url, {
         method: "POST",
-        header: header,
+        headers: header,
         body: JSON.stringify(body)
     });
 

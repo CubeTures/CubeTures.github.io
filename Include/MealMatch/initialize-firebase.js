@@ -1,4 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+
+//#region api key
 const encryptedCode = "AAAAAAAAAFELJStmLAZPCS43a3MmHydCCAJ0GAFEFSApAycWIQNb";
 const encryptedKey = 'QUl6YVN5QmVndFNWSm42bFd5XzBxdWsyb0VMeXkwd29TUm1DcU44';
 
@@ -14,6 +16,7 @@ function decrypt(code, key) {
 }
 
 const API_KEY = decrypt(encryptedCode, encryptedKey);
+//#endregion
 
 const firebaseConfig = {
   apiKey: `${API_KEY}`,
