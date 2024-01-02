@@ -7,10 +7,12 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
+let simpleSearchBtn, advancedSearchBtn, radiusRange, radiusValue;
 
 function onDocumentLoad() {
     setLocation();
     setPeople();
+    setAdvanced();
     setMatch();
 }
 
@@ -123,6 +125,17 @@ function addPerson(uid, displayName) {
 function peopleError() {
     console.warn("People Error");
     peopleErrorModal.show();
+}
+
+function setAdvanced() {
+    simpleSearchBtn = document.getElementById("simple-search");
+    advancedSearchBtn = document.getElementById("advanced-search");
+    radiusRange = document.getElementById("radius-range");
+    radiusValue = document.getElementById("radius-value");
+    radiusRange.oninput = setRadiusValue;
+}
+function setRadiusValue() {
+    radiusValue.value = radiusRange.value;
 }
 
 function setMatch() {

@@ -1,11 +1,10 @@
 import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-let auth;
+let auth = null;
 
 function checkAuth() {
-    if(!auth) {
+    if(auth === null) {
         auth = getAuth();
-        
     }    
 }
 
@@ -20,6 +19,10 @@ function getReference(uid, dataType) {
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
     return ref(db, path);
+}
+async function hasUser(otherUID=null) {
+    const data = await getUserData("readonly", otherUID);
+    return data && data.hasOwnProperty("display_name");
 }
 async function getUserData(dataType, otherUID=null) {
     let uid = getUID(otherUID);
@@ -53,7 +56,7 @@ function getCookie(cookieName) {
     for(let cookie of cookieList) {
         let spl = cookie.split("=");
         if(spl[0] == cookieName) {
-            if(spl.indexOf(";") >= 0) {
+            if(spl[1].indexOf(";") >= 0) {
                 return spl[1].substring(0, spl[1].indexOf(";"));
             }
             return spl[1];
@@ -74,7 +77,7 @@ function setCookie(cookieName, value, days) {
 }
 function removeCookie(cookieName) {
     if(hasCookie(cookieName)) {
-        document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+        document.cookie = `${cookieName}=;path=/;domain=${location.hostname};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
     }
 }
 
@@ -125,5 +128,5 @@ function addPersonalMatchRequest() {
 }
 testUserData();
 
-export { getUserData, updateUserData, removeUserData, getFriendName,
+export { hasUser, getUserData, updateUserData, removeUserData, getFriendName,
     hasCookie, getCookie, setCookie, removeCookie }

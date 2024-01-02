@@ -4,6 +4,7 @@
 }
 
 :root {
+  --primaryColor: #FB4670;
   --borderColor: #f9becb;
   --primary-transparent: rgba(252, 74, 116, .25);
 }
@@ -23,7 +24,7 @@
 }
 
 .primary-color {
-  background-color: #FB4670;
+  background-color: var(--primaryColor);
 }
 .primary-color-opacity {
   background-color: var(--primary-transparent);
@@ -77,6 +78,9 @@ body {
 }
 .white-border {
   border-color: #FAF9F6;
+}
+.no-margin {
+  margin: 0 !important;
 }
 
 .top-div {
@@ -207,4 +211,17 @@ body {
 }  
 .vertical-input-group .input-group:not(:first-child) * {
   border-top: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: var(--primaryColor); /* Change this to your desired color */
+  border: 1px solid var(--borderColor);
+}
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--primaryColor); /* Change this to your desired color */
+  border: 1px solid var(--borderColor);
+}
+input[type="range"]::-ms-thumb {
+  background-color: var(--primaryColor); /* Change this to your desired color */
+  border: 1px solid var(--borderColor);
 }

@@ -1,8 +1,7 @@
 TODO
-- Make Filters option for searching
-- So many issues with being logged in (fix with try except -> redirect user to homepage/login?)
 - Hide api key in secret github variables
-- Actually implement a genuine log out
+- Implement the different search methods
+- Add filters to searching
 
 
 Main Page

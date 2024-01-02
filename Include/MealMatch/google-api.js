@@ -112,6 +112,20 @@ function getReadableFilters() {
     return result;
 }
 //#endregion
+//#region login
+const REFRESH_TOKEN_URL = `https://securetoken.googleapis.com/v1/token?key=${API_KEY}`;
+
+const refreshHeader = {
+    "Content-Type": "application/json"
+}
+
+function getRefreshParameters(refreshToken) {
+    return {
+        "grant_type": "refresh_token",
+        "refresh_token": refreshToken
+    };
+}
+//#endregion
 //#region geocode
 const REVERSE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 
@@ -192,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 export { 
+    REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters,
     REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody,
     NEARBY_SEARCH_URL, readableFilters, getNearbyHeader, getNearbyBody 

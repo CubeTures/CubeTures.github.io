@@ -1,43 +1,60 @@
-import { getUserData, getFriendName, removeCookie } from "./firebase-database.js";
-let toolbar, login, logout, refresh, disclaimer;
+import { getUserData, getFriendName, getCookie, removeCookie } from "./firebase-database.js";
+import { login, logout, loginStatus } from "./firebase-login.js";
+
+let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 
 function onDocumentLoad() {
-    setVariables();
-    setOnClicks();
+    setLogging();
+    setMatches();
+    checkLoginStatus();
 }
-function setVariables() {
+
+function setLogging() {
     toolbar = document.getElementById("toolbar");
-    login = document.getElementById("login");
-    logout = document.getElementById("logout");
-    //refresh = document.getElementById("refresh");
+    loginBtn = document.getElementById("login");
+    logoutBtn = document.getElementById("logout");
     disclaimer = document.getElementById("login_disclaimer");
+
+    loginBtn.addEventListener("click", tryLogin);
+    logoutBtn.addEventListener("click", tryLogout);
+    //if(hasCookie("uid")) { login(); }
+}
+
+function tryLogin() {
+    login(onLogin, loginFailure);
+}
+function onLogin() {
+    console.log(`Log in success.`);
+    toggleAssetVisibilty(true);
+    populateHomepage();
+}
+function loginFailure(error) {
+    console.error(`Log in error: ${error}`);
+}
+
+function tryLogout() {
+    logout(onLogout, logoutFailure);
+}
+function onLogout() {
+    console.log("Log out success.");
+
+    toggleAssetVisibilty(false);
+    toggleSpinner(false);
+    depopulateHomepage();
+    removeAllCookies();
+
+    console.log(document.cookie);
+}
+function logoutFailure(error) {
+    console.error(`Log out error: ${error}`);
+}
+
+function setMatches() {
     matchContainer = document.getElementById("match-container");
     matchTemplate = document.getElementById("match-template");
     noMatchDisclaimer = document.getElementById("no-matches-disclaimer");
     spinner = document.getElementById("spinner");
-}
-function setOnClicks() {
-    //document.getElementById("refresh")
-        //.addEventListener("click", onRefresh);
-    document.getElementById("logout")
-        .addEventListener("click", onLogout);
-}
-
-function onLogin() {
-    toggleAssetVisibilty(true);
-    populateHomepage();
-}
-function onLogout() {
-    toggleAssetVisibilty(false);
-    depopulateHomepage();
-    removeCookie("uid");
-    removeCookie("displayName");
-    //firebase.auth().signOut();
-}
-function onRefresh() {
-    depopulateHomepage();
-    populateHomepage();
 }
 
 async function populateHomepage() {
@@ -47,7 +64,6 @@ async function populateHomepage() {
     let hasMatch = false;
     hasMatch = (await populatePersonal()) ? true : hasMatch;
     hasMatch = (await populateRequests()) ? true : hasMatch;
-    console.log(`Has Match? ${hasMatch}`);
 
     setVisible(noMatchDisclaimer, !hasMatch);
     toggleSpinner(false);
@@ -96,19 +112,34 @@ function depopulateHomepage() {
     }
 }
 
+function checkLoginStatus() {
+    setTimeout(waitForLoginStatus, 500);
+}
+function waitForLoginStatus() {
+    if(loginStatus === null) {
+        waitForLoginStatus();
+    }
+    else {
+        computeLoginStatus();
+    }
+}
+function computeLoginStatus() {
+    if(loginStatus) {
+        onLogin();
+    }
+}
+
 function toggleAssetVisibilty(isVisible) {  
     if(isVisible) {
         setVisible(toolbar, true);
-        //setVisible(refresh, true);
-        setVisible(logout, true);
-        setVisible(login, false);
+        setVisible(logoutBtn, true);
+        setVisible(loginBtn, false);
         setVisible(disclaimer, false);
     }
     else {
         setVisible(toolbar, false);
-        //setVisible(refresh, false);
-        setVisible(logout, false);
-        setVisible(login, true);
+        setVisible(logoutBtn, false);
+        setVisible(loginBtn, true);
         setVisible(disclaimer, true);
         setVisible(noMatchDisclaimer, false);
     }
@@ -130,5 +161,14 @@ function toggleSpinner(isVisible) {
     }
 }   
 
+function removeAllCookies() {
+    removeCookie("uid");
+    removeCookie("refreshToken");
+}
+
+function setOnClick(elementID, callback) {
+    document.getElementById(elementID)
+        .addEventListener("click", callback);
+}
+
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
-export { onLogin }
