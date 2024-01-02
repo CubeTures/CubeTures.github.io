@@ -145,11 +145,14 @@ async function tryMatch() {
     const inputData = await tryGetInputs();
     if(inputData) {
         console.log("No errors, creating search.");
-        createNewMatch(inputData, matchError);
+        const data = await createNewMatch(inputData, matchError);
+        console.log(data);
+        //updateUserData to update the match
     }
 }
-function matchError() {
+function matchError(error) {
     console.warn("Match Error");
+    console.error(error);
     //there was some error with creating the match.
 }
 
@@ -170,9 +173,16 @@ async function tryGetInputs() {
         return;
     } 
 
+    const [ searchMethod, radius ] = getAdvanced();
+    const [ width, height ] = getDeviceData();
+
     return {
         "locationData": locationData,
-        "people": people
+        "people": people,
+        "method": searchMethod,
+        "radius": radius,
+        "width": width,
+        "height": height
     };
 }
 async function tryGetLocation() {
@@ -217,6 +227,21 @@ function tryGetPeople() {
     }
 
     return people;
+}
+function getAdvanced() {
+    let searchMethod = "simple";
+    if(advancedSearchBtn.getAttribute("checked")) {
+        searchMethod = "advanced";
+    }
+
+    const radius = radiusValue.value;
+
+    return [ searchMethod, radius ];
+}
+function getDeviceData() {
+    let screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    let screenHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+    return [ screenWidth, screenHeight ];
 }
 
 function setInputs(address, city, state, zip, latlng) {

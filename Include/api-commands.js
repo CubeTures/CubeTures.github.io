@@ -1,15 +1,22 @@
-async function httpRequest(url, parameters) {
+async function httpRequest(url, parameters=null, alreadyJson=false) {
     const parameterString = getParameterString(parameters);
     const completeUrl = `${url}${parameterString}`;
     const response = await fetch(completeUrl);
+    if(alreadyJson) {
+        return response;
+    }
+
     return response.json();
 }
 function getParameterString(parameters) {
     let paramString = "";
-    for(const [key, value] of Object.entries(parameters)) {
-        const modifier = paramString.length > 0 ? "&" : "?";
-        paramString = `${paramString}${modifier}${key}=${value}`; 
+    if(parameters) {
+        for(const [key, value] of Object.entries(parameters)) {
+            const modifier = paramString.length > 0 ? "&" : "?";
+            paramString = `${paramString}${modifier}${key}=${value}`; 
+        }
     }
+        
     return paramString;
 }
 

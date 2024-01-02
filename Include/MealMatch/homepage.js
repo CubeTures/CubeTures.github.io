@@ -1,6 +1,5 @@
-import { getUserData, getFriendName, getCookie, removeCookie } from "./firebase-database.js";
+import { getUserData, getFriendName, removeCookie } from "./firebase-database.js";
 import { login, logout, loginStatus } from "./firebase-login.js";
-
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 
@@ -62,32 +61,34 @@ async function populateHomepage() {
     setVisible(noMatchDisclaimer, false);
 
     let hasMatch = false;
-    hasMatch = (await populatePersonal()) ? true : hasMatch;
-    hasMatch = (await populateRequests()) ? true : hasMatch;
+    hasMatch = (await populatePersonalMatch()) ? true : hasMatch;
+    hasMatch = (await populateMatchRequests()) ? true : hasMatch;
 
     setVisible(noMatchDisclaimer, !hasMatch);
     toggleSpinner(false);
 }
-async function populatePersonal() {
-    const _readonly = await getUserData("readonly");
-    const match = _readonly["match"];
+async function populatePersonalMatch() {
+    const match = await getUserData("public/match");
     if(match) {
-        addToHomepage(match, _readonly["display_name"]);
+        const displayName = await getUserData("readonly/displayName");
+        addToHomepage(match, displayName);
         return true;
     }
 
     return false;
 }
-async function populateRequests() {
+async function populateMatchRequests() {
     const requests = await getUserData("writeonly/match_requests");
     if(requests) {
         for(const uid in requests) {
-            const match = await getUserData("readonly/match", uid);
+            const match = await getUserData("public/match", uid);
             const friendName = await getFriendName(uid);
             addToHomepage(match, friendName);
         }
+        
         return true;
     }
+
     return false;
 }
 function addToHomepage(match, creator) {

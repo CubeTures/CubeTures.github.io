@@ -43,7 +43,12 @@ function removeUserData(dataType, otherUID=null) {
 
 async function getFriendName(code) {
     const userData = await getUserData("writeonly/friends");
-    return userData[code];
+    const name = userData[code];
+    if(name) {
+        return name;
+    }
+    
+    return code;
 }
 
 function hasCookie(cookieName) {

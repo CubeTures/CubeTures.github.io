@@ -19,18 +19,26 @@
             },
             "public": {
                 "match": {
-                    "center": "reverse_geocoded_address",
-                    "latlng": [30.619107746247806, -96.33609672016316],
-                    "radius": 25,
-                    "timestamp": "some_time",
+                    "address": "physical_address",
+                    "date": "date",
+                    "time": "time",
                     "people": {"userID1": "cube", "userID2": "lowa"},
                     "locations": {
-                        "place_id": {
-                            "name": "restaurant_name",
-                            "address": "address and number",
-                            "website": "url",
-                            "rating": 4.7,
-                            "photos": {"photoID": "photoURL"},
+                        "id": {
+                            "name": "displayName",
+                            "category": "primaryTypeDisplayName/text",
+                            "distance": "location/latitude",
+                            "price": "priceLevel",
+                            "photos": {"photos/array/name": "https://places.googleapis.com/v1/NAME/media?key=API_KEY&maxHeightPx=NUM&maxWidthPx=NUM"},
+
+                            "rating": "rating",
+                            "website": "websiteUri",
+                            "phoneNumber": "nationalPhoneNumber",
+                            "address": "formattedAddress",
+                            "maps": "googleMapsUri",
+                            "status": "businessStatus",
+                            "hours": "currentOpeningHours/weekdayDescriptions/array",
+
                             "responses" : { "userID1": "Y", "userID2": "N" }
                         }
                     }

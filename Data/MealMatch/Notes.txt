@@ -16,7 +16,6 @@ Extra Info
 - Website
 - Phone number
 - Address (link to google maps)
-- Menu Link (if possible)
 - Open hours (all days of week)
 
 

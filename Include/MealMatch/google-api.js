@@ -93,7 +93,7 @@ function asArray(obj) {
 function getAllFilters() {
     let result = [];
     for(const filterCategory in filters) {
-        for(const filter in filterCategory) {
+        for(const filter in filters[filterCategory]) {
             result.push(filter);
         }
     }
@@ -198,6 +198,15 @@ function getNearbyBody(latlng, types=allFilters) {
     }
 }
 //#endregion
+//#region photos
+function getPhotoUrl(name, maxWidth, maxHeight) {
+    if(maxHeight) {
+        return `https://places.googleapis.com/v1/${name}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${API_KEY}`;
+    }
+
+    return `https://places.googleapis.com/v1/${name}/media?maxWidthPx=${maxWidth}&key=${API_KEY}`;
+}
+//#endregion
 
 document.addEventListener("DOMContentLoaded", () => {
     // const split = basicMask.split(",");
@@ -209,5 +218,6 @@ export {
     REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters,
     REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody,
-    NEARBY_SEARCH_URL, readableFilters, getNearbyHeader, getNearbyBody 
+    NEARBY_SEARCH_URL, readableFilters, getNearbyHeader, getNearbyBody,
+    getPhotoUrl
 };

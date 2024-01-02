@@ -1,41 +1,108 @@
-import { postRequest } from "../api-commands.js";
-import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody } from "./google-api.js";
-const EARTH_RADIUS = 3958.8;
-
-function onContentLoad() {
-    //createNewMatch();
-}
-
-
-/*  
-    get all of the data into an object
-    send object to different class
-    class calls api and gets data
-    if api call returned results
-        class stores data in database
-        also updates users in the list with match request
-    else
-        prompt the user to change their location or radius of search  
-*/
+import { httpRequest, postRequest } from "../api-commands.js";
+import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
+    getPhotoUrl } from "./google-api.js";
+const EARTH_RADIUS = 3958.8, getPhotos = false;
+//TODO: find out when if better parameters for maxWidthPx and maxHeightPx
 
 async function createNewMatch(inputData, matchErrorCallback) {
-    //const data = await postRequest(NEARBY_SEARCH_URL, header, getBody(loc["latlng"]));
+    console.log(inputData);
 
-    const latlng = "29.6993022,-95.8161011";
-    const body = getNearbyBody(latlng);
-    const data = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
-    console.log(data);
-}
-function alertInputData(inputData) {
-    const loc = inputData["locationData"];
-    const formattedAddress = `${loc["address"]}, ${loc["city"]}, ${loc["state"]} ${loc["zip"]}`;
-    const latlng = loc["latlng"].split(",").join(", ");
-    alert(`${formattedAddress} @ ${latlng}`);
+    try {
+        const body = getNearbyBody(inputData["locationData"]["latlng"]);
+        const locations = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
+        console.log(locations);
+        return await getMatchData(inputData, locations);
+    }  
+    catch(error) {
+        matchErrorCallback(error);
+    }    
+
+    return null;
 }
 
-function latlngDistance(fromLatLng, toLatLng) {
-    const [ flat, flng ] = latlngFloat(fromLatLng);
-    const [ tlat, tlng ] = latlngFloat(toLatLng);
+async function getMatchData(inputData, locations) {
+    let result = getBasicMatchData(inputData);
+    result["locations"] = await getLocationData(inputData, locations);
+    return result;
+}
+function getBasicMatchData(inputData) {
+    let result = {};
+    const location = inputData["locationData"];
+    const date = new Date();
+
+    result["address"] = `${location["address"]}, ${location["city"]}, ${location["state"]} ${location["zip"]}`;
+    result["date"] = date.toLocaleDateString();
+    result["time"] = date.toLocaleTimeString();
+    result["people"] = inputData["people"];
+
+    return result;
+}
+async function getLocationData(inputData, locations) {
+    let result = {};
+    const latlng = inputData["locationData"]["latlng"];
+    const people = inputData["people"];
+
+    for(const location of locations["places"]) {
+        let loc = getBasicLocationData(location);
+        loc["distance"] = getDistanceData(location, latlng);
+        loc["hours"] = getHourData(location);
+        loc["responses"] = getResponseData(people);
+        loc["photos"] = await getPhotoData(inputData, location);
+        result[location["id"]] = loc;
+    }
+
+    return result;
+}
+function getBasicLocationData(location) {
+    return {
+        "name": location["displayName"]["text"],
+        "category": location["primaryTypeDisplayName"]["text"],
+        "price": location["priceLevel"],
+
+        "rating": location["rating"],
+        "website": location["websiteUri"],
+        "phone": location["nationalPhoneNumber"],
+        "address": location["formattedAddress"],
+        "maps": location["googleMapsUri"],
+        "status": location["businessStatus"]
+    };
+}
+function getDistanceData(location, fromlatlng) {
+    const tolatlng = `${location["location"]["latitude"]},${location["location"]['longitude']}`;
+    return latlngDistance(fromlatlng, tolatlng);
+}
+async function getPhotoData(inputData, location) {
+    let photos = {};
+    let count = 0;
+
+    if(getPhotos) {
+        const { width, height } = inputData;
+        for(const photo of location["photos"]) {
+            if(++count > 5) { break; }
+            const name = photo["name"];
+            const response = await httpRequest(getPhotoUrl(name, width, height), null, true);
+            photos[response["url"]] = true;
+        }
+    }    
+
+    return photos;
+}
+function getHourData(location) {
+    const hours = location["currentOpeningHours"]["weekdayDescriptions"];
+    return hours.join(",");
+}
+function getResponseData(people) {
+    let result = {};
+    for(const id in people) {
+        result[id] = "U";
+    }
+
+    return result;
+}
+
+function latlngDistance(fromlatlng, tolatlng) {
+    const [ flat, flng ] = latlngFloat(fromlatlng);
+    const [ tlat, tlng ] = latlngFloat(tolatlng);
 
     const radFromLat = toRadians(flat);
     const radFromLng = toRadians(flng);
@@ -64,5 +131,4 @@ function toRadians(angleDegrees) {
 
 
 document.addEventListener("DOMContentLoaded", onContentLoad);
-
 export { createNewMatch };
