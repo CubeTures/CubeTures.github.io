@@ -1,4 +1,4 @@
-import { httpRequest, postRequest } from "../api-commands.js";
+import { httpRequest, postRequest, getRequest } from "../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
 const EARTH_RADIUS = 3958.8, getPhotos = false;
@@ -43,12 +43,13 @@ async function getLocationData(inputData, locations) {
     const people = inputData["people"];
 
     for(const location of locations["places"]) {
+        const id = location["id"];
         let loc = getBasicLocationData(location);
         loc["distance"] = getDistanceData(location, latlng);
         loc["hours"] = getHourData(location);
         loc["responses"] = getResponseData(people);
-        loc["photos"] = await getPhotoData(inputData, location);
-        result[location["id"]] = loc;
+        loc["photos"] = await getPhotoData(inputData, location, id);
+        result[id] = loc;
     }
 
     return result;
@@ -71,7 +72,7 @@ function getDistanceData(location, fromlatlng) {
     const tolatlng = `${location["location"]["latitude"]},${location["location"]['longitude']}`;
     return latlngDistance(fromlatlng, tolatlng);
 }
-async function getPhotoData(inputData, location) {
+async function getPhotoData(inputData, location, id) {
     let photos = {};
     let count = 0;
 
@@ -81,7 +82,11 @@ async function getPhotoData(inputData, location) {
             if(++count > 5) { break; }
             const name = photo["name"];
             const response = await httpRequest(getPhotoUrl(name, width, height), null, true);
-            photos[response["url"]] = true;
+            const data = await httpRequest(url);
+            console.log(data);
+            break;
+
+            //photos[response["url"]] = true;
         }
     }    
 
@@ -130,5 +135,4 @@ function toRadians(angleDegrees) {
 }
 
 
-document.addEventListener("DOMContentLoaded", onContentLoad);
 export { createNewMatch };

@@ -29,5 +29,17 @@ async function postRequest(url, header, body) {
 
     return response.json();
 }
+async function getRequest(url, header) {
+    const corsUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+    const response = await fetch(corsUrl, {
+        method: "GET",
+        headers: header
+    });
 
-export { httpRequest, postRequest };
+    if(typeof(response) == Object) {
+        return response;
+    }
+    return response.json();
+}
+
+export { httpRequest, postRequest, getRequest };

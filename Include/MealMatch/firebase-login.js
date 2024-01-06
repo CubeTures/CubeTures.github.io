@@ -17,6 +17,8 @@ async function checkRelogin() {
         }
         else {
             console.log("User still logged in.");
+            setCookie("uid", user.uid);
+            setCookie("refreshToken", user.refreshToken);
             loginStatus = true;
         }
     });
