@@ -177,12 +177,10 @@ function getNearbyHeader(useAllMasks=true) {
     };
 }
 
-//simple: gets popular in 7.5 mile radius
-function getNearbyBody(latlng, types=allFilters) {
+function getNearbyBody(latlng, rad, types=allFilters) {
     const [ lat, lng ] = latlng.split(",");
 
     return {
-        includedPrimaryTypes: types,
         includedTypes: ["restaurant"],
         maxResultCount: 20,
         rankPreference: "POPULARITY",
@@ -192,7 +190,7 @@ function getNearbyBody(latlng, types=allFilters) {
                     latitude: lat,
                     longitude: lng
                 },
-                radius: 12000
+                radius: rad
             }
         }
     }

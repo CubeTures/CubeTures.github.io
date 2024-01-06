@@ -7,7 +7,7 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
-let simpleSearchBtn, advancedSearchBtn, radiusRange, radiusValue;
+let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
 
 function onDocumentLoad() {
     setLocation();
@@ -95,17 +95,18 @@ function setPeople() {
     populatePeople();
 }
 async function populatePeople() {
+    peopleDisclaimer.classList.add("visually-hidden");
+    peopleSpinner.classList.remove("visually-hidden");
     const friends = await getUserData("writeonly/friends");
+    peopleSpinner.classList.add("visually-hidden");
 
     if(friends) {
-        peopleDisclaimer.classList.add("visually-hidden");
-        peopleSpinner.classList.remove("visually-hidden");
-
         for(const [uid, displayName] of Object.entries(friends)) {
             addPerson(uid, displayName);
         }
-
-        peopleSpinner.classList.add("visually-hidden");
+    }
+    else {
+        peopleDisclaimer.classList.remove("visually-hidden");
     }
 }
 function addPerson(uid, displayName) {
@@ -129,7 +130,7 @@ function peopleError() {
 
 function setAdvanced() {
     simpleSearchBtn = document.getElementById("simple-search");
-    advancedSearchBtn = document.getElementById("advanced-search");
+    complexSearchBtn = document.getElementById("complex-search");
     radiusRange = document.getElementById("radius-range");
     radiusValue = document.getElementById("radius-value");
     radiusRange.oninput = setRadiusValue;
@@ -230,11 +231,11 @@ function tryGetPeople() {
 }
 function getAdvanced() {
     let searchMethod = "simple";
-    if(advancedSearchBtn.getAttribute("checked")) {
-        searchMethod = "advanced";
+    if(complexSearchBtn.getAttribute("checked")) {
+        searchMethod = "complex";
     }
 
-    const radius = radiusValue.value;
+    const radius = parseFloat(radiusValue.value) * 1609;
 
     return [ searchMethod, radius ];
 }

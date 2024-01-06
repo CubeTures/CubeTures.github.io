@@ -1,12 +1,14 @@
-async function httpRequest(url, parameters=null, alreadyJson=false) {
+async function httpRequest(url, parameters=null) {
     const parameterString = getParameterString(parameters);
     const completeUrl = `${url}${parameterString}`;
     const response = await fetch(completeUrl);
-    if(alreadyJson) {
-        return response;
-    }
-
     return response.json();
+}
+async function httpRequestJson(url, parameters=null) {
+    const parameterString = getParameterString(parameters);
+    const completeUrl = `${url}${parameterString}`;
+    const response = await fetch(completeUrl);
+    return response;
 }
 function getParameterString(parameters) {
     let paramString = "";
@@ -29,17 +31,5 @@ async function postRequest(url, header, body) {
 
     return response.json();
 }
-async function getRequest(url, header) {
-    const corsUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-    const response = await fetch(corsUrl, {
-        method: "GET",
-        headers: header
-    });
 
-    if(typeof(response) == Object) {
-        return response;
-    }
-    return response.json();
-}
-
-export { httpRequest, postRequest, getRequest };
+export { httpRequest, httpRequestJson, postRequest };

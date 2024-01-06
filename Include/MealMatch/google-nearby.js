@@ -1,4 +1,4 @@
-import { httpRequest, postRequest, getRequest } from "../api-commands.js";
+import { httpRequest, httpRequestJson, postRequest } from "../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
 const EARTH_RADIUS = 3958.8, getPhotos = false;
@@ -8,7 +8,7 @@ async function createNewMatch(inputData, matchErrorCallback) {
     console.log(inputData);
 
     try {
-        const body = getNearbyBody(inputData["locationData"]["latlng"]);
+        const body = getNearbyBody(inputData["locationData"]["latlng"], inputData["radius"]);
         const locations = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
         console.log(locations);
         return await getMatchData(inputData, locations);
@@ -56,20 +56,23 @@ async function getLocationData(inputData, locations) {
 }
 function getBasicLocationData(location) {
     return {
-        "name": location["displayName"]["text"],
-        "category": location["primaryTypeDisplayName"]["text"],
-        "price": location["priceLevel"],
+        "name": getNested(location, "displayName", "text"),
+        "category": getNested(location, "primaryTypeDisplayName", "text"),
+        "price": getNested(location, "priceLevel"),
 
-        "rating": location["rating"],
-        "website": location["websiteUri"],
-        "phone": location["nationalPhoneNumber"],
-        "address": location["formattedAddress"],
-        "maps": location["googleMapsUri"],
-        "status": location["businessStatus"]
+        "rating": getNested(location, "rating"),
+        "website": getNested(location, "websiteUri"),
+        "phone": getNested(location, "nationalPhoneNumber"),
+        "address": getNested(location, "formattedAddress"),
+        "maps": getNested(location, "googleMapsUri"),
+        "status": getNested(location, "businessStatus")
     };
 }
 function getDistanceData(location, fromlatlng) {
-    const tolatlng = `${location["location"]["latitude"]},${location["location"]['longitude']}`;
+    const lat = getNested(location, "location", "latitude");
+    const lng = getNested(location, "location", "longitude");
+    if(lat === null || lng === null) { return "Unknown"; }
+    const tolatlng = `${lat},${lng}`;
     return latlngDistance(fromlatlng, tolatlng);
 }
 async function getPhotoData(inputData, location, id) {
@@ -78,22 +81,26 @@ async function getPhotoData(inputData, location, id) {
 
     if(getPhotos) {
         const { width, height } = inputData;
+        const phts = getNested(location, "photos");
+        if(phts === null) { return photos; }
+
+        //check for id if cached
         for(const photo of location["photos"]) {
             if(++count > 5) { break; }
             const name = photo["name"];
-            const response = await httpRequest(getPhotoUrl(name, width, height), null, true);
-            const data = await httpRequest(url);
-            console.log(data);
+            const response = await httpRequestJson(getPhotoUrl(name, width, height));
+            console.log(response);
+            photos[response["url"]] = true;
             break;
-
-            //photos[response["url"]] = true;
         }
+        //save results for id to cache
     }    
 
     return photos;
 }
 function getHourData(location) {
-    const hours = location["currentOpeningHours"]["weekdayDescriptions"];
+    const hours = getNested(location, "currentOpeningHours", "weekdayDescriptions");
+    if(hours === null) { hours = []; }
     return hours.join(",");
 }
 function getResponseData(people) {
@@ -132,6 +139,12 @@ function latlngFloat(latlng) {
 }
 function toRadians(angleDegrees) {
     return (angleDegrees * Math.PI) / 180.0;
+}
+
+function getNested(obj, level,  ...rest) {
+    if (obj === undefined) return null;
+    if (rest.length == 0 && obj.hasOwnProperty(level)) return obj[level];
+    return getNested(obj[level], ...rest);
 }
 
 
