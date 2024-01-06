@@ -33,6 +33,11 @@
     color: #9461fb !important;
     background-color: #212529 !important;
 }
+.repository-btn:hover {
+    border: 1px solid #f8f9fa !important;
+    color: #f8f9fa !important;
+    background-color: #212529 !important;
+}
 
 .no-margin {
     margin: 0;
