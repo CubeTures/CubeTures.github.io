@@ -29,7 +29,7 @@
                             "category": "primaryTypeDisplayName/text",
                             "distance": "location/latitude",
                             "price": "priceLevel",
-                            "photos": {"photos/array/name": "https://places.googleapis.com/v1/NAME/media?key=API_KEY&maxHeightPx=NUM&maxWidthPx=NUM"},
+                            "photos": {"https://places.googleapis.com/v1/NAME/media?key=API_KEY&maxHeightPx=NUM&maxWidthPx=NUM": true},
 
                             "rating": "rating",
                             "website": "websiteUri",

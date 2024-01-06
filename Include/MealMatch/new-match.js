@@ -1,4 +1,4 @@
-import { getUserData } from "./firebase-database.js"
+import { getUserData, updateUserData } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
 import { createNewMatch } from "./google-nearby.js";
 
@@ -148,6 +148,7 @@ async function tryMatch() {
         console.log("No errors, creating search.");
         const data = await createNewMatch(inputData, matchError);
         console.log(data);
+        updateUserData("public/match", data);
         //updateUserData to update the match
     }
 }

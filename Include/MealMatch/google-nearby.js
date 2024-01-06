@@ -100,7 +100,7 @@ async function getPhotoData(inputData, location, id) {
 }
 function getHourData(location) {
     const hours = getNested(location, "currentOpeningHours", "weekdayDescriptions");
-    if(hours === null) { hours = []; }
+    if(hours === null) { return ""; }
     return hours.join(",");
 }
 function getResponseData(people) {

@@ -181,6 +181,7 @@ function getNearbyBody(latlng, rad, types=allFilters) {
     const [ lat, lng ] = latlng.split(",");
 
     return {
+        includedPrimaryTypes: types,
         includedTypes: ["restaurant"],
         maxResultCount: 20,
         rankPreference: "POPULARITY",
