@@ -1,4 +1,4 @@
-import { getUserData, updateUserData } from "./firebase-database.js"
+import { getUserData, updateUserData, getCookie } from "./firebase-database.js"
 import { getCurrentLocation, validateAddress } from "./google-geocode.js";
 import { createNewMatch } from "./google-nearby.js";
 
@@ -7,7 +7,7 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
-let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
+let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue, matchErrorModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -140,6 +140,7 @@ function setRadiusValue() {
 }
 
 function setMatch() {
+    matchErrorModal = getModal("matchErrorModal");
     setOnClick("match", tryMatch);
 }
 async function tryMatch() {
@@ -148,14 +149,23 @@ async function tryMatch() {
         console.log("No errors, creating search.");
         const data = await createNewMatch(inputData, matchError);
         console.log(data);
-        updateUserData("public/match", data);
-        //updateUserData to update the match
+        updateMatchData(data);
+    }
+}
+function updateMatchData(data) {
+    updateUserData("public/match", data);
+
+    const uid = getCookie("uid");
+    for(const id in data["people"]) {
+        let request = {};
+        request[uid] = true;
+        updateUserData("writeonly/match_requests", request, id);
     }
 }
 function matchError(error) {
     console.warn("Match Error");
     console.error(error);
-    //there was some error with creating the match.
+    matchErrorModal.show();
 }
 
 async function tryGetInputs() {

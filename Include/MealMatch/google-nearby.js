@@ -10,7 +10,6 @@ async function createNewMatch(inputData, matchErrorCallback) {
     try {
         const body = getNearbyBody(inputData["locationData"]["latlng"], inputData["radius"]);
         const locations = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
-        console.log(locations);
         return await getMatchData(inputData, locations);
     }  
     catch(error) {
