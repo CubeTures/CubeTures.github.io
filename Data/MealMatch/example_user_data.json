@@ -20,8 +20,8 @@
             "public": {
                 "match": {
                     "address": "physical_address",
-                    "date": "date",
-                    "time": "time",
+                    "date": "1/6/2024",
+                    "time": "6:33:33 PM",
                     "people": {"userID1": "cube", "userID2": "lowa"},
                     "locations": {
                         "id": {

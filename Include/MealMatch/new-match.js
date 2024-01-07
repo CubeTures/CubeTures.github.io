@@ -53,6 +53,7 @@ async function setCurrentLocation() {
     }
 }
 function locationError(errorCode=0) {
+    locationSpinner.classList.remove("visually-hidden");
     console.warn("Location Error");
     
     if(errorCode == 1) {
@@ -150,6 +151,10 @@ async function tryMatch() {
         const data = await createNewMatch(inputData, matchError);
         console.log(data);
         updateMatchData(data);
+        alert("Match Success");
+    }
+    else {
+        matchError();
     }
 }
 function updateMatchData(data) {

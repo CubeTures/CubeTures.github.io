@@ -1,39 +1,50 @@
+:root {
+    --mealmatch: #FB4670;
+    --github: #9461fb;
+    --itchio: #f18253;
+    --offwhite: #f8f9fa;
+    --background: #212529;
+}
+
 .title {
     margin: 1rem;
-    border: 3px solid #f8f9fa;
-    transition-duration: .15s;
-    transition-timing-function: ease-in-out;
+    color: var(--offwhite);
+    border: 3px solid var(--offwhite);
+    -webkit-transition: all .3s ease-in-out !important;
+    -moz-transition: all .3s ease-in-out !important;
+    transition: all .3s ease-in-out !important;
+    text-overflow: ellipsis;
 }
 .title:hover {
-    color: #212529 !important;
-    background-color: #f8f9fa !important;
+    color: var(--background);
+    background-color: var(--offwhite);
 }
 .white-border {
-    border: 1px solid #f8f9fa;
+    border: 1px solid var(--offwhite);
 }
 
 .project-btn {
     margin: 4px;
 }
 .mealmatch-btn:hover {
-    border: 1px solid #FB4670 !important;
-    color: #FB4670 !important;
-    background-color: #212529 !important;
-}
-.itchio-btn:hover {
-    border: 1px solid #f18253 !important;
-    color: #f18253 !important;
-    background-color: #212529 !important;
+    border: 1px solid var(--mealmatch) !important;
+    color: var(--mealmatch) !important;
+    background-color: var(--background) !important;
 }
 .github-btn:hover {
-    border: 1px solid #9461fb !important;
-    color: #9461fb !important;
-    background-color: #212529 !important;
+    border: 1px solid var(--github) !important;
+    color: var(--github) !important;
+    background-color: var(--background) !important;
+}
+.itchio-btn:hover {
+    border: 1px solid var(--itchio) !important;
+    color: var(--itchio) !important;
+    background-color: var(--background) !important;
 }
 .repository-btn:hover {
-    border: 1px solid #f8f9fa !important;
-    color: #f8f9fa !important;
-    background-color: #212529 !important;
+    border: 1px solid var(--offwhite) !important;
+    color: var(--offwhite) !important;
+    background-color: var(--background) !important;
 }
 
 .no-margin {
@@ -42,6 +53,9 @@
 .h5-margin {
     margin-bottom: 2px;
 }
+.p-margin {
+    margin-bottom: 8px !important;
+}  
 
 .padded {
     padding-left: 1rem;
@@ -49,9 +63,4 @@
 }
 .small-padded {
     padding: .5rem;
-}
-
-.sized-image {
-    height: 2rem;
-    width: auto;
 }

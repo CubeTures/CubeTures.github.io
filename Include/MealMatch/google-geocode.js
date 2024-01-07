@@ -28,7 +28,9 @@ async function getCurrentLocation(errorCallback) {
 }
 function getGeolocation(errorCallback) {
     return new Promise(resolve => {
-        navigator.geolocation.getCurrentPosition(position => resolve(position), error => errorCallback(error.code), geolocationOptions);
+        navigator.geolocation.getCurrentPosition(position => 
+            resolve(position), error => 
+                errorCallback(error.code), geolocationOptions);
     });
 }
 

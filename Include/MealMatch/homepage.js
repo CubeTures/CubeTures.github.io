@@ -2,6 +2,7 @@ import { getUserData, getFriendName, removeCookie } from "./firebase-database.js
 import { login, logout, loginStatus } from "./firebase-login.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function onDocumentLoad() {
     setLogging();
@@ -70,7 +71,7 @@ async function populateHomepage() {
 async function populatePersonalMatch() {
     const match = await getUserData("public/match");
     if(match) {
-        const displayName = await getUserData("readonly/displayName");
+        const displayName = await getUserData("readonly/display_name");
         addToHomepage(match, displayName);
         return true;
     }
@@ -92,6 +93,9 @@ async function populateMatchRequests() {
     return false;
 }
 function addToHomepage(match, creator) {
+    console.log(creator);
+    console.log(match);
+    
     const clone = matchTemplate.content.cloneNode(true);
 
     const matchElement = clone.querySelector("#match-element");
@@ -100,10 +104,34 @@ function addToHomepage(match, creator) {
     const creatorText = clone.querySelector("#creator");
     creatorText.textContent = creator;
 
-    //edit more fields
-    //add click capability
+    const date = clone.querySelector("#date");
+    date.textContent = getDate(match);
+
+    const address = clone.querySelector("#address");
+    address.textContent = match["address"];
+
+    const people = clone.querySelector("#people");
+    people.textContent = getPeople(match);
 
     matchContainer.append(clone);
+}
+function getDate(match) {
+    const dateSplit = match["date"].split("/");
+    const timeSplit = match["time"].split(" ");
+    const timeNum = timeSplit[0].split(":");
+
+    const month = months[dateSplit[0] - 1];
+    const newDate = `${month} ${dateSplit[1]}`;
+    const newTime = `${timeNum[0]}:${timeNum[1]} ${timeSplit[1]}`;
+    return `${newDate} at ${newTime}`;
+}
+function getPeople(match) {
+    let people = "";
+    for(const [ id, person ] of Object.entries(match["people"])) {
+        people += `${(people == "" ? "" : ", ")}${person}`;
+    }
+    
+    return people;
 }
 
 function depopulateHomepage() {

@@ -38,6 +38,12 @@
 .colored-input:focus {
   box-shadow: none;
 }
+.opacity-75 {
+  opacity: .75;
+}
+.opacity-50 {
+  opacity: .5;
+}
 
 body {
   font-family: "Baloo";
@@ -56,6 +62,10 @@ body {
   margin-right: 1rem;
   padding: 1rem;
   border: 1px solid var(--borderColor);
+}
+.padded-top {
+  padding-top: 16px !important;
+  padding-bottom: 0px !important;
 }
 .padded-bottom {
   padding-bottom: 1rem !important;

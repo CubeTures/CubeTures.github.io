@@ -146,5 +146,4 @@ function getNested(obj, level,  ...rest) {
     return getNested(obj[level], ...rest);
 }
 
-
 export { createNewMatch };

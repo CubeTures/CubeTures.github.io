@@ -6,7 +6,7 @@
        <link rel="icon" type="image/x-icon" href="/Images/Logo/Backed.svg">
     </head>
     <body class="bg-dark text-light">
-        <div class="rounded-4 text-center title">
+        <div class="rounded-4 text-center title" id="title-div">
             <br/>
             <h1 class="no-margin">Owen Shadburne</h1>
             <br/>
@@ -15,20 +15,31 @@
             Welcome to <u>cubetures.github.io</u>!
         </p>
 
-        <!-- Projects -->
-        <div class="d-flex flex-wrap padded">
-            <a class="btn btn-outline-light justify-content-center mealmatch-btn text-light project-btn" href="/Pages/MealMatch/home.html">
-                <h5 class="h5-margin">MealMatch</h5>
-            </a>
-            <a class="btn btn-outline-light github-btn justify-content-center project-btn" href="https://github.com/OwenShadburne/">
-                <h5 class="h5-margin">My Github</h5>
-            </a>
-            <a class="btn btn-outline-light justify-content-center itchio-btn text-light project-btn" href="https://cubetures.itch.io">
-                <h5 class="h5-margin">My itch.io</h5>
-            </a>
-            <a class="btn btn-outline-secondary repository-btn justify-content-center project-btn" href="https://github.com/CubeTures/CubeTures.github.io">
-                <h5 class="h5-margin">This Repository</h5>
-            </a>
+        <!-- Web Projects -->
+        <div class="padded">
+            <p class="p-margin">Web Projects</p>
+            <div class="d-flex flex-wrap">
+                <a class="btn btn-outline-light justify-content-center mealmatch-btn text-light project-btn" href="/Pages/MealMatch/home.html" id="mealmatch-btn">
+                    <h5 class="h5-margin">MealMatch</h5>
+                </a>
+            </div>
+        </div>
+        <br/>
+
+        <!-- More Projects -->
+        <div class="padded">
+            <p class="p-margin">More Projects</p>
+            <div class="d-flex flex-wrap">
+                <a class="btn btn-outline-light github-btn justify-content-center project-btn" href="https://github.com/OwenShadburne/" id="github-btn">
+                    <h5 class="h5-margin">My Github</h5>
+                </a>
+                <a class="btn btn-outline-light justify-content-center itchio-btn text-light project-btn" href="https://cubetures.itch.io" id="itchio-btn">
+                    <h5 class="h5-margin">My itch.io</h5>
+                </a>
+                <a class="btn btn-outline-secondary repository-btn justify-content-center project-btn" href="https://github.com/CubeTures/CubeTures.github.io" id="repository-btn">
+                    <h5 class="h5-margin">This Repository</h5>
+                </a>
+            </div>
         </div>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
