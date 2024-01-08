@@ -1,6 +1,7 @@
 import { getUserData, updateUserData, getCookie } from "../Firebase/firebase-database.js"
 import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
 import { createNewMatch } from "../Google APIs/google-nearby.js";
+import { goToMatch } from "./match.js";
 
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
 let addressHidden, cityHidden, stateHidden, zipHidden;
@@ -149,9 +150,8 @@ async function tryMatch() {
     if(inputData) {
         console.log("No errors, creating search.");
         const data = await createNewMatch(inputData, matchError);
-        console.log(data);
         updateMatchData(data);
-        alert("Match Success");
+        goToMatch(getCookie("uid"));
     }
     else {
         matchError();

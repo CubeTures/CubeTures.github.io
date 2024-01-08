@@ -1,9 +1,9 @@
 import { getUserData, removeCookie, getDisplayName, getCookie } from "../Firebase/firebase-database.js";
 import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
+import { goToMatch } from "./match.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const matchPageUrl = "/Pages/MealMatch/match.html";
 
 function onDocumentLoad() {
     setLogging();
@@ -145,7 +145,7 @@ function addToHomepage(match, creator, id) {
     const people = clone.querySelector("#people");
     people.textContent = getPeople(match);
 
-    matchElement.addEventListener("click", () => matchClick(id));
+    matchElement.addEventListener("click", () => goToMatch(id));
 
     matchContainer.append(clone);
 }
@@ -165,11 +165,7 @@ function getPeople(match) {
         people += `${(people == "" ? "" : ", ")}${person}`;
     }
     
-    return people;
-}
-function matchClick(id) {
-    const origin = window.location.origin;
-    window.location.href = `${origin}${matchPageUrl}?id=${id}`;
+    return `With ${people}`;
 }
 
 function sortByDate(a, b) {

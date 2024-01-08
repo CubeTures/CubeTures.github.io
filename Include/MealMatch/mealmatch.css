@@ -38,11 +38,11 @@
 .colored-input:focus {
   box-shadow: none;
 }
-.opacity-75 {
-  opacity: .75;
+.opacity-1 {
+  opacity: .85;
 }
-.opacity-50 {
-  opacity: .5;
+.opacity-2 {
+  opacity: .7;
 }
 
 body {
