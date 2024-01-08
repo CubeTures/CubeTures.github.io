@@ -26,6 +26,7 @@ function tryLogin() {
 }
 function onLogin() {
     console.log(`Log in success.`);
+    console.trace();
     toggleAssetVisibilty(true);
     populateHomepage();
 }
