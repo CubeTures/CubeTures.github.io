@@ -18,6 +18,7 @@ function getReference(uid, dataType) {
     checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
+    console.log(`Attempted Path: '${path}'`);
     return ref(db, path);
 }
 async function hasUser(otherUID=null) {
