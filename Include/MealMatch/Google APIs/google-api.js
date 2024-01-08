@@ -207,12 +207,6 @@ function getPhotoUrl(name, maxWidth, maxHeight) {
 }
 //#endregion
 
-document.addEventListener("DOMContentLoaded", () => {
-    // const split = basicMask.split(",");
-    // const join = split.join("\": true,\n\"");
-    // console.log(`{\n"${join}": true\n}`);
-});
-
 export { 
     REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters,
     REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,

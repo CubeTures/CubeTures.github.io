@@ -12,6 +12,9 @@ function onContentLoad() {
 async function checkRelogin() {
     const auth = await getAuth();
     onAuthStateUnsubscribe = auth.onAuthStateChanged((user) => {
+        console.log(user);
+        console.log(document.cookie);
+
         if(!user) {
             tryRelogin();
         }
@@ -19,8 +22,6 @@ async function checkRelogin() {
             console.log("User still logged in.");
             setCookie("uid", user.uid);
             setCookie("refreshToken", user.refreshToken);
-            console.log(user);
-            console.log(document.cookie);
             loginStatus = true;
         }
     });
