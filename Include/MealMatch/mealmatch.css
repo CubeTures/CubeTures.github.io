@@ -224,14 +224,14 @@ body {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  background-color: var(--primaryColor); /* Change this to your desired color */
+  background-color: var(--primaryColor);
   border: 1px solid var(--borderColor);
 }
 input[type="range"]::-moz-range-thumb {
-  background-color: var(--primaryColor); /* Change this to your desired color */
+  background-color: var(--primaryColor);
   border: 1px solid var(--borderColor);
 }
 input[type="range"]::-ms-thumb {
-  background-color: var(--primaryColor); /* Change this to your desired color */
+  background-color: var(--primaryColor);
   border: 1px solid var(--borderColor);
 }
