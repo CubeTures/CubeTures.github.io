@@ -20,7 +20,7 @@ async function checkRelogin() {
             setCookie("uid", user.uid);
             setCookie("refreshToken", user.refreshToken);
             console.log(user);
-            console.log(document.cookue);
+            console.log(document.cookie);
             loginStatus = true;
         }
     });
@@ -30,7 +30,8 @@ async function tryRelogin() {
 
     const refreshToken = getCookie("refreshToken");
     if(refreshToken) {
-        await postRequest(REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters(refreshToken));
+        const result = await postRequest(REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters(refreshToken));
+        console.log(result);
         loginStatus = true;
     }
     else {
