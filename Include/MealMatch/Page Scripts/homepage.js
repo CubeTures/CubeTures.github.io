@@ -1,5 +1,5 @@
-import { getUserData, removeCookie } from "./firebase-database.js";
-import { login, logout, loginStatus } from "./firebase-login.js";
+import { getUserData, removeCookie } from "../Firebase/firebase-database.js";
+import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

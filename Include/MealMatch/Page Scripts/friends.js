@@ -1,4 +1,4 @@
-import { getUserData, updateUserData, removeUserData, getCookie } from "./firebase-database.js";
+import { getUserData, updateUserData, removeUserData, getCookie } from "../Firebase/firebase-database.js";
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
 let requestDiv, requestCaret, requestAmount, requestDropdown, requestTemplate;

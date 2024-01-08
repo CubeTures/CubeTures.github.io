@@ -1,4 +1,4 @@
-import { httpRequestJson, postRequest } from "../api-commands.js";
+import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
 const EARTH_RADIUS = 3958.8, getPhotos = false;

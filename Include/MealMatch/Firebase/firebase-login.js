@@ -1,8 +1,8 @@
 import { getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider,
     signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { hasUser, updateUserData, setCookie, getCookie } from "./firebase-database.js";
-import { REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters } from "./google-api.js";
-import { postRequest } from "../api-commands.js";
+import { REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters } from "../Google APIs/google-api.js";
+import { postRequest } from "../../api-commands.js";
 const homepagePath = "/Pages/MealMatch/home.html";
 let onAuthStateUnsubscribe, loginStatus = null;
 
@@ -19,6 +19,8 @@ async function checkRelogin() {
             console.log("User still logged in.");
             setCookie("uid", user.uid);
             setCookie("refreshToken", user.refreshToken);
+            console.log(user);
+            console.log(document.cookue);
             loginStatus = true;
         }
     });

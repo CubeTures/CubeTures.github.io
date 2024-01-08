@@ -1,6 +1,6 @@
-import { getUserData, updateUserData, getCookie } from "./firebase-database.js"
-import { getCurrentLocation, validateAddress } from "./google-geocode.js";
-import { createNewMatch } from "./google-nearby.js";
+import { getUserData, updateUserData, getCookie } from "../Firebase/firebase-database.js"
+import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
+import { createNewMatch } from "../Google APIs/google-nearby.js";
 
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
 let addressHidden, cityHidden, stateHidden, zipHidden;

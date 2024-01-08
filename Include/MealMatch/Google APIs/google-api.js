@@ -1,5 +1,5 @@
 //#region data
-import { API_KEY } from "./initialize-firebase.js";
+import { API_KEY } from "../Firebase/firebase-initialize.js";
 
 const masks = {
     "basic": {

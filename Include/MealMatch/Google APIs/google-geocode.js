@@ -1,4 +1,4 @@
-import { httpRequest, postRequest } from "../api-commands.js";
+import { httpRequest, postRequest } from "../../api-commands.js";
 import { REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody } from "./google-api.js";
 
