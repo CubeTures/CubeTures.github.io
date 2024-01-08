@@ -1,4 +1,4 @@
-import { getUserData, updateUserData, removeUserData, getCookie } from "../Firebase/firebase-database.js";
+import { getUserData, updateUserData, removeUserData, getDisplayName, getCookie } from "../Firebase/firebase-database.js";
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
 let requestDiv, requestCaret, requestAmount, requestDropdown, requestTemplate;
@@ -19,7 +19,7 @@ function onDocumentLoad() {
 }
 
 async function setDisplayName() {
-    thisUserDisplayName = await getUserData("readonly/display_name");
+    thisUserDisplayName = await getDisplayName();
 }
 
 function setFriendCode() {

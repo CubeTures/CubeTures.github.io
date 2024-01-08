@@ -1,8 +1,9 @@
-import { getUserData, removeCookie } from "../Firebase/firebase-database.js";
+import { getUserData, removeCookie, getDisplayName, getCookie } from "../Firebase/firebase-database.js";
 import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const matchPageUrl = "/Pages/MealMatch/match.html";
 
 function onDocumentLoad() {
     setLogging();
@@ -18,7 +19,22 @@ function setLogging() {
 
     loginBtn.addEventListener("click", tryLogin);
     logoutBtn.addEventListener("click", tryLogout);
-    //if(hasCookie("uid")) { login(); }
+}
+function checkLoginStatus() {
+    setTimeout(waitForLoginStatus, 500);
+}
+function waitForLoginStatus() {
+    if(loginStatus === null) {
+        waitForLoginStatus();
+    }
+    else {
+        computeLoginStatus();
+    }
+}
+function computeLoginStatus() {
+    if(loginStatus) {
+        onLogin();
+    }
 }
 
 function tryLogin() {
@@ -26,7 +42,6 @@ function tryLogin() {
 }
 function onLogin() {
     console.log(`Log in success.`);
-    console.trace();
     toggleAssetVisibilty(true);
     populateHomepage();
 }
@@ -61,42 +76,58 @@ function setMatches() {
 async function populateHomepage() {
     toggleSpinner(true);
     setVisible(noMatchDisclaimer, false);
-
-    let hasMatch = false;
-    hasMatch = (await populatePersonalMatch()) ? true : hasMatch;
-    hasMatch = (await populateMatchRequests()) ? true : hasMatch;
-
+    let hasMatch = await populateMatches();
     setVisible(noMatchDisclaimer, !hasMatch);
     toggleSpinner(false);
+}
+async function populateMatches() {
+    let matches = [];
+
+    const personal = await populatePersonalMatch();
+    if(personal) { matches.push(personal); }
+    const requests = await populateMatchRequests();
+    if(requests.length > 0) { matches = matches.concat(requests); }
+
+    matches.sort(sortByDate);
+    for(const match of matches) {
+        console.log(match);
+        addToHomepage(match["match"], match["creator"], match["id"]);
+    }
+
+    return matches.length != 0;
 }
 async function populatePersonalMatch() {
     const match = await getUserData("public/match");
     if(match) {
-        const displayName = await getUserData("readonly/display_name");
-        addToHomepage(match, displayName);
-        return true;
+        const uid = getCookie("uid");
+        const displayName = await getDisplayName();
+        return { 
+            "match": match,
+            "creator": displayName,
+            "id": uid
+        };
     }
 
-    return false;
+    return null;
 }
 async function populateMatchRequests() {
+    let reqArray = [];
     const requests = await getUserData("writeonly/match_requests");
     if(requests) {
         for(const uid in requests) {
             const match = await getUserData("public/match", uid);
-            const friendName = await getUserData("readonly/display_name", uid);
-            addToHomepage(match, friendName);
+            const displayName = await getDisplayName(uid);
+            reqArray.push({
+                "match": match,
+                "creator": displayName,
+                "id": uid
+            })
         }
-        
-        return true;
     }
 
-    return false;
+    return reqArray;
 }
-function addToHomepage(match, creator) {
-    console.log(creator);
-    console.log(match);
-    
+function addToHomepage(match, creator, id) {    
     const clone = matchTemplate.content.cloneNode(true);
 
     const matchElement = clone.querySelector("#match-element");
@@ -113,6 +144,8 @@ function addToHomepage(match, creator) {
 
     const people = clone.querySelector("#people");
     people.textContent = getPeople(match);
+
+    matchElement.addEventListener("click", () => matchClick(id));
 
     matchContainer.append(clone);
 }
@@ -134,28 +167,23 @@ function getPeople(match) {
     
     return people;
 }
+function matchClick(id) {
+    const origin = window.location.origin;
+    window.location.href = `${origin}${matchPageUrl}?id=${id}`;
+}
+
+function sortByDate(a, b) {
+    const dA = `${a["match"]["date"]} ${a["match"]["time"]}`;
+    const dB = `${b["match"]["date"]} ${b["match"]["time"]}`;
+    const dateA = new Date(dA);
+    const dateB = new Date(dB);
+    return dateB - dateA;
+}
 
 function depopulateHomepage() {
     const elements = document.getElementsByClassName("match-element");
     for(let i = elements.length - 1; i >= 0; i--) {
         elements.item(i).remove();
-    }
-}
-
-function checkLoginStatus() {
-    setTimeout(waitForLoginStatus, 500);
-}
-function waitForLoginStatus() {
-    if(loginStatus === null) {
-        waitForLoginStatus();
-    }
-    else {
-        computeLoginStatus();
-    }
-}
-function computeLoginStatus() {
-    if(loginStatus) {
-        onLogin();
     }
 }
 

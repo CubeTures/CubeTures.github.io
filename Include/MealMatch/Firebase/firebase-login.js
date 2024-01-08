@@ -12,9 +12,6 @@ function onContentLoad() {
 async function checkRelogin() {
     const auth = await getAuth();
     onAuthStateUnsubscribe = auth.onAuthStateChanged((user) => {
-        console.log(user);
-        console.log(document.cookie);
-
         if(!user) {
             tryRelogin();
         }
@@ -32,15 +29,17 @@ async function tryRelogin() {
     const refreshToken = getCookie("refreshToken");
     if(refreshToken) {
         const result = await postRequest(REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters(refreshToken));
-        console.log(result);
-        loginStatus = true;
-    }
-    else {
-        loginStatus = false;
-        if(window.location.pathname != homepagePath) {
-            console.log("Cannot log in user. Redirecting.");
-            window.location.replace(`${window.location.origin}${homepagePath}`);
+        if(result.hasOwnProperty("auth")) {
+            console.log("User re-logged in.");
+            loginStatus = true;
+            return;
         }
+    }
+
+    loginStatus = false;
+    if(window.location.pathname != homepagePath) {
+        console.log("Cannot log in user. Redirecting.");
+        window.location.replace(`${window.location.origin}${homepagePath}`);
     }
 }
 

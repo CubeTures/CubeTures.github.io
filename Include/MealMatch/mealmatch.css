@@ -150,8 +150,13 @@ body {
   padding: 6px;
 }
 
-.match-element {}
-.people-elemnt {}
+.match-element {
+  margin-top: 1rem;
+}
+.match-element:hover {
+  cursor: pointer;
+}
+.people-element {}
 .disclaimer-text {
   margin-bottom: 0px;
 }

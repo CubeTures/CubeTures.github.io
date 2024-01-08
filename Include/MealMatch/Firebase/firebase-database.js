@@ -18,7 +18,6 @@ function getReference(uid, dataType) {
     checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
-    console.log(`Attempted Path: '${path}'`);
     return ref(db, path);
 }
 async function hasUser(otherUID=null) {
@@ -26,30 +25,25 @@ async function hasUser(otherUID=null) {
     return data && data.hasOwnProperty("display_name");
 }
 async function getUserData(dataType, otherUID=null) {
-    let uid = getUID(otherUID);
-    let reference = getReference(uid, dataType);
+    const uid = getUID(otherUID);
+    const reference = getReference(uid, dataType);
     const snapshot = await get(reference);
     return snapshot.val();
 }
 async function updateUserData(dataType, data, otherUID=null) {
-    let uid = getUID(otherUID);
-    let reference = getReference(uid, dataType);
+    const uid = getUID(otherUID);
+    const reference = getReference(uid, dataType);
     update(reference, data);
 }
 function removeUserData(dataType, otherUID=null) {
-    let uid = getUID(otherUID);
-    let reference = getReference(uid, dataType);
+    const uid = getUID(otherUID);
+    const reference = getReference(uid, dataType);
     remove(reference);
 }
 
-async function getFriendName(code) {
-    const userData = await getUserData("writeonly/friends");
-    const name = userData[code];
-    if(name) {
-        return name;
-    }
-    
-    return code;
+async function getDisplayName(otherUID=null) {
+    const uid = getUID(otherUID);
+    return await getUserData("readonly/display_name", uid);
 }
 
 function hasCookie(cookieName) {
@@ -87,52 +81,5 @@ function removeCookie(cookieName) {
     }
 }
 
-function testUserData() {
-    //addPersonalMatch();
-    //addMatchRequest();    
-    //addPersonalMatchRequest();    
-    //removeUserData("readonly/match");
-    //removeUserData("writeonly/match_requests");
-    //removeUserData("readonly/match", "fakeID");
-}
-function addPersonalMatch() {
-    updateUserData("readonly/match", {
-        "latlng": [0, 0],
-        "radius": 0,
-        "people": {
-            "uid1": "displayName1", 
-            "uid2": "displayName2"
-        },
-        "locations": {
-            "loc_a": "Y",
-            "loc_b": "M",
-            "loc_c": "N",
-            "loc_d": "U"
-        }
-    });
-}
-function addMatchRequest() {
-    updateUserData("writeonly/match_requests", {
-        "fakeID": true
-    });
-}
-function addPersonalMatchRequest() {
-    updateUserData("readonly/match", {
-        "latlng": [0, 0],
-        "radius": 0,
-        "people": {
-            "uid1": "displayName1", 
-            "uid2": "displayName2"
-        },
-        "locations": {
-            "loc_a": "Y",
-            "loc_b": "M",
-            "loc_c": "N",
-            "loc_d": "U"
-        }
-    }, "fakeID");
-}
-testUserData();
-
-export { hasUser, getUserData, updateUserData, removeUserData, getFriendName,
+export { hasUser, getUserData, updateUserData, removeUserData, getDisplayName,
     hasCookie, getCookie, setCookie, removeCookie }
