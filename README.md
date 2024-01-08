@@ -1,2 +1,2 @@
 # Cubetures.github.io
-A simple website displaying some of the web projects I've built.
+A simple website acting as a hub linking to my web projects and various other projects.
