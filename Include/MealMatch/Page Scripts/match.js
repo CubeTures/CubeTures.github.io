@@ -1,11 +1,14 @@
 import { getDisplayName } from "../Firebase/firebase-database.js";
-const matchPageUrl = "/Pages/MealMatch/match.html";
+let photos, info, extra;
+let expanded = false;
 let id;
 let display;
 
 function onDocumentLoad() {
     setID();
     displayName();
+
+    setExpand();
 }
 
 function setID() {
@@ -30,10 +33,26 @@ async function displayName() {
     display.textContent = `Displaying match created by ${name}.`;
 }
 
-function goToMatch(id) {
-    const origin = window.location.origin;
-    window.location.href = `${origin}${matchPageUrl}?id=${id}`;
+function setExpand() {
+    photos = document.getElementById("photos");
+    info = document.getElementById("info");
+    extra = document.getElementById("extra");
+    
+    info.addEventListener("click", expand);
+}
+function expand() {
+    if(expanded) {
+        //photos.classList.remove("photo-box-alt");
+        //info.classList.remove("info-box-expand");
+        extra.classList.remove("extra-box-alt");
+    }
+    else {
+        //photos.classList.add("photo-box-alt");
+        //info.classList.add("info-box-alt");
+        extra.classList.add("extra-box-alt");
+    }
+
+    expanded = !expanded;
 }
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
-export { goToMatch };

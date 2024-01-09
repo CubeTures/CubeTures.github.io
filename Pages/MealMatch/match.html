@@ -6,10 +6,67 @@
        <link rel="icon" type="image/x-icon" href="/Images/MealMatch/Logo (Simple).svg">
     </head>
 
-    <body class="dark-color text-light">
-        <p>Page still in construction.</p>
-        <p id="display"></p>
-        <!-- Get parameter of page to determine what user to get match results from -->
+    <body class="dark-color text-light full-screen">
+        <p class="visually-hidden" id="display">Displaying match created by ...</p>
+
+        <div class="vertical-flex">
+            <!-- Switch -->
+            <div class="vertical-flex-content switch-box rounded" id="switch">
+                
+                <!-- Photos -->
+                <div class="primary-color padded rounded photo-box no-margin" id="photos">
+                    <div class="dark-color rounded bordered">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+
+                <!-- Extra -->
+                <div class="primary-color padded rounded vertical-flex-content extra-box no-margin" id="extra">
+                    <div>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="primary-color padded rounded vertical-flex-content info-box" id="info">
+                <div>
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-7"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-6"></span>
+                        <span class="placeholder col-8"></span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <nav class="navbar dark-color fixed-bottom" id="toolbar">
+                <div type="button" class="container-fluid justify-content-evenly">
+                    <a type="button" class="btn image-button" href="#">
+                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Close_round.svg">
+                    </a>
+                    <a type="button" class="btn image-button no-border" href="/Pages/MealMatch/home.html">
+                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Home.svg">
+                    </a>
+                    <a type="button" class="btn image-button" href="#">
+                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Favorite.svg">
+                    </a>
+                </div>
+            </nav>
+        </div>
+        
         
         <link rel="stylesheet" href="/Packages/Bootstrap/css/bootstrap.min.css">
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>

@@ -26,6 +26,9 @@
 .primary-color {
   background-color: var(--primaryColor);
 }
+.primary-filter {
+  filter: invert(46%) sepia(69%) saturate(4206%) hue-rotate(321deg) brightness(101%) contrast(97%);
+}
 .primary-color-opacity {
   background-color: var(--primary-transparent);
 }
@@ -91,6 +94,41 @@ body {
 }
 .no-margin {
   margin: 0 !important;
+}
+
+.full-screen {
+  height: 100vh;
+  margin: 0;
+}
+.vertical-flex {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.switch-box {
+  margin: 1rem;
+  flex: 1 1 auto;
+  overflow-y: hidden;
+  position: relative;
+}
+.photo-box {
+  overflow-y: scroll;
+  height: 100%;
+}
+.info-box {
+  flex: 0 1 auto;
+}
+.extra-box {
+  transition: all .5s ease;
+  height: 100%;
+  bottom: -100%;
+  width: 100%;
+  position: absolute;
+  overflow-y: scroll;
+}
+.extra-box-alt {
+  bottom: 0;
 }
 
 .top-div {

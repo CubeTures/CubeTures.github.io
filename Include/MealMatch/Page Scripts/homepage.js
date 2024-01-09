@@ -1,6 +1,6 @@
 import { getUserData, removeCookie, getDisplayName, getCookie } from "../Firebase/firebase-database.js";
 import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
-import { goToMatch } from "./match.js";
+import { goToMatch } from "./redirect.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -143,7 +143,7 @@ function addToHomepage(match, creator, id) {
     address.textContent = match["address"];
 
     const people = clone.querySelector("#people");
-    people.textContent = getPeople(match);
+    people.textContent = `With ${getPeople(match)}`;
 
     matchElement.addEventListener("click", () => goToMatch(id));
 
@@ -165,7 +165,7 @@ function getPeople(match) {
         people += `${(people == "" ? "" : ", ")}${person}`;
     }
     
-    return `With ${people}`;
+    return people;
 }
 
 function sortByDate(a, b) {
