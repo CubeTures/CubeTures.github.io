@@ -49,7 +49,6 @@ function setTile() {
 
 }
 function startDragTile(e) {
-    alert("start");
     const { x } = getPosition(e);
     startX = x;
     setTransitions(false);
@@ -60,11 +59,10 @@ function startDragTile(e) {
     document.addEventListener("touchend", stopDrag);
     document.addEventListener("touchcancel", stopDrag);
 }
-function dragTile(ev) {
-    alert("move");
+function dragTile(e) {
     if(!startX) { return; }
-    const { clientX } = ev;
-    const offsetX = clientX - startX;
+    const { x } = getPosition(e);
+    const offsetX = x - startX;
     
     let rot = offsetX / 3;
     if(rot < 0) { rot = Math.max(-maxDegree, rot); }
@@ -73,7 +71,6 @@ function dragTile(ev) {
     tile.style.transform = `rotate(${rot}deg)`;
 }
 function stopDrag() {
-    alert("stop");
     startX = null;
     document.removeEventListener("mousemove", dragTile);
     setTransitions(true);
@@ -103,7 +100,7 @@ function highlightButton(rot) {
 function getPosition(e) {
     let x, y = null;
     if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
-        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        let touch = e.touches[0] || e.changedTouches[0];
         x = touch.pageX;
         y = touch.pageY;
     } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
