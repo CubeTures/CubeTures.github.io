@@ -104,27 +104,36 @@ body {
 .full-screen {
   height: 100vh;
   margin: 0;
+  padding: 0 !important;
   overflow: hidden;
 }
 .vertical-flex {
   display: flex;
   flex-flow: column;
   height: 100%;
+  min-height: 0;
 }
 
-.tile {
+.slot {
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
   position: relative;
 }
-.copy {
+.tile {
   display: flex;
   flex-flow: column;
   height: 100%;
   width: 100%;
   position: absolute;
   transform-origin: 50% 100%;
+}
+.copy {
+  top: 0;
+  z-index: -1;
+}
+.toolbar {
+  flex: 0 1 auto;
 }
 .switch-box {
   margin: 1rem;
@@ -133,6 +142,8 @@ body {
   position: relative;
 }
 .photo-box {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   overflow-y: scroll;
   height: 100%;
 }
@@ -144,6 +155,8 @@ body {
   height: 100%;
   bottom: -100%;
   width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   position: absolute;
   overflow-y: scroll;
 }
@@ -151,12 +164,16 @@ body {
   bottom: 0;
 }
 
-.choice-btn {
+.choice-btn, .choice-btn-alt {
   transition: all .3s ease-out;
 }
 .choice-btn:hover {
   background-color: rgba(251,70,112,.83);
   border: 1px solid var(--borderColor);
+}
+.choice-btn-alt:hover {
+  background-color: var(--darkColor);
+  border: 1px solid white;
 }
 
 .top-div {

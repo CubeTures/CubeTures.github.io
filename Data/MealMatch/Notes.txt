@@ -18,6 +18,9 @@ Extra Info
 - Open hours (all days of week)
 
 
+Leiniency:
+round(sqrt(num_people))
+
 Advanced Search Protocol (Deprecated):
 1. Gets within 5 mile radius
 2. Create a circle of 10 mile radius

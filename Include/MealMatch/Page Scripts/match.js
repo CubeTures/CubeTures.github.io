@@ -1,5 +1,5 @@
 import { getDisplayName } from "../Firebase/firebase-database.js";
-let copyTile, photos, info, extra;
+let tile, photos, info, extra;
 let noBtn, yesBtn;
 let startX;
 const maxDegree = 30;
@@ -40,31 +40,35 @@ async function displayName() {
 }
 
 function setTile() {
-    copyTile = document.getElementById("copy");
+    tile = document.getElementById("tile");
     noBtn = document.getElementById("no");
     yesBtn = document.getElementById("yes");
 
-    copyTile.addEventListener("mousedown", e => startDragTile(e));
+    tile.addEventListener("mousedown", ev => startDragTile(ev));
+    tile.addEventListener("touchstart", ev => startDragTile(ev));
 
 }
-function startDragTile(e) {
-    const { clientX } = e;
+function startDragTile(ev) {
+    const { clientX } = ev;
     startX = clientX;
     setTransitions(false);
     
-    document.addEventListener("mousemove", e => dragTile(e));
+    document.addEventListener("mousemove", ev => dragTile(ev));
+    document.addEventListener("touchmove", ev => dragTile(ev));
     document.addEventListener("mouseup", stopDrag);
+    document.addEventListener("touchend", stopDrag);
+    document.addEventListener("touchcancel", stopDrag);
 }
-function dragTile(e) {
+function dragTile(ev) {
     if(!startX) { return; }
-    const { clientX } = e;
+    const { clientX } = ev;
     const offsetX = clientX - startX;
     
     let rot = offsetX / 3;
     if(rot < 0) { rot = Math.max(-maxDegree, rot); }
     else { rot = Math.min(maxDegree, rot); }
     highlightButton(rot);
-    copyTile.style.transform = `rotate(${rot}deg)`;
+    tile.style.transform = `rotate(${rot}deg)`;
 }
 function stopDrag() {
     startX = null;
@@ -75,12 +79,12 @@ function stopDrag() {
 
 function setTransitions(state) {
     const transition = "all .3s ease-out";
-    copyTile.style.transition = state ? transition : "none";
+    tile.style.transition = state ? transition : "none";
     noBtn.style.transition = state ? transition : "none";
     yesBtn.style.transition = state ? transition : "none";
 }
 function resetActors() {
-    copyTile.style.transform = "rotate(0deg)";
+    tile.style.transform = "rotate(0deg)";
     noBtn.style.backgroundColor = `rgba(${primaryRGB},0)`;
     noBtn.style.border = `1px solid rgba(${borderRGB},0)`;
     yesBtn.style.backgroundColor = `rgba(${primaryRGB},0)`;
