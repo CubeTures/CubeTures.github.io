@@ -1,7 +1,7 @@
 import { getDisplayName } from "../Firebase/firebase-database.js";
 let tile, photos, info, extra;
 let noBtn, yesBtn;
-let startX;
+let startX, tolerance;
 const maxDegree = 30;
 const primaryRGB = "251,70,112", borderRGB = "249,190,203";
 let expanded = false;
@@ -43,6 +43,8 @@ function setTile() {
     tile = document.getElementById("tile");
     noBtn = document.getElementById("no");
     yesBtn = document.getElementById("yes");
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    tolerance = width / 6;
 
     tile.addEventListener("mousedown", e => startDragTile(e));
     tile.addEventListener("touchstart", e => startDragTile(e));
@@ -64,11 +66,14 @@ function dragTile(e) {
     const { x } = getPosition(e);
     const offsetX = x - startX;
     
-    let rot = offsetX / 3;
-    if(rot < 0) { rot = Math.max(-maxDegree, rot); }
-    else { rot = Math.min(maxDegree, rot); }
-    highlightButton(rot);
-    tile.style.transform = `rotate(${rot}deg)`;
+    if(offsetX > tolerance || offsetX < -tolerance) {
+        let rot = (offsetX - (offsetX > 0 ? tolerance : -tolerance)) / 3;
+        if(rot < 0) { rot = Math.max(-maxDegree, rot); }
+        else { rot = Math.min(maxDegree, rot); }
+        highlightButton(rot);
+        tile.style.transform = `rotate(${rot}deg)`;
+    }
+    
 }
 function stopDrag() {
     startX = null;
