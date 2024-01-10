@@ -131,8 +131,8 @@ function peopleError() {
 }
 
 function setAdvanced() {
-    simpleSearchBtn = document.getElementById("simple-search");
-    complexSearchBtn = document.getElementById("complex-search");
+    // simpleSearchBtn = document.getElementById("simple-search");
+    // complexSearchBtn = document.getElementById("complex-search");
     radiusRange = document.getElementById("radius-range");
     radiusValue = document.getElementById("radius-value");
     radiusRange.oninput = setRadiusValue;
@@ -196,7 +196,7 @@ async function tryGetInputs() {
     return {
         "locationData": locationData,
         "people": people,
-        "method": searchMethod,
+        // "method": searchMethod,
         "radius": radius,
         "width": width,
         "height": height
@@ -247,9 +247,9 @@ function tryGetPeople() {
 }
 function getAdvanced() {
     let searchMethod = "simple";
-    if(complexSearchBtn.getAttribute("checked")) {
-        searchMethod = "complex";
-    }
+    // if(complexSearchBtn.getAttribute("checked")) {
+    //     searchMethod = "complex";
+    // }
 
     const radius = parseFloat(radiusValue.value) * 1609;
 

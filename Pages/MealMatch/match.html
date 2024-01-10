@@ -10,58 +10,159 @@
         <p class="visually-hidden" id="display">Displaying match created by ...</p>
 
         <div class="vertical-flex">
-            <!-- Switch -->
-            <div class="vertical-flex-content switch-box rounded" id="switch">
-                
-                <!-- Photos -->
-                <div class="primary-color padded rounded photo-box no-margin" id="photos">
-                    <div class="dark-color rounded bordered">
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+            <!-- Tile -->
+            <div class="tile" id="tile">
+                <!-- Tile Copy -->
+                <div class="copy" id="copy">
+                    <!-- Switch -->
+                    <div class="switch-box rounded" id="switch">
+                        <!-- Photos -->
+                        <div class="primary-color padded rounded photo-box no-margin" id="photos">
+                            <div class="dark-color rounded bordered">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <div class="dark-color rounded bordered">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <div class="dark-color rounded bordered">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+
+                        <!-- Extra -->
+                        <div class="primary-color padded rounded extra-box no-margin" id="extra">
+                            <div>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-3"></span>
+                                    <span class="placeholder col-8"></span>
+                                    <span class="placeholder col-5"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-5"></span>
+                                </p>
+                            </div>
+                            <br/>
+                            <div>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-9"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-5"></span>
+                                </p>
+                            </div>
+                            <br/>
+                            <div>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-3"></span>
+                                    <span class="placeholder col-4"></span>
+                                </p>
+                            </div>
+                            <br/>
+                            <div>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-3"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-3"></span>
+                                    <span class="placeholder col-4"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Info -->
+                    <div class="primary-color padded rounded info-box" id="info">
+                        <div>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Extra -->
-                <div class="primary-color padded rounded vertical-flex-content extra-box no-margin" id="extra">
-                    <div>
-                        <p class="card-text placeholder-glow">
-                            <span class="placeholder col-7"></span>
-                            <span class="placeholder col-4"></span>
-                            <span class="placeholder col-4"></span>
-                            <span class="placeholder col-6"></span>
-                            <span class="placeholder col-8"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+                <!-- Tile Copy -->
+                <div class="copy" id="next-copy" style="top: 0; z-index: -1;">
+                    <!-- Switch -->
+                    <div class="switch-box rounded" id="switch">
+                        <!-- Photos -->
+                        <div class="primary-color padded rounded photo-box no-margin" id="photos">
+                            <div class="dark-color rounded bordered">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
 
-            <!-- Info -->
-            <div class="primary-color padded rounded vertical-flex-content info-box" id="info">
-                <div>
-                    <p class="card-text placeholder-glow">
-                        <span class="placeholder col-7"></span>
-                        <span class="placeholder col-4"></span>
-                        <span class="placeholder col-4"></span>
-                        <span class="placeholder col-6"></span>
-                        <span class="placeholder col-8"></span>
-                    </p>
+                        <!-- Extra -->
+                        <div class="primary-color padded rounded extra-box no-margin" id="extra">
+                            <div>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Info -->
+                    <div class="primary-color padded rounded info-box" id="info">
+                        <div>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Toolbar -->
-            <nav class="navbar dark-color fixed-bottom" id="toolbar">
+            <nav class="navbar fixed-bottom" id="toolbar">
                 <div type="button" class="container-fluid justify-content-evenly">
-                    <a type="button" class="btn image-button" href="#">
-                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Close_round.svg">
+                    <a type="button" class="btn image-button rounded-pill choice-btn" id="no">
+                        <img class="toolbar-image" src="/Images/MealMatch/Close_round Outline.svg">
                     </a>
                     <a type="button" class="btn image-button no-border" href="/Pages/MealMatch/home.html">
                         <img class="toolbar-image primary-filter" src="/Images/MealMatch/Home.svg">
                     </a>
-                    <a type="button" class="btn image-button" href="#">
-                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Favorite.svg">
+                    <a type="button" class="btn image-button rounded-pill choice-btn" id="yes">
+                        <img class="toolbar-image" src="/Images/MealMatch/Favorite Outline.svg">
                     </a>
                 </div>
             </nav>

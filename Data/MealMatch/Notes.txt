@@ -1,6 +1,5 @@
 TODO
 - Hide api key in secret github variables
-- Implement the different search methods
 - Add filters to searching
 
 
@@ -19,7 +18,7 @@ Extra Info
 - Open hours (all days of week)
 
 
-Advanced Search Protocol:
+Advanced Search Protocol (Deprecated):
 1. Gets within 5 mile radius
 2. Create a circle of 10 mile radius
 3. Create a square contained within it

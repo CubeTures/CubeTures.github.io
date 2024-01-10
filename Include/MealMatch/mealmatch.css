@@ -6,7 +6,9 @@
 :root {
   --primaryColor: #FB4670;
   --borderColor: #f9becb;
+  --darkColor: #282828;
   --primary-transparent: rgba(252, 74, 116, .25);
+  --transparent: rgba(0, 0, 0, 0);
 }
 :root[data-theme="light"] {
   --text: #25040c;
@@ -34,6 +36,9 @@
 }
 .dark-color {
   background-color: #282828;
+}
+.transparent-bg {
+  background-color: var(--transparent);
 }
 .colored-input {
   border: 1px solid var(--borderColor);
@@ -99,6 +104,7 @@ body {
 .full-screen {
   height: 100vh;
   margin: 0;
+  overflow: hidden;
 }
 .vertical-flex {
   display: flex;
@@ -106,6 +112,20 @@ body {
   height: 100%;
 }
 
+.tile {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  position: relative;
+}
+.copy {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform-origin: 50% 100%;
+}
 .switch-box {
   margin: 1rem;
   flex: 1 1 auto;
@@ -129,6 +149,14 @@ body {
 }
 .extra-box-alt {
   bottom: 0;
+}
+
+.choice-btn {
+  transition: all .3s ease-out;
+}
+.choice-btn:hover {
+  background-color: rgba(251,70,112,.83);
+  border: 1px solid var(--borderColor);
 }
 
 .top-div {

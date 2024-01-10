@@ -1,6 +1,11 @@
 import { getDisplayName } from "../Firebase/firebase-database.js";
-let photos, info, extra;
+let copyTile, photos, info, extra;
+let noBtn, yesBtn;
+let startX;
+const maxDegree = 30;
+const primaryRGB = "251,70,112", borderRGB = "249,190,203";
 let expanded = false;
+
 let id;
 let display;
 
@@ -8,6 +13,7 @@ function onDocumentLoad() {
     setID();
     displayName();
 
+    setTile();
     setExpand();
 }
 
@@ -33,6 +39,60 @@ async function displayName() {
     display.textContent = `Displaying match created by ${name}.`;
 }
 
+function setTile() {
+    copyTile = document.getElementById("copy");
+    noBtn = document.getElementById("no");
+    yesBtn = document.getElementById("yes");
+
+    copyTile.addEventListener("mousedown", e => startDragTile(e));
+
+}
+function startDragTile(e) {
+    const { clientX } = e;
+    startX = clientX;
+    setTransitions(false);
+    
+    document.addEventListener("mousemove", e => dragTile(e));
+    document.addEventListener("mouseup", stopDrag);
+}
+function dragTile(e) {
+    if(!startX) { return; }
+    const { clientX } = e;
+    const offsetX = clientX - startX;
+    
+    let rot = offsetX / 3;
+    if(rot < 0) { rot = Math.max(-maxDegree, rot); }
+    else { rot = Math.min(maxDegree, rot); }
+    highlightButton(rot);
+    copyTile.style.transform = `rotate(${rot}deg)`;
+}
+function stopDrag() {
+    startX = null;
+    document.removeEventListener("mousemove", dragTile);
+    setTransitions(true);
+    resetActors();
+}
+
+function setTransitions(state) {
+    const transition = "all .3s ease-out";
+    copyTile.style.transition = state ? transition : "none";
+    noBtn.style.transition = state ? transition : "none";
+    yesBtn.style.transition = state ? transition : "none";
+}
+function resetActors() {
+    copyTile.style.transform = "rotate(0deg)";
+    noBtn.style.backgroundColor = `rgba(${primaryRGB},0)`;
+    noBtn.style.border = `1px solid rgba(${borderRGB},0)`;
+    yesBtn.style.backgroundColor = `rgba(${primaryRGB},0)`;
+    yesBtn.style.border = `1px solid rgba(${borderRGB},0)`;
+}
+function highlightButton(rot) {
+    const percent = Math.abs(rot / maxDegree);
+    const button = (rot > 0) ? yesBtn : noBtn;
+    button.style.backgroundColor = `rgba(${primaryRGB},${percent/6*5})`;
+    button.style.border = `1px solid rgba(${borderRGB},${percent})`;
+}
+
 function setExpand() {
     photos = document.getElementById("photos");
     info = document.getElementById("info");
@@ -42,13 +102,9 @@ function setExpand() {
 }
 function expand() {
     if(expanded) {
-        //photos.classList.remove("photo-box-alt");
-        //info.classList.remove("info-box-expand");
         extra.classList.remove("extra-box-alt");
     }
     else {
-        //photos.classList.add("photo-box-alt");
-        //info.classList.add("info-box-alt");
         extra.classList.add("extra-box-alt");
     }
 
