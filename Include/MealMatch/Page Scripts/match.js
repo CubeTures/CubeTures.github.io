@@ -44,22 +44,24 @@ function setTile() {
     noBtn = document.getElementById("no");
     yesBtn = document.getElementById("yes");
 
-    tile.addEventListener("mousedown", ev => startDragTile(ev));
-    tile.addEventListener("touchstart", ev => startDragTile(ev));
+    tile.addEventListener("mousedown", e => startDragTile(e));
+    tile.addEventListener("touchstart", e => startDragTile(e));
 
 }
-function startDragTile(ev) {
-    const { clientX } = ev;
-    startX = clientX;
+function startDragTile(e) {
+    alert("start");
+    const { x } = getPosition(e);
+    startX = x;
     setTransitions(false);
     
-    document.addEventListener("mousemove", ev => dragTile(ev));
-    document.addEventListener("touchmove", ev => dragTile(ev));
+    document.addEventListener("mousemove", e => dragTile(e));
+    document.addEventListener("touchmove", e => dragTile(e));
     document.addEventListener("mouseup", stopDrag);
     document.addEventListener("touchend", stopDrag);
     document.addEventListener("touchcancel", stopDrag);
 }
 function dragTile(ev) {
+    alert("move");
     if(!startX) { return; }
     const { clientX } = ev;
     const offsetX = clientX - startX;
@@ -71,6 +73,7 @@ function dragTile(ev) {
     tile.style.transform = `rotate(${rot}deg)`;
 }
 function stopDrag() {
+    alert("stop");
     startX = null;
     document.removeEventListener("mousemove", dragTile);
     setTransitions(true);
@@ -95,6 +98,20 @@ function highlightButton(rot) {
     const button = (rot > 0) ? yesBtn : noBtn;
     button.style.backgroundColor = `rgba(${primaryRGB},${percent/6*5})`;
     button.style.border = `1px solid rgba(${borderRGB},${percent})`;
+}
+
+function getPosition(e) {
+    let x, y = null;
+    if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        x = touch.pageX;
+        y = touch.pageY;
+    } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+        x = e.clientX;
+        y = e.clientY;
+    }
+
+    return { "x": x, "y": y };
 }
 
 function setExpand() {
