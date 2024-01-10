@@ -1,8 +1,7 @@
 import { getDisplayName } from "../Firebase/firebase-database.js";
 let tile, photos, info, extra;
 let noBtn, yesBtn;
-let startX, tolerance;
-const maxDegree = 30;
+let startX, maxDist, tolerance;
 const primaryRGB = "251,70,112", borderRGB = "249,190,203";
 let expanded = false;
 
@@ -44,7 +43,8 @@ function setTile() {
     noBtn = document.getElementById("no");
     yesBtn = document.getElementById("yes");
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    tolerance = width / 6;
+    maxDist = width / 3;
+    tolerance = width / 9;
 
     tile.addEventListener("mousedown", e => startDragTile(e));
     tile.addEventListener("touchstart", e => startDragTile(e));
@@ -65,15 +65,12 @@ function dragTile(e) {
     if(!startX) { return; }
     const { x } = getPosition(e);
     const offsetX = x - startX;
-    
+
     if(offsetX > tolerance || offsetX < -tolerance) {
-        let rot = (offsetX - (offsetX > 0 ? tolerance : -tolerance)) / 3;
-        if(rot < 0) { rot = Math.max(-maxDegree, rot); }
-        else { rot = Math.min(maxDegree, rot); }
-        highlightButton(rot);
-        tile.style.transform = `rotate(${rot}deg)`;
+        let movement = (offsetX - (offsetX > 0 ? tolerance : -tolerance));
+        highlightButton(movement);
+        tile.style.transform = `translate(${movement}px, 0px)`;
     }
-    
 }
 function stopDrag() {
     startX = null;
@@ -95,10 +92,10 @@ function resetActors() {
     yesBtn.style.backgroundColor = `rgba(${primaryRGB},0)`;
     yesBtn.style.border = `1px solid rgba(${borderRGB},0)`;
 }
-function highlightButton(rot) {
-    const percent = Math.abs(rot / maxDegree);
-    const button = (rot > 0) ? yesBtn : noBtn;
-    button.style.backgroundColor = `rgba(${primaryRGB},${percent/6*5})`;
+function highlightButton(movement) {
+    const percent = Math.abs(movement / maxDist);
+    const button = (movement > 0) ? yesBtn : noBtn;
+    button.style.backgroundColor = `rgba(${primaryRGB},${percent})`;
     button.style.border = `1px solid rgba(${borderRGB},${percent})`;
 }
 
