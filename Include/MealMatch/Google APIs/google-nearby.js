@@ -90,7 +90,7 @@ async function getPhotoData(inputData, location, id) {
             const response = await httpRequestJson(getPhotoUrl(name, width));
             let url = response["url"];
             url.replaceAll(".", ",");
-            photos[response["url"]] = true;
+            photos[url] = true;
         }
     }
     else {
