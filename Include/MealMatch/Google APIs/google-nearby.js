@@ -52,6 +52,8 @@ async function getLocationData(inputData, locations) {
         break;
     }
 
+    console.log(result);
+
     return result;
 }
 function getBasicLocationData(location) {
@@ -90,12 +92,14 @@ async function getPhotoData(inputData, location, id) {
             const response = await httpRequestJson(getPhotoUrl(name, width));
             let url = response["url"];
             url.replaceAll(".", ",");
+            console.log(url);
             photos[url] = true;
         }
     }
     else {
         photos["empty"] = true;
     }
+    console.log(photos);
 
     return photos;
 }

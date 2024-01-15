@@ -158,6 +158,7 @@ async function tryMatch() {
     }
 }
 async function updateMatchData(data) {
+    console.log(data);
     await setUserData("public/match", data);
 
     const uid = getCookie("uid");
