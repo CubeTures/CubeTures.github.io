@@ -1,6 +1,7 @@
 TODO
 - Hide api key in secret github variables
 - Add filters to searching
+- Add loading screen while the match is being created
 
 
 Main Page

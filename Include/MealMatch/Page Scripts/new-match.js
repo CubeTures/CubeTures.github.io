@@ -170,7 +170,7 @@ async function updateMatchData(data) {
     }
 }
 async function removeOldMatchRequests(uid, oldMatch) {
-    const oldMatch = await getUserData("public/match");
+    oldMatch = await getUserData("public/match");
 
     if(oldMatch) {
         const people = oldMatch["people"];
