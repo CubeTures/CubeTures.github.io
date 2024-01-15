@@ -246,6 +246,9 @@ body {
 .pad-bot {
   padding-bottom: 4px;
 }
+.pad-bot-rem {
+  padding-bottom: 1rem;
+}
 .pad-both {
   padding-top: 2px;
   padding-bottom: 2px;

@@ -1,13 +1,13 @@
 TODO
 - Hide api key in secret github variables
 - Add filters to searching
-- Add loading screen while the match is being created
+- Add loading screen/progress bar while the match is being created
 
 
 Main Page
 -- Name of Restaurant
 -- Category (bbq, chinese, etc)
-- Photos
+-- Photos
 -- Distance from center location
 -- Price Range
 
