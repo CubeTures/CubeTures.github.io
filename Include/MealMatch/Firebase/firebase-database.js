@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 let auth = null;
 
@@ -29,6 +29,11 @@ async function getUserData(dataType, otherUID=null) {
     const reference = getReference(uid, dataType);
     const snapshot = await get(reference);
     return snapshot.val();
+}
+async function setUserData(dataType, otherUID=null) {
+    const uid = getUID(otherUID);
+    const reference = getReference(uid, dataType);
+    set(reference, data);
 }
 async function updateUserData(dataType, data, otherUID=null) {
     const uid = getUID(otherUID);
@@ -81,5 +86,5 @@ function removeCookie(cookieName) {
     }
 }
 
-export { hasUser, getUserData, updateUserData, removeUserData, getDisplayName,
+export { hasUser, getUserData, setUserData, updateUserData, removeUserData, getDisplayName,
     hasCookie, getCookie, setCookie, removeCookie }

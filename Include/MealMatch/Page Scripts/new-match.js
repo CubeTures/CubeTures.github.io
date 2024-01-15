@@ -1,4 +1,4 @@
-import { getUserData, updateUserData, getCookie } from "../Firebase/firebase-database.js"
+import { getUserData, setUserData, updateUserData, getCookie } from "../Firebase/firebase-database.js"
 import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
 import { createNewMatch } from "../Google APIs/google-nearby.js";
 import { goToMatch } from "./redirect.js";
@@ -54,7 +54,7 @@ async function setCurrentLocation() {
     }
 }
 function locationError(errorCode=0) {
-    locationSpinner.classList.remove("visually-hidden");
+    locationSpinner.classList.add("visually-hidden");
     console.warn("Location Error");
     
     if(errorCode == 1) {
@@ -158,7 +158,7 @@ async function tryMatch() {
     }
 }
 function updateMatchData(data) {
-    updateUserData("public/match", data);
+    setUserData("public/match", data);
 
     const uid = getCookie("uid");
     for(const id in data["people"]) {

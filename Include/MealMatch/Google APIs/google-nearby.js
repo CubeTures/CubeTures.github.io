@@ -79,7 +79,7 @@ async function getPhotoData(inputData, location, id) {
     let count = 0;
 
     if(getPhotos) {
-        const { width, height } = inputData;
+        const { width } = inputData;
         const phts = getNested(location, "photos");
         if(phts === null) { return photos; }
 
@@ -89,6 +89,7 @@ async function getPhotoData(inputData, location, id) {
             const response = await httpRequestJson(getPhotoUrl(name, width));
             console.log(response);
             photos[response["url"]] = true;
+            break;
         }
     }    
 

@@ -151,8 +151,8 @@ function parsePriceLevel(price) {
     return "NaN";
 }
 function formatDistance(distance) {
-    const rounded = parseFloat(distance).toFixed(2);
-    const s = (rounded == "1.00") ? "" : "s";
+    const rounded = parseFloat(distance).toFixed(1);
+    const s = (rounded == "1.0") ? "" : "s";
     return `${rounded} Miles Away`;
 }
 
