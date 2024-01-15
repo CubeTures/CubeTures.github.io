@@ -122,6 +122,7 @@ body {
 .vertical-flex {
   display: flex;
   flex-flow: column;
+  overflow: hidden;
   height: 100%;
   min-height: 0;
 }

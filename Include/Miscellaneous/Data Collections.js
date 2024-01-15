@@ -1,5 +1,5 @@
 // credit: https://www.geeksforgeeks.org/implementation-queue-javascript/
-export default class Queue {
+export class Queue {
     constructor() {
         this.items = {}
         this.frontIndex = 0
@@ -21,5 +21,20 @@ export default class Queue {
     }
     get printQueue() {
         return this.items;
+    }
+}
+
+export class Stack {
+    constructor() {
+        this.items = [];
+    }
+    push(item) {
+        this.items.push(item);
+    }
+    pop(item) {
+        this.items.pop(item);
+    }
+    peek() {
+        return this.items[this.items.length - 1];
     }
 }

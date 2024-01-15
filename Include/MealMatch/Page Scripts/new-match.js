@@ -157,7 +157,6 @@ async function tryMatch() {
         matchError();
     }
 }
-//before overwritting previous, find friends and remove match requests
 async function updateMatchData(data) {
     const uid = getCookie("uid");
 

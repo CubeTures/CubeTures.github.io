@@ -1,6 +1,6 @@
-import Queue from "../../Miscellaneous/Queue.js";
+import { Stack } from "../../Miscellaneous/Data Collections.js";
 const primaryRGB = "251,70,112", borderRGB = "249,190,203";
-const queue = new Queue();
+let stack = new Stack();
 let yesBtn, noBtn, maxDist, tolerance;
 const weekdayAbrv = { 
     "Monday": "M",
@@ -26,7 +26,7 @@ function setWidths() {
 export default class MatchTile {
     constructor(clone, id, location, decisionCallback) {
         this.setVariables(clone, id, decisionCallback);
-        this.addToQueue();
+        this.addToStack();
         this.setInfo(clone, location);
         this.setExtra(clone, location);
         this.setPhotos(clone, location);
@@ -48,16 +48,12 @@ export default class MatchTile {
             noBtn = document.getElementById("no");
         }
     }
-    addToQueue() {
-        if(!queue) {
-            queue = new Queue();
-        }
-
-        queue.enqueue(this.id);
+    addToStack() {
+        stack.push(this.id);
     }
-    removeFromQueue() {
-        if(this.id == queue.peek()) {
-            queue.dequeue();
+    removeFromStack() {
+        if(this.id == stack.peek()) {
+            stack.pop();
         }
     }
     setInfo(clone, location) {
@@ -74,6 +70,9 @@ export default class MatchTile {
         distance.textContent = this.formatDistance(location["distance"]);
     }
     setExtra(clone, location) {
+        const name = clone.querySelector("#name-backup");
+        name.textContent = location["name"];
+
         const address = clone.querySelector("#address");
         address.textContent = location["address"];
         address.setAttribute("href", location["maps"]);
@@ -281,7 +280,7 @@ export default class MatchTile {
     }
 
     startDrag(e) {
-        if(this.id == queue.peek()) {
+        if(this.id == stack.peek()) {
             const { x } = this.getPosition(e);
             this.startX = x;
             this.setTransitions(false);
@@ -332,7 +331,7 @@ export default class MatchTile {
     endDecision(decision) {
         const direction = decision ? "right" : "left";
         this.tile.classList.add(`offscreen-${direction}`);
-        this.removeFromQueue()        
+        this.removeFromStack()        
         this.decisionCallback(decision);
     }
     
