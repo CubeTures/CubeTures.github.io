@@ -1,6 +1,6 @@
 import { Stack } from "../../Miscellaneous/Data Collections.js";
 const primaryRGB = "251,70,112", borderRGB = "249,190,203";
-let stack = new Stack();
+const stack = new Stack();
 let yesBtn, noBtn, maxDist, tolerance;
 const weekdayAbrv = { 
     "Monday": "M",
@@ -35,8 +35,11 @@ export default class MatchTile {
 
     setVariables(clone, id, decisionCallback) {
         this.tile = clone.querySelector("#tile");
+        this.tile.style.zIndex = stack.size;
+        clone.querySelector("#extra").style.zIndex = stack.size + 1;
         this.id = id;
         this.decisionCallback = decisionCallback;
+
         this.startDragAnon = (e) => this.startDrag(e);
         this.dragTileAnon = (e) => this.dragTile(e);
         this.stopDragAnon = (e) => this.stopDrag(e);
@@ -56,17 +59,6 @@ export default class MatchTile {
         }
         if(!noBtn) {
             noBtn = document.getElementById("no");
-        }
-    }
-    addToStack() {
-        stack.push(this.id);
-    }
-    isTopOfStack() {
-        return this.id == stack.peek();
-    }
-    removeFromStack() {
-        if(this.isTopOfStack()) {
-            stack.pop();
         }
     }
     setInfo(clone, location) {
@@ -123,50 +115,6 @@ export default class MatchTile {
         
     }
 
-    setActions(clone) {
-        this.setSwitch(clone);
-        this.setButtonClicks(true);
-        this.setStartDrag(true);
-    }
-
-    setSwitch(clone) {
-        const info = clone.querySelector("#info");
-        this.extra = clone.querySelector("#extra");
-        info.addEventListener("click", () => { 
-            this.switchDisplay(this.extra);
-        });
-    }
-    switchDisplay(extra) {
-        if(extra.classList.contains("extra-box-alt")) {
-            extra.classList.remove("extra-box-alt");
-        }
-        else {
-            extra.classList.add("extra-box-alt");
-        }
-    }
-
-    setStartDrag(state) {
-        if(state) {
-            this.tile.addEventListener("mousedown", this.startDragAnon);
-            this.tile.addEventListener("touchstart", this.startDragAnon);
-        }
-        else {
-            this.tile.removeEventListener("mousedown", this.startDragAnon);
-            this.tile.removeEventListener("touchstart", this.startDragAnon);
-        }        
-    }
-
-    setButtonClicks(state) {
-        if(state) {
-            yesBtn.addEventListener("click", this.yesDecision);
-            noBtn.addEventListener("click", this.noDecision);
-        }
-        else {
-            yesBtn.removeEventListener("click", this.yesDecision);
-            noBtn.removeEventListener("click", this.noDecision);
-        }
-    }
-    
     parsePriceLevel(price) {
         const head = "PRICE_LEVEL_";
         const index = price.indexOf(head);
@@ -304,6 +252,50 @@ export default class MatchTile {
         return num;
     }
 
+    setActions(clone) {
+        this.setSwitch(clone);
+        this.setButtonClicks(true);
+        this.setStartDrag(true);
+    }
+
+    setSwitch(clone) {
+        const info = clone.querySelector("#info");
+        this.extra = clone.querySelector("#extra");
+        info.addEventListener("click", () => { 
+            this.switchDisplay(this.extra);
+        });
+    }
+    switchDisplay(extra) {
+        if(extra.classList.contains("extra-box-alt")) {
+            extra.classList.remove("extra-box-alt");
+        }
+        else {
+            extra.classList.add("extra-box-alt");
+        }
+    }
+
+    setStartDrag(state) {
+        if(state) {
+            this.tile.addEventListener("mousedown", this.startDragAnon);
+            this.tile.addEventListener("touchstart", this.startDragAnon);
+        }
+        else {
+            this.tile.removeEventListener("mousedown", this.startDragAnon);
+            this.tile.removeEventListener("touchstart", this.startDragAnon);
+        }        
+    }
+
+    setButtonClicks(state) {
+        if(state) {
+            yesBtn.addEventListener("click", this.yesDecision);
+            noBtn.addEventListener("click", this.noDecision);
+        }
+        else {
+            yesBtn.removeEventListener("click", this.yesDecision);
+            noBtn.removeEventListener("click", this.noDecision);
+        }
+    }
+
     startDrag(e) {
         if(this.isTopOfStack()) {
             const { x } = this.getPosition(e);
@@ -392,6 +384,18 @@ export default class MatchTile {
         }
     
         return { "x": x, "y": y };
+    }
+
+    addToStack() {
+        stack.push(this.id);
+    }
+    isTopOfStack() {
+        return this.id == stack.peek();
+    }
+    removeFromStack() {
+        if(this.isTopOfStack()) {
+            stack.pop();
+        }
     }
 }
 

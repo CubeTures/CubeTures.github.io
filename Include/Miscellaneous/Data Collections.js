@@ -42,6 +42,9 @@ export class Stack {
     peek() {
         return this.items[this.items.length - 1];
     }
+    get size() {
+        return this.items.length;
+    }
 
     isEmpty() {
         return this.items.length == 0;
