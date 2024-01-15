@@ -28,22 +28,21 @@ function setTile() {
     template = document.getElementById("template");
     
     createTiles();
-
-    // tile.addEventListener("click", () => {
-    //     console.log("right");
-    //     tile.classList.add("offscreen-right");
-    // })
 }
 
 async function createTiles() {
     const locations = await getUserData("public/match/locations", id);
-    hidePlaceholder();
 
+    const len = Object.keys(locations).length;
+    let count = 0;
     for(const [ id, location ] of Object.entries(locations)) {
+        const active = (len - 2) <= count++;
         const clone = template.content.cloneNode(true);
-        new MatchTile(clone, id, location, decision);
+        new MatchTile(clone, id, location, decision, active);
         slot.append(clone);
     }
+
+    hidePlaceholder();
 }
 function hidePlaceholder() {
     const placeholder = document.getElementById("placeholder");

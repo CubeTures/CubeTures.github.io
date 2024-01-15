@@ -24,21 +24,29 @@ function setWidths() {
 }
 
 export default class MatchTile {
-    constructor(clone, id, location, decisionCallback) {
-        this.setVariables(clone, id, decisionCallback);
+    constructor(clone, id, location, decisionCallback, initiallyActive) {
+        this.setVariables(clone, id, decisionCallback, initiallyActive);
         this.addToStack();
         this.setInfo(clone, location);
         this.setExtra(clone, location);
-        this.setPhotos(clone, location);
+        this.setPhotos(location);
         this.setActions(clone);
     }
 
-    setVariables(clone, id, decisionCallback) {
+    setVariables(clone, id, decisionCallback, initiallyActive) {
         this.tile = clone.querySelector("#tile");
         this.tile.style.zIndex = stack.size;
         clone.querySelector("#extra").style.zIndex = stack.size + 1;
+
         this.id = id;
         this.decisionCallback = decisionCallback;
+        this.initiallyActive = initiallyActive;
+        this.photoDiv = clone.getElementById("photos");
+        this.photoList = [];
+        this.onPop = () => { this.onStackPop(); }
+        if(!this.initiallyActive) { 
+            stack.onPopSub(this.onPop); 
+        }        
 
         this.startDragAnon = (e) => this.startDrag(e);
         this.dragTileAnon = (e) => this.dragTile(e);
@@ -97,9 +105,8 @@ export default class MatchTile {
         const hoursArray = location["hours"].split(",");
         hours.innerHTML = this.getHoursTable(hoursArray);
     }
-    setPhotos(clone, location) {
+    setPhotos(location) {
         const classes = "class='match-image rounded bordered'";
-        const photoDiv = clone.getElementById("photos");
     
         const photos = location["photos"];
         if(photos) {
@@ -107,12 +114,14 @@ export default class MatchTile {
             for(const photo in photos) {
                 let url = photo.replaceAll(",", ".");
                 url = url.replaceAll("|", "/");
-                html += `<img ${classes} src=${url}>`;
+                const place = this.initiallyActive ? "src" : "hold";
+                const img = `<img ${classes} ${place}=${url} alt="photo">`;
+                this.photoList.push(img);
+                html += img;
             }
-    
-            photoDiv.innerHTML = html;
+            
+            this.photoDiv.innerHTML = html;
         }
-        
     }
 
     parsePriceLevel(price) {
@@ -395,6 +404,18 @@ export default class MatchTile {
     removeFromStack() {
         if(this.isTopOfStack()) {
             stack.pop();
+        }
+    }
+    onStackPop() {
+        if(this.id == stack.next()) {
+            let html = "";
+            for(const img of this.photoList) {
+                const replaced = img.replace("hold", "src");
+                html += replaced;
+            }
+
+            this.photoDiv.innerHTML = html;
+            stack.onPopUnsub(this.onPop);
         }
     }
 }

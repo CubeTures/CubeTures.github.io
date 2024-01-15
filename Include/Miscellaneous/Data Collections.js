@@ -30,6 +30,7 @@ export class Queue {
 export class Stack {
     constructor() {
         this.items = [];
+        this.onPopListeners = [];
     }
 
     push(item) {
@@ -37,10 +38,15 @@ export class Stack {
     }
     pop(item) {
         this.items.pop(item);
+        this.onPopNotify();
     }
 
     peek() {
         return this.items[this.items.length - 1];
+    }
+    next() {
+        if(this.size <= 1) { return null; }
+        return this.items[this.items.length - 2];
     }
     get size() {
         return this.items.length;
@@ -48,5 +54,19 @@ export class Stack {
 
     isEmpty() {
         return this.items.length == 0;
+    }
+
+    onPopSub(callback) {
+        this.onPopListeners.push(callback);
+        console.log(this.onPopListeners);
+    }
+    onPopUnsub(callback) {
+        const index = this.onPopListeners.indexOf(callback);
+        this.onPopListeners.splice(index, 1);
+    }
+    onPopNotify() {
+        for(const callback of this.onPopListeners) {
+            callback();
+        }
     }
 }
