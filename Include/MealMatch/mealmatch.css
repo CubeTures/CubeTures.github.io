@@ -9,6 +9,7 @@
   --darkColor: #282828;
   --primary-transparent: rgba(252, 74, 116, .25);
   --transparent: rgba(0, 0, 0, 0);
+  --placeholder: rgba(213, 213, 213, 0.4);
 }
 :root[data-theme="light"] {
   --text: #25040c;
@@ -52,6 +53,9 @@
 .opacity-2 {
   opacity: .7;
 }
+table tr td, table tr th{
+  background-color: var(--transparent) !important;
+}
 
 body {
   font-family: "Baloo";
@@ -91,6 +95,9 @@ body {
 .no-top-border {
   border-top: 0px !important;
 }
+.top-border {
+  border-top: 2px solid white !important;
+}
 .btn {
   border-color: var(--borderColor);
 }
@@ -125,18 +132,20 @@ body {
   flex-flow: column;
   height: 100%;
   width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
   position: absolute;
-  transform-origin: 50% 100%;
 }
-.copy {
+.placeholder-tile {
   top: 0;
-  z-index: -1;
+  z-index: 10;
 }
 .toolbar {
   flex: 0 1 auto;
 }
 .switch-box {
-  margin: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   flex: 1 1 auto;
   overflow-y: hidden;
   position: relative;
@@ -159,9 +168,17 @@ body {
   padding-bottom: 1rem;
   position: absolute;
   overflow-y: scroll;
+  z-index: 1;
 }
 .extra-box-alt {
   bottom: 0;
+}
+
+.tb-active {
+  background-color: rgba(255, 255, 255, .2) !important;
+}
+.placeholder-image {
+  background-color: var(--placeholder);
 }
 
 .choice-btn, .choice-btn-alt {
@@ -203,6 +220,22 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.pad-top {
+  padding-top: 4px;
+}
+.pad-bot {
+  padding-bottom: 4px;
+}
+.pad-both {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.ellp {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .image-button {

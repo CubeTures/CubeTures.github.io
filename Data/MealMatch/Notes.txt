@@ -14,8 +14,8 @@ Extra Info
 - Star Rating
 - Website
 - Phone number
-- Address (link to google maps)
-- Open hours (all days of week)
+-- Address (link to google maps)
+-- Open hours (all days of week)
 
 
 Leiniency:
