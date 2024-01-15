@@ -150,21 +150,21 @@ async function tryMatch() {
     if(inputData) {
         console.log("No errors, creating search.");
         const data = await createNewMatch(inputData, matchError);
-        updateMatchData(data);
+        await updateMatchData(data);
         goToMatch(getCookie("uid"));
     }
     else {
         matchError();
     }
 }
-function updateMatchData(data) {
-    setUserData("public/match", data);
+async function updateMatchData(data) {
+    await setUserData("public/match", data);
 
     const uid = getCookie("uid");
     for(const id in data["people"]) {
         let request = {};
         request[uid] = true;
-        updateUserData("writeonly/match_requests", request, id);
+        await updateUserData("writeonly/match_requests", request, id);
     }
 }
 function matchError(error) {

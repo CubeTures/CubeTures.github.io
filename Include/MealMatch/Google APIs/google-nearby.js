@@ -1,7 +1,7 @@
 import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
-const EARTH_RADIUS = 3958.8, getPhotos = true;
+const EARTH_RADIUS = 3958.8, getPhotos = false;
 //TODO: find out when if better parameters for maxWidthPx and maxHeightPx
 
 async function createNewMatch(inputData, matchErrorCallback) {
@@ -91,7 +91,10 @@ async function getPhotoData(inputData, location, id) {
             photos[response["url"]] = true;
             break;
         }
-    }    
+    }
+    else {
+        photos["empty"] = true;
+    }
 
     return photos;
 }

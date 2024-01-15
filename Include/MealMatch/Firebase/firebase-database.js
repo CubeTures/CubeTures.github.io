@@ -18,6 +18,7 @@ function getReference(uid, dataType) {
     checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
+    console.log(path);
     return ref(db, path);
 }
 async function hasUser(otherUID=null) {
@@ -30,7 +31,7 @@ async function getUserData(dataType, otherUID=null) {
     const snapshot = await get(reference);
     return snapshot.val();
 }
-async function setUserData(dataType, otherUID=null) {
+async function setUserData(dataType, data, otherUID=null) {
     const uid = getUID(otherUID);
     const reference = getReference(uid, dataType);
     set(reference, data);
