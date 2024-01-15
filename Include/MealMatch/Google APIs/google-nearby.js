@@ -85,13 +85,15 @@ async function getPhotoData(inputData, location, id) {
         const { width } = inputData;
         const phts = getNested(location, "photos");
         if(phts === null) { return photos; }
+        
 
         for(const photo of location["photos"]) {
             if(++count > 5) { break; }
             const name = photo["name"];
             const response = await httpRequestJson(getPhotoUrl(name, width));
             let url = response["url"];
-            url.replaceAll(".", ",");
+            url = url.replaceAll("/", "|");
+            url = url.replaceAll(".", ",");
             console.log(url);
             photos[url] = true;
         }

@@ -157,6 +157,7 @@ async function tryMatch() {
         matchError();
     }
 }
+//before overwritting previous, find friends and remove match requests
 async function updateMatchData(data) {
     console.log(data);
     await setUserData("public/match", data);
