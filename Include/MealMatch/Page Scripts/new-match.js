@@ -1,4 +1,4 @@
-import { getUserData, setUserData, updateUserData, getCookie } from "../Firebase/firebase-database.js"
+import { getUserData, setUserData, updateUserData, getCookie, removeUserData } from "../Firebase/firebase-database.js"
 import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
 import { createNewMatch } from "../Google APIs/google-nearby.js";
 import { goToMatch } from "./redirect.js";
@@ -159,14 +159,25 @@ async function tryMatch() {
 }
 //before overwritting previous, find friends and remove match requests
 async function updateMatchData(data) {
-    console.log(data);
-    await setUserData("public/match", data);
-
     const uid = getCookie("uid");
+
+    await removeOldMatchRequests(uid);
+    await setUserData("public/match", data);    
     for(const id in data["people"]) {
         let request = {};
         request[uid] = true;
         await updateUserData("writeonly/match_requests", request, id);
+    }
+}
+async function removeOldMatchRequests(uid, oldMatch) {
+    const oldMatch = await getUserData("public/match");
+
+    if(oldMatch) {
+        const people = oldMatch["people"];
+        for(const otherUID in people) {
+            const dataType = `writeonly/match_requests/${uid}`;
+            removeUserData(dataType, otherUID);
+        }
     }
 }
 function matchError(error) {

@@ -107,6 +107,11 @@ body {
 .no-margin {
   margin: 0 !important;
 }
+.no-outer {
+  margin: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
 
 .full-screen {
   height: 100dvh;
@@ -135,6 +140,9 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   position: absolute;
+
+  left: 0;
+  right: 0;
 }
 .placeholder-tile {
   top: 0;
@@ -158,6 +166,7 @@ body {
 }
 .info-box {
   flex: 0 1 auto;
+  cursor: pointer;
 }
 .extra-box {
   transition: all .5s ease;
@@ -180,6 +189,14 @@ body {
 .placeholder-image {
   background-color: var(--placeholder);
 }
+.offscreen-right {
+  transition: all .5s ease;
+  left: 100%;
+}
+.offscreen-left {
+  transition: all .5s ease;
+  left: -100%;
+}
 
 .choice-btn, .choice-btn-alt {
   transition: all .3s ease-out;
@@ -189,8 +206,8 @@ body {
   border: 1px solid var(--borderColor);
 }
 .choice-btn-alt:hover {
-  background-color: var(--darkColor);
-  border: 1px solid white;
+  background-color: var(--darkColor) !important;
+  border: 1px solid white !important;
 }
 
 .top-div {
@@ -261,6 +278,14 @@ body {
   height: 2rem;
   width: auto;
   margin-bottom: .5rem;
+}
+.match-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.match-image:last-child {
+  margin-bottom: 0 !important;
 }
 .even-button-padding {
   padding: 6px;

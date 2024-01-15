@@ -12,50 +12,58 @@
         <div class="vertical-flex">
             <!-- Slot -->
             <div class="slot" id="slot">
-                <!-- Tile -->
-                <div class="tile" id="tile">
-                    <!-- Switch -->
-                    <div class="switch-box rounded" id="switch">
-                        <!-- Photos -->
-                        <div class="primary-color padded rounded photo-box no-margin" id="photos">
-                            <p>Images here lol</p>
+                <!-- Template -->
+                <template id="template">
+                    <!-- Tile -->
+                    <div class="tile" id="tile">
+                        <!-- Switch -->
+                        <div class="switch-box rounded" id="switch">
+                            <!-- Photos -->
+                            <div class="primary-color padded rounded photo-box no-margin text-center" id="photos">
+                                <p>There are no photos for this establishment.</p>
+                            </div>
+
+                            <!-- Extra -->
+                            <div class="primary-color padded rounded extra-box no-margin" id="extra">
+                                <div class="pad-bot"><b>Rating:</b>
+                                    <span id="rating">N/A</span>
+                                </div>
+                                <div class="pad-bot"><b>Address:</b>
+                                    <a class="text-white" id="address">N/A</a>
+                                </div>
+                                <div class="pad-bot"><b>Website:</b>
+                                    <a class="text-white" id="website">N/A</a>
+                                </div>
+                                <div class="pad-bot"><b>Phone Number:</b>
+                                    <a class="text-white" id="phone">N/A</a>
+                                </div>
+                                <div id="hours"></div>
+                            </div>
                         </div>
 
-                        <!-- Extra -->
-                        <div class="primary-color padded rounded extra-box no-margin" id="extra">
-                            <div class="pad-bot"><b>Rating:</b>
-                                <span id="rating">N/A</span>
+                        <!-- Info -->
+                        <div class="primary-color padded rounded no-margin info-box" id="info">
+                            <div class="justify-content-between d-flex">
+                                <h1 class="no-margin pad-top ellp" id="name">Name</h1>
+                                <button type="button" class="image-button no-outer">
+                                    <img class="pill-image" src="/Images/MealMatch/Info.svg">
+                                </button>
                             </div>
-                            <div class="pad-bot"><b>Address:</b>
-                                <a class="text-white" id="address">N/A</a>
-                            </div>
-                            <div class="pad-bot"><b>Website:</b>
-                                <a class="text-white" id="website">N/A</a>
-                            </div>
-                            <div class="pad-bot"><b>Phone Number:</b>
-                                <a class="text-white" id="phone">N/A</a>
-                            </div>
-                            <div id="hours"></div>
-                        </div>
+                            <h5 class="no-margin opacity-1 pad-bot ellp" id="category">Category</h5>
+                            <h5 class="no-margin opacity-2 pad-bot ellp">
+                                <span id="price">$$</span>,
+                                <span id="distance">Num Miles Away</span>
+                            </h5>
+                        </div>                  
                     </div>
-
-                    <!-- Info -->
-                    <div class="primary-color padded rounded no-margin info-box" id="info">
-                        <h1 class="no-margin pad-top ellp" id="name">Name</h1>
-                        <h5 class="no-margin opacity-1 pad-bot ellp" id="category">Category</h5>
-                        <h5 class="no-margin opacity-2 pad-bot ellp">
-                            <span id="price">$$</span>,
-                            <span id="distance">Num Miles Away</span>
-                        </h5>
-                    </div>                  
-                </div>
+                </template>
 
                 <!-- Placeholder -->
                 <div class="tile placeholder-tile" id="placeholder">
                     <!-- Switch -->
                     <div class="switch-box rounded" id="switch">
                         <!-- Photos -->
-                        <div class="primary-color padded rounded photo-box no-margin" id="photos">
+                        <div class="primary-color padded rounded photo-box no-margin" id="photos" style="overflow-y: hidden !important;">
                             <div class="placeholder-image rounded bordered">
                                 <br/>
                                 <br/>

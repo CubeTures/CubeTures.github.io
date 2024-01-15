@@ -2,7 +2,6 @@ import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
 const EARTH_RADIUS = 3958.8, getPhotos = true;
-//TODO: find out when if better parameters for maxWidthPx and maxHeightPx
 
 async function createNewMatch(inputData, matchErrorCallback) {
     console.log(inputData);
@@ -47,9 +46,8 @@ async function getLocationData(inputData, locations) {
         loc["distance"] = getDistanceData(location, latlng);
         loc["hours"] = getHourData(location);
         loc["responses"] = getResponseData(people);
-        loc["photos"] = await getPhotoData(inputData, location, id);
+        loc["photos"] = await getPhotoData(inputData, location);
         result[id] = loc;
-        break;
     }
 
     console.log(result);
@@ -77,7 +75,7 @@ function getDistanceData(location, fromlatlng) {
     const tolatlng = `${lat},${lng}`;
     return latlngDistance(fromlatlng, tolatlng);
 }
-async function getPhotoData(inputData, location, id) {
+async function getPhotoData(inputData, location) {
     let photos = {};
     let count = 0;
 
@@ -85,7 +83,6 @@ async function getPhotoData(inputData, location, id) {
         const { width } = inputData;
         const phts = getNested(location, "photos");
         if(phts === null) { return photos; }
-        
 
         for(const photo of location["photos"]) {
             if(++count > 5) { break; }
