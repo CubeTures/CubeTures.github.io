@@ -88,7 +88,8 @@ async function getPhotoData(inputData, location, id) {
             if(++count > 5) { break; }
             const name = photo["name"];
             const response = await httpRequestJson(getPhotoUrl(name, width));
-            console.log(response);
+            let url = response["url"];
+            url.replaceAll(".", ",");
             photos[response["url"]] = true;
         }
     }

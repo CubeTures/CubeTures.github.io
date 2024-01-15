@@ -198,7 +198,7 @@ function getNearbyBody(latlng, rad, types=allFilters) {
 }
 //#endregion
 //#region photos
-function getPhotoUrl(name, maxWidth, maxHeight) {
+function getPhotoUrl(name, maxWidth, maxHeight=null) {
     if(maxHeight) {
         return `https://places.googleapis.com/v1/${name}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${API_KEY}`;
     }

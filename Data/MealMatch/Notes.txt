@@ -4,16 +4,16 @@ TODO
 
 
 Main Page
-- Name of Restaurant
-- Category (bbq, chinese, etc)
+-- Name of Restaurant
+-- Category (bbq, chinese, etc)
 - Photos
-- Distance from center location
-- Price Range
+-- Distance from center location
+-- Price Range
 
 Extra Info
-- Star Rating
-- Website
-- Phone number
+-- Star Rating
+-- Website
+-- Phone number
 -- Address (link to google maps)
 -- Open hours (all days of week)
 
