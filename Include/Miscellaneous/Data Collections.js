@@ -5,6 +5,7 @@ export class Queue {
         this.frontIndex = 0
         this.backIndex = 0
     }
+    
     enqueue(item) {
         this.items[this.backIndex] = item
         this.backIndex++
@@ -16,9 +17,11 @@ export class Queue {
         this.frontIndex++
         return item
     }
+
     peek() {
         return this.items[this.frontIndex]
     }
+
     get printQueue() {
         return this.items;
     }
@@ -28,13 +31,19 @@ export class Stack {
     constructor() {
         this.items = [];
     }
+
     push(item) {
         this.items.push(item);
     }
     pop(item) {
         this.items.pop(item);
     }
+
     peek() {
         return this.items[this.items.length - 1];
+    }
+
+    isEmpty() {
+        return this.items.length == 0;
     }
 }

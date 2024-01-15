@@ -40,6 +40,16 @@ export default class MatchTile {
         this.startDragAnon = (e) => this.startDrag(e);
         this.dragTileAnon = (e) => this.dragTile(e);
         this.stopDragAnon = (e) => this.stopDrag(e);
+        this.yesDecision = () => { 
+            if(this.isTopOfStack()) {
+                this.endDecision(true);
+            }
+        }
+        this.noDecision = () => { 
+            if(this.isTopOfStack()) {
+                this.endDecision(false); 
+            }
+        }
 
         if(!yesBtn) {
            yesBtn = document.getElementById("yes");
@@ -51,8 +61,11 @@ export default class MatchTile {
     addToStack() {
         stack.push(this.id);
     }
+    isTopOfStack() {
+        return this.id == stack.peek();
+    }
     removeFromStack() {
-        if(this.id == stack.peek()) {
+        if(this.isTopOfStack()) {
             stack.pop();
         }
     }
@@ -112,6 +125,7 @@ export default class MatchTile {
 
     setActions(clone) {
         this.setSwitch(clone);
+        this.setButtonClicks(true);
         this.setStartDrag(true);
     }
 
@@ -140,6 +154,17 @@ export default class MatchTile {
             this.tile.removeEventListener("mousedown", this.startDragAnon);
             this.tile.removeEventListener("touchstart", this.startDragAnon);
         }        
+    }
+
+    setButtonClicks(state) {
+        if(state) {
+            yesBtn.addEventListener("click", this.yesDecision);
+            noBtn.addEventListener("click", this.noDecision);
+        }
+        else {
+            yesBtn.removeEventListener("click", this.yesDecision);
+            noBtn.removeEventListener("click", this.noDecision);
+        }
     }
     
     parsePriceLevel(price) {
@@ -280,7 +305,7 @@ export default class MatchTile {
     }
 
     startDrag(e) {
-        if(this.id == stack.peek()) {
+        if(this.isTopOfStack()) {
             const { x } = this.getPosition(e);
             this.startX = x;
             this.setTransitions(false);
@@ -331,7 +356,7 @@ export default class MatchTile {
     endDecision(decision) {
         const direction = decision ? "right" : "left";
         this.tile.classList.add(`offscreen-${direction}`);
-        this.removeFromStack()        
+        this.removeFromStack();
         this.decisionCallback(decision);
     }
     
