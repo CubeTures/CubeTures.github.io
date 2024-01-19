@@ -1,15 +1,16 @@
 import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
-const EARTH_RADIUS = 3958.8, getPhotos = true;
+const EARTH_RADIUS = 3958.8, getPhotos = true, maxPhotoCount = 5;
+export let status = { "abort": false };
 
-async function createNewMatch(inputData, matchErrorCallback) {
-    console.log(inputData);
+async function createNewMatch(inputData, matchLoadCallback, matchErrorCallback) {
+    status["abort"] = false;
 
     try {
         const body = getNearbyBody(inputData["locationData"]["latlng"], inputData["radius"]);
         const locations = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
-        return await getMatchData(inputData, locations);
+        return await getMatchData(inputData, locations, matchLoadCallback);
     }  
     catch(error) {
         matchErrorCallback(error);
@@ -18,9 +19,9 @@ async function createNewMatch(inputData, matchErrorCallback) {
     return null;
 }
 
-async function getMatchData(inputData, locations) {
+async function getMatchData(inputData, locations, matchLoadCallback) {
     let result = getBasicMatchData(inputData);
-    result["locations"] = await getLocationData(inputData, locations);
+    result["locations"] = await getLocationData(inputData, locations, matchLoadCallback);
     return result;
 }
 function getBasicMatchData(inputData) {
@@ -35,19 +36,25 @@ function getBasicMatchData(inputData) {
 
     return result;
 }
-async function getLocationData(inputData, locations) {
+async function getLocationData(inputData, locations, matchLoadCallback) {
     let result = {};
+    let resultCount = 0;
+    let resultLength = Object.keys(locations["places"]).length;
+    let loadPercent = 100 / resultLength;
     const latlng = inputData["locationData"]["latlng"];
     const people = inputData["people"];
 
     for(const location of locations["places"]) {
+        if(status["abort"]) { break; }
         const id = location["id"];
         let loc = getBasicLocationData(location);
         loc["distance"] = getDistanceData(location, latlng);
         loc["hours"] = getHourData(location);
         loc["responses"] = getResponseData(people);
-        loc["photos"] = await getPhotoData(inputData, location);
+        loc["photos"] = await getPhotoData(inputData, location, matchLoadCallback, loadPercent);
         result[id] = loc;
+
+        matchLoadCallback(++resultCount * loadPercent, true);
     }
 
     console.log(result);
@@ -75,7 +82,7 @@ function getDistanceData(location, fromlatlng) {
     const tolatlng = `${lat},${lng}`;
     return latlngDistance(fromlatlng, tolatlng);
 }
-async function getPhotoData(inputData, location) {
+async function getPhotoData(inputData, location, matchLoadCallback, loadPercent) {
     let photos = {};
     let count = 0;
 
@@ -85,14 +92,16 @@ async function getPhotoData(inputData, location) {
         if(phts === null) { return photos; }
 
         for(const photo of location["photos"]) {
-            if(++count > 5) { break; }
+            if(status["abort"]) { break; }
+            if(++count > maxPhotoCount) { break; }
             const name = photo["name"];
             const response = await httpRequestJson(getPhotoUrl(name, width));
             let url = response["url"];
             url = url.replaceAll("/", "|");
             url = url.replaceAll(".", ",");
-            console.log(url);
             photos[url] = true;
+
+            matchLoadCallback(count * loadPercent / maxPhotoCount);
         }
     }
     else {

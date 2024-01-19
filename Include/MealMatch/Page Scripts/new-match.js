@@ -1,6 +1,6 @@
 import { getUserData, setUserData, updateUserData, getCookie, removeUserData } from "../Firebase/firebase-database.js"
 import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
-import { createNewMatch } from "../Google APIs/google-nearby.js";
+import { createNewMatch, status } from "../Google APIs/google-nearby.js";
 import { goToMatch } from "./redirect.js";
 
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
@@ -8,7 +8,8 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
-let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue, matchErrorModal;
+let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
+let loadValue, loadBar, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -142,16 +143,25 @@ function setRadiusValue() {
 }
 
 function setMatch() {
+    loadBar = document.getElementById("load-bar");
+    matchLoadModal = getModal("matchLoadModal");
     matchErrorModal = getModal("matchErrorModal");
+    matchCancelModal = getModal("matchCancelModal");
     setOnClick("match", tryMatch);
+    setOnClick("cancel-match", cancelMatch);
 }
 async function tryMatch() {
     const inputData = await tryGetInputs();
     if(inputData) {
         console.log("No errors, creating search.");
-        const data = await createNewMatch(inputData, matchError);
-        await updateMatchData(data);
-        goToMatch(getCookie("uid"));
+        resetMatchLoad();
+        matchLoadModal.show();
+        const data = await createNewMatch(inputData, matchLoad, matchError);
+
+        if(!status["abort"]) {
+            await updateMatchData(data);
+            goToMatch(getCookie("uid"));
+        }
     }
     else {
         matchError();
@@ -179,10 +189,32 @@ async function removeOldMatchRequests(uid, oldMatch) {
         }
     }
 }
+function resetMatchLoad() {
+    loadValue = 0;
+    loadBar.style.width = 0;
+    loadBar.textContent = "0%";
+}
+function matchLoad(updateValue, locationUpdate=false) {
+    if(locationUpdate) {
+        loadValue = updateValue;
+    }
+    else {
+        loadValue += updateValue;
+    }
+
+    const percent = `${loadValue}%`;
+    loadBar.style.width = percent;
+    loadBar.textContent = percent;
+}
 function matchError(error) {
+    matchLoadModal.hide();
     console.warn("Match Error");
     console.error(error);
     matchErrorModal.show();
+}
+function cancelMatch() {
+    status["abort"] = true;
+    matchCancelModal.show();
 }
 
 async function tryGetInputs() {

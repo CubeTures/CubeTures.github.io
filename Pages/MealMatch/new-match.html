@@ -209,6 +209,8 @@
             <br/>
         </div>
 
+
+
         <!-- Match Button -->
         <div class="text-center">
             <button class="btn btn-outline-light white-border" id="match">Match</button>
@@ -333,8 +335,48 @@
             </div>
         </div>
 
-         <!-- Match Error Modal -->
-         <div class="modal fade" id="matchErrorModal" tabindex="-1" aria-labelledby="matchErrorModalLabel" aria-hidden="true" data-bs-theme="dark">
+        <!-- Match Load Modal -->
+        <div class="modal fade" id="matchLoadModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="matchLoadModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="matchLoadModalLabel">Creating Match</h1>
+                    </div>
+                    <div class="modal-body">
+                        Please wait while we create your match. 
+                        This may take longer if you have bad internet connection.
+                        <br/>
+                        <div class="padded no-border">
+                            <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated primary-color" style="width: 0%" id="load-bar"></div>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light white-border" data-bs-dismiss="modal" id="cancel-match">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match Cancel Modal -->
+        <div class="modal fade" id="matchCancelModal" tabindex="-1" aria-labelledby="matchCancelModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="matchCancelModalLabel">Match Cancelled</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        You cancelled the match.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match Error Modal -->
+        <div class="modal fade" id="matchErrorModal" tabindex="-1" aria-labelledby="matchErrorModalLabel" aria-hidden="true" data-bs-theme="dark">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">

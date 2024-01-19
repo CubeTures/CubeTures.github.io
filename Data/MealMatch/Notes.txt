@@ -2,6 +2,7 @@ TODO
 - Hide api key in secret github variables
 - Add filters to searching
 - Add loading screen/progress bar while the match is being created
+- Change api to tripadvisor
 
 
 Main Page
