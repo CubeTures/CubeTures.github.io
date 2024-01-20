@@ -138,6 +138,7 @@ body {
   margin: 0;
   padding: 0 !important;
   overflow: hidden;
+  overscroll-behavior-x: none;
 }
 .vertical-flex {
   display: flex;

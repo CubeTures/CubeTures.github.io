@@ -99,6 +99,23 @@
                     </div>
                 </template>
 
+                <!-- Decided -->
+                <div class="tile" style="z-index: 0;">
+                    <!-- Switch -->
+                    <div class="switch-box rounded" id="switch">
+                        <!-- Photos -->
+                        <div class="dark-color padded rounded photo-box no-margin primary-color-text" id="decided-box" style="overflow-y: auto !important;">
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="dark-color padded rounded no-margin primary-color-text info-box" id="info">
+                        <h1 class="no-margin pad-top ellp">No More Matches.</h1>
+                        <h5 class="no-margin opacity-1 pad-bot ellp">Wait for others...</h5>
+                        <h5 class="no-margin opacity-2 pad-bot ellp">Or create a new match!</h5>
+                    </div>                  
+                </div>
+
                 <!-- Placeholder -->
                 <div class="tile placeholder-tile" id="placeholder">
                     <!-- Switch -->
@@ -140,23 +157,22 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Decided -->
-                <div class="tile" style="z-index: 0;">
-                    <!-- Switch -->
-                    <div class="switch-box rounded" id="switch">
-                        <!-- Photos -->
-                        <div class="dark-color padded rounded photo-box no-margin primary-color-text" id="decided-box" style="overflow-y: auto !important;">
-                        </div>
-                    </div>
-
+                    
                     <!-- Info -->
-                    <div class="dark-color padded rounded no-margin primary-color-text info-box" id="info">
-                        <h1 class="no-margin pad-top ellp">No More Matches.</h1>
-                        <h5 class="no-margin opacity-1 pad-bot ellp">Wait for others to respond...</h5>
-                        <h5 class="no-margin opacity-2 pad-bot ellp">Or create a new match!</h5>
-                    </div>                  
+                    <div class="primary-color padded rounded no-margin info-box" id="info">
+                        <h1 class="no-margin pad-top ellp placeholder-glow" id="name">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-3"></span>
+                        </h1>
+                        <h5 class="no-margin opacity-1 pad-both ellp placeholder-glow" id="category">
+                            <span class="placeholder col-3"></span>
+                            <span class="placeholder col-4"></span>
+                        </h5>
+                        <h5 class="no-margin opacity-2 pad-bot ellp placeholder-glow">
+                            <span class="placeholder col-2"></span>
+                            <span class="placeholder col-4"></span>
+                        </h5>
+                    </div>  
                 </div>
             </div>
 

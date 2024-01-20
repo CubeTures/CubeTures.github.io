@@ -3,6 +3,7 @@ TODO
 - Add filters to searching
 - Change api to tripadvisor
 - Add broken heart if there are no matches and everyone has responded
+- Textures for headers and footers?
 
 
 Main Page

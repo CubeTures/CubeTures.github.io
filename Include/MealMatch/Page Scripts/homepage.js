@@ -5,7 +5,7 @@ import { goToMatch } from "./redirect.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const decidedImage = "/Images/MealMatch/Favorite.svg";
+const decidedImage = "/Images/MealMatch/Favorite.svg", failedImage = "/Images/MealMatch/Broken_heart.svg";
 
 function onDocumentLoad() {
     setLogging();
@@ -149,6 +149,7 @@ function addToHomepage(match, creator, id, uid) {
 
     const image = clone.querySelector("#match-image");
     if(match["decided"]) { image.src = decidedImage; }
+    else if(match["failed"]) { image.src = failedImage; }
 
     matchElement.addEventListener("click", () => goToMatch(id));
 

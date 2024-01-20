@@ -104,16 +104,25 @@ async function checkPlaceDecision(id) {
     if(!isDecided) {
         const path = getResponsesPath(id);
         const responses = await getUserData(path, matchID);
+        const decisionPath = `${getLocationPath(id)}/decision`;
+        const decision = await getUserData(decisionPath, matchID);
 
-        let yes = 0, total = 0;
+        let yes = 0, responded = 0, total = 0;
         for(const [ id, decision ] of Object.entries(responses)) {
             if(decision == "Y") { yes++; }
+            if(decision != "U") { responded++; }
             total++;
         }
         let leniency = Math.max(Math.floor(Math.sqrt(total - 1) - 1), 0);
+        const yesVote = yes + leniency >= total;
+        const allResponded = responded == total;
 
-        if(yes + leniency >= total) {
+        if(yesVote) {
             placeDecided(id);
+        }
+        if(!decision && allResponded) {
+            setIndividualDecision(id, yesVote);
+            awaitIndividualDecision(id);
         }
     }
 }
@@ -162,8 +171,47 @@ async function getDecidedHTML(decided) {
     return `${html}`;    
 }
 
+function setIndividualDecision(id, yesVote) {
+    const locationPath = getLocationPath(id);
+    let data = {};
+    data["decision"] = yesVote ? "Y" : "N";
+    updateUserData(locationPath, data, matchID);
+}
+function awaitIndividualDecision(id) {
+    const decisionPath = `${getLocationPath(id)}/decision`;
+    onUserData(decisionPath, checkFailedMatch);
+}
+async function checkFailedMatch() {
+    const decidedPath = getDecidedPath();
+    const hasDecided = await getUserData(decidedPath, matchID);
+
+    if(!hasDecided) {
+        const path = "public/match/locations";
+        const locations = await getUserData(path, matchID);
+
+        let haveDecision = 0, total = 0;
+        for(const [ id, location ] of Object.entries(locations)) {
+            if(location["decision"]) { haveDecision++; }
+            total++;
+        }
+
+        if(haveDecision == total) {
+            setFailedMatch();
+        }
+    }
+}
+function setFailedMatch() {
+    const path = "public/match";
+    let data = {};
+    data["failed"] = true;
+    updateUserData(path, data, matchID);
+}
+
+function getLocationPath(id) {
+    return `public/match/locations/${id}`;
+}
 function getResponsesPath(id) {
-    return `public/match/locations/${id}/responses`;
+    return `${getLocationPath(id)}/responses`;
 }
 function getDecidedPath() {
     return "public/match/decided";
