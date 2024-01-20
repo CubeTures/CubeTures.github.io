@@ -29,6 +29,10 @@
 .primary-color {
   background-color: var(--primaryColor);
 }
+.primary-color-text {
+  color: var(--primaryColor);
+  border: 1px var(--primaryColor) solid !important;
+}
 .primary-filter {
   filter: invert(46%) sepia(69%) saturate(4206%) hue-rotate(321deg) brightness(101%) contrast(97%);
 }
