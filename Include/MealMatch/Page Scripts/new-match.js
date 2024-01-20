@@ -9,7 +9,7 @@ let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
 let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
-let loadValue, loadBar, loadDebug, matchLoadModal, matchErrorModal, matchCancelModal;
+let loadValue, loadBar, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -144,7 +144,6 @@ function setRadiusValue() {
 
 function setMatch() {
     loadBar = document.getElementById("load-bar");
-    loadDebug = document.getElementById("load-debug");
     matchLoadModal = getModal("matchLoadModal");
     matchErrorModal = getModal("matchErrorModal");
     matchCancelModal = getModal("matchCancelModal");
@@ -160,8 +159,8 @@ async function tryMatch() {
         const data = await createNewMatch(inputData, matchLoad, matchError);
 
         if(!status["abort"]) {
-            //await updateMatchData(data);
-            //goToMatch(getCookie("uid"));
+            await updateMatchData(data);
+            goToMatch(getCookie("uid"));
         }
     }
     else {
@@ -196,18 +195,17 @@ function resetMatchLoad() {
     loadBar.textContent = "0%";
 }
 function matchLoad(updateValue, locationUpdate=false) {
+    let percent = "";
     if(locationUpdate) {
         loadValue = updateValue;
+        percent = `${Math.round(loadValue)}%`;
     }
     else {
-        loadValue += updateValue;
+        percent = `${Math.floor(loadValue + updateValue)}%`;
     }
 
-    const percent = `${loadValue}%`;
     loadBar.style.width = percent;
     loadBar.textContent = percent;
-
-    loadDebug.textContent += `${(locationUpdate ? "location:" : "photo:")} ${loadValue} part, ${percent} percent`;
 }
 function matchError(error) {
     matchLoadModal.hide();
