@@ -6,7 +6,7 @@
        <link rel="icon" type="image/x-icon" href="/Images/MealMatch/Logo (Simple).svg">
     </head>
 
-    <body class="dark-color text-light full-screen">
+    <body class="dark-color text-light full-screen food-texture">
         <div class="vertical-flex">
             <!-- Slot -->
             <div class="slot" id="slot">
@@ -105,6 +105,11 @@
                     <div class="switch-box rounded" id="switch">
                         <!-- Photos -->
                         <div class="dark-color padded rounded photo-box no-margin primary-color-text" id="decided-box" style="overflow-y: auto !important;">
+                            <div class="text-center visually-hidden" id="failed-text">
+                                Everyone has responded and no matches have been made.
+                                <br/>
+                                Try a different location or different filters.
+                            </div>
                         </div>
                     </div>
 
@@ -157,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Info -->
                     <div class="primary-color padded rounded no-margin info-box" id="info">
                         <h1 class="no-margin pad-top ellp placeholder-glow" id="name">
@@ -183,7 +188,7 @@
                         <img class="toolbar-image" src="/Images/MealMatch/Close_round Outline.svg">
                     </a>
                     <a type="button" class="btn image-button rounded-pill choice-btn-alt" href="/Pages/MealMatch/home.html">
-                        <img class="toolbar-image primary-filter" src="/Images/MealMatch/Home.svg">
+                        <img class="toolbar-image" src="/Images/MealMatch/Home Outline.svg">
                     </a>
                     <a type="button" class="btn image-button rounded-pill choice-btn" id="yes">
                         <img class="toolbar-image" src="/Images/MealMatch/Favorite Outline.svg">
@@ -216,6 +221,7 @@
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>
         
         <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
+        <script type="module" src="/Include/MealMatch/Page Scripts/texture-offset.js"></script>
         <script type="module" src="/Include/MealMatch/Firebase/firebase-initialize.js"></script>
         <script type="module" src="/Include/MealMatch/Firebase/firebase-login.js"></script>
         <script type="module" src="/Include/MealMatch/Page Scripts/match.js"></script>

@@ -3,7 +3,7 @@ import { getCookie } from "../../Miscellaneous/Cookies.js";
 import { getNested } from "../../Miscellaneous/Object Commands.js";
 import MatchTile from "./match-tile.js";
 let matchID, userID, slot, template;
-let decidedBox, decidedText, decidedModal;
+let decidedBox, decidedText, failedText, decidedModal;
 const confettiOptions = {
     particleCount: 100,
     spread: 70,
@@ -77,6 +77,7 @@ function hidePlaceholder() {
 function setDecision() {
     decidedBox = document.getElementById("decided-box");
     decidedText = document.getElementById("decided-text");
+    failedText = document.getElementById("failed-text");
     decidedModal = getModal("decidedModal");
 
     const path = getDecidedPath();
@@ -139,12 +140,18 @@ async function displayDecided() {
     const decidedPath = getDecidedPath();
     const decided = await getUserData(decidedPath, matchID);
 
+    const failedPath = "public/match/failed";
+    const failed = await getUserData(failedPath, matchID);
+
     if(decided) {
         const html = await getDecidedHTML(decided);
         decidedModal.show();
         decidedText.innerHTML = html;
         decidedBox.innerHTML = html;
         confetti(confettiOptions);
+    }
+    else if(failed) {
+        failedText.classList.remove("visually-hidden");
     }
 }
 async function getDecidedHTML(decided) {

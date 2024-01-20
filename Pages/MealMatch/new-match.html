@@ -8,7 +8,7 @@
 
     <body class="dark-color text-light">
         <!-- Toolbar -->
-        <nav class="navbar top-div fixed-bottom top-border" id="toolbar">
+        <nav class="navbar top-div fixed-bottom top-border food-texture" id="toolbar">
             <div class="container-fluid justify-content-evenly">
                 <a type="button" class="btn image-button" href="/Pages/MealMatch/home.html">
                     <img class="toolbar-image" src="/Images/MealMatch/Home.svg">
@@ -23,7 +23,7 @@
         </nav>
 
         <!-- Header -->
-        <div class="top-div sticky-top bottom-border">
+        <div class="top-div sticky-top bottom-border food-texture">
             <br>
             <h1 class="display-1 pad-bot-rem no-margin">New Match</h1>
         </div>
@@ -184,18 +184,6 @@
                     </button>
                 </div>
 
-                <!-- Search Method -->
-                <!--div>
-                    <p class="no-margin">Search Method</p>
-                    <div class="d-flex flex-wrap">
-                        <input type="radio" class="btn-check" name="options-base" id="simple-search" autocomplete="off" checked>
-                        <label class="btn btn-outline-light flex-wrap-checkbox" for="simple-search">Simple</label>
-
-                        <input type="radio" class="btn-check" name="options-base" id="complex-search" autocomplete="off">
-                        <label class="btn btn-outline-light flex-wrap-checkbox" for="complex-search">Complex</label>
-                    </div>
-                </div-->
-
                 <div>
                     <p class="no-margin" style="margin-top: .5rem !important;">
                         Search Radius: <output id="radius-value">5</output> Mile(s)
@@ -301,7 +289,7 @@
                     <div class="modal-body">
                         <ul>
                             <li>Please select at least one person to create a match.</li>
-                            <li>If you have no people are showing up, you need to register a friend. 
+                            <li>If no people are showing up, you need to register a friend. 
                                 To do so, follow these steps:
                                 <ol>
                                     <li>Go to the friend tab.</li>
@@ -395,9 +383,9 @@
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>
 
         <link href="/Include/MealMatch/mealmatch.css" rel="stylesheet">
+        <script type="module" src="/Include/MealMatch/Page Scripts/texture-offset.js"></script>
         <script type="module" src="/Include/MealMatch/Firebase/firebase-initialize.js"></script>
         <script type="module" src="/Include/MealMatch/Firebase/firebase-login.js"></script>
-        <script type="module" src="/Include/MealMatch/Google APIs/google-api.js"></script>
         <script type="module" src="/Include/MealMatch/Page Scripts/new-match.js"></script>
     </body>
 </html>

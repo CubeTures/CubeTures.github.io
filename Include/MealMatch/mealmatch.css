@@ -67,6 +67,12 @@ table tr td, table tr th{
   background-color: var(--transparent) !important;
 }
 
+.food-texture {
+  background-image: url("/Images/MealMatch/Food\ Texture.svg");
+  background-size: 250px auto;
+  /*randomly set the background-position of this class*/
+}
+
 body {
   font-family: "Baloo";
   padding-bottom: 5rem;

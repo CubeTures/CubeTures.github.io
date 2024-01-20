@@ -9,7 +9,7 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
-let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
+let radiusRange, radiusValue;
 let loadValue, loadBar, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
@@ -133,8 +133,6 @@ function peopleError() {
 }
 
 function setAdvanced() {
-    // simpleSearchBtn = document.getElementById("simple-search");
-    // complexSearchBtn = document.getElementById("complex-search");
     radiusRange = document.getElementById("radius-range");
     radiusValue = document.getElementById("radius-value");
     radiusRange.oninput = setRadiusValue;
@@ -163,9 +161,6 @@ async function tryMatch() {
             await updateMatchData(data);
             goToMatch(getCookie("uid"));
         }
-    }
-    else {
-        matchError();
     }
 }
 async function updateMatchData(data) {
@@ -234,13 +229,12 @@ async function tryGetInputs() {
         return;
     }
 
-    const [ searchMethod, radius ] = getAdvanced();
+    const [ radius ] = getAdvanced();
     const [ width, height ] = getDeviceData();
 
     return {
         "locationData": locationData,
         "people": people,
-        // "method": searchMethod,
         "radius": radius,
         "width": width,
         "height": height
@@ -290,14 +284,8 @@ async function tryGetPeople() {
     return people;
 }
 function getAdvanced() {
-    let searchMethod = "simple";
-    // if(complexSearchBtn.getAttribute("checked")) {
-    //     searchMethod = "complex";
-    // }
-
     const radius = parseFloat(radiusValue.value) * 1609;
-
-    return [ searchMethod, radius ];
+    return [ radius ];
 }
 function getDeviceData() {
     let screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
