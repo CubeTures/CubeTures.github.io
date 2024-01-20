@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getDatabase, ref, get, set, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 let auth = null;
 
@@ -18,7 +18,7 @@ function getReference(uid, dataType) {
     checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
-    console.log(path);
+    //console.log(path);
     return ref(db, path);
 }
 async function hasUser(otherUID=null) {
@@ -40,6 +40,11 @@ async function updateUserData(dataType, data, otherUID=null) {
     const uid = getUID(otherUID);
     const reference = getReference(uid, dataType);
     update(reference, data);
+}
+async function onUserData(dataType, callback, otherUID=null) {
+    const uid = getUID(otherUID);
+    const reference = getReference(uid, dataType);
+    onValue(reference, callback);
 }
 function removeUserData(dataType, otherUID=null) {
     const uid = getUID(otherUID);
@@ -87,5 +92,6 @@ function removeCookie(cookieName) {
     }
 }
 
-export { hasUser, getUserData, setUserData, updateUserData, removeUserData, getDisplayName,
+export { hasUser, getUserData, setUserData, updateUserData,
+    onUserData, removeUserData, getDisplayName,
     hasCookie, getCookie, setCookie, removeCookie }

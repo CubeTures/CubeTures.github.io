@@ -58,7 +58,6 @@ export class Stack {
 
     onPopSub(callback) {
         this.onPopListeners.push(callback);
-        console.log(this.onPopListeners);
     }
     onPopUnsub(callback) {
         const index = this.onPopListeners.indexOf(callback);

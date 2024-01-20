@@ -36,7 +36,10 @@
   background-color: var(--primary-transparent);
 }
 .dark-color {
-  background-color: #282828;
+  background-color: var(--darkColor);
+}
+.dark-text {
+  color: var(--darkColor);
 }
 .transparent-bg {
   background-color: var(--transparent);
@@ -95,8 +98,8 @@ body {
 .no-top-border {
   border-top: 0px !important;
 }
-.top-border {
-  border-top: 2px solid white !important;
+.table-top-border {
+  border-top: 1px solid white !important;
 }
 .btn {
   border-color: var(--borderColor);
@@ -106,6 +109,16 @@ body {
 }
 .no-margin {
   margin: 0 !important;
+  margin-block-end: 0;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.margin-top {
+  margin-top: 8px !important;
+}
+.negative-margin-top {
+  margin-top: -8px !important;
 }
 .no-outer {
   margin: 0 !important;
@@ -197,6 +210,11 @@ body {
 .offscreen-left {
   transition: all .5s ease;
   left: -100%;
+}
+.prevent-select {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .choice-btn, .choice-btn-alt {
@@ -384,4 +402,19 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]::-ms-thumb {
   background-color: var(--primaryColor);
   border: 1px solid var(--borderColor);
+}
+
+.spoiler { transition: color 0.3s; position: relative }
+.spoiler:not(:hover), .spoiler:not(:hover) * { color: transparent }
+.spoiler * { transition: color 0.3s, background 0.3s }
+.spoiler:not(:hover) * { background: transparent }
+.spoiler::after {
+    content: 'Hover to View';
+    position: absolute;
+    top: 0; left: 0;
+    color: transparent;
+}
+.spoiler:not(:hover)::after {
+    color: #ffffff;
+    transition: color 0.3s 0.3s;
 }

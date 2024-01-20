@@ -1,6 +1,8 @@
 import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
+import { getCookie } from "../Firebase/firebase-database.js"
+import { getNested } from "../../Miscellaneous/Object Commands.js";
 const EARTH_RADIUS = 3958.8, getPhotos = true, maxPhotoCount = 5;
 export let status = { "abort": false };
 
@@ -107,7 +109,6 @@ async function getPhotoData(inputData, location, matchLoadCallback, loadPercent)
     else {
         photos["empty"] = true;
     }
-    console.log(photos);
 
     return photos;
 }
@@ -121,6 +122,9 @@ function getResponseData(people) {
     for(const id in people) {
         result[id] = "U";
     }
+
+    const uid = getCookie("uid");
+    result[uid] = "U";
 
     return result;
 }
@@ -152,12 +156,6 @@ function latlngFloat(latlng) {
 }
 function toRadians(angleDegrees) {
     return (angleDegrees * Math.PI) / 180.0;
-}
-
-function getNested(obj, level,  ...rest) {
-    if (obj === undefined) return null;
-    if (rest.length == 0 && obj.hasOwnProperty(level)) return obj[level];
-    return getNested(obj[level], ...rest);
 }
 
 export { createNewMatch };

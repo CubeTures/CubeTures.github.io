@@ -1,27 +1,29 @@
 TODO
 - Hide api key in secret github variables
 - Add filters to searching
-- Add loading screen/progress bar while the match is being created
 - Change api to tripadvisor
+- Move cookies commands to separate js file
+- Add broken heart if there are no matches and everyone has responded
+- Show the decided on the "no more matches screen"
 
 
 Main Page
--- Name of Restaurant
--- Category (bbq, chinese, etc)
--- Photos
--- Distance from center location
--- Price Range
+- Name of Restaurant
+- Category (bbq, chinese, etc)
+- Photos
+- Distance from center location
+- Price Range
 
 Extra Info
--- Star Rating
--- Website
--- Phone number
--- Address (link to google maps)
--- Open hours (all days of week)
+- Star Rating
+- Website
+- Phone number
+- Address (link to google maps)
+- Open hours (all days of week)
 
 
-Leiniency:
-round(sqrt(num_people))
+Leniency:
+max( floor( sqrt( total - 1 ) - 1 ), 0 )
 
 Advanced Search Protocol (Deprecated):
 1. Gets within 5 mile radius

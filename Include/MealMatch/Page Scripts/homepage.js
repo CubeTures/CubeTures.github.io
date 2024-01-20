@@ -4,6 +4,7 @@ import { goToMatch } from "./redirect.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const decidedImage = "/Images/MealMatch/Favorite.svg";
 
 function onDocumentLoad() {
     setLogging();
@@ -89,9 +90,10 @@ async function populateMatches() {
     if(requests.length > 0) { matches = matches.concat(requests); }
 
     matches.sort(sortByDate);
+    const uid = getCookie("uid");
     for(const match of matches) {
         console.log(match);
-        addToHomepage(match["match"], match["creator"], match["id"]);
+        addToHomepage(match["match"], match["creator"], match["id"], uid);
     }
 
     return matches.length != 0;
@@ -100,10 +102,9 @@ async function populatePersonalMatch() {
     const match = await getUserData("public/match");
     if(match) {
         const uid = getCookie("uid");
-        const displayName = await getDisplayName();
         return { 
             "match": match,
-            "creator": displayName,
+            "creator": "You",
             "id": uid
         };
     }
@@ -127,7 +128,7 @@ async function populateMatchRequests() {
 
     return reqArray;
 }
-function addToHomepage(match, creator, id) {    
+function addToHomepage(match, creator, id, uid) {    
     const clone = matchTemplate.content.cloneNode(true);
 
     const matchElement = clone.querySelector("#match-element");
@@ -143,7 +144,10 @@ function addToHomepage(match, creator, id) {
     address.textContent = match["address"];
 
     const people = clone.querySelector("#people");
-    people.textContent = `With ${getPeople(match)}`;
+    people.textContent = `With ${getPeople(match, uid)}`;
+
+    const image = clone.querySelector("#match-image");
+    if(match["decided"]) { image.src = decidedImage; }
 
     matchElement.addEventListener("click", () => goToMatch(id));
 
@@ -159,10 +163,12 @@ function getDate(match) {
     const newTime = `${timeNum[0]}:${timeNum[1]} ${timeSplit[1]}`;
     return `${newDate} at ${newTime}`;
 }
-function getPeople(match) {
+function getPeople(match, uid) {
     let people = "";
     for(const [ id, person ] of Object.entries(match["people"])) {
-        people += `${(people == "" ? "" : ", ")}${person}`;
+        people += (people == "" ? "" : ", ");
+        if(id == uid) { people += "You"; }
+        else { people += person; }
     }
     
     return people;

@@ -7,15 +7,13 @@
     </head>
 
     <body class="dark-color text-light full-screen">
-        <p class="visually-hidden" id="display">Displaying match created by ...</p>
-
         <div class="vertical-flex">
             <!-- Slot -->
             <div class="slot" id="slot">
                 <!-- Template -->
                 <template id="template">
                     <!-- Tile -->
-                    <div class="tile" id="tile">
+                    <div class="tile prevent-select" id="tile">
                         <!-- Switch -->
                         <div class="switch-box rounded" id="switch">
                             <!-- Photos -->
@@ -41,6 +39,46 @@
                                     <a class="text-white" id="phone">N/A</a>
                                 </div>
                                 <div id="hours"></div>
+                                <div>
+                                    <table class="table table-dark table-borderless no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Response</th>
+                                                <th scope="col">Amount of Votes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-top-border">
+                                            <tr>
+                                                <td scope="row">Like</td>
+                                                <td>
+                                                    <blockquote class="spoiler no-margin" id="yes-votes">
+                                                        0
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">Dislike</td>
+                                                <td>
+                                                    <blockquote class="spoiler no-margin" id="no-votes">
+                                                        0
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">Undecided</td>
+                                                <td>
+                                                    <blockquote class="spoiler no-margin" id="undecided-votes">
+                                                        0
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">Total</td>
+                                                <td id="total-votes">0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -102,21 +140,23 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Placeholder -->
+                <div class="tile" style="z-index: -1;">
+                    <!-- Switch -->
+                    <div class="switch-box rounded" id="switch">
+                        <!-- Photos -->
+                        <div class="dark-color padded rounded photo-box no-margin white-border text-center" id="decided-box" style="overflow-y: hidden !important;">
+                            
+                        </div>
+                    </div>
 
                     <!-- Info -->
-                    <div class="primary-color padded rounded no-margin info-box" id="info">
-                        <h1 class="no-margin pad-top ellp placeholder-glow" id="name">
-                            <span class="placeholder col-7"></span>
-                            <span class="placeholder col-3"></span>
-                        </h1>
-                        <h5 class="no-margin opacity-1 pad-both ellp placeholder-glow" id="category">
-                            <span class="placeholder col-3"></span>
-                            <span class="placeholder col-4"></span>
-                        </h5>
-                        <h5 class="no-margin opacity-2 pad-bot ellp placeholder-glow">
-                            <span class="placeholder col-2"></span>
-                            <span class="placeholder col-4"></span>
-                        </h5>
+                    <div class="dark-color padded rounded no-margin white-border info-box" id="info">
+                        <h1 class="no-margin pad-top ellp">No More Matches.</h1>
+                        <h5 class="no-margin opacity-1 pad-bot ellp">Wait for others to respond...</h5>
+                        <h5 class="no-margin opacity-2 pad-bot ellp">Or create a new match!</h5>
                     </div>                  
                 </div>
             </div>
@@ -135,6 +175,25 @@
                     </a>
                 </div>
             </nav>
+        </div>
+
+        <!-- Decided Modal -->
+        <div class="modal fade" id="decidedModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="decidedModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="decidedModalLabel">Match!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="decided-text">
+                        Body
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light white-border" data-bs-dismiss="modal">Continue Matching</button>
+                        <a class="btn btn-light white-border" href="/Pages/MealMatch/home.html">Return Home</a>
+                    </div>
+                </div>
+            </div>
         </div>
         
         

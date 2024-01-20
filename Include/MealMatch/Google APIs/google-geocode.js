@@ -1,6 +1,7 @@
 import { httpRequest, postRequest } from "../../api-commands.js";
 import { REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody } from "./google-api.js";
+import { getNested } from "../../Miscellaneous/Object Commands.js";
 
 const importantComponents = ["street_number", "route", "locality", "administrative_area_level_1", "postal_code"];
 
@@ -137,12 +138,6 @@ function hasIssue(component) {
     }
 
     return false;
-}
-
-function getNested(obj, level,  ...rest) {
-    if (obj === undefined) return null;
-    if (rest.length == 0 && obj.hasOwnProperty(level)) return obj[level];
-    return getNested(obj[level], ...rest);
 }
 
 export { getCurrentLocation, validateAddress };

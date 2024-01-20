@@ -104,7 +104,10 @@ export default class MatchTile {
         const hours = clone.querySelector("#hours");
         const hoursArray = location["hours"].split(",");
         hours.innerHTML = this.getHoursTable(hoursArray);
+
+        this.setVotes(clone, location);
     }
+    
     setPhotos(location) {
         const classes = "class='match-image rounded bordered'";
     
@@ -173,7 +176,7 @@ export default class MatchTile {
         return ""+
             `<table class="table table-dark table-borderless no-margin">
                 ${head}
-                <tbody class="top-border">${body}</tbody>
+                <tbody class="table-top-border">${body}</tbody>
             </table>`;
     }
     getHoursHead() {
@@ -261,6 +264,30 @@ export default class MatchTile {
         return num;
     }
 
+    setVotes(clone, location) {
+        const yes = clone.querySelector("#yes-votes");
+        const no = clone.querySelector("#no-votes");
+        const und = clone.querySelector("#undecided-votes");
+        const tot = clone.querySelector("#total-votes");
+
+        const [ y, n, u, t ] = this.getVoteCounts(location);
+        yes.textContent = y;
+        no.textContent = n;
+        und.textContent = u;
+        tot.textContent = t;
+    }
+    getVoteCounts(location) {
+        let y = 0, n = 0, u = 0, t = 0;
+        for(const [ id, response ] in Object.entries(location["responses"])) {
+            if(response == "Y") { y++; }
+            else if(response == "N") { n++; }
+            else { u++; }
+            t++;
+        }
+
+        return [ y, n, u, t ];
+    }
+
     setActions(clone) {
         this.setSwitch(clone);
         this.setButtonClicks(true);
@@ -323,7 +350,6 @@ export default class MatchTile {
     }
     dragTile(e) {
         if(!this.startX) { return; }
-        e.preventDefault();
         const { x } = this.getPosition(e);
         const offsetX = x - this.startX;
     
@@ -358,7 +384,7 @@ export default class MatchTile {
         const direction = decision ? "right" : "left";
         this.tile.classList.add(`offscreen-${direction}`);
         this.removeFromStack();
-        this.decisionCallback(decision);
+        this.decisionCallback(this.id, decision);
     }
     
     setTransitions(state) {

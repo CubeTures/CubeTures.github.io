@@ -192,7 +192,6 @@ async function removeOldMatchRequests(uid, oldMatch) {
 function resetMatchLoad() {
     loadValue = 0;
     loadBar.style.width = 0;
-    loadBar.textContent = "0%";
 }
 function matchLoad(updateValue, locationUpdate=false) {
     let percent = "";
@@ -205,7 +204,6 @@ function matchLoad(updateValue, locationUpdate=false) {
     }
 
     loadBar.style.width = percent;
-    loadBar.textContent = percent;
 }
 function matchError(error) {
     matchLoadModal.hide();
@@ -229,11 +227,11 @@ async function tryGetInputs() {
         return;
     }
 
-    const people = tryGetPeople();
+    const people = await tryGetPeople();
     if(people == null) { 
         peopleError(); 
         return;
-    } 
+    }
 
     const [ searchMethod, radius ] = getAdvanced();
     const [ width, height ] = getDeviceData();
@@ -271,7 +269,7 @@ async function getLocationData(address, city, state, zip, latlng) {
         "latlng": latlng
     }
 }
-function tryGetPeople() {
+async function tryGetPeople() {
     let people = {};
     let isEmpty = true;
 
@@ -330,7 +328,7 @@ function setOnClick(elementID, callback) {
         .addEventListener("click", callback);
 }
 function getModal(elementID) {
-    return new bootstrap.Modal(document.getElementById(elementID), {});
+    return new bootstrap.Modal(document.getElementById(elementID));
 }
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
