@@ -1,8 +1,16 @@
-import { getCookie, getUserData, updateUserData, onUserData } from "../Firebase/firebase-database.js";
+import { getUserData, updateUserData, onUserData } from "../Firebase/firebase-database.js";
+import { getCookie } from "../../Miscellaneous/Cookies.js";
 import { getNested } from "../../Miscellaneous/Object Commands.js";
 import MatchTile from "./match-tile.js";
 let matchID, userID, slot, template;
-let decidedText, decidedModal;
+let decidedBox, decidedText, decidedModal;
+const confettiOptions = {
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+    shapes: ["square"],
+    zIndex: 1060
+}
 
 function onDocumentLoad() {
     setID();
@@ -36,8 +44,6 @@ function setTile() {
 async function createTiles() {
     const locationsUnclean = await getUserData("public/match/locations", matchID);
     const locations = removeResponded(locationsUnclean);
-    console.log(locationsUnclean);
-    console.log(locations);
 
     const len = Object.keys(locations).length;
     let count = 0;
@@ -69,6 +75,7 @@ function hidePlaceholder() {
 }
 
 function setDecision() {
+    decidedBox = document.getElementById("decided-box");
     decidedText = document.getElementById("decided-text");
     decidedModal = getModal("decidedModal");
 
@@ -127,6 +134,8 @@ async function displayDecided() {
         const html = await getDecidedHTML(decided);
         decidedModal.show();
         decidedText.innerHTML = html;
+        decidedBox.innerHTML = html;
+        confetti(confettiOptions);
     }
 }
 async function getDecidedHTML(decided) {
@@ -143,7 +152,7 @@ async function getDecidedHTML(decided) {
 
         html += `
         <h1>${name}</h1>
-        <ul>
+        <ul class="opacity-1">
             <li> ${category} </li>
             <li> <a class="text-white" href="${maps}">${address}</a> </li>
         </ul>

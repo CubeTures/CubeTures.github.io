@@ -1,5 +1,6 @@
 import { getDatabase, ref, get, set, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import { getCookie } from "../../Miscellaneous/Cookies.js";
 let auth = null;
 
 function checkAuth() {
@@ -57,41 +58,6 @@ async function getDisplayName(otherUID=null) {
     return await getUserData("readonly/display_name", uid);
 }
 
-function hasCookie(cookieName) {
-    return document.cookie.split(';').some(c => {
-        return c.trim().startsWith(cookieName + '=');
-    });
-}
-function getCookie(cookieName) {
-    let cookieList = document.cookie.split(" ");
-    for(let cookie of cookieList) {
-        let spl = cookie.split("=");
-        if(spl[0] == cookieName) {
-            if(spl[1].indexOf(";") >= 0) {
-                return spl[1].substring(0, spl[1].indexOf(";"));
-            }
-            return spl[1];
-        }
-    }
-
-    console.log(`${cookieName} not found in cookies`);
-    return null;
-}
-function setCookie(cookieName, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = cookieName + "=" + (value || "")  + expires + "; path=/";
-}
-function removeCookie(cookieName) {
-    if(hasCookie(cookieName)) {
-        document.cookie = `${cookieName}=;path=/;domain=${location.hostname};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    }
-}
 
 export { hasUser, getUserData, setUserData, updateUserData,
-    onUserData, removeUserData, getDisplayName,
-    hasCookie, getCookie, setCookie, removeCookie }
+    onUserData, removeUserData, getDisplayName }

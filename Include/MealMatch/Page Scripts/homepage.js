@@ -1,4 +1,5 @@
-import { getUserData, removeCookie, getDisplayName, getCookie } from "../Firebase/firebase-database.js";
+import { getUserData, getDisplayName } from "../Firebase/firebase-database.js";
+import { getCookie, removeCookie } from "../../Miscellaneous/Cookies.js";
 import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
 import { goToMatch } from "./redirect.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;

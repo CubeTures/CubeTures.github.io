@@ -1,6 +1,7 @@
 import { getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider,
     signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { hasUser, updateUserData, setCookie, getCookie } from "./firebase-database.js";
+import { hasUser, updateUserData } from "./firebase-database.js";
+import { setCookie, getCookie } from "../../Miscellaneous/Cookies.js";
 import { REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters } from "../Google APIs/google-api.js";
 import { postRequest } from "../../api-commands.js";
 const homepagePath = "/Pages/MealMatch/home.html";

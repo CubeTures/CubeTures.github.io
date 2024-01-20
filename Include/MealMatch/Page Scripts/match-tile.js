@@ -35,8 +35,8 @@ export default class MatchTile {
 
     setVariables(clone, id, decisionCallback, initiallyActive) {
         this.tile = clone.querySelector("#tile");
-        this.tile.style.zIndex = stack.size;
-        clone.querySelector("#extra").style.zIndex = stack.size + 1;
+        this.tile.style.zIndex = stack.size + 1;
+        clone.querySelector("#extra").style.zIndex = stack.size + 2;
 
         this.id = id;
         this.decisionCallback = decisionCallback;

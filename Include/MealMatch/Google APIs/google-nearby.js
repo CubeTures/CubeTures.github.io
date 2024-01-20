@@ -1,7 +1,7 @@
 import { httpRequestJson, postRequest } from "../../api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
     getPhotoUrl } from "./google-api.js";
-import { getCookie } from "../Firebase/firebase-database.js"
+import { getCookie } from "../../Miscellaneous/Cookies.js";
 import { getNested } from "../../Miscellaneous/Object Commands.js";
 const EARTH_RADIUS = 3958.8, getPhotos = true, maxPhotoCount = 5;
 export let status = { "abort": false };

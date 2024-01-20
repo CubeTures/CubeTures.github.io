@@ -2,9 +2,7 @@ TODO
 - Hide api key in secret github variables
 - Add filters to searching
 - Change api to tripadvisor
-- Move cookies commands to separate js file
 - Add broken heart if there are no matches and everyone has responded
-- Show the decided on the "no more matches screen"
 
 
 Main Page
