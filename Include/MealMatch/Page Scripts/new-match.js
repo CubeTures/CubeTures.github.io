@@ -160,8 +160,8 @@ async function tryMatch() {
         const data = await createNewMatch(inputData, matchLoad, matchError);
 
         if(!status["abort"]) {
-            await updateMatchData(data);
-            goToMatch(getCookie("uid"));
+            //await updateMatchData(data);
+            //goToMatch(getCookie("uid"));
         }
     }
     else {
