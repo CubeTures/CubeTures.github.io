@@ -70,12 +70,17 @@ table tr td, table tr th{
 .food-texture {
   background-image: url("/Images/MealMatch/Food\ Texture.svg");
   background-size: 250px auto;
-  /*randomly set the background-position of this class*/
+}
+.food-texture-dark {
+  background-image: url("/Images/MealMatch/Food\ Dark.svg");
+  background-size: 250px auto;
 }
 
 body {
   font-family: "Baloo";
   padding-bottom: 5rem;
+  position: relative;
+  min-height: 100dvh;
 }
 .padded {
   margin-left: 1rem !important;
