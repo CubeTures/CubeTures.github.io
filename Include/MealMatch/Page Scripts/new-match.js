@@ -9,7 +9,7 @@ let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
 let simpleSearchBtn, complexSearchBtn, radiusRange, radiusValue;
-let loadValue, loadBar, matchLoadModal, matchErrorModal, matchCancelModal;
+let loadValue, loadBar, loadDebug, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -144,6 +144,7 @@ function setRadiusValue() {
 
 function setMatch() {
     loadBar = document.getElementById("load-bar");
+    loadDebug = document.getElementById("load-debug");
     matchLoadModal = getModal("matchLoadModal");
     matchErrorModal = getModal("matchErrorModal");
     matchCancelModal = getModal("matchCancelModal");
@@ -205,6 +206,8 @@ function matchLoad(updateValue, locationUpdate=false) {
     const percent = `${loadValue}%`;
     loadBar.style.width = percent;
     loadBar.textContent = percent;
+
+    loadDebug.textContent += `${(locationUpdate ? "location:" : "photo:")} ${loadValue} part, ${percent} percent`;
 }
 function matchError(error) {
     matchLoadModal.hide();
