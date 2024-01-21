@@ -7,12 +7,3 @@ on:
 
 env:
   GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-
-jobs:
-  set-secrets:
-    runs-on: ubuntu-latest
-    environment: github-pages
-
-    steps:        
-      - name: Display Secrets
-        run: echo $GOOGLE_API_KEY
