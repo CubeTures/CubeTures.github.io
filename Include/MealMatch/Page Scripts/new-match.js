@@ -11,7 +11,7 @@ let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
 let radiusRange, radiusValue;
-let loadValue, loadBar, matchLoadModal, matchErrorModal, matchCancelModal;
+let loadValue, loadBar, matchLoadDOM, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
     setLocation();
@@ -145,21 +145,29 @@ function setRadiusValue() {
 
 function setMatch() {
     loadBar = document.getElementById("load-bar");
+    matchLoadDOM = document.getElementById("matchLoadModal");
+    matchLoadDOM.addEventListener("hide.bs.modal", () => {
+        matchLoadDOM.removeEventListener("shown.bs.modal", hideMatchLoad);
+    })
     matchLoadModal = getModal("matchLoadModal");
     matchErrorModal = getModal("matchErrorModal");
     matchCancelModal = getModal("matchCancelModal");
+
+
     setOnClick("match", tryMatch);
     setOnClick("cancel-match", cancelMatch);
 }
 async function tryMatch() {
     const inputData = await tryGetInputs();
+    console.log(inputData);
     if(inputData) {
         console.log("No errors, creating search.");
+        document.getElementById("matchLoadModal").addEventListener("show.bs.modal", ()=>console.log("show"));
         resetMatchLoad();
         matchLoadModal.show();
         const data = await createNewMatch(inputData, matchLoad, matchError);
 
-        if(!status["abort"]) {
+        if(data && !status["abort"]) {
             await updateMatchData(data);
             goToMatch(getCookie("uid"));
         }
@@ -203,12 +211,18 @@ function matchLoad(updateValue, locationUpdate=false) {
 
     loadBar.style.width = percent;
 }
+function hideMatchLoad() {
+    matchLoadModal.hide();
+    matchLoadDOM.removeEventListener("shown.bs.modal", hideMatchLoad);
+}
 function matchError(error) {
     matchLoadModal.hide();
+    matchLoadDOM.addEventListener("shown.bs.modal", hideMatchLoad);
     console.warn("Match Error");
     console.error(error);
     matchErrorModal.show();
 }
+
 function cancelMatch() {
     status["abort"] = true;
     matchCancelModal.show();

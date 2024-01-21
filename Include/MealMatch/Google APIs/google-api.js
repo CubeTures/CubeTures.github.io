@@ -103,22 +103,22 @@ function asArray(obj) {
 }
 
 function getAllFilters() {
+    return bfs(filters, 0);
+}
+function bfs(obj, depth) {
+    if(typeof(obj) == "string") { 
+        return [obj];
+    }
+
     let result = [];
-    for(const filterCategory in filters) {
-        for(const filter in filters[filterCategory]) {
-            if(filterCategory != "Store Type") {
-                for(const deepFilter in filter) {
-                    result.push(deepFilter);
-                }
-            }
-            else {
-                result.push(filter);
-            }
-        }
+    for(const o in obj) {
+        const dive = bfs(obj[o], depth + 1);
+        result = result.concat(dive);
     }
 
     return result;
 }
+
 function getReadableFilters() {
     let result = {};
     for(const filterCategory in filters) {

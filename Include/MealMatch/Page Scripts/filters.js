@@ -5,7 +5,7 @@ const spaces = 4;
 //breadth first search
 
 function setFilters() {
-    console.log(bfs(filters, 0));
+    //console.log(bfs(filters, 0));
 }
 function bfs(obj, depth) {
     const spaceStr = getSpaces(depth);
@@ -29,6 +29,34 @@ function getSpaces(num) {
         }
     }
     return result;
+}
+
+function createAccordion(filter, includeCheckboxes=false) {
+    const checkboxes = includeCheckboxes ? `<div class="checkboxes"></div>` : "";
+
+    return `
+    <div class="accordion accordion--custom">
+        <div class="accordion-item" id="${filter}-item">
+            <h2 class="accordion-header>
+                <input type="checkbox" class="form-check-input no-margin">
+                <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#${filter}-collapse-"
+                    aria-expanded="true" aria-controls="${filter}-collapse">
+                    <p class="m-font">${filter}</p>
+                </button>
+            <h2>
+            <div id="${filter}-collapse"
+            class="accordion-collapse collapse" data-bs-parent="#${filter}-item">
+                <div class="accordion-body" id="${filter}-dropdown">
+                    ${checkboxes}
+                <div>
+            </div>
+        </div>
+    </div>
+    `;
+}
+function createCheckbox() {
+    //filler
 }
 
 class FilterCheckbox {
