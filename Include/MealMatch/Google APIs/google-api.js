@@ -1,5 +1,5 @@
 //#region data
-import { API_KEY } from "../Firebase/firebase-initialize.js";
+import gak from "../Firebase/firebase-initialize.js";
 
 const masks = {
     "basic": {
@@ -113,7 +113,7 @@ function getReadableFilters() {
 }
 //#endregion
 //#region login
-const REFRESH_TOKEN_URL = `https://securetoken.googleapis.com/v1/token?key=${API_KEY}`;
+const REFRESH_TOKEN_URL = `https://securetoken.googleapis.com/v1/token?key=${gak}`;
 
 const refreshHeader = {
     "Content-Type": "application/json"
@@ -139,12 +139,12 @@ function getGeocodeParameters(latlng) {
     return { 
         "latlng": latlng, 
         "location_type": "ROOFTOP",
-        "key": API_KEY 
+        "key": gak 
     };
 }
 //#endregion
 //#region validation
-const ADDRESS_VALIDATION_URL = `https://addressvalidation.googleapis.com/v1:validateAddress?key=${API_KEY}`;
+const ADDRESS_VALIDATION_URL = `https://addressvalidation.googleapis.com/v1:validateAddress?key=${gak}`;
 
 const validationHeader = {
     "Content-Type": "application/json"
@@ -172,7 +172,7 @@ const readableFilters = getReadableFilters();
 function getNearbyHeader(useAllMasks=true) {
     return {
         'Content-Type': 'application/json',
-        'X-Goog-Api-Key': API_KEY,
+        'X-Goog-Api-Key': gak,
         'X-Goog-FieldMask': useAllMasks ? allMasks : basicMasks
     };
 }
@@ -200,10 +200,10 @@ function getNearbyBody(latlng, rad, types=allFilters) {
 //#region photos
 function getPhotoUrl(name, maxWidth, maxHeight=null) {
     if(maxHeight) {
-        return `https://places.googleapis.com/v1/${name}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${API_KEY}`;
+        return `https://places.googleapis.com/v1/${name}/media?maxHeightPx=${maxHeight}&maxWidthPx=${maxWidth}&key=${gak}`;
     }
 
-    return `https://places.googleapis.com/v1/${name}/media?maxWidthPx=${maxWidth}&key=${API_KEY}`;
+    return `https://places.googleapis.com/v1/${name}/media?maxWidthPx=${maxWidth}&key=${gak}`;
 }
 //#endregion
 

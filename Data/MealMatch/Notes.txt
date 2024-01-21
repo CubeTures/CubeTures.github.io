@@ -1,5 +1,4 @@
 TODO
-- Hide api key in secret github variables
 - Add filters to searching
 - Change api to tripadvisor
 
