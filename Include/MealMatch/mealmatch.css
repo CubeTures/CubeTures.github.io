@@ -7,6 +7,7 @@
   --primaryColor: #FB4670;
   --borderColor: #f9becb;
   --darkColor: #282828;
+  --offwhite: #f8f9fa;
   --primary-transparent: rgba(252, 74, 116, .25);
   --transparent: rgba(0, 0, 0, 0);
   --placeholder: rgba(213, 213, 213, 0.4);
@@ -117,13 +118,13 @@ body {
   border-top: 0px !important;
 }
 .table-top-border {
-  border-top: 1px solid white !important;
+  border-top: 1px solid var(--offwhite) !important;
 }
 .btn {
   border-color: var(--borderColor);
 }
 .white-border {
-  border-color: #FAF9F6;
+  border-color: var(--offwhite);
 }
 .no-margin {
   margin: 0 !important;
@@ -236,6 +237,71 @@ body {
   user-select: none;
 }
 
+#filter-div .accordion {
+  margin-top: 1rem;
+}
+#filter-div .accordion:last-child {
+  margin-bottom: 1rem;
+}
+.accordion--custom .accordion-header {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+.accordion--custom .accordion-header .accordion-button {
+  padding-left: 1rem !important; 
+}
+.accordion-header {
+  background-color: var(--primaryColor) !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px var(--offwhite) solid;
+}
+.accordion-header:has(button.collapsed) {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: none !important;
+}
+.accordion-item, .accordion-button {
+  background-color: var(--primary-transparent) !important;
+  color: var(--offwhite) !important;
+}
+.accordion-item {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.accordion-body {
+  background-color: var(--transparent) !important;
+  padding: 0;
+}
+.accordion-item {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
+.accordion--custom .accordion-body .checkboxes {
+  padding: 1rem;
+}
+.accordion-button {
+  box-shadow: none !important;
+}
+.accordion-button::after {
+  background-image: url("/Images/MealMatch/chevron-up.svg") !important;
+}
+
+.form-check-input {
+  border: 1px var(--borderColor) solid !important;
+  box-shadow: none !important;
+}
+.form-check-input:checked, .form-check-input:indeterminate {
+  background-color: var(--primaryColor) !important;
+}
+.form-check-input:not(:checked, :indeterminate) {
+  background-color: var(--primary-transparent) !important;
+}
+.form-check .form-check-label {
+  padding-top: 2px;
+}
+
 .choice-btn, .choice-btn-alt {
   transition: all .3s ease-out;
 }
@@ -245,7 +311,7 @@ body {
 }
 .choice-btn-alt:hover {
   background-color: var(--darkColor) !important;
-  border: 1px solid white !important;
+  border: 1px solid var(--offwhite) !important;
 }
 
 .top-div {
@@ -277,6 +343,10 @@ body {
   overflow: hidden;
 }
 
+.checkbox-example {
+  margin-top: 2px !important;
+  margin-left: -18px;
+}
 .pad-top {
   padding-top: 4px;
 }
@@ -434,6 +504,6 @@ input[type="range"]::-ms-thumb {
     color: transparent;
 }
 .spoiler:not(:hover)::after {
-    color: #ffffff;
+    color: var(--offwhite);
     transition: color 0.3s 0.3s;
 }

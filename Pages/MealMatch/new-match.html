@@ -179,7 +179,7 @@
             <div class="primary-color rounded padded padded-bottom" id="people">
                 <div class="d-flex justify-content-between">
                     <p class="l-font">Advanced</p>
-                    <button type="button" class="image-button" id="people-info" data-bs-toggle="modal" data-bs-target="#advancedModal">
+                    <button type="button" class="image-button" data-bs-toggle="modal" data-bs-target="#advancedModal">
                         <img class="pill-image" src="/Images/MealMatch/Info.svg">
                     </button>
                 </div>
@@ -197,20 +197,123 @@
             <br/>
         </div>
 
+        <!-- Filters -->
+        <div class="accordion accordion--custom">
+            <div class="accordion-item" id="filter-div">
+                <h2 class="accordion-header">
+                    <input type="checkbox" class="form-check-input no-margin">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapse" aria-expanded="true" aria-controls="filter-collapse">
+                        <p class="l-font">Filters
+                        </p>
+                    </button>
+                    <button type="button" class="image-button" data-bs-toggle="modal" data-bs-target="#filtersModal" style="padding-right: 1rem">
+                        <img class="pill-image" src="/Images/MealMatch/Info.svg">
+                    </button>
+                </h2>
+                <div id="filter-collapse" class="accordion-collapse collapse" data-bs-parent="#filter-div">
+                    <div class="accordion-body" id="filter-dropdown">
 
+                        <!-- Store Type -->
+                        <div class="accordion accordion--custom">
+                            <div class="accordion-item" id="filter-div-c1">
+                                <h2 class="accordion-header">
+                                    <input type="checkbox" class="form-check-input no-margin">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapse-c1" aria-expanded="true" aria-controls="filter-collapse-c1">
+                                        <p class="m-font">Store Type</p>
+                                    </button>
+                                </h2>
+                                <div id="filter-collapse-c1" class="accordion-collapse collapse show" data-bs-parent="#filter-div-c1">
+                                    <div class="accordion-body" id="filter-dropdown">
+                                        <div class="checkboxes">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Bar
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Cafe
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cultural -->
+                        <div class="accordion accordion--custom">
+                            <div class="accordion-item" id="filter-div-c2">
+                                <h2 class="accordion-header">
+                                    <input type="checkbox" class="form-check-input no-margin">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapse-c2" aria-expanded="true" aria-controls="filter-collapse-c1">
+                                        <p class="m-font">Cultural</p>
+                                    </button>
+                                </h2>
+                                <div id="filter-collapse-c2" class="accordion-collapse collapse show" data-bs-parent="#filter-div-c2">
+                                    <div class="accordion-body" id="filter-dropdown">
+                                        <!-- Americas -->
+                                        <div class="accordion accordion--custom">
+                                            <div class="accordion-item" id="filter-div-c2-c1">
+                                            <h2 class="accordion-header">
+                                                <input type="checkbox" class="form-check-input no-margin">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapse-c2-c1" aria-expanded="true" aria-controls="filter-collapse-c1">
+                                                    <p class="m-font">Americas</p>
+                                                </button>
+                                            </h2>
+                                            <div id="filter-collapse-c2-c1" class="accordion-collapse collapse show" data-bs-parent="#filter-div-c2-c1">
+                                                <div class="accordion-body" id="filter-dropdown">
+                                                    <div class="checkboxes">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                American
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                Mexican
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                Brazilian
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
 
         <!-- Match Button -->
         <div class="text-center">
             <button class="btn btn-outline-light white-border" id="match">Match</button>
         </div>
         <br>
+
+        <!-- #region Modals -->
         
         <!-- Location Modal -->
         <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true" data-bs-theme="dark">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="locaitonModalLabel">How to Input Location</h1>
+                        <h1 class="modal-title fs-5" id="locaitonModalLabel">About Location</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -244,7 +347,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="locaitonValidationModalLabel">Location Validation</h1>
+                        <h1 class="modal-title fs-5" id="locaitonValidationModalLabel">Validate Location</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="location-error-text">
@@ -265,7 +368,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="peopleModalLabel">How to Select People</h1>
+                        <h1 class="modal-title fs-5" id="peopleModalLabel">About People</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -317,6 +420,69 @@
                         <ul>
                             <li>The radius from the location of your search you wish to recieve results from.</li>
                             <li>The default value is 5 Miles.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters Modal -->
+        <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true" data-bs-theme="dark">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="filtersModalLabel">About Filters</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <b><i>Filters currently do not work.</i></b>
+                        <br/><br/>
+
+                        <b>Restaurant Types</b><br/>
+                        <ul>
+                            <li>
+                                <b>Primary Type</b>:
+                                The main type of the restaurant.
+                                McDonald's Primary Type is Fast Food.
+                            </li>
+                            <li>
+                                <b>Regular Types</b>:
+                                The different categories a restuarant may fall under.
+                                McDonald's' types include Fast Food and Hamburger.
+                            </li>
+                        </ul>
+
+                        <b>Filter States</b><br/>
+                        <ul style="list-style-type: none; padding-left: 1rem;">
+                            <li>
+                                <label style="margin-left: 18px;">
+                                    <input type="checkbox" class="form-check-input checkbox-example" checked disabled>
+                                    Will create a search where the <b>Primary Type</b> of the restaurant is this type.
+                                    Filters are combined with OR: American OR Fast Food.
+                                </label>
+                            </li>
+                            <li>
+                                <label style="margin-left: 18px;">
+                                    <input type="checkbox" class="form-check-input checkbox-example indeterminate" checked disabled>
+                                    Will create a search where this type of restaurant will not show up in results.
+                                    Filters are combined with AND: Not American AND Not Fast Food.
+                                </label>
+                            </li>
+                            <li>
+                                <label style="margin-left: 18px;">
+                                    <input type="checkbox" class="form-check-input checkbox-example" disabled>
+                                    Will create a search where this type of restaurant cannot be the 
+                                    <b>Primary Type</b> of a restaurant.
+                                </label>
+                            </li>
+                        </ul>
+
+                        <b>Filter Categories</b>
+                        <ul>
+                            <li>
+                                By clicking the checkbox of a filter, all the filters under it will
+                                become the same state.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -378,6 +544,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- #endregion -->
 
         <link rel="stylesheet" href="/Packages/Bootstrap/css/bootstrap.min.css">
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>

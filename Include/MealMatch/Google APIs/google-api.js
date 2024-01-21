@@ -27,48 +27,60 @@ const masks = {
 };
 
 const filters = {
-    "other": {
-        "bakery": true,
-        "bar": true,
-        "cafe": true,
-        "coffee_shop": true,
-        "ice_cream_shop": true,
-        "meal_delivery": true,
-        "sandwich_shop": true,
-        "steak_house": true
+    "Store Type": {
+        "Bar": "bar",
+        "Cafe": "cafe",
+        "Coffee Shop": "coffee_shop",
+        "Takeout Only": "meal_delivery",
     },
-    "food type": {
-        "breakfast_restaurant": true,
-        "brunch_restaurant": true,
-        "fast_food_restaurant": true,
-        "hamburger_restaurant": true,
-        "pizza_restaurant": true,
-        "ramen_restaurant": true,
-        "seafood_restaurant": true,
-        "vegan_restaurant": true,
-        "vegetarian_restaurant": true
+    "Food Type": {
+        "Variety": {
+            "Bakery": "bakery",
+            "Barbecue": "barbecue_restaurant",
+            "Breakfast": "breakfast_restaurant",
+            "Brunch": "brunch_restaurant",
+            "Fast Food": "fast_food_restaurant",
+            "Seafood": "seafood_restaurant",
+            "Vegan": "vegan_restaurant",
+            "Vegitarian": "vegetarian_restaurant"
+        },
+        "Specific": {
+            "Hamburger": "hamburger_restaurant",
+            "Ice Cream Shop": "ice_cream_shop",
+            "Pizza": "pizza_restaurant",
+            "Ramen": "ramen_restaurant",
+            "Sandwich Shop": "sandwich_shop",
+            "Steak House": "steak_house",
+            "Sushi": "sushi_restaurant"
+        }
     },
-    "culture": {
-        "american_restaurant": true,
-        "barbecue_restaurant": true,
-        "brazilian_restaurant": true,
-        "chinese_restaurant": true,
-        "french_restaurant": true,
-        "greek_restaurant": true,
-        "indian_restaurant": true,
-        "indonesian_restaurant": true,
-        "italian_restaurant": true,
-        "japanese_restaurant": true,
-        "korean_restaurant": true,
-        "lebanese_restaurant": true,
-        "mediterranean_restaurant": true,
-        "mexican_restaurant": true,
-        "middle_eastern_restaurant": true,
-        "spanish_restaurant": true,
-        "sushi_restaurant": true,
-        "thai_restaurant": true,
-        "turkish_restaurant": true,
-        "vietnamese_restaurant": true
+    "Cultural": {
+        "Americas": {
+            "American": "american_restaurant",
+            "Mexican": "mexican_restaurant",
+            "Brazilian": "brazilian_restaurant"
+        },
+        "Europe": {
+            "French": "french_restaurant",
+            "Greek": "greek_restaurant",
+            "Italian": "italian_restaurant",
+            "Mediterranean": "mediterranean_restaurant",
+            "Spanish": "spanish_restaurant"
+        },
+        "Middle East": {
+            "Lebanese": "lebanese_restaurant",
+            "Middle Eastern": "middle_eastern_restaurant"
+        },
+        "Asia": {
+            "Chinese": "chinese_restaurant",
+            "Indian":  "indian_restaurant",
+            "Indonesian": "indonesian_restaurant",
+            "Japanese": "japanese_restaurant",
+            "Korean": "korean_restaurant",
+            "Thai": "thai_restaurant",
+            "Turkish": "turkish_restaurant",
+            "Vietnamese": "vietnamese_restaurant"
+        }
     }
 };
 //#endregion
@@ -94,7 +106,14 @@ function getAllFilters() {
     let result = [];
     for(const filterCategory in filters) {
         for(const filter in filters[filterCategory]) {
-            result.push(filter);
+            if(filterCategory != "Store Type") {
+                for(const deepFilter in filter) {
+                    result.push(deepFilter);
+                }
+            }
+            else {
+                result.push(filter);
+            }
         }
     }
 
@@ -211,6 +230,6 @@ export {
     REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters,
     REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody,
-    NEARBY_SEARCH_URL, readableFilters, getNearbyHeader, getNearbyBody,
+    NEARBY_SEARCH_URL, filters, readableFilters, getNearbyHeader, getNearbyBody,
     getPhotoUrl
 };

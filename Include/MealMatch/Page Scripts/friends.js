@@ -2,12 +2,10 @@ import { getUserData, updateUserData, removeUserData, getDisplayName } from "../
 import { getCookie } from "../../Miscellaneous/Cookies.js";
 let thisUserDisplayName;
 let friendcode, sendRequestInput;
-let requestDiv, requestCaret, requestAmount, requestDropdown, requestTemplate;
+let requestDiv, requestAmount, requestDropdown, requestTemplate;
 let requestBreak, requestDisclaimer;
-let friendDiv, friendCaret, friendAmount, friendDropdown, friendTemplate;
+let friendDiv, friendAmount, friendDropdown, friendTemplate;
 let friendBreak, friendDisclaimer;
-let expandedCaret = "/Images/MealMatch/Expand_down.svg";
-let collapsedCaret = "/Images/MealMatch/Expand_up.svg";
 let toastBootstrap;
 
 function onDocumentLoad() {
@@ -91,7 +89,6 @@ async function alreadyFriend(uid) {
 
 async function setFriendRequests() {
     requestDiv = document.getElementById("request-div");
-    requestCaret = document.getElementById("request-caret");
     requestAmount = document.getElementById("request-amount");
     requestDropdown = document.getElementById("request-dropdown");
     requestTemplate = document.getElementById("request-template");
@@ -99,35 +96,9 @@ async function setFriendRequests() {
     requestBreak = document.getElementById("request-break");
     requestDisclaimer = document.getElementById("request-disclaimer");
     
-    requestDiv.addEventListener("click", toggleRequests);
     let requestCount = await populateFriendRequests();
     if(requestCount > 0) {
         toggleDisclaimer(requestDisclaimer, requestBreak, false);
-    }
-}
-function toggleRequests() {
-    let isExpanded = requestCaret.hasAttribute("expanded");
-    if(isExpanded) {
-        setRequestDropdown(false);
-    }
-    else {
-        setRequestDropdown(true);
-    }
-}
-function setRequestDropdown(isVisibile) {
-    //setVisible(requestDropdown, isVisibile);
-
-    if(isVisibile) {
-        requestDiv.classList.add("flat-bottom");
-        requestDropdown.classList.add("flat-top");
-        requestCaret.src = expandedCaret;
-        requestCaret.setAttribute("expanded", "");
-    }
-    else {
-        requestDiv.classList.remove("flat-bottom");
-        requestDropdown.classList.remove("flat-top");
-        requestCaret.src = collapsedCaret;
-        requestCaret.removeAttribute("expanded");
     }
 }
 async function populateFriendRequests() {
@@ -199,7 +170,6 @@ function decrementRequestAmount() {
 
 async function setFriends() {
     friendDiv = document.getElementById("friend-div");
-    friendCaret = document.getElementById("friend-caret");
     friendAmount = document.getElementById("friend-amount");
     friendDropdown = document.getElementById("friend-dropdown");
     friendTemplate = document.getElementById("friend-template");
@@ -207,35 +177,9 @@ async function setFriends() {
     friendBreak = document.getElementById("friend-break");
     friendDisclaimer = document.getElementById("friend-disclaimer");
     
-    friendDiv.addEventListener("click", toggleFriends);
     let friendCount = await populateFriends();
     if(friendCount > 0) {
         toggleDisclaimer(friendDisclaimer, friendBreak, false);
-    }
-}
-function toggleFriends() {
-    let isExpanded = friendCaret.hasAttribute("expanded");
-    if(isExpanded) {
-        setFriendDropdown(false);
-    }
-    else {
-        setFriendDropdown(true);
-    }
-}
-function setFriendDropdown(isVisibile) {
-    //setVisible(friendDropdown, isVisibile);
-
-    if(isVisibile) {
-        friendDiv.classList.add("flat-bottom");
-        friendDropdown.classList.add("flat-top");
-        friendCaret.src = expandedCaret;
-        friendCaret.setAttribute("expanded", "");
-    }
-    else {
-        friendDiv.classList.remove("flat-bottom");
-        friendDropdown.classList.remove("flat-top");
-        friendCaret.src = collapsedCaret;
-        friendCaret.removeAttribute("expanded");
     }
 }
 async function populateFriends() {

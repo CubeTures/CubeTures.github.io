@@ -1,7 +1,16 @@
 TODO
 - Add filters to searching
+- Tell if the store youre looking at is open at the moment
 - Change api to tripadvisor
-
+    - Pros:
+        - Free with Links to Site
+    - Cons: 
+        - Only 10 Places
+        - Only 3 Images
+    - Workaround:
+        - Make both apis usable
+        - Only allow google api to be used by whitelisted users
+            - Add button to allow users to request to be whitelisted
 
 Main Page
 - Name of Restaurant
@@ -28,3 +37,20 @@ Advanced Search Protocol (Deprecated):
 4. Place 4 equally sized circles inside the square, without overlapping
 5. Get within each of those 4 circles
 6. Return the union of all 5 circles
+
+<!-- Store Type -->
+accordion accordion--custom
+    accordion-item id="accordion-item"
+
+        accordion-header
+            form-check-input
+            accordion-button data-bs-target="#accordion-collapse" aria-controls="filter-collapse-c1"
+                Filter Category
+
+        accordion-collapse id="accordion-collapse" data-bs-parent="#accordion-item"
+            accordion-body id="accordion-body"
+                checkboxes
+                    form-check
+                        form-check-input id="checkbox-item"
+                        form-check-label id="checkbox-label" for="checkbox-item">
+                            Checkbox Item

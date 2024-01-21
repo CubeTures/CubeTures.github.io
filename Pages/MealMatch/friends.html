@@ -60,68 +60,70 @@
         </div>
 
         <!-- Friend Requests -->
-        <div>
-            <div class="primary-color rounded padded flat-bottom" id="request-div" data-bs-toggle="collapse" data-bs-target="#request-dropdown">
-                <div class="justify-content-between d-flex">
-                    <p class="l-font">Requests
+        <div class="accordion">
+            <div class="accordion-item" id="request-div">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#request-collapse" aria-expanded="true" aria-controls="request-collapse">
+                    <p class="l-font">Requests 
                         <span id="request-amount">(0)</span>
                     </p>
-                    <img class="footer-image" src="/Images/MealMatch/Expand_down.svg" id="request-caret" expanded="">
-                </div>
-            </div>
-
-            <!-- Dropdown -->
-            <div class="collapse show primary-color-opacity rounded padded-extension bordered flat-top" id="request-dropdown">
-                <div id="request-break" class="visually-hidden"><br/></div>
-                <p class="padded-2 text-center rounded no-border m-font-special" id="request-disclaimer">You have no requests.</p>
-                <template id="request-template">
-                    <div id="request-wrapper">
-                        <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
-                            <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
-                            <div class="justify-content-evenly no-overflow-boxes">
-                                <button class="btn btn-outline-light even-button-padding" id="decline">
-                                    <img src="/Images/MealMatch/Close_round.svg">
-                                </button>
-                                <button class="btn btn-outline-light even-button-padding" id="accept">
-                                    <img src="/Images/MealMatch/Done_round.svg">
-                                </button>
+                </button>
+              </h2>
+              <div id="request-collapse" class="accordion-collapse collapse show" data-bs-parent="#request-div">
+                <div class="accordion-body" id="request-dropdown">
+                    <div id="request-break" class="visually-hidden"><br/></div>
+                    <p class="padded-2 text-center rounded no-border m-font-special" id="request-disclaimer">You have no requests.</p>
+                    <template id="request-template">
+                        <div id="request-wrapper">
+                            <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
+                                <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
+                                <div class="justify-content-evenly no-overflow-boxes">
+                                    <button class="btn btn-outline-light even-button-padding" id="decline">
+                                        <img src="/Images/MealMatch/Close_round.svg">
+                                    </button>
+                                    <button class="btn btn-outline-light even-button-padding" id="accept">
+                                        <img src="/Images/MealMatch/Done_round.svg">
+                                    </button>
+                                </div>
                             </div>
+                            <br/>
                         </div>
-                        <br/>
-                    </div>
-                </template>
+                    </template>
+                </div>
+              </div>
             </div>
         </div>
         <br/>
 
         <!-- Friends -->
-        <div>
-            <div class="primary-color rounded padded flat-bottom" id="friend-div" data-bs-toggle="collapse" data-bs-target="#friend-dropdown">
-                <div class="justify-content-between d-flex">
+        <div class="accordion">
+            <div class="accordion-item" id="friend-div">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#friend-collapse" aria-expanded="true" aria-controls="friend-collapse">
                     <p class="l-font">Friends 
                         <span id="friend-amount">(0)</span>
                     </p>
-                    <img class="footer-image" src="/Images/MealMatch/Expand_down.svg" id="friend-caret" expanded="">
-                </div>
-            </div>
-
-            <!-- Dropdown -->
-            <div class="collapse show primary-color-opacity rounded padded-extension bordered flat-top" id="friend-dropdown">
-                <div id="friend-break" class="visually-hidden"><br/></div>
-                <p class="padded-2 text-center rounded no-border m-font-special" id="friend-disclaimer">You have no friends.</p>
-                <template id="friend-template">
-                    <div id="friend-wrapper">
-                        <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
-                            <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
-                            <div>
-                                <button class="btn btn-outline-light even-button-padding" id="remove">
-                                    <img src="/Images/MealMatch/Close_round.svg">
-                                </button>
+                </button>
+              </h2>
+              <div id="friend-collapse" class="accordion-collapse collapse show" data-bs-parent="#friend-div">
+                <div class="accordion-body" id="friend-dropdown">
+                    <div id="friend-break" class="visually-hidden"><br/></div>
+                    <p class="padded-2 text-center rounded no-border m-font-special" id="friend-disclaimer">You have no friends.</p>
+                    <template id="friend-template">
+                        <div id="friend-wrapper">
+                            <div class="primary-color rounded padded-2 d-flex justify-content-between no-overflow">
+                                <p class="m-font no-overflow-text" id="display-name">DisplayName</p>
+                                <div>
+                                    <button class="btn btn-outline-light even-button-padding" id="remove">
+                                        <img src="/Images/MealMatch/Close_round.svg">
+                                    </button>
+                                </div>
                             </div>
+                            <br/>
                         </div>
-                        <br/>
-                    </div>
-                </template>
+                    </template>
+                </div>
+              </div>
             </div>
         </div>
         <br/>
