@@ -1,0 +1,18 @@
+name: Set Secrets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  set-secrets:
+    runs-on: ubuntu-latest
+    environment: github-pages
+
+    steps:
+      - name: Set Secrets
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        
+        echo: $GOOGLE_API_KEY

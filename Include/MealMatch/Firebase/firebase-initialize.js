@@ -1,4 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+// const envPath = "/.env";
+
+// async function getEnv() {
+//   const env = await fetch(envPath);
+//   console.log(env);
+// }
+// getEnv();
 
 //#region api key
 const encryptedCode = "AAAAAAAAAFELJStmLAZPCS43a3MmHydCCAJ0GAFEFSApAycWIQNb";

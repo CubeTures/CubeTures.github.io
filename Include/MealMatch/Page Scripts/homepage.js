@@ -93,7 +93,6 @@ async function populateMatches() {
     matches.sort(sortByDate);
     const uid = getCookie("uid");
     for(const match of matches) {
-        console.log(match);
         addToHomepage(match["match"], match["creator"], match["id"], uid);
     }
 
