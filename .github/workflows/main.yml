@@ -10,4 +10,9 @@ env:
 
 jobs:
   set-secrets:
-    # Does nothing
+    runs-on: ubuntu-latest
+    environment: github-pages
+
+    steps:        
+      - name: Display Secrets
+        run: echo $GOOGLE_API_KEY
