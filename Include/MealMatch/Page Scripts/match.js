@@ -49,7 +49,7 @@ async function createTiles() {
     const len = Object.keys(locations).length;
     let count = 0;
     for(const [ id, location ] of Object.entries(locations)) {
-        alert(`Location: ${id.substring(id.length-5)} ${location["name"]}`);
+        alert(`Location: ${location["name"]} (${id.substring(id.length-5)}) ${count+1}/${len}`);
         const active = (len - 2) <= count++;
         createTile(id, location, active);
     }
