@@ -42,15 +42,14 @@ function setTile() {
 }
 
 async function createTiles() {
-    alert("started");
     const locationsUnclean = await getUserData("public/match/locations", matchID);
     const locations = removeResponded(locationsUnclean);
-    alert(`Len before: ${Objec.keys(locationsUnclean).length}\nLen After: ${Objec.keys(locations).length}`);
 
 
     const len = Object.keys(locations).length;
     let count = 0;
     for(const [ id, location ] of Object.entries(locations)) {
+        alert(`Location: ${id.substring(id.length-5)} ${location["name"]}`);
         const active = (len - 2) <= count++;
         createTile(id, location, active);
     }

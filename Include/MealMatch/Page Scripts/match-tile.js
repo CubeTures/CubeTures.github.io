@@ -71,39 +71,53 @@ export default class MatchTile {
     }
     setInfo(clone, location) {
         const name = clone.querySelector("#name");
-        name.textContent = location["name"];
+        const nm = location["name"];
+        name.textContent = nm ? nm : "Unknown";
     
         const category = clone.querySelector("#category");
-        category.textContent = location["category"];
+        const cat = location["category"];
+        category.textContent = cat ? cat : "Unknown";
     
         const price = clone.querySelector("#price");
-        price.textContent = this.parsePriceLevel(location["price"]);
+        const pr = location["price"];
+        price.textContent = pr ? this.parsePriceLevel(pr) : "?";
     
         const distance = clone.querySelector("#distance");
-        distance.textContent = this.formatDistance(location["distance"]);
+        const dst = location["distance"];
+        distance.textContent = dst ? this.formatDistance(dst) : "? Miles Away";
     }
     setExtra(clone, location) {
         const name = clone.querySelector("#name-backup");
-        name.textContent = location["name"];
+        const nm = location["name"];
+        name.textContent = nm ? nm : "Unknown";
 
         const address = clone.querySelector("#address");
-        address.textContent = location["address"];
-        address.setAttribute("href", location["maps"]);
+        const adr = location["address"];
+        const mp = location["maps"];
+        address.textContent = adr ? adr : "Unknown";
+        address.setAttribute("href", mp ? mp : "#");
     
         const website = clone.querySelector("#website");
-        website.textContent = this.getWebsiteText(location["website"]);
-        website.setAttribute("href", location["website"]);
+        const wb = location["website"];
+        const wbt = wb ? this.getWebsiteText(wb) : "Unknown";
+        website.textContent = wbt ? wbt : "Unknown";
+        website.setAttribute("href", wb ? wb : "#");
     
         const phone = clone.querySelector("#phone");
-        phone.textContent = location["phone"];
-        phone.setAttribute("href", this.getPhoneHref(location["phone"]));
+        const pn = location["phone"];
+        const pnh = pn ? this.getPhoneHref(pn) : "#";
+        phone.textContent = pn ? pn : "Unknown";
+        phone.setAttribute("href", pnh ? pnh : "#");
     
         const rating = clone.querySelector("#rating");
-        rating.textContent = this.formatRating(location["rating"]);
+        const rt = location["rating"];
+        const rtt = rt ? this.formatRating(rt): "Unknown";
+        rating.textContent = rtt ? rtt : "Unknown";
     
         const hours = clone.querySelector("#hours");
-        const hoursArray = location["hours"].split(",");
-        hours.innerHTML = this.getHoursTable(hoursArray);
+        const hr = location["hours"];
+        const hoursArray = hr ? hr.split(",") : null;
+        hours.innerHTML = hoursArray ? this.getHoursTable(hoursArray) : "";
 
         this.setVotes(clone, location);
     }
