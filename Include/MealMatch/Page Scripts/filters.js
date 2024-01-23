@@ -55,8 +55,15 @@ function createAccordion(filter, includeCheckboxes=false) {
     </div>
     `;
 }
-function createCheckbox() {
-    //filler
+function createCheckbox(filter, id) {
+    return `
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="${id}">
+        <label class="form-check-label" for="${id}"> 
+            ${filter}
+        </label>
+    </div>
+    `;
 }
 
 class FilterCheckbox {

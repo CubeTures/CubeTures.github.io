@@ -1,6 +1,12 @@
-TODO
+Version 1.1
 - Add filters to searching
 - Tell if the store youre looking at is open at the moment
+- Suppress notifications of match until re-enter
+- Change icons to bootstrap
+- Add outlines to the toolbar icons
+- Fix new user creation and sending friend request
+
+Version 1.2
 - Change api to tripadvisor
     - Pros:
         - Free with Links to Site
@@ -38,7 +44,7 @@ Advanced Search Protocol (Deprecated):
 5. Get within each of those 4 circles
 6. Return the union of all 5 circles
 
-<!-- Store Type -->
+
 accordion accordion--custom
     accordion-item id="accordion-item"
 

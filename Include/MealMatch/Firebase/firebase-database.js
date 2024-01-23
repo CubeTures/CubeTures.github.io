@@ -19,12 +19,11 @@ function getReference(uid, dataType) {
     checkAuth();
     const db = getDatabase();
     const path = `users/${uid}/${dataType}`;
-    //console.log(path);
     return ref(db, path);
 }
 async function hasUser(otherUID=null) {
     const data = await getUserData("readonly", otherUID);
-    return data && data.hasOwnProperty("display_name");
+    return data != null && data.hasOwnProperty("display_name");
 }
 async function getUserData(dataType, otherUID=null) {
     const uid = getUID(otherUID);

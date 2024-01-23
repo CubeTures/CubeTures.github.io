@@ -60,17 +60,16 @@ function login(successCallback, errorCallback) {
     }
 }
 
-function loginUser(user, successCallback) {
-    if(!existingUser(user)) {
-        newLogin(user);
-    }
+async function loginUser(user, successCallback) {
     setCookie("uid", user.uid);
     setCookie("refreshToken", user.refreshToken);
 
+    const existing = await hasUser(user.uid);
+    if(!existing) {
+        newLogin(user);
+    }
+
     successCallback();
-}
-function existingUser(user) {
-    return hasUser(user.uid);
 }
 function newLogin(user) {
     setDisplayName(user);
