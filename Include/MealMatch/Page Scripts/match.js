@@ -45,7 +45,7 @@ async function createTiles() {
     alert("started");
     const locationsUnclean = await getUserData("public/match/locations", matchID);
     const locations = removeResponded(locationsUnclean);
-    alert("ended");
+    alert(`Len before: ${Objec.keys(locationsUnclean).length}\nLen After: ${Objec.keys(locations).length}`);
 
 
     const len = Object.keys(locations).length;
