@@ -42,8 +42,11 @@ function setTile() {
 }
 
 async function createTiles() {
+    alert("started");
     const locationsUnclean = await getUserData("public/match/locations", matchID);
     const locations = removeResponded(locationsUnclean);
+    alert("ended");
+
 
     const len = Object.keys(locations).length;
     let count = 0;
