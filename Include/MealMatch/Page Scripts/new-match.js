@@ -1,5 +1,5 @@
 import { getUserData, setUserData, updateUserData, removeUserData } from "../Firebase/firebase-database.js"
-import { getCookie } from "../../Miscellaneous/Cookies.js";
+import { getCookie } from "../../Miscellaneous/cookies.js";
 import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
 import { createNewMatch, status } from "../Google APIs/google-nearby.js";
 import setFilters from "./filters.js";

@@ -1,7 +1,7 @@
-import { httpRequest, postRequest } from "../../api-commands.js";
+import { httpRequest, postRequest } from "../../Miscellaneous/api-commands.js";
 import { REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody } from "./google-api.js";
-import { getNested } from "../../Miscellaneous/Object Commands.js";
+import { getNested } from "../../Miscellaneous/object-commands.js";
 
 const importantComponents = ["street_number", "route", "locality", "administrative_area_level_1", "postal_code"];
 

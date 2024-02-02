@@ -1,6 +1,6 @@
 import { getUserData, updateUserData, onUserData } from "../Firebase/firebase-database.js";
-import { getCookie } from "../../Miscellaneous/Cookies.js";
-import { getNested } from "../../Miscellaneous/Object Commands.js";
+import { getCookie } from "../../Miscellaneous/cookies.js";
+import { getNested } from "../../Miscellaneous/object-commands.js";
 import MatchTile from "./match-tile.js";
 let matchID, userID, slot, template;
 let decidedBox, decidedText, failedText, decidedModal;

@@ -1,4 +1,4 @@
-import { Stack } from "../../Miscellaneous/Data Collections.js";
+import { Stack } from "../../Miscellaneous/data-collections.js";
 const primaryRGB = "251,70,112", borderRGB = "249,190,203";
 const stack = new Stack();
 let yesBtn, noBtn, maxDist, tolerance;

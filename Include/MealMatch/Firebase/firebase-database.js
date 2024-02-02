@@ -1,6 +1,6 @@
 import { getDatabase, ref, get, set, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getCookie } from "../../Miscellaneous/Cookies.js";
+import { getCookie } from "../../Miscellaneous/cookies.js";
 let auth = null;
 
 function checkAuth() {
