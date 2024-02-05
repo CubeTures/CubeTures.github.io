@@ -3,7 +3,7 @@ import { getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider,
 import { hasUser, updateUserData } from "/Include/MealMatch/Firebase/firebase-database.js";
 import { setCookie, getCookie } from "/Include/Miscellaneous/cookies.js";
 import { REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters } from "/Include/MealMatch/Google APIs/google-api.js";
-import { postRequest } from "/Include/MealMatch/Miscellaneous/api-commands.js";
+import { postRequest } from "/Include/Miscellaneous/api-commands.js";
 const homepagePath = "/Pages/MealMatch/home.html";
 let onAuthStateUnsubscribe, loginStatus = null;
 
