@@ -1,7 +1,7 @@
-import { getUserData, updateUserData, onUserData } from "../Firebase/firebase-database.js";
-import { getCookie } from "../../Miscellaneous/cookies.js";
-import { getNested } from "../../Miscellaneous/object-commands.js";
-import MatchTile from "./match-tile.js";
+import { getUserData, updateUserData, onUserData } from "/Include/MealMatch/Firebase/firebase-database.js";
+import { getCookie } from "/Include/Miscellaneous/cookies.js";
+import { getNested } from "/Include/Miscellaneous/object-commands.js";
+import MatchTile from "/Include/MealMatch/Page Scripts/match-tile.js";
 let matchID, userID, slot, template;
 let decidedBox, decidedText, failedText, decidedModal;
 const confettiOptions = {

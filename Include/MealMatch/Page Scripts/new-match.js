@@ -1,9 +1,9 @@
-import { getUserData, setUserData, updateUserData, removeUserData } from "../Firebase/firebase-database.js"
-import { getCookie } from "../../Miscellaneous/cookies.js";
-import { getCurrentLocation, validateAddress } from "../Google APIs/google-geocode.js";
-import { createNewMatch, status } from "../Google APIs/google-nearby.js";
-import setFilters from "./filters.js";
-import { goToMatch } from "./redirect.js";
+import { getUserData, setUserData, updateUserData, removeUserData } from "/Include/MealMatch/Firebase/firebase-database.js"
+import { getCookie } from "/Include/Miscellaneous/cookies.js";
+import { getCurrentLocation, validateAddress } from "/Include/MealMatch/Google APIs/google-geocode.js";
+import { createNewMatch, status } from "/Include/MealMatch/Google APIs/google-nearby.js";
+import setFilters from "/Include/MealMatch/Page Scripts/filters.js";
+import { goToMatch } from "/Include/MealMatch/Page Scripts/redirect.js";
 
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
 let addressHidden, cityHidden, stateHidden, zipHidden;

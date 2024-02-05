@@ -1,5 +1,5 @@
 //#region data
-import gak from "../Firebase/firebase-initialize.js";
+import gak from "/Include/MealMatch/Firebase/firebase-initialize.js";
 
 const masks = {
     "basic": {

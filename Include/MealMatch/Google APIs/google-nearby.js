@@ -1,8 +1,8 @@
-import { httpRequestJson, postRequest } from "../../Miscellaneous/api-commands.js";
+import { httpRequestJson, postRequest } from "/Include/Miscellaneous/api-commands.js";
 import { NEARBY_SEARCH_URL, getNearbyHeader, getNearbyBody,
-    getPhotoUrl } from "./google-api.js";
-import { getCookie } from "../../Miscellaneous/cookies.js";
-import { getNested } from "../../Miscellaneous/object-commands.js";
+    getPhotoUrl } from "/Include/MealMatch/Google APIs/google-api.js";
+import { getCookie } from "/Include/Miscellaneous/cookies.js";
+import { getNested } from "/Include/Miscellaneous/object-commands.js";
 const EARTH_RADIUS = 3958.8, getPhotos = true, maxPhotoCount = 5;
 export let status = { "abort": false };
 

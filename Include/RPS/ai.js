@@ -1,4 +1,4 @@
-import { Types, TypeList } from "./types.js";
+import { Types, TypeList } from "/Include/RPS/types.js";
 
 class AI {
     getMove() {

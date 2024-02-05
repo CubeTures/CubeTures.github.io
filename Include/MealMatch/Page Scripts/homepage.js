@@ -1,7 +1,7 @@
-import { getUserData, getDisplayName } from "../Firebase/firebase-database.js";
-import { getCookie, removeCookie } from "../../Miscellaneous/cookies.js";
-import { login, logout, loginStatus } from "../Firebase/firebase-login.js";
-import { goToMatch } from "./redirect.js";
+import { getUserData, getDisplayName } from "/Include/MealMatch/Firebase/firebase-database.js";
+import { getCookie, removeCookie } from "/Include/Miscellaneous/cookies.js";
+import { login, logout, loginStatus } from "/Include/MealMatch/Firebase/firebase-login.js";
+import { goToMatch } from "/Include/MealMatch/Page Scripts/redirect.js";
 let toolbar, loginBtn, logoutBtn, disclaimer;
 let matchContainer, matchTemplate, noMatchDisclaimer, spinner;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

@@ -1,7 +1,7 @@
-import Enumerate from "../Miscellaneous/enumerate.js";
-import { Types, TypeList } from "./types.js";
-import Canvas from "./canvas.js";
-import ai from "./ai.js";
+import Enumerate from "/Include/Miscellaneous/enumerate.js";
+import { Types, TypeList } from "/Include/RPS/types.js";
+import Canvas from "/Include/RPS/canvas.js";
+import ai from "/Include/RPS/ai.js";
 let canvas, canvasEnumerate;
 let playerDisplay, aiDisplay;
 let scoreDisplay, scoreEnumerate;
