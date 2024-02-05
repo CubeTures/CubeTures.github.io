@@ -1,3 +1,4 @@
+console.trace();
 function hasCookie(cookieName) {
     return document.cookie.split(';').some(c => {
         return c.trim().startsWith(cookieName + '=');
