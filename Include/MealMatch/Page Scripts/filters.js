@@ -6,6 +6,8 @@ const spaces = 4;
 
 function setFilters() {
     //console.log(bfs(filters, 0));
+    //console.log(filters);
+    //console.log(createFilters()[0]);
 }
 function bfs(obj, depth) {
     const spaceStr = getSpaces(depth);
@@ -31,39 +33,62 @@ function getSpaces(num) {
     return result;
 }
 
+function createFilters(obj=filters, depth=0) {
+    if(typeof(obj) == "string") { 
+        return [ obj, "id" ];
+    }
+
+    let result = createAccordion(obj); // for some reason an obj fir the filter??
+    for(const o in obj) {
+        const [ dive, type ] = createFilters(obj[o], depth + 1);
+        if(type == "id") {
+            result += createCheckbox(o, dive);
+        }
+        else {
+            result += dive;
+        }
+    }
+
+    result += getAccordionFooter();
+    return [ result, "accordion" ];
+}
+
 function createAccordion(filter, includeCheckboxes=false) {
     const checkboxes = includeCheckboxes ? `<div class="checkboxes"></div>` : "";
 
     return `
-    <div class="accordion accordion--custom">
-        <div class="accordion-item" id="${filter}-item">
-            <h2 class="accordion-header>
-                <input type="checkbox" class="form-check-input no-margin">
-                <button class="accordion-button collapsed" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#${filter}-collapse-"
-                    aria-expanded="true" aria-controls="${filter}-collapse">
-                    <p class="m-font">${filter}</p>
-                </button>
-            <h2>
-            <div id="${filter}-collapse"
+<!-- ${filter} -->
+<div class="accordion accordion--custom">
+    <div class="accordion-item" id="${filter}-item>"
+        <h2 class="accordion-header">
+            <input type="checkbox" class="form-check-input no-margin"></input>
+            <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#${filter}-collapse"
+                aria-expanded="true" aria-controls="${filter}-collapse>"
+                <p class="m-font">${filter}</p>
+            </button>   
+        </h2>
+        <div id="${filter}"-collapse
             class="accordion-collapse collapse" data-bs-parent="#${filter}-item">
-                <div class="accordion-body" id="${filter}-dropdown">
-                    ${checkboxes}
-                <div>
+            <div class="accordion-body" id="${filter}"-dropdown>
+                ${checkboxes}`;
+}
+function getAccordionFooter() {
+    return `
             </div>
         </div>
     </div>
+</div>
     `;
 }
 function createCheckbox(filter, id) {
     return `
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="${id}">
-        <label class="form-check-label" for="${id}"> 
-            ${filter}
-        </label>
-    </div>
-    `;
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" id="${id}"></input>
+    <label class="form-check-label" for="${id}"> 
+        ${filter}
+    </label>
+</div>`;
 }
 
 class FilterCheckbox {

@@ -1,5 +1,5 @@
 import { getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider,
-    signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+    signInWithPopup, browserPopupRedirectResolver } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { hasUser, updateUserData } from "/Include/MealMatch/Firebase/firebase-database.js";
 import { setCookie, getCookie } from "/Include/Miscellaneous/cookies.js";
 import { REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters } from "/Include/MealMatch/Google APIs/google-api.js";
@@ -46,10 +46,11 @@ async function tryRelogin() {
 
 function login(successCallback, errorCallback) {
     const auth = getAuth();
+    const googleProvider = new GoogleAuthProvider();
     try {
         setPersistence(auth, browserLocalPersistence)
         .then(() => {
-            signInWithPopup(auth, new GoogleAuthProvider())
+            signInWithPopup(auth, googleProvider, browserPopupRedirectResolver)
                 .then((result) => {
                     loginUser(result.user, successCallback);
                 });
