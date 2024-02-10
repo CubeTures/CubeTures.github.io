@@ -61,8 +61,6 @@ function onLogout() {
     toggleSpinner(false);
     depopulateHomepage();
     removeAllCookies();
-
-    console.log(document.cookie);
 }
 function logoutFailure(error) {
     console.error(`Log out error: ${error}`);

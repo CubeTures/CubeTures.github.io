@@ -10,7 +10,7 @@ async function createNewMatch(inputData, matchLoadCallback, matchErrorCallback) 
     status["abort"] = false;
 
     try {
-        const body = getNearbyBody(inputData["locationData"]["latlng"], inputData["radius"]);
+        const body = getNearbyBody(inputData["locationData"]["latlng"], inputData["radius"], inputData["filters"]);
         const locations = await postRequest(NEARBY_SEARCH_URL, getNearbyHeader(), body);
         return await getMatchData(inputData, locations, matchLoadCallback);
     }  

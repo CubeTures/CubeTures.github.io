@@ -237,10 +237,10 @@ body {
   user-select: none;
 }
 
-#filter-div .accordion {
+#Filters-item .accordion {
   margin-top: 1rem;
 }
-#filter-div .accordion:last-child {
+#Filters-item .accordion:last-child {
   margin-bottom: 1rem;
 }
 .accordion--custom .accordion-header {

@@ -1,107 +1,134 @@
 import { filters } from "/Include/MealMatch/Google APIs/google-api.js";
-const spaces = 4;
+import { FilterCheckbox, FilterAccordion } from "/Include/MealMatch/Page Scripts/filter-checkbox.js";
+const filterTitle = "Filters", checkboxSuffix = "-checkbox";
+let filterDiv;
 
-//indeterminate = true
-//breadth first search
-
-function setFilters() {
-    //console.log(bfs(filters, 0));
-    //console.log(filters);
-    //console.log(createFilters()[0]);
+function populateFilters() {
+    filterDiv = document.getElementById("filters");
+    createFilters();
+    createCheckboxes();
 }
-function bfs(obj, depth) {
-    const spaceStr = getSpaces(depth);
-    if(typeof(obj) == "string") { 
-        return `${spaceStr}${obj}\n`; //create checkbox
-    }
 
-    let result = ""; //create accordion
+function createFilters() {
+    let titledFilter = {};
+    titledFilter[filterTitle] = filters;
+
+    const html = createFiltersRecursive(titledFilter)[0];
+    filterDiv.innerHTML = html;
+}
+function createFiltersRecursive(obj, depth=0) {
+    let result = "", type = "accordion";
+
     for(const o in obj) {
-        const dive = bfs(obj[o], depth + 1);
-        result += `${spaceStr}${o}:\n${dive}`;
-    }
-
-    return result;
-}
-function getSpaces(num) {
-    let result = "";
-    for(let i = 0; i < num; i++) {
-        for(let j = 0; j < spaces; j++) {
-            result += " ";
-        }
-    }
-    return result;
-}
-
-function createFilters(obj=filters, depth=0) {
-    if(typeof(obj) == "string") { 
-        return [ obj, "id" ];
-    }
-
-    let result = createAccordion(obj); // for some reason an obj fir the filter??
-    for(const o in obj) {
-        const [ dive, type ] = createFilters(obj[o], depth + 1);
-        if(type == "id") {
-            result += createCheckbox(o, dive);
+        if(isFinalDepth(obj[o])) {
+            result += createCheckbox(o, obj[o]);
+            type = "checkbox";
         }
         else {
+            const [ dive, typeDeep ] = createFiltersRecursive(obj[o], depth + 1);
+            result += createAccordion(o, typeDeep == "checkbox");
             result += dive;
         }
     }
 
-    result += getAccordionFooter();
-    return [ result, "accordion" ];
+    result += getAccordionFooter(type == "checkbox");
+    return [ result, type ];
 }
 
 function createAccordion(filter, includeCheckboxes=false) {
-    const checkboxes = includeCheckboxes ? `<div class="checkboxes"></div>` : "";
+    const mainFilter = filter == filterTitle;
+    const checkboxes = includeCheckboxes ? `<div class="checkboxes">` : "";
+    const filterID = getFilterID(filter);
 
     return `
-<!-- ${filter} -->
-<div class="accordion accordion--custom">
-    <div class="accordion-item" id="${filter}-item>"
-        <h2 class="accordion-header">
-            <input type="checkbox" class="form-check-input no-margin"></input>
-            <button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#${filter}-collapse"
-                aria-expanded="true" aria-controls="${filter}-collapse>"
-                <p class="m-font">${filter}</p>
-            </button>   
-        </h2>
-        <div id="${filter}"-collapse
-            class="accordion-collapse collapse" data-bs-parent="#${filter}-item">
-            <div class="accordion-body" id="${filter}"-dropdown>
-                ${checkboxes}`;
+    <!-- ${filter} -->
+    <div class="accordion accordion--custom">
+        <div class="accordion-item" id="${filterID}-item">
+            <h2 class="accordion-header">
+                <input type="checkbox" class="form-check-input no-margin" checked id="${filterID}${checkboxSuffix}"></input>
+                <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#${filterID}-collapse"
+                    aria-expanded="true" aria-controls="${filterID}-collapse">
+                    <p class="${mainFilter ? "l-font" : "m-font"}">${filter}</p>
+                </button>
+                ${mainFilter ? `
+                <button type="button" class="image-button"
+                    data-bs-toggle="modal" data-bs-target="#filtersModal" style="padding-right: 1rem">
+                    <img class="pill-image" src="/Images/MealMatch/Info.svg">
+                </button>` : ""}
+            </h2>
+            <div id="${filterID}-collapse"
+                class="accordion-collapse collapse" data-bs-parent="#${filterID}-item">
+                <div class="accordion-body" id="${filterID}-dropdown">
+                    ${checkboxes}`;
 }
-function getAccordionFooter() {
-    return `
+function getAccordionFooter(hasCheckbox=false) {
+    return `${hasCheckbox ? "</div>" : ""}
+                </div>
             </div>
         </div>
-    </div>
-</div>
-    `;
+    </div>`;
 }
 function createCheckbox(filter, id) {
+    const filterID = getFilterID(filter);
+
     return `
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" id="${id}"></input>
-    <label class="form-check-label" for="${id}"> 
-        ${filter}
-    </label>
-</div>`;
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked id="${filterID}${checkboxSuffix}" filter="${id}"></input>
+        <label class="form-check-label" for="${filterID}${checkboxSuffix}"> 
+            ${filter}
+        </label>
+    </div>`;
 }
 
-class FilterCheckbox {
-    /*  hold parent and children, subscribe to children
-        when clicked:
-            toggle alll children
-            notify parent to check status of all children
+function createCheckboxes() {
+    const filterAccordion = new FilterAccordion("Filters", null);
+    const children = createCheckboxesRecursive(filters, filterAccordion);
+    filterAccordion.setChildren(children);
+}
+function createCheckboxesRecursive(obj, parent, depth=0) {
+    let children = [];
 
-        cycle:
-            unchecked
-            checked
-            indeterminate / checked
-    */
+    for(const o in obj) {
+        const filterID = getFilterID(o);
+
+        if(isFinalDepth(obj[o])) {
+            const filterCheckbox = new FilterCheckbox(filterID, parent);
+            children.push(filterCheckbox);
+        }
+        else {
+            const filterAccordion = new FilterAccordion(filterID, parent);
+            const newChildren = createCheckboxesRecursive(obj[o], filterAccordion, depth + 1);
+            filterAccordion.setChildren(newChildren);
+
+            children.push(filterAccordion);
+            children.concat(newChildren);
+        }
+    }
+
+    return children;
+}
+
+function isFinalDepth(values) {
+    return typeof(values) == "string";
+}
+
+function getAllFilterIDs(obj=filters, depth=0) {
+    let result = [];
+    for(const o in obj) {
+        if(isFinalDepth(obj[o])) {
+            result.push(`${getFilterID(o)}${checkboxSuffix}`);
+        }
+        else {
+            const dive = getAllFilterIDs(obj[o], depth + 1);
+            result = result.concat(dive);
+        }
+    }
+
+    return result;
+}
+function getFilterID(filter) {
+    return filter.replaceAll(" ", "-");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -111,4 +138,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
-export default setFilters;
+export { populateFilters, getAllFilterIDs };

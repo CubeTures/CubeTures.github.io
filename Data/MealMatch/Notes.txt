@@ -1,5 +1,4 @@
 Version 1.1
-- Add filters to searching
 - Tell if the store youre looking at is open at the moment
 - Suppress notifications of match until re-enter
 - Change icons to bootstrap
@@ -18,31 +17,6 @@ Version 1.2
         - Only allow google api to be used by whitelisted users
             - Add button to allow users to request to be whitelisted
 
-Main Page
-- Name of Restaurant
-- Category (bbq, chinese, etc)
-- Photos
-- Distance from center location
-- Price Range
-
-Extra Info
-- Star Rating
-- Website
-- Phone number
-- Address (link to google maps)
-- Open hours (all days of week)
-
-
-Leniency:
-max( floor( sqrt( total - 1 ) - 1 ), 0 )
-
-Advanced Search Protocol (Deprecated):
-1. Gets within 5 mile radius
-2. Create a circle of 10 mile radius
-3. Create a square contained within it
-4. Place 4 equally sized circles inside the square, without overlapping
-5. Get within each of those 4 circles
-6. Return the union of all 5 circles
 
 
 accordion accordion--custom

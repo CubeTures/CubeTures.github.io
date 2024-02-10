@@ -93,31 +93,6 @@ function asString(obj) {
 
     return result;
 }
-function asArray(obj) {
-    let result = [];
-    for(const o in obj) {
-        result.push(o);
-    }
-
-    return result;
-}
-
-function getAllFilters() {
-    return bfs(filters, 0);
-}
-function bfs(obj, depth) {
-    if(typeof(obj) == "string") { 
-        return [obj];
-    }
-
-    let result = [];
-    for(const o in obj) {
-        const dive = bfs(obj[o], depth + 1);
-        result = result.concat(dive);
-    }
-
-    return result;
-}
 
 function getReadableFilters() {
     let result = {};
@@ -185,7 +160,6 @@ function getValidationBody(address, city, state, zip) {
 //#region nearby
 const NEARBY_SEARCH_URL = "https://places.googleapis.com/v1/places:searchNearby";
 const basicMasks = asString(masks["basic"]), allMasks = asString(masks["all"]);
-const allFilters = getAllFilters();
 const readableFilters = getReadableFilters();
 
 function getNearbyHeader(useAllMasks=true) {
@@ -196,12 +170,14 @@ function getNearbyHeader(useAllMasks=true) {
     };
 }
 
-function getNearbyBody(latlng, rad, types=allFilters) {
+function getNearbyBody(latlng, rad, filters) {
     const [ lat, lng ] = latlng.split(",");
+    const { include, exclude } = filters;
 
     return {
-        includedPrimaryTypes: types,
+        includedPrimaryTypes: include,
         includedTypes: ["restaurant"],
+        excludedTypes: exclude,
         maxResultCount: 20,
         rankPreference: "POPULARITY",
         locationRestriction: {
@@ -213,7 +189,7 @@ function getNearbyBody(latlng, rad, types=allFilters) {
                 radius: rad
             }
         }
-    }
+    };
 }
 //#endregion
 //#region photos
@@ -230,6 +206,6 @@ export {
     REFRESH_TOKEN_URL, refreshHeader, getRefreshParameters,
     REVERSE_GEOCODE_URL, geolocationOptions, getGeocodeParameters,
     ADDRESS_VALIDATION_URL, validationHeader, getValidationBody,
-    NEARBY_SEARCH_URL, filters, readableFilters, getNearbyHeader, getNearbyBody,
-    getPhotoUrl
+    NEARBY_SEARCH_URL, filters, readableFilters, 
+    getNearbyHeader, getNearbyBody, getPhotoUrl
 };

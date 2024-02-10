@@ -2,7 +2,7 @@ import { getUserData, setUserData, updateUserData, removeUserData } from "/Inclu
 import { getCookie } from "/Include/Miscellaneous/cookies.js";
 import { getCurrentLocation, validateAddress } from "/Include/MealMatch/Google APIs/google-geocode.js";
 import { createNewMatch, status } from "/Include/MealMatch/Google APIs/google-nearby.js";
-import setFilters from "/Include/MealMatch/Page Scripts/filters.js";
+import { populateFilters, getAllFilterIDs } from "/Include/MealMatch/Page Scripts/filters.js";
 import { goToMatch } from "/Include/MealMatch/Page Scripts/redirect.js";
 
 let addressInput, cityInput, stateInput, zipInput, latlngInput;
@@ -10,14 +10,15 @@ let addressHidden, cityHidden, stateHidden, zipHidden;
 let locationSpinner, locationErrorModal, locationErrorText;
 let locationValidationModal, formattedAddressText, correctedAddress;
 let peopleContainer, peopleTemplate, peopleDisclaimer, peopleSpinner, peopleErrorModal;
+let filterCheckboxes;
 let radiusRange, radiusValue;
 let loadValue, loadBar, matchLoadDOM, matchLoadModal, matchErrorModal, matchCancelModal;
 
 function onDocumentLoad() {
     setLocation();
     setPeople();
-    setAdvanced();
     setFilters();
+    setAdvanced();
     setMatch();
 }
 
@@ -54,7 +55,7 @@ async function setCurrentLocation() {
             address["administrative_area_level_1"], address["postal_code"], locationData["latlng"]);
     }
     else {
-        locationError();
+        locationError(0);
     }
 }
 function locationError(errorCode=0) {
@@ -132,6 +133,20 @@ function addPerson(uid, displayName) {
 function peopleError() {
     console.warn("People Error");
     peopleErrorModal.show();
+}
+
+function setFilters() {
+    populateFilters();
+    setCheckboxes();
+}
+function setCheckboxes() {
+    filterCheckboxes = [];
+
+    const allFilterIDs = getAllFilterIDs();
+    for(const filterID of allFilterIDs) {
+        const checkbox = document.getElementById(filterID);
+        filterCheckboxes.push(checkbox);
+    }
 }
 
 function setAdvanced() {
@@ -245,6 +260,7 @@ async function tryGetInputs() {
         return;
     }
 
+    const filters = getFilters();
     const [ radius ] = getAdvanced();
     const [ width, height ] = getDeviceData();
 
@@ -252,6 +268,7 @@ async function tryGetInputs() {
         "locationData": locationData,
         "people": people,
         "radius": radius,
+        "filters": filters,
         "width": width,
         "height": height
     };
@@ -298,6 +315,24 @@ async function tryGetPeople() {
     }
 
     return people;
+}
+function getFilters() {
+    let include = [];
+    let exclude = [];
+
+    for(const checkbox of filterCheckboxes) {
+        if(checkbox.indeterminate) {
+            exclude.push(checkbox.getAttribute("filter"));
+        }
+        else if(checkbox.checked) {
+            include.push(checkbox.getAttribute("filter"));
+        }
+    }
+
+    return {
+        "include": include,
+        "exclude": exclude
+    };
 }
 function getAdvanced() {
     const radius = parseFloat(radiusValue.value) * 1609;
