@@ -3,7 +3,9 @@ Version 1.1
 - Suppress notifications of match until re-enter
 - Change icons to bootstrap
 - Add outlines to the toolbar icons
-- Fix new user creation and sending friend request
+- Toolbar at top of matching screen
+    - See places you liked
+    - See places that you matched with
 
 Version 1.2
 - Change api to tripadvisor
@@ -16,21 +18,3 @@ Version 1.2
         - Make both apis usable
         - Only allow google api to be used by whitelisted users
             - Add button to allow users to request to be whitelisted
-
-
-
-accordion accordion--custom
-    accordion-item id="accordion-item"
-
-        accordion-header
-            form-check-input
-            accordion-button data-bs-target="#accordion-collapse" aria-controls="filter-collapse-c1"
-                Filter Category
-
-        accordion-collapse id="accordion-collapse" data-bs-parent="#accordion-item"
-            accordion-body id="accordion-body"
-                checkboxes
-                    form-check
-                        form-check-input id="checkbox-item"
-                        form-check-label id="checkbox-label" for="checkbox-item">
-                            Checkbox Item
