@@ -1,103 +1,112 @@
 {
-    "Meal Match": {
-        "date": "2/2024",
-        "language": "JavaScript",
-        "field": "Application",
-        "context": "Personal",
-        "setting": "Solo",
-        "url": "https://cubetures.github.io/Pages/MealMatch/home.html"
+    "Filters": {
+        "language": [ "C#", "Java", "JavaScript", "Python" ],
+        "field": ["Application", "Game", "Console"],
+        "context": ["Personal", "College", "Highschool"],
+        "setting": ["Solo", "Team"]
     },
 
-    "Core Control": {
-        "date": "10/2023",
-        "language": "C#",
-        "field": "Game",
-        "context": "Personal",
-        "setting": "Team",
-        "url": "https://bobgames1215.itch.io/core-control"
-    },
-    "Brain&": {
-        "date": "7/2022",
-        "language": "C#",
-        "field": "Game",
-        "context": "Personal",
-        "setting": "Solo",
-        "url": "https://cubetures.itch.io/brainand"
-    },
-    "Shadows": {
-        "date": "3/2022",
-        "language": "C#",
-        "field": "Game",
-        "context": "Personal",
-        "setting": "Solo",
-        "url": "https://cubetures.itch.io/shadows"
-    },
-
-    "Centipede": {
-        "date": "3/2023",
-        "language": "JavaScript",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Team",
-        "url": "https://github.com/owenshadburne/Centipede"
-    },
-    "Web Browser": {
-        "date": "2/2023",
-        "language": "JavaScript",
-        "field": "Application",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/Web-Browser"
-    },
-    "Speed": {
-        "date": "11/2022",
-        "language": "JavaScript",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/Speed-Card-API"
-    },
-    "SQL Import": {
-        "date": "10/2022",
-        "language": "Python",
-        "field": "Console",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/SQL-Import"
-    },
-
-    "Asteroids": {
-        "date": "11/2023",
-        "language": "C#",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/Asteroids"
-    },
-    "Rush Hour": {
-        "date": "10/2022",
-        "language": "C#",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/Rush-Hour"
-    },    
-
-    "Settlers of Catan": {
-        "date": "5/2022",
-        "language": "Java",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Team",
-        "url": "https://github.com/owenshadburne/Settlers-of-Catan"
-    },
-
-    "Bloxorz": {
-        "date": "11/2021",
-        "language": "Python",
-        "field": "Game",
-        "context": "Highschool",
-        "setting": "Solo",
-        "url": "https://github.com/owenshadburne/Bloxorz"
+    "Projects": {
+        "Meal Match": {
+            "date": "2/2024",
+            "language": "JavaScript",
+            "field": "Application",
+            "context": "Personal",
+            "setting": "Solo",
+            "url": "https://cubetures.github.io/Pages/MealMatch/home.html"
+        },
+    
+        "Core Control": {
+            "date": "10/2023",
+            "language": "C#",
+            "field": "Game",
+            "context": "Personal",
+            "setting": "Team",
+            "url": "https://bobgames1215.itch.io/core-control"
+        },
+        "Brain&": {
+            "date": "7/2022",
+            "language": "C#",
+            "field": "Game",
+            "context": "Personal",
+            "setting": "Solo",
+            "url": "https://cubetures.itch.io/brainand"
+        },
+        "Shadows": {
+            "date": "3/2022",
+            "language": "C#",
+            "field": "Game",
+            "context": "Personal",
+            "setting": "Solo",
+            "url": "https://cubetures.itch.io/shadows"
+        },
+    
+        "Centipede": {
+            "date": "3/2023",
+            "language": "JavaScript",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Team",
+            "url": "https://github.com/owenshadburne/Centipede"
+        },
+        "Web Browser": {
+            "date": "2/2023",
+            "language": "JavaScript",
+            "field": "Application",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/Web-Browser"
+        },
+        "Speed": {
+            "date": "11/2022",
+            "language": "JavaScript",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/Speed-Card-API"
+        },
+        "SQL Import": {
+            "date": "10/2022",
+            "language": "Python",
+            "field": "Console",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/SQL-Import"
+        },
+    
+        "Asteroids": {
+            "date": "11/2023",
+            "language": "C#",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/Asteroids"
+        },
+        "Rush Hour": {
+            "date": "10/2022",
+            "language": "C#",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/Rush-Hour"
+        },    
+    
+        "Settlers of Catan": {
+            "date": "5/2022",
+            "language": "Java",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Team",
+            "url": "https://github.com/owenshadburne/Settlers-of-Catan"
+        },
+    
+        "Bloxorz": {
+            "date": "11/2021",
+            "language": "Python",
+            "field": "Game",
+            "context": "Highschool",
+            "setting": "Solo",
+            "url": "https://github.com/owenshadburne/Bloxorz"
+        }
     }
 }
