@@ -1,7 +1,7 @@
 {
     "Filters": {
         "language": [ "C#", "Java", "JavaScript", "Python" ],
-        "field": ["Application", "Game", "Console"],
+        "type": ["Application", "Game", "Console"],
         "context": ["Personal", "College", "Highschool"],
         "setting": ["Solo", "Team"]
     },
@@ -10,103 +10,115 @@
         "Meal Match": {
             "date": "2/2024",
             "language": "JavaScript",
-            "field": "Application",
+            "type": "Application",
             "context": "Personal",
             "setting": "Solo",
-            "url": "https://cubetures.github.io/Pages/MealMatch/home.html"
+            "url": "https://cubetures.github.io/Pages/MealMatch/home.html",
+            "images": []
         },
     
         "Core Control": {
             "date": "10/2023",
             "language": "C#",
-            "field": "Game",
+            "type": "Game",
             "context": "Personal",
             "setting": "Team",
-            "url": "https://bobgames1215.itch.io/core-control"
+            "url": "https://bobgames1215.itch.io/core-control",
+            "images": []
         },
-        "Brain&": {
+        "BrainAnd": {
             "date": "7/2022",
             "language": "C#",
-            "field": "Game",
+            "type": "Game",
             "context": "Personal",
             "setting": "Solo",
-            "url": "https://cubetures.itch.io/brainand"
+            "url": "https://cubetures.itch.io/brainand",
+            "images": []
         },
         "Shadows": {
             "date": "3/2022",
             "language": "C#",
-            "field": "Game",
+            "type": "Game",
             "context": "Personal",
             "setting": "Solo",
-            "url": "https://cubetures.itch.io/shadows"
+            "url": "https://cubetures.itch.io/shadows",
+            "images": []
         },
     
         "Centipede": {
             "date": "3/2023",
             "language": "JavaScript",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Team",
-            "url": "https://github.com/owenshadburne/Centipede"
+            "url": "https://github.com/owenshadburne/Centipede",
+            "images": []
         },
         "Web Browser": {
             "date": "2/2023",
             "language": "JavaScript",
-            "field": "Application",
+            "type": "Application",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/Web-Browser"
+            "url": "https://github.com/owenshadburne/Web-Browser",
+            "images": []
         },
         "Speed": {
             "date": "11/2022",
             "language": "JavaScript",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/Speed-Card-API"
+            "url": "https://github.com/owenshadburne/Speed-Card-API",
+            "images": []
         },
         "SQL Import": {
             "date": "10/2022",
             "language": "Python",
-            "field": "Console",
+            "type": "Console",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/SQL-Import"
+            "url": "https://github.com/owenshadburne/SQL-Import",
+            "images": []
         },
     
         "Asteroids": {
             "date": "11/2023",
             "language": "C#",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/Asteroids"
+            "url": "https://github.com/owenshadburne/Asteroids",
+            "images": []
         },
         "Rush Hour": {
             "date": "10/2022",
             "language": "C#",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/Rush-Hour"
+            "url": "https://github.com/owenshadburne/Rush-Hour",
+            "images": []
         },    
     
         "Settlers of Catan": {
             "date": "5/2022",
             "language": "Java",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Team",
-            "url": "https://github.com/owenshadburne/Settlers-of-Catan"
+            "url": "https://github.com/owenshadburne/Settlers-of-Catan",
+            "images": []
         },
     
         "Bloxorz": {
             "date": "11/2021",
             "language": "Python",
-            "field": "Game",
+            "type": "Game",
             "context": "Highschool",
             "setting": "Solo",
-            "url": "https://github.com/owenshadburne/Bloxorz"
+            "url": "https://github.com/owenshadburne/Bloxorz",
+            "images": []
         }
     }
 }
