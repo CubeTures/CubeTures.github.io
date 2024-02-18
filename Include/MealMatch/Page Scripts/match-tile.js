@@ -73,7 +73,7 @@ export default class MatchTile {
     setInfo(clone, location) {
         const outermost = clone.querySelector("#tile");
         outermost.id = this.id;
-        if(this.initiallyActive) {
+        if(!this.initiallyActive) {
             outermost.setAttribute("hidden", true);
         }
 
