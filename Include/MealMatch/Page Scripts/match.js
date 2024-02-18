@@ -86,16 +86,12 @@ function setDecision() {
 }
 
 async function decision(id, isYes) {
-    alert("1");
     const path = getResponsesPath(id);
-    alert("2");
     let response = {};
     response[userID] = isYes ? "Y" : "N";
 
     updateUserData(path, response, matchID);
-    alert("3");
     awaitDecisionUpdate(path, id);
-    alert("4");
 }
 function awaitDecisionUpdate(path, id) {
     const userPath = `${path}/${userID}`;
