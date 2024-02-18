@@ -41,6 +41,7 @@ export default class MatchTile {
         this.id = id;
         this.decisionCallback = decisionCallback;
         this.initiallyActive = initiallyActive;
+        this.postStack = false;
         this.photoDiv = clone.getElementById("photos");
         this.photoList = [];
         this.onPop = () => { this.onStackPop(); }
@@ -70,6 +71,12 @@ export default class MatchTile {
         }
     }
     setInfo(clone, location) {
+        const outermost = clone.querySelector("#tile");
+        outermost.id = this.id;
+        if(this.initiallyActive) {
+            outermost.setAttribute("hidden", true);
+        }
+
         const name = clone.querySelector("#name");
         const nm = location["name"];
         name.textContent = nm ? nm : "Unknown";
@@ -131,8 +138,7 @@ export default class MatchTile {
             for(const photo in photos) {
                 let url = photo.replaceAll(",", ".");
                 url = url.replaceAll("|", "/");
-                const loading = this.initiallyActive ? "eager" : "lazy";
-                const img = `<img ${classes} egg=${url} alt="photo" loading="${loading}">`;
+                const img = `<img ${classes} src=${url} alt="photo">`;
                 this.photoList.push(img);
                 html += img;
             }
@@ -447,7 +453,15 @@ export default class MatchTile {
         }
     }
     onStackPop() {
+        if(this.postStack) {
+            const outermost = document.getElementById(this.id);
+            outermost.setAttribute("hidden");
+        }
+
         if(this.id == stack.next()) {
+            const outermost = document.getElementById(this.id);
+            outermost.removeAttribute("hidden");
+
             let html = "";
             for(const img of this.photoList) {
                 const replaced = img.replace("hold", "src");
@@ -456,6 +470,8 @@ export default class MatchTile {
 
             this.photoDiv.innerHTML = html;
             stack.onPopUnsub(this.onPop);
+
+            this.postStack = true;
         }
     }
 }

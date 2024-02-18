@@ -1,3 +1,7 @@
+Version 1.0
+- Class of visually hidden to components that havent been reached yet
+- Class of visually hidden to components that have been already decided
+
 Version 1.1
 - Tell if the store youre looking at is open at the moment
 - Suppress notifications of match until re-enter
