@@ -132,7 +132,7 @@ export default class MatchTile {
                 let url = photo.replaceAll(",", ".");
                 url = url.replaceAll("|", "/");
                 const loading = this.initiallyActive ? "eager" : "lazy";
-                const img = `<img ${classes} src=${url} alt="photo" loading="${loading}">`;
+                const img = `<img ${classes} egg=${url} alt="photo" loading="${loading}">`;
                 this.photoList.push(img);
                 html += img;
             }
