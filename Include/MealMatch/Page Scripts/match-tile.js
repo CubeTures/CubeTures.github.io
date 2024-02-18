@@ -131,8 +131,8 @@ export default class MatchTile {
             for(const photo in photos) {
                 let url = photo.replaceAll(",", ".");
                 url = url.replaceAll("|", "/");
-                const place = this.initiallyActive ? "src" : "hold";
-                const img = `<img ${classes} ${place}=${url} alt="photo">`;
+                const loading = this.initiallyActive ? "eager" : "lazy";
+                const img = `<img ${classes} src=${url} alt="photo" loading="${loading}">`;
                 this.photoList.push(img);
                 html += img;
             }

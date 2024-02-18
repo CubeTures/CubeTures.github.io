@@ -96,15 +96,12 @@ async function decision(id, isYes) {
 function awaitDecisionUpdate(path, id) {
     const userPath = `${path}/${userID}`;
     onUserData(userPath, () => {
-        alert("1");
         checkPlaceDecision(id);
     });
 }
 async function checkPlaceDecision(id) {
-    alert("2");
     const decidedPath = `${getDecidedPath()}/${id}`;
     const isDecided = await getUserData(decidedPath, matchID);
-    alert("3");
 
     if(!isDecided) {
         const path = getResponsesPath(id);
@@ -129,8 +126,6 @@ async function checkPlaceDecision(id) {
             setIndividualDecision(id, yesVote);
             awaitIndividualDecision(id);
         }
-
-        alert("4");
     }
 }
 
