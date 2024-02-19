@@ -103,56 +103,23 @@ class Project {
     createHTML(template) {
         const clone = template.content.cloneNode(true);
 
-        const title = this.selrep(clone, "card-title");
+        const title = this.selrep(clone, "card-title-text");
         title.textContent = this.name;
 
         const image = this.selrep(clone, "photo");
         image.src = this.getPlaceholderImage();
         image.alt = `${this.name} Image`;
-        //this.setCarousel(clone);
+
+        const desc = this.selrep(clone, "description");
+        desc.textContent = "Lorem ipsum dolor sit amet, " +
+            "consectetur adipiscing elit, " + 
+            "sed do eiusmod tempor incididunt ut " + 
+            "labore et dolore magna aliqua.";
+
 
         return clone;
     }
-
-    setCarousel(clone) {
-        this.setCarouselIDs(clone);
-        this.createCarouselItems(clone);
-    }
-    setCarouselIDs(clone) {
-        const carousel = this.selrep(clone, "carousel");
-        const prev = this.selrep(carousel, "carousel-previous");
-        const next = this.selrep(carousel, "carousel-next");
-        
-        const carouselID = `#${this.getIDReplacement("carousel")}`;
-        prev.setAttribute("data-bs-target", carouselID);
-        next.setAttribute("data-bs-target", carouselID);
-    }
-    createCarouselItems(clone) {
-        const carousel = this.selrep(clone, "carousel-inner");
-        const itemTemplate = this.selrep(carousel, "carousel-template");
-
-        const count = this.getRandomInt(2, 5);
-        for(let i = 0; i < count; i++) {
-            const item = this.createCarouselItem(itemTemplate, i == 0)
-            carousel.append(item);
-        }   
-    }
-    createCarouselItem(template, active) {
-        const clone = template.content.cloneNode(true);
-
-        
-
-        const item = this.selrep(clone, "carousel-item");
-        if(active) { item.classList.add("active"); }
-
-        const img = this.selrep(clone, "carousel-image");
-        img.src = src;
-        img.alt = `${this.name} Image`;
-        if(active) { img.loading = "auto"; }
-        else { img.loading = "lazy"; }
-
-        return clone;
-    }
+    
     getPlaceholderImage() {
         const rand = this.getRandomInt(350, 400);
         return `http://placekitten.com/${rand}/${rand}`; 

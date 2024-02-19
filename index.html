@@ -12,56 +12,30 @@
             <br/>
         </div>
 
-        <!-- Have the card expand and turn into a modal-like blurb -->
         <template id="project-template">
-            <div class="project-card rounded text-center">
-                <div class="project-card-content">
-                    <div>
-                        <h2 class="project-card-title" id="card-title">Title</h2>
+            <div class="col">
+                <div class="project-card rounded">
+                    <div class="project-card-content text-center">
+                        <div class="project-card-title">
+                            <h2 class="project-card-title-text" id="card-title-text">Title</h2>
+                        </div>
+                        <div class="small-padded project-card-body">
+                            <div>
+                                <img class="rounded project-card-photo" src="..." alt="..." id="photo">
+                                <div class="project-card-text" >
+                                    <p id="description">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div class="ribbon ribbon-bottom-right"><span>new</span></div-->
                     </div>
-                    <div class="small-padded project-card-body">
-                        <img class="rounded" src="..." alt="..." id="photo">
-                    </div>
-                    <div class="ribbon ribbon-bottom-right"><span>C#</span></div>
                 </div>
             </div>
         </template>
 
-        <div id="projects" class="d-flex flex-wrap justify-content-center project-container"> <!-- row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2 -->
-            
-            <!--
-                <div class="col" style="padding-bottom: 1rem;">
-                    <div class="padded">
-                        <div class="card text-center border-light-subtle" data-bs-theme="dark">
-                            <div class="card-header">
-                                <h2 class="card-title no-margin" id="card-title">Meal Match</h2>
-                            </div>
-                            <div class="card-body">
-                                <img id="photo">
-                                    <div id="carousel" class="carousel slide">
-                                        <div class="carousel-inner rounded" id="carousel-inner">
-                                            <template id="carousel-template">
-                                                <div class="carousel-item" id="carousel-item">
-                                                    <img src="..." class="d-block w-100" alt="..." id="carousel-image">
-                                                </div>
-                                            </template>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" 
-                                            data-bs-target="#carouselExample" data-bs-slide="prev" id="carousel-previous">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                        data-bs-target="#carouselExample" data-bs-slide="next" id="carousel-next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            -->
+        <div id="projects" class="project-container row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
         </div>
 
         <!-- Web Projects -->
@@ -95,6 +69,6 @@
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>
 
         <link href="/Include/Main Page/styles.css" rel="stylesheet">
-        <!--script type="module" src="/Include/Main Page/generate-projects.js"></script-->
+        <!-- <script type="module" src="/Include/Main Page/generate-projects.js"></script> -->
     </body>
 </html>
