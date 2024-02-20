@@ -6,7 +6,7 @@
        <link rel="icon" type="image/x-icon" href="/Images/Logo/Backed.svg">
     </head>
     <body class="bg-dark text-light">
-        <div class="rounded-4 text-center title" id="title-div">
+        <div class="rounded-4 text-center title">
             <br/>
             <h1 class="no-margin">Owen Shadburne</h1>
             <br/>
@@ -14,22 +14,27 @@
 
         <template id="project-template">
             <div class="col">
-                <div class="project-card rounded">
-                    <div class="project-card-content text-center">
-                        <div class="project-card-title">
+                <div class="project-card rounded" id="card">
+                    <div class="project-card-content text-center rounded">
+                        <div class="project-card-title" id="title">
                             <h2 class="project-card-title-text" id="card-title-text">Title</h2>
                         </div>
-                        <div class="small-padded project-card-body">
-                            <div>
+                        <div class="project-card-body" id="side">
+                            <div class="project-card-side project-card-front" id="front">
                                 <img class="rounded project-card-photo" src="..." alt="..." id="photo">
-                                <div class="project-card-text" >
-                                    <p id="description">
-
-                                    </p>
+                            </div>
+                            <div class="project-card-side project-card-back rounded" id="back">
+                                <div class="project-card-text d-flex flex-column justify-content-around text-light">
+                                    <div>
+                                        <p class="about" id="about">About</p>
+                                    </div>
+                                    <div>
+                                        <div class="tags d-flex flex-wrap justify-content-center" id="tags"></div>
+                                        <div class="links" id="links"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--div class="ribbon ribbon-bottom-right"><span>new</span></div-->
                     </div>
                 </div>
             </div>
@@ -68,7 +73,7 @@
         <link rel="stylesheet" href="/Packages/Bootstrap/css/bootstrap.min.css">
         <script src="/Packages/Bootstrap/js/bootstrap.min.js"></script>
 
-        <link href="/Include/Main Page/styles.css" rel="stylesheet">
+        <link href="/Include/Main Page/Styles/styles.css" rel="stylesheet">
         <!-- <script type="module" src="/Include/Main Page/generate-projects.js"></script> -->
     </body>
 </html>

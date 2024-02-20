@@ -65,6 +65,11 @@ class Filter {
     }
 }
 
+//procedurally generate a new css rule for each 
+const changeOnFlip = {
+    ".project-card": ""
+};
+
 class Project {
     /*
         id: string (name with dashes)
@@ -74,8 +79,10 @@ class Project {
         type: string
         context: string
         setting: string
-        url: string (http path)
+        links: { string: string }
+        about: string
         images: string[] (absolute paths)
+        color: string
     */
 
     constructor(name, options) {
@@ -85,8 +92,10 @@ class Project {
             type,
             context,
             setting,
-            url,
-            images
+            links,
+            about,
+            images,
+            color
         } = options;
 
         this.id = name.replace(" ", "-");
@@ -96,33 +105,82 @@ class Project {
         this.type = type;
         this.context = context;
         this.setting = setting;
-        this.url = url;
+        this.links = links;
+        this.about = about;
         this.images = images;
+        this.color = color;
     }
 
     createHTML(template) {
         const clone = template.content.cloneNode(true);
 
-        const title = this.selrep(clone, "card-title-text");
-        title.textContent = this.name;
+        const card = this.selrep(clone, "card");
+
+        const title = this.selrep(clone, "title");
+        title.addEventListener("click", () => { this.onClick(); });
+
+        const titleText = this.selrep(clone, "card-title-text");
+        titleText.textContent = this.name;
 
         const image = this.selrep(clone, "photo");
         image.src = this.getPlaceholderImage();
         image.alt = `${this.name} Image`;
 
-        const desc = this.selrep(clone, "description");
-        desc.textContent = "Lorem ipsum dolor sit amet, " +
-            "consectetur adipiscing elit, " + 
-            "sed do eiusmod tempor incididunt ut " + 
-            "labore et dolore magna aliqua.";
+        const about = this.selrep(clone, "about");
+        about.textContent = this.about;
 
+        this.setTags(clone);
+        this.setLinks(clone);
 
         return clone;
+    }
+
+    onClick() {
+        if(!this.card) {
+            this.card = document.getElementById(this.getIDReplacement("card"));
+        }
+
+        if(this.card.classList.contains("flipped")) {
+            this.card.classList.remove("flipped");
+        }
+        else {
+            this.card.classList.add("flipped");
+        }
     }
     
     getPlaceholderImage() {
         const rand = this.getRandomInt(350, 400);
         return `http://placekitten.com/${rand}/${rand}`; 
+    }
+
+    setTags(clone) {
+        const tags = this.selrep(clone, "tags");
+
+        tags.innerHTML += this.createTag(this.language);
+        tags.innerHTML += this.createTag(this.type);
+        tags.innerHTML += this.createTag(this.context);
+        tags.innerHTML += this.createTag(this.setting);
+    }
+    createTag(tag) {
+        return `
+        <div class="tag rounded-pill">
+            ${tag}
+        </div>`;
+    }
+
+    setLinks(clone) {
+        const links = this.selrep(clone, "links");
+
+        for(const [ name, url ] of Object.entries(this.links)) {
+            links.innerHTML += this.createLink(name, url);
+        }
+    }
+    createLink(name, url) {
+        return `
+        <a type="button" class="btn btn-outline-light link"
+            href="${url}">
+            ${name}
+        </a>`;
     }
 
     // select and replace
@@ -136,7 +194,7 @@ class Project {
     }
 
     toString() {
-        return `${this.name}: ${this.url}`;
+        return this.name;
     }
 
     getRandomInt(min, max) {
