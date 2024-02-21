@@ -32,7 +32,7 @@
             },
             "about": "Core Control",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#5dfbfa"
         },
         "BrainAnd": {
             "date": "7/2022",
@@ -45,7 +45,7 @@
             },
             "about": "BrainAnd",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#f8fab6"
         },
         "Shadows": {
             "date": "3/2022",
@@ -58,7 +58,7 @@
             },
             "about": "Shadows",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#6775f5"
         },
     
         "Centipede": {
@@ -72,7 +72,7 @@
             },
             "about": "Centipede",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#c0f263"
         },
         "Web Browser": {
             "date": "2/2023",
@@ -87,19 +87,6 @@
             "images": [],
             "color": "#FFFFFF"
         },
-        "Speed": {
-            "date": "11/2022",
-            "language": "JavaScript",
-            "type": "Game",
-            "context": "High School",
-            "setting": "Solo",
-            "links": {
-                "GitHub": "https://github.com/owenshadburne/Speed-Card-API"
-            },
-            "about": "Speed",
-            "images": [],
-            "color": "#FFFFFF"
-        },
         "SQL Import": {
             "date": "10/2022",
             "language": "Python",
@@ -111,7 +98,7 @@
             },
             "about": "SQL Import",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#a182ff"
         },
     
         "Asteroids": {
@@ -125,7 +112,7 @@
             },
             "about": "Asteroids",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#ababab"
         },
         "Rush Hour": {
             "date": "10/2022",
@@ -138,7 +125,7 @@
             },
             "about": "Rush Hour",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#f25063"
         },    
     
         "Settlers of Catan": {
@@ -152,7 +139,7 @@
             },
             "about": "Settlers of Catan",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#f2ab6d"
         },
     
         "Bloxorz": {
@@ -166,7 +153,7 @@
             },
             "about": "Bloxorz",
             "images": [],
-            "color": "#FFFFFF"
+            "color": "#f06a5d"
         }
     }
 }

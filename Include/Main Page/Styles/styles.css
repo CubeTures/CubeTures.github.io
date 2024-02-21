@@ -71,17 +71,8 @@
   z-index: 1;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-.project-card.flipped {
-  border-color: #FB4670;
-}
-.project-card.flipped .project-card-content {
-  color: #FB4670;
-}
 .project-card.flipped .project-card-content::before {
   animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards;
-}
-.project-card.flipped .project-card-title {
-  border-color: #FB4670;
 }
 .project-card.flipped .project-card-body {
   transform: rotateY(180deg) !important;

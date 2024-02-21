@@ -67,7 +67,9 @@ class Filter {
 
 //procedurally generate a new css rule for each 
 const changeOnFlip = {
-    ".project-card": ""
+    "project-card": "borderColor",
+    "project-card-content": "color",
+    "project-card-title": "borderColor"
 };
 
 class Project {
@@ -142,9 +144,22 @@ class Project {
 
         if(this.card.classList.contains("flipped")) {
             this.card.classList.remove("flipped");
+            this.setChangeOnFlip(false);
         }
         else {
             this.card.classList.add("flipped");
+            this.setChangeOnFlip(true);
+        }
+    }
+    setChangeOnFlip(flipped) {
+        for(const [ cls, attr] of Object.entries(changeOnFlip)) {
+            if(this.card.classList.contains(cls)) {
+                this.card.style[attr] = flipped ? this.color : null;
+            }
+            else {
+                const elem = this.card.querySelector(`.${cls}`);
+                elem.style[attr] = flipped ? this.color : null;
+            }
         }
     }
     

@@ -1,8 +1,1 @@
-project-card (border-color)
-project-card-content (color !always) 
-project-card-title (border-color)
-
-Optional
-.project-card-title-text (color) -- Don't have to set
-
 Order by date created

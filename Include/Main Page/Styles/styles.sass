@@ -80,15 +80,11 @@ $card-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
   transition: $card-transition
 
   &.flipped
-    border-color: $mealmatch
-
     .project-card-content
-      color: $mealmatch
       &::before
         animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
 
     .project-card-title
-      border-color: $mealmatch
 
     .project-card-body
       transform: rotateY(180deg) !important
