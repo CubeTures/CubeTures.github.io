@@ -124,9 +124,7 @@ class Project {
         const titleText = this.selrep(clone, "card-title-text");
         titleText.textContent = this.name;
 
-        const image = this.selrep(clone, "photo");
-        image.src = this.getPlaceholderImage();
-        image.alt = `${this.name} Image`;
+        this.setImage(clone);
 
         const about = this.selrep(clone, "about");
         about.textContent = this.about;
@@ -163,6 +161,17 @@ class Project {
         }
     }
     
+    setImage(clone) {
+        const image = this.selrep(clone, "photo");
+        if(this.images.length > 0) {
+            image.src = this.images[0];
+        }
+        else {
+            image.src = this.getPlaceholderImage();
+        }
+        
+        image.alt = `${this.name} Image`;
+    }
     getPlaceholderImage() {
         const rand = this.getRandomInt(350, 400);
         return `http://placekitten.com/${rand}/${rand}`; 
