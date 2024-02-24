@@ -14,24 +14,24 @@
             "context": "Personal",
             "setting": "Solo",
             "links": {
-                "GitHub": "https://cubetures.github.io/Pages/MealMatch/home.html"
+                "View Project": "https://cubetures.github.io/Pages/MealMatch/home.html"
             },
-            "about": "A Tinder-like approach to finding a restaurant in your area with your friends.",
+            "about": "A Tinder-like approach to finding a restaurant in your area with your friends. Implemented using Firebase Authentication and Real-Time Database in addition to the Google Maps API.",
             "images": ["/Images/Main Page/Projects/Meal Match.png"],
             "color": "#FB4670"
         },
     
         "Core Control": {
-            "date": "10/2023",
+            "date": "12/2021",
             "language": "C#",
             "type": "Game",
             "context": "Personal",
             "setting": "Team",
             "links": {
-                "itch.io": "https://bobgames1215.itch.io/core-control"
+                "View Project": "https://bobgames1215.itch.io/core-control"
             },
-            "about": "Core Control",
-            "images": [],
+            "about": "A fast-paced shooter where there is no player; you are everywhere. Engineered with Unity for the Zeno Game Jam 2021 where it placed 2nd among 78 submissions.",
+            "images": ["/Images/Main Page/Projects/Core Control.png"],
             "color": "#5dfbfa"
         },
         "BrainAnd": {
@@ -43,8 +43,8 @@
             "links": {
                 "itch.io": "https://cubetures.itch.io/brainand"
             },
-            "about": "BrainAnd",
-            "images": [],
+            "about": "An intense puzzle game based on the popular esoteric programming language BrainF*ck. Developed with Unity, this project served as an inspiration for a meeting I later gave at my school's Computer Science Club.",
+            "images": ["/Images/Main Page/Projects/BrainAnd.png"],
             "color": "#f8fab6"
         },
         "Shadows": {
@@ -56,7 +56,7 @@
             "links": {
                 "itch.io": "https://cubetures.itch.io/shadows"
             },
-            "about": "Shadows",
+            "about": "A mind-bending 3D puzzle game about casting shadows. It includes a sandbox mode that allows for sharable custom creations. Produced using Unity as my first publicly published game.",
             "images": [],
             "color": "#6775f5"
         },
@@ -71,8 +71,8 @@
                 "GitHub": "https://github.com/owenshadburne/Centipede"
             },
             "about": "Centipede",
-            "images": [],
-            "color": "#c0f263"
+            "images": ["/Images/Main Page/Projects/Centipede.png"],
+            "color": "#77F263"
         },
         "Web Browser": {
             "date": "2/2023",
@@ -101,33 +101,6 @@
             "color": "#a182ff"
         },
     
-        "Asteroids": {
-            "date": "11/2023",
-            "language": "C#",
-            "type": "Game",
-            "context": "High School",
-            "setting": "Solo",
-            "links": {
-                "GitHub": "https://github.com/owenshadburne/Asteroids"
-            },
-            "about": "Asteroids",
-            "images": [],
-            "color": "#ababab"
-        },
-        "Rush Hour": {
-            "date": "10/2022",
-            "language": "C#",
-            "type": "Game",
-            "context": "High School",
-            "setting": "Solo",
-            "links": {
-                "GitHub": "https://github.com/owenshadburne/Rush-Hour"
-            },
-            "about": "Rush Hour",
-            "images": [],
-            "color": "#f25063"
-        },    
-    
         "Settlers of Catan": {
             "date": "5/2022",
             "language": "Java",
@@ -138,7 +111,7 @@
                 "GitHub": "https://github.com/owenshadburne/Settlers-of-Catan"
             },
             "about": "Settlers of Catan",
-            "images": [],
+            "images": ["/Images/Main Page/Projects/Settlers of Catan.png"],
             "color": "#f2ab6d"
         },
     

@@ -173,6 +173,10 @@
   text-overflow: ellipsis;
 }
 
+.about {
+  text-align: left;
+}
+
 .tag {
   margin-right: 1rem;
   margin-bottom: 1rem;
