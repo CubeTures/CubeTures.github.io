@@ -14,11 +14,12 @@
             "context": "Personal",
             "setting": "Solo",
             "links": {
-                "View Project": "https://cubetures.github.io/Pages/MealMatch/home.html"
+                "Try it Out": "https://cubetures.github.io/Pages/MealMatch/home.html",
+                "GitHub": "https://github.com/CubeTures/CubeTures.github.io"
             },
             "about": "A Tinder-like approach to finding a restaurant in your area with your friends. Implemented using Firebase Authentication and Real-Time Database in addition to the Google Maps API.",
             "images": ["/Images/Main Page/Projects/Meal Match.png"],
-            "color": "#FB4670"
+            "color": "#FF7192"
         },
     
         "Core Control": {
@@ -28,7 +29,7 @@
             "context": "Personal",
             "setting": "Team",
             "links": {
-                "View Project": "https://bobgames1215.itch.io/core-control"
+                "Try it Out": "https://bobgames1215.itch.io/core-control"
             },
             "about": "A fast-paced shooter where there is no player; you are everywhere. Engineered with Unity for the Zeno Game Jam 2021 where it placed 2nd among 78 submissions.",
             "images": ["/Images/Main Page/Projects/Core Control.png"],
@@ -41,9 +42,10 @@
             "context": "Personal",
             "setting": "Solo",
             "links": {
-                "itch.io": "https://cubetures.itch.io/brainand"
+                "Try it Out": "https://cubetures.itch.io/brainand",
+                "GitHub": "https://github.com/owenshadburne/BrainAnd"                
             },
-            "about": "An intense puzzle game based on the popular esoteric programming language BrainF*ck. Developed with Unity, this project served as an inspiration for a meeting I later gave at my school's Computer Science Club.",
+            "about": "An intense puzzle game based on my own esoteric programming language. Developed with Unity, this project served as an inspiration for a meeting I later gave at my school's Computer Science Club.",
             "images": ["/Images/Main Page/Projects/BrainAnd.png"],
             "color": "#f8fab6"
         },
@@ -54,50 +56,38 @@
             "context": "Personal",
             "setting": "Solo",
             "links": {
-                "itch.io": "https://cubetures.itch.io/shadows"
+                "Try it Out": "https://cubetures.itch.io/shadows",
+                "GitHub": "https://github.com/owenshadburne/Shadows"
             },
             "about": "A mind-bending 3D puzzle game about casting shadows. It includes a sandbox mode that allows for sharable custom creations. Produced using Unity as my first publicly published game.",
-            "images": [],
+            "images": ["/Images/Main Page/Projects/Shadows.png"],
             "color": "#6775f5"
         },
-    
-        "Centipede": {
-            "date": "3/2023",
-            "language": "JavaScript",
-            "type": "Game",
-            "context": "High School",
-            "setting": "Team",
-            "links": {
-                "GitHub": "https://github.com/owenshadburne/Centipede"
-            },
-            "about": "Centipede",
-            "images": ["/Images/Main Page/Projects/Centipede.png"],
-            "color": "#77F263"
-        },
-        "Web Browser": {
+        
+        "Search Engine": {
             "date": "2/2023",
             "language": "JavaScript",
             "type": "Application",
             "context": "High School",
             "setting": "Solo",
             "links": {
-                "GitHub": "https://github.com/owenshadburne/Web-Browser"
+                "GitHub": "https://github.com/owenshadburne/Search-Engine"
             },
-            "about": "Web Browser",
-            "images": [],
-            "color": "#FFFFFF"
+            "about": "A web crawler and search engine running off a local database. Developed with Node.js and post requests on a client-side server.",
+            "images": ["/Images/Main Page/Projects/Search Engine.png"],
+            "color": "#AEAEAE"
         },
-        "SQL Import": {
+        "SQL Importer": {
             "date": "10/2022",
             "language": "Python",
             "type": "Console",
             "context": "High School",
             "setting": "Solo",
             "links": {
-                "GitHub": "https://github.com/owenshadburne/SQL-Import"
+                "GitHub": "https://github.com/owenshadburne/SQL-Importer"
             },
-            "about": "SQL Import",
-            "images": [],
+            "about": "A lightweight Python program that converts .json, .csv, and .xml files into an SQLite database.",
+            "images": ["/Images/Main Page/Projects/SQL Importer.png"],
             "color": "#a182ff"
         },
     
@@ -110,7 +100,7 @@
             "links": {
                 "GitHub": "https://github.com/owenshadburne/Settlers-of-Catan"
             },
-            "about": "Settlers of Catan",
+            "about": "A faithful reaction of the popular board game Settlers of Catan. Developed with JSwing and a complex doubly linked lists to connect cities and roads.",
             "images": ["/Images/Main Page/Projects/Settlers of Catan.png"],
             "color": "#f2ab6d"
         },
@@ -124,8 +114,8 @@
             "links": {
                 "GitHub": "https://github.com/owenshadburne/Bloxorz"
             },
-            "about": "Bloxorz",
-            "images": [],
+            "about": "A reimagining of the flash game Bloxorz in 2D. Designed using Pygame and exported using PyInstaller.",
+            "images": ["/Images/Main Page/Projects/Bloxorz.png"],
             "color": "#f06a5d"
         }
     }

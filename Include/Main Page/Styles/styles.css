@@ -1,3 +1,7 @@
+body {
+  margin-bottom: 2rem;
+}
+
 .title {
   margin: 1rem;
   color: #f8f9fa;
@@ -61,6 +65,7 @@
 .project-container {
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: 100%;
 }
 
 .project-card {
