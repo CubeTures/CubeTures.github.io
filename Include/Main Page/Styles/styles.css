@@ -149,6 +149,7 @@ body {
 
 .project-card-side {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden !important;
 }
 
 .project-card-back {
