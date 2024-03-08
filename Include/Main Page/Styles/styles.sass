@@ -144,12 +144,15 @@ body
 .project-card-body
   position: relative
   display: inline-block
-  transform-style: preserve-3d
   transition: $card-transition
   padding: $card-internal-padding
+  transform-style: preserve-3d
+  backface-visibility: hidden
+  -webkit-backface-visibility: hidden !important
   z-index: 2
 
 .project-card-side
+  transform-style: preserve-3d
   backface-visibility: hidden
   -webkit-backface-visibility: hidden !important
 

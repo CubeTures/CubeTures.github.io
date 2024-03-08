@@ -141,13 +141,16 @@ body {
 .project-card-body {
   position: relative;
   display: inline-block;
-  transform-style: preserve-3d;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   padding: 1rem;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden !important;
   z-index: 2;
 }
 
 .project-card-side {
+  transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden !important;
 }
