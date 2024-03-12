@@ -9,7 +9,7 @@ $dark: #212529
 $dark-subtle: #282b2f
 $external-shadow: $dark-subtle 0px 0px 5px 2px
 $card-internal-padding: 1rem
-$card-transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)
+$card-transition: all 0.4s ease-out
 
 // Common
 body
@@ -81,17 +81,24 @@ body
   max-width: 100%
   z-index: 1
   transition: $card-transition
+  perspective: 1000px
 
   &.flipped
     .project-card-content::before
         animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
 
+    .project-card-front
+      visibility: hidden
+
+    .project-card-back
+      visibility: visible
+
     .project-card-body
-      transform: rotateY(180deg) !important
+      transform: rotateY(180deg)
   
   &:not(.flipped)
     .project-card-content::before
-      display: none      
+      display: none
 
 .project-card-content 
   position: relative
@@ -109,7 +116,6 @@ body
     background-color: currentColor
     transform: translateX(-55%)
     z-index: 1 !important
-  
 
 .project-card-title 
   position: relative
@@ -148,31 +154,26 @@ body
   transform-style: preserve-3d
   z-index: 2
 
-.hidden-photo
-  visibility: hidden
-
 .project-card-side
-  position: absolute
   backface-visibility: hidden !important
   -webkit-backface-visibility: hidden !important
-  -moz-backface-visibility: hidden !important
-  -ms-backface-visibility: hidden !important
-  top: $card-internal-padding
-  width: calc(100% - 2 * $card-internal-padding)
-  height: calc(100% - 2 * $card-internal-padding)
+  transition: $card-transition  
+
+.project-card-front
+  visibility: visible
 
 .project-card-back
+  position: absolute
+  visibility: hidden
+  transform: rotateY(180deg)
+  width: calc(100% - 2 * $card-internal-padding)
+  height: calc(100% - 2 * $card-internal-padding)
   overflow: auto
+  top: $card-internal-padding
+  //border: 1px solid currentColor
   background-color: transparentize($dark-subtle, .3)
   backdrop-filter: blur(30px)
-  transform: rotateY(180deg) !important
   z-index: 3
-
-  & *
-    backface-visibility: hidden !important
-    -webkit-backface-visibility: hidden !important
-    -moz-backface-visibility: hidden !important
-    -ms-backface-visibility: hidden !important
 
 .project-card-photo 
   max-width: 100% !important
