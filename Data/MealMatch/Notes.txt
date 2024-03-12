@@ -1,5 +1,6 @@
 Version 1.1
-- Change swipe animation from fixed point to current location (less choppy)
+- REMOVE DUPLICATE RESTAURANTS
+- CHANGE "NO MORE MATCHES" MESSAGE (try searching again with a different location or filters?)
 - Tell if the store youre looking at is open at the moment
 - Suppress notifications of match until re-enter
 - Change icons to bootstrap

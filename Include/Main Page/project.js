@@ -150,7 +150,7 @@ class Project {
         }
     }
     setChangeOnFlip(flipped) {
-        for(const [ cls, attr] of Object.entries(changeOnFlip)) {
+        for(const [ cls, attr ] of Object.entries(changeOnFlip)) {
             if(this.card.classList.contains(cls)) {
                 this.card.style[attr] = flipped ? this.color : null;
             }
@@ -163,14 +163,19 @@ class Project {
     
     setImage(clone) {
         const image = this.selrep(clone, "photo");
+        const hiddenimage = this.selrep(clone, "hidden-photo");
+
         if(this.images.length > 0) {
             image.src = this.images[0];
+            hiddenimage.src = this.images[0];
         }
         else {
             image.src = this.getPlaceholderImage();
+            hiddenimage.src = this.getPlaceholderImage();
         }
         
         image.alt = `${this.name} Image`;
+        hiddenimage.alt = `${this.name} Image`;
     }
     getPlaceholderImage() {
         const rand = this.getRandomInt(350, 400);

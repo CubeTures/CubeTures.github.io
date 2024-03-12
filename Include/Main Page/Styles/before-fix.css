@@ -74,7 +74,7 @@ body {
   box-shadow: #282b2f 0px 0px 5px 2px;
   max-width: 100%;
   z-index: 1;
-  transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .project-card.flipped .project-card-content::before {
   animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards;
@@ -113,7 +113,7 @@ body {
   border-top-right-radius: 5px;
   padding: 0.5rem;
   border-bottom: 1px #434549 solid;
-  transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 2 !important;
 }
 .project-card-title:hover {
@@ -141,40 +141,31 @@ body {
 .project-card-body {
   position: relative;
   display: inline-block;
-  transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   padding: 1rem;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden !important;
   z-index: 2;
 }
 
-.hidden-photo {
-  visibility: hidden;
-}
-
 .project-card-side {
-  position: absolute;
-  backface-visibility: hidden !important;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden !important;
-  -moz-backface-visibility: hidden !important;
-  -ms-backface-visibility: hidden !important;
-  top: 1rem;
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
 }
 
 .project-card-back {
+  position: absolute;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
   overflow: auto;
+  top: 1rem;
   background-color: rgba(40, 43, 47, 0.7);
   -webkit-backdrop-filter: blur(30px);
           backdrop-filter: blur(30px);
   transform: rotateY(180deg) !important;
   z-index: 3;
-}
-.project-card-back * {
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
-  -moz-backface-visibility: hidden !important;
-  -ms-backface-visibility: hidden !important;
 }
 
 .project-card-photo {
@@ -231,4 +222,4 @@ body {
   to {
     top: 0%;
   }
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=before-fix.css.map */

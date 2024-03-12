@@ -9,7 +9,7 @@ $dark: #212529
 $dark-subtle: #282b2f
 $external-shadow: $dark-subtle 0px 0px 5px 2px
 $card-internal-padding: 1rem
-$card-transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)
+$card-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
 
 // Common
 body
@@ -83,7 +83,8 @@ body
   transition: $card-transition
 
   &.flipped
-    .project-card-content::before
+    .project-card-content
+      &::before
         animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
 
     .project-card-body
@@ -146,33 +147,26 @@ body
   transition: $card-transition
   padding: $card-internal-padding
   transform-style: preserve-3d
+  backface-visibility: hidden
+  -webkit-backface-visibility: hidden !important
   z-index: 2
 
-.hidden-photo
-  visibility: hidden
-
 .project-card-side
-  position: absolute
-  backface-visibility: hidden !important
+  transform-style: preserve-3d
+  backface-visibility: hidden
   -webkit-backface-visibility: hidden !important
-  -moz-backface-visibility: hidden !important
-  -ms-backface-visibility: hidden !important
-  top: $card-internal-padding
-  width: calc(100% - 2 * $card-internal-padding)
-  height: calc(100% - 2 * $card-internal-padding)
 
 .project-card-back
+  position: absolute
+  width: calc(100% - 2 * $card-internal-padding)
+  height: calc(100% - 2 * $card-internal-padding)
   overflow: auto
+  top: $card-internal-padding
+  //border: 1px solid currentColor
   background-color: transparentize($dark-subtle, .3)
   backdrop-filter: blur(30px)
   transform: rotateY(180deg) !important
   z-index: 3
-
-  & *
-    backface-visibility: hidden !important
-    -webkit-backface-visibility: hidden !important
-    -moz-backface-visibility: hidden !important
-    -ms-backface-visibility: hidden !important
 
 .project-card-photo 
   max-width: 100% !important

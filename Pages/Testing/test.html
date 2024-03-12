@@ -1,36 +1,76 @@
 <!DOCTYPE html>
 <html>
+	<head>
+
+	</head>
 	<body>
-		<div class="cardContainer inactive">
+		<div class="wrapper">
 			<div class="card">
-				<div class="side front">
-					<div class="img img1"></div>
-					<div class="info">
-				  		<h2>Super S</h2>
-				  		<p>A stand-on with an exceptional compact stance. Great for tight spaces and trailering.</p>
-					</div>
-			  	</div>
-			  	<div class="side back">
-					<div class="info">
-				  		<h2>At a glance</h2>
-				  		<div class="reviews">
-							<p>23 Reviews</p>
-				  		</div>
-						<ul>
-							<li>Manage backyard gates with ease with the 36" deck option</li>
-							<li>Your choice of deck sizes ranging from 36", 48", 52" and 60"</li>
-							<li>Updated hip bolstering offers superior operator comfort and positioning</li>
-						</ul>
-				  		<div class="btn">
-							<h4>Learn More</h4>
-							<svg fill="#333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/><path d="M0-.25h24v24H0z" fill="none"/></svg>
+				<input type="checkbox" id="card1" class="more" aria-hidden="true">
+				<div class="content">
+					<div class="front" style="background-image: url('https://images.unsplash.com/photo-1529408686214-b48b8532f72c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=986e2dee5c1b488d877ad7ba1afaf2ec&auto=format&fit=crop&w=1350&q=80')">
+						<div class="inner">
+							<h2>Cozy apartment</h2>
+							<div class="rating">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="far fa-star"></i>
+							</div>
+							<label for="card1" class="button" aria-hidden="true">
+								Details
+							</label>
 						</div>
 					</div>
-			  	</div>
+					<div class="back">
+						<div class="inner">
+							<div class="info">
+								<span>5</span>
+								<div class="icon">
+									<i class="fas fa-users"></i>
+									<span>people</span>
+								</div>
+							</div>
+							<div class="info">
+								<span>4</span>
+								<div class="icon">
+									<i class="fas fa-door-open"></i>
+									<span>rooms</span>
+								</div>
+							</div>
+							<div class="info">
+								<span>3</span>
+								<div class="icon">
+									<i class="fas fa-bed"></i>
+									<span>beds</span>
+								</div>
+							</div>
+							<div class="info">
+								<span>1</span>
+								<div class="icon">
+									<i class="fas fa-bath"></i>
+									<span>bath</span>
+								</div>
+							</div>
+							<div class="description">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, accusamus.</p>
+								<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates earum nostrum ipsam
+									ullam, reiciendis nam consectetur? Doloribus voluptate architecto possimus perferendis
+									tenetur nemo amet temporibus, enim soluta nam, debitis.</p>
+							</div>
+							<div class="location">Warsaw, Poland</div>
+							<div class="price">38€ / day</div>
+							<label for="card1" class="button return" aria-hidden="true">
+								<i class="fas fa-arrow-left"></i>
+							</label>
+						</div>
+					</div>
+				</div>
 			</div>
+			
 		</div>
 
 		<link href="/Pages/Testing/test.css" rel="stylesheet">
-        <script type="module" src="/Pages/Testing/test.js"></script>
 	</body>
 </html>
