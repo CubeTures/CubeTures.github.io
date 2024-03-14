@@ -1,4 +1,4 @@
-import { Filter, Project } from "/Include/Main Page/project.js";
+import { Project } from "/Include/Main Page/project.js";
 const projectPath = "../../../Data/Main Page/projects.json";
 
 function onDocumentLoad() {
@@ -6,20 +6,13 @@ function onDocumentLoad() {
 }
 
 async function prepareProjects() {
-    const json = await fetchProjects();
-    console.log(json);
-    const filters = json["Filters"];
-    const projects = json["Projects"];
+    const projects = await fetchProjects();
     
     populateProjects(projects);
-    populateFilters(filters);
 }
 async function fetchProjects() {
     const response = await fetch(projectPath);
     return response.json();
-}
-function populateFilters(filters) {
-    //const filterButtonTempalte = document.getElementById("filter-button-template")
 }
 function populateProjects(projects) {
     let projectObjects = [];
@@ -32,7 +25,6 @@ function populateProjects(projects) {
         parent.append(html);
         projectObjects.push(projectObj);
     }
-    // projects
 }
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad);

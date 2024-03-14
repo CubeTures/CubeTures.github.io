@@ -9,14 +9,21 @@ $dark: #212529
 $dark-subtle: #282b2f
 $external-shadow: $dark-subtle 0px 0px 5px 2px
 $card-internal-padding: 1rem
-$card-transition: all 0.4s ease-out
+$card-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
+
+@font-face
+  font-family: "Madimi"
+  src: url("/Data/Main Page/MadimiOne-Regular.ttf") format("truetype")
+
 
 // Common
 body
   margin-bottom: 2rem
 
 .title 
-  margin: 1rem
+  width: calc(100% - 2rem)
+  margin-top: 1rem
+  margin-bottom: 1rem
   color: $offwhite
   -webkit-transition: all .3s ease-in-out !important
   -moz-transition: all .3s ease-in-out !important
@@ -43,37 +50,36 @@ body
   padding-left: 1rem
   padding-right: 1rem
 
+.clamped-container 
+  max-width: 100ch
+  margin: auto
 
-// Old btns
-.project-btn 
-  margin: 4px
+// Accordions
+.accordion-item
+  border: none !important
+        
+  .accordion-header
+    &:has(+ .collapsing, + .show)
+      .accordion-button
+        border-bottom-left-radius: 6px !important
+        border-bottom-right-radius: 6px !important
 
-.mealmatch-btn:hover 
-  border: 1px solid $mealmatch !important
-  color: $mealmatch !important
-  background-color: $dark !important
+    &:not(:has(+ .collapsing, + .show))
+      .accordion-button:not(.last-accordion-button)
+        border-bottom: 0px solid $white-subtle !important
 
-.github-btn:hover 
-  border: 1px solid $github !important
-  color: $github !important
-  background-color: $dark !important
+.accordion-item:has(.collapsing, .show) + .accordion-item .accordion-button
+  border-top-left-radius: 6px !important
+  border-top-right-radius: 6px !important
 
-.itchio-btn:hover 
-  border: 1px solid $itchio !important
-  color: $itchio !important
-  background-color: $dark !important
-
-.repository-btn:hover 
-  border: 1px solid $offwhite !important
-  color: $offwhite !important
-  background-color: $dark !important 
+.accordion-button
+  border: 1px solid $white-subtle !important
+  background-color: $dark-subtle !important
+  box-shadow: none !important
+  padding-left: 2rem
+  padding-right: 2rem
 
 // Project Cards
-.project-container 
-  padding-left: 1rem
-  padding-right: 1rem
-  max-width: 100%
-
 .project-card
   background: $dark
   border: 1px $white-subtle solid
@@ -81,24 +87,20 @@ body
   max-width: 100%
   z-index: 1
   transition: $card-transition
-  perspective: 1000px
 
   &.flipped
     .project-card-content::before
         animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
 
-    .project-card-front
-      visibility: hidden
-
-    .project-card-back
-      visibility: visible
-
     .project-card-body
       transform: rotateY(180deg)
+
+    .project-card-back
+      backdrop-filter: blur(30px) !important
   
   &:not(.flipped)
     .project-card-content::before
-      display: none
+      display: none      
 
 .project-card-content 
   position: relative
@@ -116,13 +118,13 @@ body
     background-color: currentColor
     transform: translateX(-55%)
     z-index: 1 !important
-
+  
 .project-card-title 
   position: relative
   background-color: transparentize($dark-subtle, .3)
   backdrop-filter: blur(50px)
-  border-top-left-radius: 5px
-  border-top-right-radius: 5px
+  border-top-left-radius: 6px
+  border-top-right-radius: 6px
   padding: .5rem
   border-bottom: 1px $white-subtle solid
   transition: $card-transition
@@ -157,22 +159,17 @@ body
 .project-card-side
   backface-visibility: hidden !important
   -webkit-backface-visibility: hidden !important
-  transition: $card-transition  
-
-.project-card-front
-  visibility: visible
+  transition: $card-transition
 
 .project-card-back
   position: absolute
-  visibility: hidden
-  transform: rotateY(180deg)
   width: calc(100% - 2 * $card-internal-padding)
   height: calc(100% - 2 * $card-internal-padding)
   overflow: auto
   top: $card-internal-padding
   //border: 1px solid currentColor
   background-color: transparentize($dark-subtle, .3)
-  backdrop-filter: blur(30px)
+  transform: rotateY(180deg) !important
   z-index: 3
 
 .project-card-photo 
@@ -206,7 +203,6 @@ body
 
   &:last-child
     margin-right: 0
-
 
 @keyframes wave
   0%, 100%

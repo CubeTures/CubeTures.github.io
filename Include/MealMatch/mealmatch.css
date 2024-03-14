@@ -253,13 +253,13 @@ body {
 }
 .accordion-header {
   background-color: var(--primaryColor) !important;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   border-bottom: 1px var(--offwhite) solid;
 }
 .accordion-header:has(button.collapsed) {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   border-bottom: none !important;
 }
 .accordion-item, .accordion-button {
@@ -275,8 +275,8 @@ body {
   padding: 0;
 }
 .accordion-item {
-  border-bottom-left-radius: 5px !important;
-  border-bottom-right-radius: 5px !important;
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
 }
 .accordion--custom .accordion-body .checkboxes {
   padding: 1rem;

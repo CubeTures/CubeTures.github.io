@@ -1,70 +1,3 @@
-class Filter {
-    /*
-        language: dict { string: Project[] }
-        type: dict { string: Project[] }
-        context: dict { string: Project[] }
-        setting: dict { string: Project[] }
-    */
-    constructor(options) {
-        const {
-            language,
-            type,
-            context,
-            setting
-        } = options;
-
-        this.filters = {};
-        this.initFilters("language", language);
-        this.initFilters("type", type);
-        this.initFilters("context", context);
-        this.initFilters("setting", setting);
-    }
-    initFilters(value, options) {
-        this.filters[value]["all"] = new Set();
-        for(const option of options) {
-            this.filters[value][option] = new Set();
-        }
-    }
-
-    setProjects(projects) {
-        this.setFilters("language", projects);
-        this.setFilters("type", projects);
-        this.setFilters("context", projects);
-        this.setFilters("setting", projects);
-    }
-    setFilters(value, projects) {
-        for(const project of projects) {
-            const projectValue = project[value];
-            this.filters[value][projectValue].add(project);
-        }
-    }
-
-    getProjects(options) {
-        const {
-            language,
-            type,
-            context,
-            setting
-        } = options;
-        
-        const results = new Set();
-        results.union(this.getFilters("language", language));
-        results.union(this.getFilters("type", type));
-        results.union(this.getFilters("context", context));
-        results.union(this.getFilters("setting", setting));
-
-    }
-    getFilters(value, options) {
-        const result = new Set();
-        for(const option of options) {
-            const toAdd = this.filters[value][option];
-            result.union(toAdd);
-        }
-
-        return result;
-    }
-}
-
 //procedurally generate a new css rule for each 
 const changeOnFlip = {
     "project-card": "borderColor",
@@ -78,9 +11,7 @@ class Project {
         name: string
         date: string (month/day)
         language: string
-        type: string
-        context: string
-        setting: string
+        technologies: string[]
         links: { string: string }
         about: string
         images: string[] (absolute paths)
@@ -91,9 +22,7 @@ class Project {
         const {
             date,
             language,
-            type,
-            context,
-            setting,
+            technologies,
             links,
             about,
             images,
@@ -104,9 +33,7 @@ class Project {
         this.name = name;
         this.date = date;
         this.language = language;
-        this.type = type;
-        this.context = context;
-        this.setting = setting;
+        this.technologies = technologies;
         this.links = links;
         this.about = about;
         this.images = images;
@@ -182,9 +109,10 @@ class Project {
         const tags = this.selrep(clone, "tags");
 
         tags.innerHTML += this.createTag(this.language);
-        tags.innerHTML += this.createTag(this.type);
-        tags.innerHTML += this.createTag(this.context);
-        tags.innerHTML += this.createTag(this.setting);
+
+        for(const technology of this.technologies) {
+            tags.innerHTML += this.createTag(technology);
+        }
     }
     createTag(tag) {
         return `
@@ -227,4 +155,4 @@ class Project {
     }
 }
 
-export { Filter, Project };
+export { Project };

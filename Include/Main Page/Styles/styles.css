@@ -1,9 +1,15 @@
+@font-face {
+  font-family: "Madimi";
+  src: url("/Data/Main Page/MadimiOne-Regular.ttf") format("truetype");
+}
 body {
   margin-bottom: 2rem;
 }
 
 .title {
-  margin: 1rem;
+  width: calc(100% - 2rem);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   color: #f8f9fa;
   transition: all 0.3s ease-in-out !important;
   text-overflow: ellipsis;
@@ -34,38 +40,33 @@ body {
   padding-right: 1rem;
 }
 
-.project-btn {
-  margin: 4px;
+.clamped-container {
+  max-width: 100ch;
+  margin: auto;
 }
 
-.mealmatch-btn:hover {
-  border: 1px solid #FB4670 !important;
-  color: #FB4670 !important;
-  background-color: #212529 !important;
+.accordion-item {
+  border: none !important;
+}
+.accordion-item .accordion-header:has(+ .collapsing, + .show) .accordion-button {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+}
+.accordion-item .accordion-header:not(:has(+ .collapsing, + .show)) .accordion-button:not(.last-accordion-button) {
+  border-bottom: 0px solid #434549 !important;
 }
 
-.github-btn:hover {
-  border: 1px solid #9461fb !important;
-  color: #9461fb !important;
-  background-color: #212529 !important;
+.accordion-item:has(.collapsing, .show) + .accordion-item .accordion-button {
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
 }
 
-.itchio-btn:hover {
-  border: 1px solid #f18253 !important;
-  color: #f18253 !important;
-  background-color: #212529 !important;
-}
-
-.repository-btn:hover {
-  border: 1px solid #f8f9fa !important;
-  color: #f8f9fa !important;
-  background-color: #212529 !important;
-}
-
-.project-container {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  max-width: 100%;
+.accordion-button {
+  border: 1px solid #434549 !important;
+  background-color: #282b2f !important;
+  box-shadow: none !important;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .project-card {
@@ -74,20 +75,17 @@ body {
   box-shadow: #282b2f 0px 0px 5px 2px;
   max-width: 100%;
   z-index: 1;
-  transition: all 0.4s ease-out;
-  perspective: 1000px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .project-card.flipped .project-card-content::before {
   animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards;
 }
-.project-card.flipped .project-card-front {
-  visibility: hidden;
-}
-.project-card.flipped .project-card-back {
-  visibility: visible;
-}
 .project-card.flipped .project-card-body {
   transform: rotateY(180deg);
+}
+.project-card.flipped .project-card-back {
+  -webkit-backdrop-filter: blur(30px) !important;
+          backdrop-filter: blur(30px) !important;
 }
 .project-card:not(.flipped) .project-card-content::before {
   display: none;
@@ -116,11 +114,11 @@ body {
   background-color: rgba(40, 43, 47, 0.7);
   -webkit-backdrop-filter: blur(50px);
           backdrop-filter: blur(50px);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   padding: 0.5rem;
   border-bottom: 1px #434549 solid;
-  transition: all 0.4s ease-out;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 2 !important;
 }
 .project-card-title:hover {
@@ -148,7 +146,7 @@ body {
 .project-card-body {
   position: relative;
   display: inline-block;
-  transition: all 0.4s ease-out;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   padding: 1rem;
   transform-style: preserve-3d;
   z-index: 2;
@@ -157,24 +155,17 @@ body {
 .project-card-side {
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
-  transition: all 0.4s ease-out;
-}
-
-.project-card-front {
-  visibility: visible;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .project-card-back {
   position: absolute;
-  visibility: hidden;
-  transform: rotateY(180deg);
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
   overflow: auto;
   top: 1rem;
   background-color: rgba(40, 43, 47, 0.7);
-  -webkit-backdrop-filter: blur(30px);
-          backdrop-filter: blur(30px);
+  transform: rotateY(180deg) !important;
   z-index: 3;
 }
 
