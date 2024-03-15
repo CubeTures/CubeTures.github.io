@@ -6,6 +6,9 @@ class Skill {
 
     createHTML(template) {
         const clone = template.content.cloneNode(true);
+        
+        const title = this.selrep(clone, "name");
+        title.textContent = this.name;
 
         const img = clone.querySelector("img");
         img.src = this.image;
@@ -13,6 +16,12 @@ class Skill {
         img.title = this.name;
 
         return clone;
+    }
+    
+    selrep(clone, id) {
+      const item = clone.querySelector(`#${id}`);
+      item.id = `${this.name}-${id}`;
+      return item;
     }
 }
 

@@ -78,16 +78,25 @@ body {
 }
 
 .skill {
-  background-color: #282b2f;
+  background-color: #212529;
   border: 1px solid #434549;
   border-radius: 6px;
   overflow: hidden;
-  padding: 0.5rem;
   flex-shrink: 0;
   margin-bottom: 0.5rem;
 }
+.skill img {
+  margin: .5rem;
+}
 .skill:not(:last-child) {
   margin-right: 1rem;
+}
+
+.skill-header {
+  background-color: #282b2f;
+  border-bottom: 1px solid #434549;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .project-card {
