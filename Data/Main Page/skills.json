@@ -1,0 +1,29 @@
+{
+    "Languages": {
+        "C#": "/Images/Main Page/Languages/csharp.svg",
+        "JavaScript": "/Images/Main Page/Languages/js.svg",
+        "TypeScript": "/Images/Main Page/Languages/typescript.svg",
+        "Python": "/Images/Main Page/Languages/python.svg",
+        "Java": "/Images/Main Page/Languages/java.svg",
+        "C++": "/Images/Main Page/Languages/c++.svg",
+        "HTML": "/Images/Main Page/Languages/html5.svg",
+        "CSS": "/Images/Main Page/Languages/css3.svg",
+        "Sass": "/Images/Main Page/Languages/sass.svg",
+        "SQLite": "/Images/Main Page/Languages/mysql.svg"
+    },
+    "Frameworks and Libraries": {
+        "Node.js": "/Images/Main Page/Libraries/nodejs.svg",
+        "Jest": "/Images/Main Page/Libraries/jest.svg",
+        "Bootstrap": "/Images/Main Page/Libraries/bootstrap5.svg",
+        "Pygame": "/Images/Main Page/Libraries/pygame.svg",
+        "Google Maps API": "/Images/Main Page/Libraries/googlemaps.svg"
+    },
+    "Developer Tools and Platforms": {
+        "Git": "/Images/Main Page/Tools/git.svg",
+        "Firebase": "/Images/Main Page/Tools/firebase.svg",
+        "Figma": "/Images/Main Page/Tools/figma.svg",
+        "Unity": "/Images/Main Page/Tools/unity.svg",
+        "Windows": "/Images/Main Page/Tools/windows.svg",
+        "Linux": "/Images/Main Page/Tools/redhat.svg"
+    }
+}

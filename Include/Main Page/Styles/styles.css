@@ -69,6 +69,27 @@ body {
   padding-right: 2rem;
 }
 
+.category:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.wrap {
+  overflow-x: auto;
+}
+
+.skill {
+  background-color: #282b2f;
+  border: 1px solid #434549;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0.5rem;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+.skill:not(:last-child) {
+  margin-right: 1rem;
+}
+
 .project-card {
   background: #212529;
   border: 1px #434549 solid;

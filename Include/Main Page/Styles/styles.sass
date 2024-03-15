@@ -15,12 +15,11 @@ $card-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
   font-family: "Madimi"
   src: url("/Data/Main Page/MadimiOne-Regular.ttf") format("truetype")
 
-
 // Common
 body
   margin-bottom: 2rem
 
-.title 
+.title
   width: calc(100% - 2rem)
   margin-top: 1rem
   margin-bottom: 1rem
@@ -34,30 +33,30 @@ body
     color: $dark
     background-color: $offwhite
 
-.white-border 
+.white-border
   border: 1px solid $offwhite
 
-.no-margin 
+.no-margin
   margin: 0
 
-.h5-margin 
+.h5-margin
   margin-bottom: 2px
 
-.p-margin 
+.p-margin
   margin-bottom: 8px !important
 
-.side-padded 
+.side-padded
   padding-left: 1rem
   padding-right: 1rem
 
-.clamped-container 
+.clamped-container
   max-width: 100ch
   margin: auto
 
 // Accordions
 .accordion-item
   border: none !important
-        
+
   .accordion-header
     &:has(+ .collapsing, + .show)
       .accordion-button
@@ -79,6 +78,25 @@ body
   padding-left: 2rem
   padding-right: 2rem
 
+//Skills
+.category:not(:last-child)
+  margin-bottom: 1rem
+
+.wrap
+  overflow-x: auto
+
+.skill
+  background-color: $dark-subtle
+  border: 1px solid $white-subtle
+  border-radius: 6px
+  overflow: hidden
+  padding: .5rem
+  flex-shrink: 0
+  margin-bottom: .5rem
+
+  &:not(:last-child)
+    margin-right: 1rem
+
 // Project Cards
 .project-card
   background: $dark
@@ -90,19 +108,19 @@ body
 
   &.flipped
     .project-card-content::before
-        animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
+      animation: wave 4s ease-in-out infinite, fill 2.5s ease-out forwards
 
     .project-card-body
       transform: rotateY(180deg)
 
     .project-card-back
       backdrop-filter: blur(30px) !important
-  
+
   &:not(.flipped)
     .project-card-content::before
-      display: none      
+      display: none
 
-.project-card-content 
+.project-card-content
   position: relative
   width: 100%
   height: 100%
@@ -118,8 +136,8 @@ body
     background-color: currentColor
     transform: translateX(-55%)
     z-index: 1 !important
-  
-.project-card-title 
+
+.project-card-title
   position: relative
   background-color: transparentize($dark-subtle, .3)
   backdrop-filter: blur(50px)
@@ -130,17 +148,17 @@ body
   transition: $card-transition
   z-index: 2 !important
 
-  &:hover 
+  &:hover
     cursor: pointer
 
-.project-card-title-text 
+.project-card-title-text
   margin: 0
 
-  &::after 
+  &::after
     content: ""
     display: inline-block
     color: inheret
-    background-color: currentColor 
+    background-color: currentColor
     mask-image: url("/Images/Main\ Page/Icons/three-dots.svg")
     mask-size: contain
     width: 2rem
@@ -172,11 +190,11 @@ body
   transform: rotateY(180deg) !important
   z-index: 3
 
-.project-card-photo 
+.project-card-photo
   max-width: 100% !important
   border: $white-subtle 1px solid
 
-.project-card-text 
+.project-card-text
   flex-grow: 1
   width: 0
   min-width: 100%
