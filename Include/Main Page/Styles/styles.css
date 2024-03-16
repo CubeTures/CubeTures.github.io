@@ -85,14 +85,23 @@ body {
   flex-shrink: 0;
   margin-bottom: 0.5rem;
 }
-.skill img {
-  margin: .5rem;
-}
 .skill:not(:last-child) {
   margin-right: 1rem;
 }
+.skill .img-container {
+  padding: 0.5rem;
+}
+.skill img {
+  display: block;
+  background-color: #282b2f;
+  border-radius: 6px;
+  padding: 0.5rem;
+  margin: auto;
+}
 
 .skill-header {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   background-color: #282b2f;
   border-bottom: 1px solid #434549;
   border-top-left-radius: 6px;
@@ -176,7 +185,7 @@ body {
 .project-card-body {
   position: relative;
   display: inline-block;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   padding: 1rem;
   transform-style: preserve-3d;
   z-index: 2;
@@ -185,7 +194,7 @@ body {
 .project-card-side {
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .project-card-back {

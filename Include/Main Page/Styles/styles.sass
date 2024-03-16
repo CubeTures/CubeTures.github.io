@@ -10,6 +10,7 @@ $dark-subtle: #282b2f
 $external-shadow: $dark-subtle 0px 0px 5px 2px
 $card-internal-padding: 1rem
 $card-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
+$card-flip-transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
 
 @font-face
   font-family: "Madimi"
@@ -86,16 +87,34 @@ body
   overflow-x: auto
 
 .skill
-  background-color: $dark-subtle
+  background-color: $dark
   border: 1px solid $white-subtle
   border-radius: 6px
   overflow: hidden
-  padding: .5rem
   flex-shrink: 0
   margin-bottom: .5rem
 
   &:not(:last-child)
     margin-right: 1rem
+
+  .img-container
+    padding: .5rem
+
+  img
+    display: block
+    background-color: $dark-subtle
+    //border: 1px solid $white-subtle
+    border-radius: 6px
+    padding: .5rem
+    margin: auto
+
+.skill-header
+  padding-left: .5rem
+  padding-right: .5rem
+  background-color: $dark-subtle
+  border-bottom: 1px solid $white-subtle
+  border-top-left-radius: 6px
+  border-top-right-radius: 6px
 
 // Project Cards
 .project-card
@@ -169,7 +188,7 @@ body
 .project-card-body
   position: relative
   display: inline-block
-  transition: $card-transition
+  transition: $card-flip-transition
   padding: $card-internal-padding
   transform-style: preserve-3d
   z-index: 2
@@ -177,7 +196,7 @@ body
 .project-card-side
   backface-visibility: hidden !important
   -webkit-backface-visibility: hidden !important
-  transition: $card-transition
+  transition: $card-flip-transition
 
 .project-card-back
   position: absolute
@@ -185,7 +204,6 @@ body
   height: calc(100% - 2 * $card-internal-padding)
   overflow: auto
   top: $card-internal-padding
-  //border: 1px solid currentColor
   background-color: transparentize($dark-subtle, .3)
   transform: rotateY(180deg) !important
   z-index: 3
