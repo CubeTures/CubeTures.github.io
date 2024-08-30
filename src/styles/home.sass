@@ -1,0 +1,44 @@
+@import 'vars.sass'
+
+.margin-bottom
+    margin-bottom: $padding
+
+.book-list
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: $padding
+
+.book
+    background-color: $background-color
+    border-radius: $border-radius
+    border: 1px solid $border-color
+    overflow: hidden
+    position: relative
+    cursor: pointer
+
+.book-title-gradient
+    background: $title-gradient
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    padding: $padding
+
+.book-title
+    display: -webkit-box
+    -webkit-box-orient: vertical
+    -webkit-line-clamp: 2
+    text-overflow: ellipsis
+    overflow: hidden
+    color: $text-color
+
+    position: absolute
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: $padding,
+
+.book-cover
+    display: block
+    max-width: 100%
