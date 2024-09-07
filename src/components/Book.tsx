@@ -1,20 +1,28 @@
 import { BookProps } from "@/interfaces/homeInterfaces";
 import "@/styles/home.sass";
-import Link from "next/link";
+import BookCover from "./BookCover";
+import { useRouter } from "next/navigation";
+import { format } from "url";
 
 export default function Book({ title, author, cover, id }: BookProps) {
+	const router = useRouter();
+
+	function onClick() {
+		const url = format({ pathname: "/books", query: { id } });
+		router.push(url);
+	}
+
 	return (
-		<Link
+		<div
 			className="book"
-			href={`/books?id=${id}`}>
-			<img
-				className="book-cover"
-				src={cover}
-				alt={title}
+			onClick={onClick}>
+			<BookCover
+				title={title}
+				image={cover}
 			/>
 			<div className="book-title-gradient">
 				<p className="book-title">{title}</p>
 			</div>
-		</Link>
+		</div>
 	);
 }

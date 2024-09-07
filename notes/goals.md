@@ -17,11 +17,30 @@
 -   Authentication
 -   Ranking system
     -   People can submit multiple different versions of cover images, summaries and the highest votes ones get displayed
+-   Security for API
+    -   How can I make sure the API is only used in the intended way?
 -   Reputation system
     -   People with high enough reputation get access to particular roles
     -   See reports, accept tags and genres, etc.
 -   Suggestion Algorithm??
     -   Readers record which books they've read and their rating of them, then get suggested more books like they like
+
+# Overview
+
+-   TypeScript
+    -   React with Next.js frontend
+    -   What is github pages
+    -   How the deploy works
+-   Firebase "Backend"
+    -   Authentication (Coming Later)
+    -   Database
+-   Crowd Sourcing
+    -   Need to come up with ideas
+-   What can you help with
+    -   I won't make you code in typescript or react unless you want to
+    -   Design UI and functionality
+    -   Design storage protocols
+    -   Design Crowd Sourcing procedures
 
 # Useful Libraries
 
