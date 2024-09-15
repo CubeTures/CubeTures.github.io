@@ -8,7 +8,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"deploy": "echo $null >> ./out/.nojekyll && gh-pages -d out -t true"
+		"copy": "xcopy dist_files out /E /I /Y",
+		"deploy": "npm run copy && gh-pages -o out -t true"
 	},
 	"dependencies": {
 		"fast-average-color": "^9.4.0",

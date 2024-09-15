@@ -1,11 +1,12 @@
+import { BookProps } from "@/interfaces/homeInterfaces";
 import { Tag } from "@/interfaces/tagInterfaces";
 
-export function getDisplayTagList(
-	format: Tag,
-	demographic: Tag,
-	genres: Tag[],
-	tropes: Tag[]
-) {
+export function getDisplayTagList({
+	format,
+	demographic,
+	genres,
+	tropes,
+}: BookProps) {
 	return [
 		{
 			label: "Format",

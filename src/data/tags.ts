@@ -1,7 +1,7 @@
-import { Tags } from "@/interfaces/tagInterfaces";
+import { TagSections } from "@/interfaces/tagInterfaces";
 
-const tags: Tags = {
-	format: {
+const tags: TagSections = {
+	Format: {
 		Anthology: {
 			description:
 				"A collection of short works, such as stories, poems, or essays, usually by multiple authors.",
@@ -71,7 +71,7 @@ const tags: Tags = {
 				"A self-published, small-circulation magazine that often contains original work, including art, stories, and commentary.",
 		},
 	},
-	demographic: {
+	Demographic: {
 		Adult: {
 			description:
 				"Content aimed at an adult audience, often dealing with more mature themes and complex subjects.",
@@ -105,7 +105,7 @@ const tags: Tags = {
 				"A general demographic for young readers, typically including children and teens.",
 		},
 	},
-	genre: {
+	Genre: {
 		Adventure: {
 			description:
 				"Stories that focus on exciting, risky, and daring experiences, often involving travel or exploration.",
@@ -195,7 +195,7 @@ const tags: Tags = {
 				"Stories set in the American West, often featuring cowboys, outlaws, and rugged landscapes.",
 		},
 	},
-	tropes: {
+	Tropes: {
 		"Accidental Marriage": {
 			description:
 				"A situation where characters are unintentionally married, leading to unexpected consequences.",
@@ -466,3 +466,5 @@ const tags: Tags = {
 		},
 	},
 };
+
+export default tags;

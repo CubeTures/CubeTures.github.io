@@ -1,0 +1,36 @@
+@import 'vars.sass'
+
+.book-dial-picker
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+    gap: $padding
+
+.book-dial-button
+    border-radius: $border-radius
+    padding: $padding
+    margin: $padding
+
+    &.selected
+        background-color: $light-color
+
+.book-summary
+    background-color: $light-color
+    padding: $padding
+    border-radius: $border-radius
+    margin-bottom: $padding
+
+.book-tag-header
+    margin-bottom: $padding
+
+.book-tag-container
+    flex-direction: row
+    flex-wrap: wrap
+    display: flex
+    gap: $padding
+    margin-bottom: $padding * 2
+
+.book-tag
+    background-color: $light-color
+    border-radius: $border-radius
+    padding: $padding

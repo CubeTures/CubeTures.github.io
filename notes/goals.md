@@ -23,7 +23,18 @@
     -   People with high enough reputation get access to particular roles
     -   See reports, accept tags and genres, etc.
 -   Suggestion Algorithm??
+
     -   Readers record which books they've read and their rating of them, then get suggested more books like they like
+
+# Examples
+
+Crowd Sourcing:
+
+-   Wikipedia, Stackoverflow, Danbooru
+
+Book Websites
+
+-   [Hardcover](https://hardcover.app), Goodreads, [Goodreads datasets](https://mengtingwan.github.io/data/goodreads.html#datasets)
 
 # Overview
 

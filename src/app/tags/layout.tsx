@@ -6,8 +6,8 @@ import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Book Info",
-	description: "Book Info",
+	title: "Tag Info",
+	description: "Tag Info",
 };
 
 export default function RootLayout({

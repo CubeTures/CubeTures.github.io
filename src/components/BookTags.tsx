@@ -1,47 +1,28 @@
-import { BookProps } from "@/interfaces/homeInterfaces";
+import { useBookInfoContext } from "@/hooks/context";
 import { DisplayTagList } from "@/interfaces/tagInterfaces";
 import { getDisplayTagList } from "@/scripts/helper";
 
-function Pill(label: string) {
+function Pill(label: string, index: number) {
 	return (
 		<p
-			style={{
-				border: "1px solid white",
-				borderRadius: "12px",
-				padding: "6px",
-			}}>
+			key={index}
+			className="book-tag">
 			{label}
 		</p>
 	);
 }
 
-export default function BookTags({
-	format,
-	demographic,
-	genres,
-	tropes,
-}: BookProps) {
-	const tags: DisplayTagList = getDisplayTagList(
-		format,
-		demographic,
-		genres,
-		tropes
-	);
+export default function BookTags() {
+	const context = useBookInfoContext();
+	const tags: DisplayTagList = getDisplayTagList(context);
 
 	return (
 		<div>
-			{tags.map(({ label, items }) => (
-				<div>
-					<h3 style={{ marginBottom: "6px" }}>{label}</h3>
-					<div
-						style={{
-							flexDirection: "row",
-							flexWrap: "wrap",
-							display: "flex",
-							gap: "6px",
-							marginBottom: "6px",
-						}}>
-						{items.map((tag) => Pill(tag))}
+			{tags.map(({ label, items }, index) => (
+				<div key={index}>
+					<h3 className="book-tag-header">{label}</h3>
+					<div className="book-tag-container">
+						{items.map((tag, index) => Pill(tag, index))}
 					</div>
 				</div>
 			))}

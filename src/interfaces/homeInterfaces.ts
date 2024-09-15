@@ -5,6 +5,7 @@ export interface BookProps {
 	title: string;
 	author: string;
 	cover: string;
+	summary: string;
 	format: Tag;
 	demographic: Tag;
 	genres: Tag[];
