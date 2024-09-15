@@ -1,16 +1,7 @@
 import { useBookInfoContext } from "@/hooks/context";
 import { DisplayTagList } from "@/interfaces/tagInterfaces";
 import { getDisplayTagList } from "@/scripts/helper";
-
-function Pill(label: string, index: number) {
-	return (
-		<p
-			key={index}
-			className="book-tag">
-			{label}
-		</p>
-	);
-}
+import Tag from "./Tag";
 
 export default function BookTags() {
 	const context = useBookInfoContext();
@@ -22,7 +13,12 @@ export default function BookTags() {
 				<div key={index}>
 					<h3 className="book-tag-header">{label}</h3>
 					<div className="book-tag-container">
-						{items.map((tag, index) => Pill(tag, index))}
+						{items.map((tag, index) => (
+							<Tag
+								section={label}
+								name={tag}
+							/>
+						))}
 					</div>
 				</div>
 			))}
